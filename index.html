@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juhrum Auto Accessories — Desert Iron, Sharjah UAE</title>
+<meta name="description" content="Premium 4×4 and pickup truck accessories. Bed covers, exterior builds, audio, PPF, upholstery. Sharjah UAE — Industrial Area 4. 4.7★ Google Rating. Trusted 5+ years.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── PRELOADER WITH ANIMATED PARTICLES ── */
+#preload{position:fixed;inset:0;background:var(--black);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+#preload-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.pl-logo-wrap{overflow:hidden;position:relative;z-index:2;}
+.pl-logo{font-family:var(--fd);font-size:clamp(44px,8vw,120px);letter-spacing:.12em;line-height:1;transform:translateY(110%);transition:transform 1s cubic-bezier(.76,0,.24,1) .1s;display:flex;align-items:center;gap:14px;}
+.pl-logo img{height:.78em;width:auto;}
+.pl-logo.up{transform:translateY(0);}
+.pl-bar-wrap{width:160px;height:1px;background:rgba(196,154,56,.15);margin-top:24px;overflow:hidden;position:relative;z-index:2;}
+.pl-bar{height:100%;background:var(--gold);width:0;transition:width 1.5s cubic-bezier(.76,0,.24,1) .4s;}
+.pl-bar.go{width:100%;}
+.pl-sub{font-family:var(--fu);font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--dim);margin-top:16px;opacity:0;transition:opacity .5s .5s;position:relative;z-index:2;}
+.pl-sub.show{opacity:1;}
+#preload.exit{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);}
+
+/* ── HERO WITH VIDEO BACKGROUND ── */
+#hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 80px;}
+.hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-video-bg video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;}
+.hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.35) 50%,rgba(5,5,5,.7) 100%);}
+.hero-veil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,var(--black),transparent);}
+#jcanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+.hero-content{position:relative;z-index:3;pointer-events:none;}
+.h-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:20px;opacity:0;transform:translateY(14px);transition:opacity .8s .1s,transform .8s .1s;}
+.h-tag b{width:28px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
+.h-tag.in{opacity:1;transform:none;}
+.h-h1{font-family:var(--fd);font-size:clamp(80px,13vw,188px);line-height:.88;letter-spacing:.022em;color:var(--white);}
+.h-h1 .row{overflow:hidden;display:block;}
+.h-h1 .inner{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.76,0,.24,1);}
+.h-h1 .inner.up{transform:translateY(0);}
+.h-h1 .g{color:var(--gold);}
+.h-h1 .s{-webkit-text-stroke:1px rgba(237,236,231,.18);color:transparent;}
+.h-sub{font-size:15px;font-weight:300;color:var(--silver);letter-spacing:.018em;max-width:400px;line-height:1.8;margin-top:28px;opacity:0;transform:translateY(16px);transition:opacity .9s .75s,transform .9s .75s;}
+.h-sub.in{opacity:1;transform:none;}
+.h-ctas{display:flex;gap:20px;align-items:center;margin-top:44px;pointer-events:all;opacity:0;transform:translateY(14px);transition:opacity .9s .95s,transform .9s .95s;}
+.h-ctas.in{opacity:1;transform:none;}
+.h-stats{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:30px;opacity:0;transition:opacity 1.2s 1.2s;}
+.h-stats.in{opacity:1;}
+.hst{text-align:right;}
+.hst-n{font-family:var(--fd);font-size:44px;color:var(--gold);line-height:1;}
+.hst-l{font-family:var(--fu);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
+.hst-div{width:1px;height:26px;background:linear-gradient(var(--gold-lo),transparent);margin-left:auto;}
+.h-scroll{position:absolute;right:52px;bottom:84px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity 1s 1.4s;}
+.h-scroll.in{opacity:1;}
+.h-scroll-line{width:1px;height:52px;background:linear-gradient(var(--gold),transparent);animation:pulse 2.2s ease infinite;}
+.h-scroll span{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;}
+@keyframes pulse{0%,100%{opacity:.9;transform:scaleY(1)}50%{opacity:.2;transform:scaleY(.4)}}
+
+.ticker{background:var(--gold);overflow:hidden;padding:17px 0;position:relative;z-index:4;}
+.ticker-t{display:flex;white-space:nowrap;animation:jTicker 28s linear infinite;}
+.ticker-i{font-family:var(--fd);font-size:12px;letter-spacing:.26em;color:var(--black);padding:0 44px;display:flex;align-items:center;gap:44px;flex-shrink:0;}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:rgba(0,0,0,.3);}
+@keyframes jTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── UPDATED NAV WITH BLACK BG & PROPER SPACING ── */
+.jnav{position:fixed;top:0;left:0;right:0;z-index:800;padding:28px 52px;display:flex;align-items:center;justify-content:space-between;background:var(--black);border-bottom:1px solid rgba(196,154,56,.08);}
+.jnav-logo{display:flex;align-items:center;gap:12px;}
+.jnav-logo img{height:32px;width:auto;}
+.jnav-tag{font-family:var(--fu);font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);position:absolute;right:52px;top:50%;transform:translateY(-50%);}
+
+.chapter{padding:100px 52px;position:relative;overflow:hidden;}
+.ch-compact{max-width:1200px;margin:0 auto;}
+.ch-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:60px;}
+.ch-h2{font-family:var(--fd);font-size:clamp(52px,7vw,92px);line-height:.92;letter-spacing:.02em;color:var(--white);margin-bottom:20px;}
+.ch-h2 .g{color:var(--gold);}.ch-h2 .s{-webkit-text-stroke:1px rgba(237,236,231,.14);color:transparent;display:block;}
+.ch-body{font-size:15px;font-weight:300;line-height:1.85;color:var(--silver);letter-spacing:.015em;margin-bottom:14px;}
+.ch-body strong{color:var(--white);font-weight:400;}.ch-body em{color:var(--gold);font-style:normal;}
+
+/* ── IMAGE PLACEHOLDERS ── */
+.img-placeholder{width:100%;aspect-ratio:16/10;background:var(--surface);border:1px dashed rgba(196,154,56,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+/* ── REVIEWS GRID (MULTIPLE) ── */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin-top:40px;}
+.review-card{background:var(--surface);padding:28px;border:1px solid rgba(196,154,56,.08);position:relative;}
+.rev-stars{color:var(--gold);font-size:14px;margin-bottom:12px;}
+.rev-text{font-size:14px;line-height:1.7;color:var(--silver);margin-bottom:16px;font-style:italic;}
+.rev-author{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+/* ── STORY SECTION WITH HORIZONTAL SCROLL ── */
+#story-wrapper{position:relative;overflow:hidden;background:var(--deep);}
+.story-intro{padding:100px 52px 60px;max-width:800px;margin:0 auto;text-align:center;}
+.story-h2{font-family:var(--fd);font-size:clamp(60px,8vw,110px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:24px;}
+.story-h2 .g{color:var(--gold);}
+.story-sub{font-size:15px;color:var(--silver);line-height:1.8;}
+
+#story-horizontal{position:relative;height:400vh;} /* 4x viewport for 4 stages */
+.story-sticky{position:sticky;top:0;height:100vh;overflow:hidden;}
+.story-track{display:flex;height:100%;will-change:transform;position:relative;}
+.story-stage{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:52px;position:relative;}
+.stage-content{max-width:500px;position:relative;z-index:2;}
+.stage-num{font-family:var(--fd);font-size:120px;color:rgba(196,154,56,.1);position:absolute;top:-40px;left:-20px;line-height:1;z-index:0;}
+.stage-title{font-family:var(--fd);font-size:clamp(40px,5vw,68px);color:var(--gold);margin-bottom:16px;line-height:.95;}
+.stage-text{font-size:15px;color:var(--silver);line-height:1.8;}
+
+/* Spline container in background */
+#spline-bg-container{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease;z-index:1;}
+#spline-bg-container.visible{opacity:1;}
+
+.contact-strip{display:flex;border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);background:var(--surface);position:relative;z-index:2;}
+.cs-item{flex:1;padding:44px 40px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
+.cs-item:last-child{border-right:none;}.cs-item:hover{background:rgba(196,154,56,.04);}
+.cs-label{font-family:var(--fu);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cs-title{font-family:var(--fd);font-size:28px;letter-spacing:.06em;color:var(--white);}
+.cs-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
+.cs-item:hover .cs-arrow{transform:translateX(7px);color:var(--gold);}
+
+#products-prev{position:relative;z-index:2;background:var(--black);padding:80px 52px;}
+.pp-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;max-width:1200px;margin-left:auto;margin-right:auto;}
+.pp-h2{font-family:var(--fd);font-size:clamp(52px,7.5vw,96px);line-height:.9;letter-spacing:.02em;color:var(--white);}
+.pp-h2 .g{color:var(--gold);}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;max-width:1200px;margin:0 auto;}
+.pc3{background:var(--surface);border:1px solid rgba(196,154,56,.06);padding:32px;text-align:center;transition:border-color .4s;}
+.pc3:hover{border-color:rgba(196,154,56,.2);}
+.pc3-title{font-family:var(--fd);font-size:26px;letter-spacing:.08em;color:var(--white);margin:20px 0 10px;}
+.pc3-desc{font-size:13px;color:var(--dim);line-height:1.6;}
+
+#contact-final{background:var(--deep);padding:80px 52px;position:relative;}
+.cf-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1200px;margin:0 auto;}
+.cf-left h2{font-family:var(--fd);font-size:clamp(48px,6vw,88px);line-height:.9;color:var(--white);margin-bottom:20px;}
+.cf-left h2 .g{color:var(--gold);}
+.cf-left p{font-size:14px;color:var(--silver);line-height:1.8;margin-bottom:20px;}
+.cf-facts{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+.cf-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.cf-key{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+.cf-val{font-size:14px;color:var(--white);}
+.wa-btn{display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:var(--black);padding:16px 32px;text-decoration:none;font-family:var(--fu);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px;transition:background .3s;}
+.wa-btn:hover{background:var(--gold-hi);}
+.map-box{width:100%;height:280px;background:var(--surface);border:1px dashed rgba(196,154,56,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.soc-row{display:flex;gap:20px;}
+.soc-lnk{font-family:var(--fu);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .3s;}
+.soc-lnk:hover{color:var(--gold);}
+
+.jfoot{background:var(--deep);border-top:1px solid rgba(255,255,255,.04);padding:36px 52px;display:flex;align-items:center;justify-content:space-between;}
+.jfoot-logo{font-family:var(--fd);font-size:19px;letter-spacing:.2em;color:var(--white);}
+.jfoot-logo b{color:var(--gold);font-weight:400;}
+.jfoot-tag{font-family:var(--fu);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(196,154,56,.35);}
+.jfoot-copy{font-family:var(--fu);font-size:9px;letter-spacing:.15em;color:var(--dim);}
+
+@media (max-width: 900px) {
+  .jnav{padding:20px 24px;}
+  .jnav-tag{display:none;}
+  .chapter{padding:60px 24px;}
+  .ch-intro{grid-template-columns:1fr;gap:32px;}
+  .h-stats{display:none;}
+  .cf-wrap{grid-template-columns:1fr;gap:40px;}
+  .jfoot{padding:24px;flex-direction:column;gap:10px;text-align:center;}
+}
+</style>
+</head>
+<body class="noise">
+
+<!-- ── CUSTOM CURSOR ── -->
+<div id="jcursor"></div>
+<div id="jring"></div>
+<div id="jlabel"></div>
+
+<!-- ── PRELOADER WITH ANIMATED PARTICLES ── -->
+<div id="preload">
+  <canvas id="preload-canvas"></canvas>
+  <div class="pl-logo-wrap">
+    <div class="pl-logo" id="pllo">
+      <img src="images/logo-transparent.png" alt="JA">
+      <span>JUHRUM</span>
+    </div>
+  </div>
+  <div class="pl-bar-wrap"><div class="pl-bar" id="plbar"></div></div>
+  <div class="pl-sub" id="plsub">Desert Iron</div>
+</div>
+
+<!-- ── NAV (UPDATED WITH BLACK BG) ── -->
+<nav class="jnav">
+  <a href="/" class="jnav-logo">
+    <img src="images/logo-transparent.png" alt="Juhrum">
+  </a>
+  <div class="jnav-tag">JUHRUM CAR ACCESSORIES</div>
+</nav>
+
+<!-- ── HERO WITH VIDEO ── -->
+<section id="hero">
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-veil"></div>
+  <canvas id="jcanvas"></canvas>
+  
+  <div class="hero-content">
+    <div class="h-tag" id="htag"><b></b>Premium 4×4 Accessories</div>
+    <h1 class="h-h1">
+      <span class="row"><span class="inner" id="hl0">DESERT</span></span>
+      <span class="row"><span class="inner g" id="hl1">IRON</span></span>
+      <span class="row"><span class="inner s" id="hl2">BUILT FOR POWER</span></span>
+    </h1>
+    <p class="h-sub" id="hsub">Sharjah's trusted destination for bed covers, exterior builds, audio systems, PPF, and upholstery. 5+ years building legends.</p>
+    <div class="h-ctas" id="hctas">
+      <a href="https://wa.me/9710503002898" class="btn-g" data-tip="Chat"><span>Message on WhatsApp</span></a>
+      <a href="#products-prev" class="btn-o">View Products →</a>
+    </div>
+  </div>
+
+  <div class="h-stats" id="hstats">
+    <div class="hst">
+      <div class="hst-n" data-count="5">5+</div>
+      <div class="hst-l">Years Experience</div>
+    </div>
+    <div class="hst-div"></div>
+    <div class="hst">
+      <div class="hst-n">4.7</div>
+      <div class="hst-l">Google Rating</div>
+    </div>
+  </div>
+
+  <div class="h-scroll" id="hscroll">
+    <div class="h-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker">
+  <div class="ticker-t">
+    <div class="ticker-i">BED COVERS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">EXTERIOR BUILDS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">AUDIO SYSTEMS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">PAINT PROTECTION <span class="ticker-dot"></span></div>
+    <div class="ticker-i">UPHOLSTERY <span class="ticker-dot"></span></div>
+    <div class="ticker-i">BED COVERS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">EXTERIOR BUILDS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">AUDIO SYSTEMS <span class="ticker-dot"></span></div>
+    <div class="ticker-i">PAINT PROTECTION <span class="ticker-dot"></span></div>
+    <div class="ticker-i">UPHOLSTERY <span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- ── ABOUT (COMPACT) ── -->
+<section class="chapter">
+  <div class="ch-compact">
+    <div class="ch-intro">
+      <div class="reveal">
+        <h2 class="ch-h2">Built for the <span class="g">Desert</span></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="ch-body">Located in <strong>Industrial Area 4, Sharjah</strong>, we specialize in transforming 4×4s and pickup trucks into machines that command respect.</p>
+        <p class="ch-body">From <em>high-grade bed covers</em> to complete exterior builds, every project is executed with precision and backed by 5+ years of trusted service.</p>
+      </div>
+    </div>
+    <div class="img-placeholder reveal d2">[ Shop Interior Photo ]</div>
+  </div>
+</section>
+
+<!-- ── STORY SECTION (HORIZONTAL SCROLL) ── -->
+<div id="story-wrapper">
+  <div class="story-intro">
+    <h2 class="story-h2 reveal">Our <span class="g">Journey</span></h2>
+    <p class="story-sub reveal d1">Four stages that define Juhrum's commitment to excellence.</p>
+  </div>
+
+  <div id="story-horizontal">
+    <div class="story-sticky">
+      <div class="story-track" id="story-track">
+        <div class="story-stage" data-stage="1">
+          <div class="stage-content">
+            <div class="stage-num">01</div>
+            <h3 class="stage-title">Foundation</h3>
+            <p class="stage-text">Started with a vision: to bring world-class 4×4 accessories to the UAE market. Small workshop, big dreams.</p>
+          </div>
+        </div>
+
+        <div class="story-stage" data-stage="2">
+          <div class="stage-content">
+            <div class="stage-num">02</div>
+            <h3 class="stage-title">Growth</h3>
+            <p class="stage-text">Expanded services to include full exterior builds, premium audio installations, and paint protection film.</p>
+          </div>
+        </div>
+
+        <div class="story-stage" data-stage="3">
+          <div class="stage-content">
+            <div class="stage-num">03</div>
+            <h3 class="stage-title">Recognition</h3>
+            <p class="stage-text">Built a loyal customer base across UAE. 4.7★ Google rating and hundreds of satisfied truck owners.</p>
+          </div>
+        </div>
+
+        <div class="story-stage" data-stage="4">
+          <div class="stage-content">
+            <div class="stage-num">04</div>
+            <h3 class="stage-title">Today</h3>
+            <p class="stage-text">Leading destination for premium truck accessories in Sharjah. Every build tells a story of power and precision.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spline 3D Screw Background (appears at stage 2-3) -->
+      <div id="spline-bg-container"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REVIEWS (MULTIPLE) ── -->
+<section class="chapter" style="background:var(--black);">
+  <div class="ch-compact">
+    <h2 class="ch-h2 reveal">What Our <span class="g">Clients Say</span></h2>
+    <div class="reviews-grid">
+      <div class="review-card reveal d1">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Best bed cover installation in UAE. Perfect fit, high quality materials. These guys know trucks."</p>
+        <div class="rev-author">— Ahmed K.</div>
+      </div>
+      <div class="review-card reveal d2">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Transformed my F-150 with full exterior build. Professional service, attention to detail is unmatched."</p>
+        <div class="rev-author">— Mohammed S.</div>
+      </div>
+      <div class="review-card reveal d3">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Audio system sounds incredible. Fair pricing, excellent craftsmanship. Highly recommend Juhrum."</p>
+        <div class="rev-author">— Khalid M.</div>
+      </div>
+      <div class="review-card reveal d4">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"PPF installation was flawless. Truck looks brand new. Will come back for future upgrades."</p>
+        <div class="rev-author">— Rashid A.</div>
+      </div>
+      <div class="review-card reveal d5">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Custom upholstery exceeded expectations. Quality leather, perfect stitching. True professionals."</p>
+        <div class="rev-author">— Sultan H.</div>
+      </div>
+      <div class="review-card reveal d6">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Been a customer for 3 years. Consistent quality, honest pricing. Best in Sharjah hands down."</p>
+        <div class="rev-author">— Yousef T.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT STRIP ── -->
+<div class="contact-strip">
+  <a href="https://wa.me/9710503002898" class="cs-item" data-tip="Chat">
+    <div>
+      <div class="cs-label">Get in Touch</div>
+      <div class="cs-title">WhatsApp</div>
+    </div>
+    <div class="cs-arrow">→</div>
+  </a>
+  <a href="tel:+9710503002898" class="cs-item" data-tip="Call">
+    <div>
+      <div class="cs-label">Call Direct</div>
+      <div class="cs-title">050 300 2898</div>
+    </div>
+    <div class="cs-arrow">→</div>
+  </a>
+  <a href="https://goo.gl/maps/yourlink" class="cs-item" data-tip="Visit" target="_blank">
+    <div>
+      <div class="cs-label">Visit Shop</div>
+      <div class="cs-title">Get Directions</div>
+    </div>
+    <div class="cs-arrow">→</div>
+  </a>
+</div>
+
+<!-- ── PRODUCTS PREVIEW ── -->
+<section id="products-prev">
+  <div class="pp-head reveal">
+    <h2 class="pp-h2">Our <span class="g">Services</span></h2>
+  </div>
+  <div class="pp-grid">
+    <div class="pc3 reveal d1">
+      <div class="img-placeholder" style="aspect-ratio:1;margin-bottom:20px;">[ Bed Cover Photo ]</div>
+      <h3 class="pc3-title">Bed Covers</h3>
+      <p class="pc3-desc">Premium hard and soft tonneau covers. Custom fit for all truck models.</p>
+    </div>
+    <div class="pc3 reveal d2">
+      <div class="img-placeholder" style="aspect-ratio:1;margin-bottom:20px;">[ Exterior Build Photo ]</div>
+      <h3 class="pc3-title">Exterior Builds</h3>
+      <p class="pc3-desc">Complete transformations. Bumpers, grilles, lighting, lift kits.</p>
+    </div>
+    <div class="pc3 reveal d3">
+      <div class="img-placeholder" style="aspect-ratio:1;margin-bottom:20px;">[ Audio System Photo ]</div>
+      <h3 class="pc3-title">Audio Systems</h3>
+      <p class="pc3-desc">Professional installations. Premium speakers, subwoofers, amplifiers.</p>
+    </div>
+    <div class="pc3 reveal d4">
+      <div class="img-placeholder" style="aspect-ratio:1;margin-bottom:20px;">[ PPF Photo ]</div>
+      <h3 class="pc3-title">Paint Protection</h3>
+      <p class="pc3-desc">High-grade PPF and ceramic coating. Keep your truck pristine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT FINAL ── -->
+<section id="contact-final">
+  <div class="cf-wrap">
+    <div class="cf-left reveal">
+      <h2>Visit <span class="g">Juhrum</span></h2>
+      <p>Located in Industrial Area 4, Sharjah. Open every day, ready to transform your ride.</p>
+      <div class="cf-facts">
+        <div class="cf-row"><span class="cf-key">Location</span><span class="cf-val">Industrial Area 4, Sharjah</span></div>
+        <div class="cf-row"><span class="cf-key">Hours</span><span class="cf-val">8:00 AM – 11:00 PM, Every Day</span></div>
+        <div class="cf-row"><span class="cf-key">Phone</span><span class="cf-val">050 300 2898</span></div>
+        <div class="cf-row"><span class="cf-key">Rating</span><span class="cf-val">4.7 ★ Google Reviews</span></div>
+      </div>
+    </div>
+    <div class="cf-right reveal d2">
+      <a href="https://wa.me/9710503002898" class="wa-btn" target="_blank" data-tip="Chat">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>Message on WhatsApp</span>
+      </a>
+      <div class="map-box">[ Google Maps Embed Here ]</div>
+      <div class="soc-row">
+        <a href="https://instagram.com/Jahrom.4x4.ae" class="soc-lnk" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@Jahrom.4x4.UAE" class="soc-lnk" target="_blank">TikTok</a>
+        <a href="https://youtube.com/@jahrom_4x4_ae" class="soc-lnk" target="_blank">YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="jfoot">
+  <div class="jfoot-logo">JUHR<b>UM</b></div>
+  <div class="jfoot-tag">Desert Iron — Built for Power</div>
+  <div class="jfoot-copy">© 2025 Juhrum Auto Accessories, Sharjah UAE</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── PRELOADER WITH ANIMATED PARTICLES ──
+(function(){
+  const canvas = document.getElementById('preload-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const particleCount = 150;
+  
+  for(let i = 0; i < particleCount; i++){
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2 + 1,
+      speedBoost: 1
+    });
+  }
+
+  let progress = 0;
+  let animating = true;
+
+  function animateParticles(){
+    if(!animating) return;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(p => {
+      // Movement
+      p.x += p.vx * p.speedBoost;
+      p.y += p.vy * p.speedBoost;
+      
+      // Wrap around edges
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+      
+      // Draw particle
+      ctx.fillStyle = `rgba(196, 154, 56, ${0.4 * (p.size / 3)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(animateParticles);
+  }
+  
+  animateParticles();
+
+  // Simulate loading progress
+  const progressInterval = setInterval(() => {
+    if(progress < 20){
+      progress += Math.random() * 3;
+    } else if(progress < 90){
+      // Sudden jump + particle speed boost
+      progress = 90;
+      particles.forEach(p => {
+        p.speedBoost = 15;
+        p.vx = (Math.random() - 0.5) * 3;
+        p.vy = (Math.random() - 0.5) * 3;
+      });
+      setTimeout(() => {
+        progress = 100;
+        clearInterval(progressInterval);
+      }, 400);
+    }
+  }, 100);
+
+  const pl = document.getElementById('preload');
+  const logo = document.getElementById('pllo');
+  const bar = document.getElementById('plbar');
+  const sub = document.getElementById('plsub');
+  
+  setTimeout(() => logo.classList.add('up'), 80);
+  setTimeout(() => {
+    bar.classList.add('go');
+    sub.classList.add('show');
+  }, 240);
+  
+  setTimeout(() => {
+    animating = false;
+    pl.classList.add('exit');
+    setTimeout(() => {
+      pl.style.display = 'none';
+      startHero();
+    }, 1100);
+  }, 2400);
+})();
+
+function startHero(){
+  document.getElementById('htag').classList.add('in');
+  [0,1,2].forEach((i) => setTimeout(() => document.getElementById('hl'+i).classList.add('up'), i*120));
+  setTimeout(() => document.getElementById('hsub').classList.add('in'), 500);
+  setTimeout(() => document.getElementById('hctas').classList.add('in'), 700);
+  setTimeout(() => document.getElementById('hstats').classList.add('in'), 900);
+  setTimeout(() => document.getElementById('hscroll').classList.add('in'), 1100);
+}
+
+// ── GOLD PARTICLE FIELD (MORE VISIBLE) ──
+(function(){
+  const canvas = document.getElementById('jcanvas');
+  const R = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true});
+  R.setPixelRatio(Math.min(devicePixelRatio, 2));
+  R.setSize(innerWidth, innerHeight);
+  
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(58, innerWidth/innerHeight, .1, 1000);
+  cam.position.z = 5;
+  
+  const N = 3200;
+  const pos = new Float32Array(N*3);
+  const sc = new Float32Array(N);
+  const rnd = new Float32Array(N);
+  
+  for(let i=0; i<N; i++){
+    pos[i*3] = (Math.random()-.5)*20;
+    pos[i*3+1] = (Math.random()-.5)*12;
+    pos[i*3+2] = (Math.random()-.5)*10;
+    sc[i] = Math.random();
+    rnd[i] = Math.random();
+  }
+  
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('aS', new THREE.BufferAttribute(sc, 1));
+  geo.setAttribute('aR', new THREE.BufferAttribute(rnd, 1));
+  
+  const mat = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    uniforms: {
+      uT: {value: 0},
+      uM: {value: new THREE.Vector2()},
+      uSz: {value: 3.2 * R.getPixelRatio()}
+    },
+    vertexShader: `
+      uniform float uT;
+      uniform vec2 uM;
+      uniform float uSz;
+      attribute float aS;
+      attribute float aR;
+      varying float vA;
+      void main(){
+        vec3 p = position;
+        p.x += sin(uT*.35 + aR*6.28)*.1*aR;
+        p.y += cos(uT*.25 + aR*3.14)*.08*aR;
+        p.z += sin(uT*.18 + aR*9.)*.05;
+        vec4 mv = modelViewMatrix * vec4(p, 1.);
+        vec2 sp = (projectionMatrix*mv).xy;
+        float d = distance(sp, uM*2.);
+        float rep = smoothstep(.9, 0., d)*.55;
+        p.xy += normalize(p.xy - uM)*rep;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
+        gl_PointSize = uSz * aS * (1. + sin(uT + aR*6.28)*.28);
+        vA = aS * .75;
+      }
+    `,
+    fragmentShader: `
+      varying float vA;
+      void main(){
+        float d = distance(gl_PointCoord, vec2(.5));
+        if(d > .5) discard;
+        float a = smoothstep(.5, 0., d) * vA;
+        gl_FragColor = vec4(.77, .6, .22, a * .65);
+      }
+    `
+  });
+  
+  const pts = new THREE.Points(geo, mat);
+  scene.add(pts);
+  
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX/innerWidth - .5)*2;
+    my = -(e.clientY/innerHeight - .5)*2;
+  });
+  
+  const clk = new THREE.Clock();
+  (function animate(){
+    requestAnimationFrame(animate);
+    const t = clk.getElapsedTime();
+    mat.uniforms.uT.value = t;
+    mat.uniforms.uM.value.set(mx*.5, my*.5);
+    cam.position.x += (mx*.45 - cam.position.x)*.04;
+    cam.position.y += (my*.3 - cam.position.y)*.04;
+    cam.lookAt(scene.position);
+    pts.rotation.y = t*.018;
+    R.render(scene, cam);
+  })();
+  
+  window.addEventListener('resize', () => {
+    cam.aspect = innerWidth/innerHeight;
+    cam.updateProjectionMatrix();
+    R.setSize(innerWidth, innerHeight);
+  });
+})();
+
+// ── HORIZONTAL STORY SCROLL WITH SPLINE ──
+(function(){
+  const wrapper = document.getElementById('story-horizontal');
+  const track = document.getElementById('story-track');
+  const splineContainer = document.getElementById('spline-bg-container');
+  
+  if(!wrapper || !track) return;
+  
+  // Load Spline only once when entering stage 2
+  let splineLoaded = false;
+  
+  function loadSpline(){
+    if(splineLoaded) return;
+    splineLoaded = true;
+    
+    // Dynamically load Spline runtime
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@splinetool/runtime@1.9.44/build/runtime.js';
+    document.head.appendChild(script);
+    
+    script.onload = () => {
+      const canvas = document.createElement('spline-viewer');
+      canvas.setAttribute('url', 'https://prod.spline.design/HrsWHEf9-Gqp5AZc/scene.splinecode');
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      splineContainer.appendChild(canvas);
+    };
+  }
+  
+  window.addEventListener('scroll', () => {
+    const rect = wrapper.getBoundingClientRect();
+    const wrapperTop = rect.top;
+    const wrapperHeight = rect.height;
+    const progress = Math.max(0, Math.min(1, -wrapperTop / (wrapperHeight - window.innerHeight)));
+    
+    // Move track horizontally through 4 stages (0% to 300%)
+    const translateX = progress * 300;
+    track.style.transform = `translateX(-${translateX}%)`;
+    
+    // Show Spline during stages 2-3 (25% - 75% of scroll)
+    if(progress >= 0.25 && progress <= 0.75){
+      if(!splineLoaded) loadSpline();
+      splineContainer.classList.add('visible');
+    } else {
+      splineContainer.classList.remove('visible');
+    }
+  });
+})();
+</script>
+<script src="juhrum.js"></script>
+</body>
+</html>
