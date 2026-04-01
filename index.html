@@ -21,7 +21,8 @@
 
 #hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 80px;}
 .hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
-.hero-video-bg video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;}
+.hero-video-bg video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;opacity:0;animation:videoFadeIn 2.5s ease-out 0.3s forwards;}
+@keyframes videoFadeIn{0%{opacity:0;}100%{opacity:1;}}
 .hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.35) 50%,rgba(5,5,5,.7) 100%);}
 .hero-veil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,var(--black),transparent);}
 #jcanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
@@ -51,9 +52,6 @@
 .h-scroll span{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;}
 @keyframes pulse{0%,100%{opacity:.9;transform:scaleY(1)}50%{opacity:.2;transform:scaleY(.4)}}
 
-/* VIDEO HINT OVERLAY */
-.hero-video-hint{position:absolute;bottom:24px;left:52px;z-index:3;font-family:var(--fu);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(196,154,56,.3);pointer-events:none;}
-
 .ticker{background:var(--gold);overflow:hidden;padding:17px 0;position:relative;z-index:4;}
 .ticker-t{display:flex;white-space:nowrap;animation:jTicker 28s linear infinite;}
 .ticker-i{font-family:var(--fd);font-size:12px;letter-spacing:.26em;color:var(--black);padding:0 44px;display:flex;align-items:center;gap:44px;flex-shrink:0;}
@@ -62,18 +60,56 @@
 
 .jnav-logo img{height:32px;width:auto;vertical-align:middle;}
 
-.chapter{padding:120px 52px;position:relative;overflow:hidden;}
-.ch-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.ch-h2{font-family:var(--fd);font-size:clamp(52px,7vw,104px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:28px;}
-.ch-h2 .g{color:var(--gold);}.ch-h2 .s{-webkit-text-stroke:1px rgba(237,236,231,.14);color:transparent;display:block;}
-.ch-body{font-size:15px;font-weight:300;line-height:1.85;color:var(--silver);letter-spacing:.015em;margin-bottom:18px;}
-.ch-body strong{color:var(--white);font-weight:400;}.ch-body em{color:var(--gold);font-style:normal;}
+/* PRODUCTS SECTION - SIMPLIFIED */
+#products-section{position:relative;z-index:2;background:var(--black);padding:100px 52px;}
+.prod-head{max-width:1200px;margin:0 auto 60px;text-align:center;}
+.prod-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.prod-h2{font-family:var(--fd);font-size:clamp(60px,8vw,120px);line-height:.9;letter-spacing:.02em;color:var(--white);}
+.prod-h2 .g{color:var(--gold);}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:1200px;margin:0 auto;}
+.prod-card{position:relative;aspect-ratio:4/5;background:var(--surface);overflow:hidden;cursor:none;transition:transform .3s;}
+.prod-card:hover{transform:translateY(-4px);}
+.prod-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:10px;letter-spacing:.14em;color:rgba(196,154,56,.12);text-transform:uppercase;text-align:center;padding:36px;z-index:0;}
+.prod-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,.97) 0%,rgba(5,5,5,.22) 55%,transparent 100%);}
+.prod-glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(196,154,56,.09) 0%,transparent 60%);transition:opacity .4s;}
+.prod-card:hover .prod-glow{opacity:1;}
+.prod-border{position:absolute;inset:0;z-index:3;pointer-events:none;border:1px solid transparent;transition:border-color .4s;}
+.prod-card:hover .prod-border{border-color:rgba(196,154,56,.22);}
+.prod-content{position:absolute;bottom:0;left:0;right:0;padding:32px 28px;z-index:2;}
+.prod-cat{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.prod-name{font-family:var(--fd);font-size:32px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:12px;}
+.prod-desc{font-size:13px;font-weight:300;color:var(--silver);line-height:1.65;margin-bottom:16px;max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.76,0,.24,1),opacity .4s;opacity:0;}
+.prod-card:hover .prod-desc{max-height:120px;opacity:1;}
+.prod-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--fu);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .3s;}
+.prod-cta:hover{gap:14px;}
 
-.shop-img-wrap{position:relative;padding-bottom:24px;padding-right:24px;}
-.shop-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
-.shop-img-badge{position:absolute;bottom:0;right:0;z-index:2;background:var(--gold);padding:18px 20px;}
-.sib-n{font-family:var(--fd);font-size:40px;color:var(--black);line-height:1;}
-.sib-l{font-family:var(--fu);font-size:8px;letter-spacing:.18em;color:rgba(0,0,0,.6);display:block;margin-top:2px;}
+/* BOOKING MINI SECTION */
+.booking-mini{background:var(--surface);border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);padding:60px 52px;text-align:center;position:relative;z-index:2;}
+.booking-inner{max-width:800px;margin:0 auto;}
+.booking-h3{font-family:var(--fd);font-size:clamp(44px,6vw,72px);letter-spacing:.06em;color:var(--white);margin-bottom:16px;line-height:1;}
+.booking-h3 .g{color:var(--gold);}
+.booking-text{font-size:15px;color:var(--silver);line-height:1.8;margin-bottom:32px;}
+.booking-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.booking-info{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+/* STORY HORIZONTAL SCROLL SECTION */
+#story-wrapper{position:relative;background:var(--deep);overflow:hidden;}
+.story-intro{padding:100px 52px 60px;max-width:800px;margin:0 auto;text-align:center;}
+.story-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.story-h2{font-family:var(--fd);font-size:clamp(60px,8vw,110px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:24px;}
+.story-h2 .g{color:var(--gold);}
+
+#story-horizontal{position:relative;height:400vh;}
+.story-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;}
+.story-track{display:flex;height:100%;will-change:transform;position:relative;}
+.story-stage{min-width:100vw;height:100%;display:flex;align-items:center;justify-content:center;padding:0 52px;position:relative;}
+.stage-content{max-width:600px;position:relative;z-index:2;text-align:center;}
+.stage-num{font-family:var(--fd);font-size:160px;color:rgba(196,154,56,.06);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;z-index:0;pointer-events:none;}
+.stage-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);color:var(--gold);margin-bottom:20px;line-height:.95;}
+.stage-text{font-size:16px;color:var(--silver);line-height:1.9;max-width:520px;margin:0 auto;}
+
+#spline-bg{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease;z-index:1;}
+#spline-bg.visible{opacity:1;}
 
 .contact-strip{display:flex;border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);background:var(--surface);position:relative;z-index:2;}
 .cs-item{flex:1;padding:52px 44px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
@@ -83,42 +119,9 @@
 .cs-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
 .cs-item:hover .cs-arrow{transform:translateX(7px);color:var(--gold);}
 
-#products-prev{position:relative;z-index:2;background:var(--black);padding:120px 52px;}
-.pp-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;max-width:1400px;margin-left:auto;margin-right:auto;}
-.pp-h2{font-family:var(--fd);font-size:clamp(52px,7.5vw,108px);line-height:.9;letter-spacing:.02em;color:var(--white);}
-.pp-h2 .g{color:var(--gold);}.pp-h2 .s{-webkit-text-stroke:1px rgba(237,236,231,.13);color:transparent;display:block;}
-.pp-right{max-width:260px;}.pp-sub{font-size:13px;font-weight:300;color:var(--dim);line-height:1.75;text-align:right;margin-bottom:20px;}
-.pp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1400px;margin:0 auto 48px;}
-.pc3{position:relative;aspect-ratio:3/4;background:var(--surface);overflow:hidden;cursor:none;}
-.pc3-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.23,1,.32,1);z-index:0;}
-.pc3:hover .pc3-img{transform:scale(1.04);}
-.pc3-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:9px;letter-spacing:.14em;color:rgba(196,154,56,.1);text-transform:uppercase;text-align:center;padding:36px;z-index:0;}
-.pc3 canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;z-index:0;}
-.pc3-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,.97) 0%,rgba(5,5,5,.22) 55%,transparent 100%);}
-.glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(196,154,56,.09) 0%,transparent 60%);transition:opacity .4s;}
-.pc3-border{position:absolute;inset:0;z-index:3;pointer-events:none;border:1px solid transparent;transition:border-color .4s;}
-.pc3:hover .pc3-border{border-color:rgba(196,154,56,.22);}
-.pc3-idx{position:absolute;top:18px;right:18px;z-index:2;font-family:var(--fd);font-size:12px;color:rgba(196,154,56,.22);letter-spacing:.08em;}
-.pc3-content{position:absolute;bottom:0;left:0;right:0;padding:28px 24px;z-index:2;}
-.pc3-cat{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-.pc3-name{font-family:var(--fd);font-size:28px;letter-spacing:.04em;color:var(--white);line-height:1;}
-.pc3-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.65;margin-top:10px;max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.76,0,.24,1),opacity .4s;opacity:0;}
-.pc3:hover .pc3-desc{max-height:90px;opacity:1;}
-.pc3-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--fu);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .3s;}
-.pc3-cta:hover{gap:14px;}
-.pp-more{max-width:1400px;margin:0 auto;text-align:center;}
-
-.nb{position:relative;z-index:2;background:var(--gold);padding:72px 52px;overflow:hidden;}
-.nb::before{content:'JUHRUM';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:20vw;letter-spacing:.1em;color:rgba(0,0,0,.05);white-space:nowrap;pointer-events:none;line-height:1;}
-.nb-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;position:relative;z-index:1;}
-.nb-item{text-align:center;padding:0 20px;border-right:1px solid rgba(0,0,0,.12);}
-.nb-item:last-child{border-right:none;}
-.nb-n{font-family:var(--fd);font-size:84px;color:var(--black);line-height:1;display:block;}
-.nb-l{font-family:var(--fu);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-top:4px;}
-
-.reviews{padding:120px 52px;background:var(--deep);border-top:1px solid rgba(196,154,56,.07);}
-.reviews-inner{max-width:1400px;margin:0 auto;}
-.reviews-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;}
+.reviews{padding:100px 52px;background:var(--black);border-top:1px solid rgba(196,154,56,.07);}
+.reviews-inner{max-width:1200px;margin:0 auto;}
+.reviews-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
 .reviews-h2{font-family:var(--fd);font-size:clamp(48px,6vw,90px);line-height:.9;letter-spacing:.02em;color:var(--white);}
 .reviews-h2 .g{color:var(--gold);}
 .rating-summary{text-align:right;}
@@ -134,67 +137,20 @@
 .rcard-initials{width:36px;height:36px;border-radius:50%;background:rgba(196,154,56,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;color:var(--gold);flex-shrink:0;}
 .rcard-name{font-family:var(--fu);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--white);}
 .rcard-meta{font-family:var(--fu);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:2px;}
-.rcard-badge{position:absolute;top:20px;right:20px;font-family:var(--fu);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,154,56,.2);padding:4px 10px;}
 
-.gallery-strip{position:relative;z-index:2;background:var(--black);padding:100px 0 80px;}
-.gs-head{padding:0 52px;margin-bottom:44px;display:flex;align-items:flex-end;justify-content:space-between;}
-.gs-h2{font-family:var(--fd);font-size:clamp(52px,7vw,96px);line-height:.9;letter-spacing:.02em;color:var(--white);}
-.gs-h2 .g{color:var(--gold);}
-.gs-hint{font-family:var(--fu);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px;}
-.gs-hint::after{content:'→';font-size:16px;}
-.gs-track{display:flex;gap:2px;padding:0 52px;overflow-x:auto;scrollbar-width:none;}
-.gs-track::-webkit-scrollbar{display:none;}
-.gi{flex-shrink:0;position:relative;overflow:hidden;background:var(--surface);}
-.gi:nth-child(3n+1){width:420px;height:560px;}
-.gi:nth-child(3n+2){width:300px;height:400px;align-self:center;}
-.gi:nth-child(3n+0){width:500px;height:480px;align-self:flex-end;}
-.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.23,1,.32,1);}
-.gi:hover img{transform:scale(1.04);}
-.gi::before{content:attr(data-ph);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:9px;letter-spacing:.14em;color:rgba(196,154,56,.12);text-transform:uppercase;text-align:center;padding:36px;}
-.gi::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.7) 0%,transparent 55%);z-index:1;pointer-events:none;}
-.gi-lbl{position:absolute;bottom:16px;left:18px;z-index:2;font-family:var(--fu);font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);}
+.jfoot{background:var(--deep);border-top:1px solid rgba(255,255,255,.04);padding:36px 52px;display:flex;align-items:center;justify-content:space-between;}
+.jfoot-logo{font-family:var(--fd);font-size:19px;letter-spacing:.2em;color:var(--white);}
+.jfoot-logo b{color:var(--gold);font-weight:400;}
+.jfoot-tag{font-family:var(--fu);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(196,154,56,.35);}
+.jfoot-copy{font-family:var(--fu);font-size:9px;letter-spacing:.15em;color:var(--dim);}
 
-.page-nav-band{display:flex;background:var(--surface);border-top:1px solid rgba(196,154,56,.07);position:relative;z-index:2;}
-.pnb-item{flex:1;padding:44px 44px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
-.pnb-item:last-child{border-right:none;}.pnb-item:hover{background:rgba(196,154,56,.04);}
-.pnb-label{font-family:var(--fu);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.pnb-title{font-family:var(--fd);font-size:26px;letter-spacing:.06em;color:var(--white);}
-.pnb-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
-.pnb-item:hover .pnb-arrow{transform:translateX(7px);color:var(--gold);}
-
-.contact-final{position:relative;z-index:2;background:var(--deep);padding:130px 52px;border-top:1px solid rgba(196,154,56,.09);}
-.cf-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
-.cf-h2{font-family:var(--fd);font-size:clamp(60px,9vw,124px);line-height:.87;letter-spacing:.02em;color:var(--white);margin-bottom:28px;}
-.cf-h2 .g{color:var(--gold);}.cf-h2 .s{-webkit-text-stroke:1px rgba(237,236,231,.11);color:transparent;display:block;}
-.cf-body{font-size:15px;font-weight:300;color:var(--dim);line-height:1.8;max-width:360px;margin-bottom:44px;letter-spacing:.015em;}
-.cf-info{display:flex;flex-direction:column;}
-.cf-row{display:flex;gap:20px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.04);}
-.cf-row:first-child{border-top:1px solid rgba(255,255,255,.04);}
-.cf-key{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);min-width:70px;padding-top:2px;}
-.cf-val{font-size:13px;font-weight:300;color:var(--silver);line-height:1.6;}
-.cf-right{display:flex;flex-direction:column;gap:14px;}
-.wa-btn{display:flex;align-items:center;gap:16px;background:#25D366;color:#000;text-decoration:none;padding:22px 32px;font-family:var(--fu);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;position:relative;overflow:hidden;transition:all .3s;}
-.wa-btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.13);transform:translateX(-100%);transition:transform .45s cubic-bezier(.76,0,.24,1);}
-.wa-btn:hover::before{transform:translateX(0);}
-.wa-btn svg,.wa-btn span{position:relative;z-index:1;}
-.map-box{height:200px;background:var(--surface);display:flex;align-items:center;justify-content:center;border:1px solid rgba(196,154,56,.07);position:relative;overflow:hidden;}
-.map-box::before{content:'[ Google Maps — Industrial Area 4, Sharjah ]';font-family:var(--fu);font-size:9px;letter-spacing:.14em;color:rgba(196,154,56,.16);text-transform:uppercase;text-align:center;padding:20px;}
-.soc-row{display:flex;gap:10px;}
-.soc-lnk{font-family:var(--fu);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:10px 18px;border:1px solid rgba(255,255,255,.07);transition:all .3s;}
-.soc-lnk:hover{color:var(--gold);border-color:rgba(196,154,56,.25);}
-
-@media(max-width:900px){
-  #hero{padding:0 24px 60px;}.h-stats{display:none;}
-  .chapter{padding:80px 24px;}.ch-intro{grid-template-columns:1fr;gap:48px;}
-  .contact-strip{flex-direction:column;}.cs-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);}
-  #products-prev{padding:80px 24px;}.pp-head{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:40px;}.pp-sub{text-align:left;}.pp-grid{grid-template-columns:1fr 1fr;}
-  .nb-grid{grid-template-columns:1fr 1fr;}
-  .reviews{padding:80px 24px;}.reviews-header{flex-direction:column;align-items:flex-start;gap:24px;}.rating-summary{text-align:left;}.reviews-grid{grid-template-columns:1fr;}
-  .gallery-strip{padding:80px 0;}.gs-head,.gs-track{padding-left:24px;padding-right:24px;}
-  .page-nav-band{flex-direction:column;}.pnb-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);}
-  .contact-final{padding:80px 24px;}.cf-inner{grid-template-columns:1fr;gap:56px;}
+@media (max-width: 900px) {
+  .prod-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .reviews-header{flex-direction:column;align-items:flex-start;gap:20px;}
+  .booking-ctas{flex-direction:column;}
+  .h-stats{display:none;}
 }
-@media(max-width:560px){.pp-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body class="noise">
@@ -227,6 +183,7 @@
   <a href="https://wa.me/9710503002898" class="jnav-wa" data-tip="WhatsApp">WhatsApp Us</a>
 </nav>
 
+<!-- HERO SECTION -->
 <section id="hero">
   <div class="hero-video-bg">
     <video autoplay muted loop playsinline>
@@ -243,8 +200,8 @@
     </h1>
     <p class="h-sub" id="hsub">Premium 4×4 and pickup truck accessories for drivers who demand more. Trusted by UAE truck owners for over five years.</p>
     <div class="h-ctas" id="hctas">
-      <a href="products.html" class="btn-g" data-tip="Explore"><span>View Products</span><span>→</span></a>
-      <a href="story.html" class="btn-o">Our Story</a>
+      <a href="#products-section" class="btn-g" data-tip="Explore"><span>View Products</span><span>→</span></a>
+      <a href="#story-wrapper" class="btn-o">Our Story</a>
     </div>
   </div>
   <div class="h-stats" id="hstats">
@@ -257,172 +214,160 @@
   <div class="h-scroll" id="hscroll"><div class="h-scroll-line"></div><span>Scroll</span></div>
 </section>
 
+<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-t">
     <div class="ticker-i">Bed Covers<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Pickup Accessories<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Ford F-Series<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Dodge Ram TRX<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Chevrolet Silverado<span class="ticker-dot"></span></div>
-    <div class="ticker-i">4×4 Off-Road<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Exterior Builds<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Audio Systems<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Paint Protection<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Upholstery<span class="ticker-dot"></span></div>
     <div class="ticker-i">4.7★ Google Rating<span class="ticker-dot"></span></div>
     <div class="ticker-i">Sharjah UAE<span class="ticker-dot"></span></div>
     <div class="ticker-i">Bed Covers<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Pickup Accessories<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Ford F-Series<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Dodge Ram TRX<span class="ticker-dot"></span></div>
-    <div class="ticker-i">Chevrolet Silverado<span class="ticker-dot"></span></div>
-    <div class="ticker-i">4×4 Off-Road<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Exterior Builds<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Audio Systems<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Paint Protection<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Upholstery<span class="ticker-dot"></span></div>
     <div class="ticker-i">4.7★ Google Rating<span class="ticker-dot"></span></div>
     <div class="ticker-i">Sharjah UAE<span class="ticker-dot"></span></div>
   </div>
 </div>
 
-<div class="chapter" style="background:var(--black);">
-  <div style="position:absolute;font-family:var(--fd);font-size:26vw;color:rgba(196,154,56,.025);top:-5%;left:-2%;pointer-events:none;line-height:1;letter-spacing:.06em;">01</div>
-  <div class="ch-intro">
-    <div>
-      <div class="tag reveal" style="margin-bottom:22px;">Chapter One</div>
-      <h2 class="ch-h2 reveal d1">WHERE EVERY<br><span class="g">TRUCK</span><br>HAS A<br><span class="s">STORY.</span></h2>
-      <p class="ch-body reveal d2">Juhrum was built from a simple obsession — <strong>serious trucks deserve serious gear.</strong> Founded in Sharjah's Industrial Area 4 by Hadi Ghanaatian, the shop draws from deep Persian automotive culture, where pride in your vehicle isn't a hobby. It's a way of life.</p>
-      <p class="ch-body reveal d3">Five years later, <em>trusted by pickup owners across the UAE</em> — from Silverado bed covers to full Dodge Ram TRX builds. Word of mouth built what no advertising could.</p>
-      <div class="reveal d4" style="margin-top:36px;"><a href="story.html" class="btn-o" data-tip="Story">Read the full story</a></div>
-    </div>
-    <div class="shop-img-wrap reveal d2">
-      <div class="shop-img" style="background:var(--surface);border:1px dashed rgba(196,154,56,.2);display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">[ SHOP INTERIOR PHOTO ]</div>
-      <div class="shop-img-badge"><div class="sib-n">5+</div><span class="sib-l">Years<br>Trusted</span></div>
-    </div>
+<!-- PRODUCTS SECTION (MOVED UP - 4 CARDS) -->
+<section id="products-section">
+  <div class="prod-head reveal">
+    <div class="prod-tag">What We Offer</div>
+    <h2 class="prod-h2">OUR <span class="g">SERVICES</span></h2>
   </div>
-</div>
-
-<div class="contact-strip">
-  <a href="https://wa.me/9710503002898" class="cs-item" data-tip="Chat" target="_blank">
-    <div><div class="cs-label">WhatsApp</div><div class="cs-title">Message Us</div></div><div class="cs-arrow">→</div>
-  </a>
-  <a href="products.html" class="cs-item" data-tip="Browse">
-    <div><div class="cs-label">Full Catalogue</div><div class="cs-title">View Products</div></div><div class="cs-arrow">→</div>
-  </a>
-  <a href="contact.html" class="cs-item" data-tip="Visit">
-    <div><div class="cs-label">Industrial Area 4</div><div class="cs-title">Sharjah, UAE</div></div><div class="cs-arrow">→</div>
-  </a>
-</div>
-
-<section id="products-prev">
-  <div class="pp-head reveal">
-    <div>
-      <div class="tag" style="margin-bottom:16px;">What We Offer</div>
-      <h2 class="pp-h2">OUR<br><span class="g">CATALOGUE</span><span class="s">BUILDS.</span></h2>
-    </div>
-    <div class="pp-right">
-      <p class="pp-sub">No prices listed. Every build is unique. Contact us for a personalised quote.</p>
-      <a href="products.html" class="btn-o" style="font-size:10px;">See all products</a>
-    </div>
-  </div>
-  <div class="pp-grid">
-
-    <div class="pc3 card3d reveal" data-tip="Inquire">
+  <div class="prod-grid">
+    <div class="prod-card card3d reveal" data-tip="Inquire">
       <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <div class="pc3-ph">[ BED COVERS PHOTO ]</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">01</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Bed Covers</div>
-          <div class="pc3-name">Hardtop Tonneau</div>
-          <div class="pc3-desc">6063-T5 aluminium slats, powder-coated matte black. EPDM rubber seals. 500 lb load rating. Fits F-150, Silverado, Dodge Ram, and more.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
+        <div class="prod-ph">[ BED COVERS PHOTO ]</div>
+        <div class="prod-ov"></div>
+        <div class="prod-glow"></div>
+        <div class="prod-border"></div>
+        <div class="prod-content">
+          <div class="prod-cat">Bed Covers</div>
+          <div class="prod-name">Hardtop Tonneau</div>
+          <div class="prod-desc">Premium aluminium bed covers. Custom-fit for F-150, Silverado, Ram, and more. 500 lb load rating.</div>
+          <a href="https://wa.me/9710503002898" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
         </div>
       </div>
     </div>
 
-    <div class="pc3 card3d reveal d1" data-tip="Inquire">
+    <div class="prod-card card3d reveal d1" data-tip="Inquire">
       <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <div class="pc3-ph">[ DODGE RAM TRX BUILD PHOTO ]</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">02</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Full Build</div>
-          <div class="pc3-name">Dodge Ram TRX</div>
-          <div class="pc3-desc">Full accessory build — exterior upgrades, interior packages, and protection. Come in and build yours to spec.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
+        <div class="prod-ph">[ EXTERIOR BUILD PHOTO ]</div>
+        <div class="prod-ov"></div>
+        <div class="prod-glow"></div>
+        <div class="prod-border"></div>
+        <div class="prod-content">
+          <div class="prod-cat">Exterior</div>
+          <div class="prod-name">Exterior Builds</div>
+          <div class="prod-desc">Bull bars, running boards, roof racks, fender flares. UAE desert-tested. Fitted to your exact model.</div>
+          <a href="https://wa.me/9710503002898" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
         </div>
       </div>
     </div>
 
-    <div class="pc3 card3d reveal d2" data-tip="Inquire">
+    <div class="prod-card card3d reveal d2" data-tip="Inquire">
       <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <canvas id="c3d0"></canvas>
-        <div class="pc3-ph">EXTERIOR BUILD PHOTO</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">03</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Exterior</div>
-          <div class="pc3-name">Exterior Builds</div>
-          <div class="pc3-desc">Bull bars, running boards, roof racks, fender flares. UAE desert-tested. Fitted to your exact model.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
+        <div class="prod-ph">[ AUDIO SYSTEM PHOTO ]</div>
+        <div class="prod-ov"></div>
+        <div class="prod-glow"></div>
+        <div class="prod-border"></div>
+        <div class="prod-content">
+          <div class="prod-cat">Electronics</div>
+          <div class="prod-name">Audio & Screens</div>
+          <div class="prod-desc">Apple CarPlay, Android Auto, premium audio systems. Full professional installation included.</div>
+          <a href="https://wa.me/9710503002898" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
         </div>
       </div>
     </div>
 
-    <div class="pc3 card3d reveal d1" data-tip="Inquire">
+    <div class="prod-card card3d reveal d3" data-tip="Inquire">
       <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <canvas id="c3d1"></canvas>
-        <div class="pc3-ph">AUDIO / SCREENS PHOTO</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">04</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Electronics</div>
-          <div class="pc3-name">Audio & Screens</div>
-          <div class="pc3-desc">Apple CarPlay, Android Auto, premium audio, subwoofers, cameras. Full professional installation by our technical team.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
+        <div class="prod-ph">[ PPF / PROTECTION PHOTO ]</div>
+        <div class="prod-ov"></div>
+        <div class="prod-glow"></div>
+        <div class="prod-border"></div>
+        <div class="prod-content">
+          <div class="prod-cat">Protection</div>
+          <div class="prod-name">PPF & Protection</div>
+          <div class="prod-desc">Self-healing paint protection film. Ceramic coating. Keep your truck pristine in UAE conditions.</div>
+          <a href="https://wa.me/9710503002898" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
         </div>
       </div>
     </div>
-
-    <div class="pc3 card3d reveal d2" data-tip="Inquire">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <canvas id="c3d2"></canvas>
-        <div class="pc3-ph">PPF / THERMAL PHOTO</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">05</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Protection</div>
-          <div class="pc3-name">PPF & Thermal</div>
-          <div class="pc3-desc">Self-healing paint protection film. All types of thermal insulation. Keeps your truck pristine in UAE heat.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pc3 card3d reveal d3" data-tip="Talk">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <canvas id="c3d3"></canvas>
-        <div class="pc3-ph">INTERIOR / UPHOLSTERY PHOTO</div>
-        <div class="pc3-ov"></div><div class="glow"></div><div class="pc3-border"></div>
-        <div class="pc3-idx">06</div>
-        <div class="pc3-content">
-          <div class="pc3-cat">Interior</div>
-          <div class="pc3-name">Upholstery & Leather</div>
-          <div class="pc3-desc">Full leather seat upholstery and floor installation in all colours. Installed to factory finish standard.</div>
-          <a href="https://wa.me/9710503002898" class="pc3-cta" target="_blank">Request Price →</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="pp-more reveal">
-    <a href="products.html" class="btn-g" data-tip="All Products"><span>View Full Catalogue</span><span>→</span></a>
   </div>
 </section>
 
-<div class="nb">
-  <div class="nb-grid">
-    <div class="nb-item reveal"><span class="nb-n" data-count="5" data-suffix="+">0+</span><span class="nb-l">Years Active</span></div>
-    <div class="nb-item reveal d1"><span class="nb-n" data-count="100" data-suffix="+">0+</span><span class="nb-l">Products & Services</span></div>
-    <div class="nb-item reveal d2"><span class="nb-n">4.7★</span><span class="nb-l">Google Rating</span></div>
-    <div class="nb-item reveal d3"><span class="nb-n">UAE</span><span class="nb-l">Nationwide</span></div>
+<!-- BOOKING MINI SECTION (NEW) -->
+<section class="booking-mini reveal">
+  <div class="booking-inner">
+    <h3 class="booking-h3">READY TO <span class="g">BUILD?</span></h3>
+    <p class="booking-text">Book a free consultation — we'll walk you through options for your truck and provide a personalized quote.</p>
+    <div class="booking-ctas">
+      <a href="https://wa.me/9710503002898" class="btn-g" data-tip="Chat" target="_blank"><span>WhatsApp Us</span></a>
+      <a href="tel:+9710503002898" class="btn-dark" data-tip="Call"><span>Call: 050 300 2898</span></a>
+    </div>
+    <div class="booking-info">Open 8:00 AM – 11:00 PM, Every Day</div>
+  </div>
+</section>
+
+<!-- STORY SECTION (HORIZONTAL SCROLL WITH 3D) -->
+<div id="story-wrapper">
+  <div class="story-intro">
+    <div class="story-tag reveal">Our Journey</div>
+    <h2 class="story-h2 reveal d1">FROM VISION TO <span class="g">REALITY</span></h2>
+  </div>
+
+  <div id="story-horizontal">
+    <div class="story-sticky">
+      <div class="story-track" id="story-track">
+        
+        <div class="story-stage">
+          <div class="stage-num">01</div>
+          <div class="stage-content">
+            <h3 class="stage-title">Foundation</h3>
+            <p class="stage-text">Started in Sharjah's Industrial Area 4 with one clear goal: serious trucks deserve serious gear. No compromises, no shortcuts.</p>
+          </div>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-num">02</div>
+          <div class="stage-content">
+            <h3 class="stage-title">Craft</h3>
+            <p class="stage-text">Every bed cover custom-fitted. Every build hand-checked by our team. We don't do template jobs — your truck is unique, so is our work.</p>
+          </div>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-num">03</div>
+          <div class="stage-content">
+            <h3 class="stage-title">Trusted</h3>
+            <p class="stage-text">4.7★ Google rating. 500+ trucks built across UAE. Word-of-mouth built what advertising couldn't. Trust earned, not bought.</p>
+          </div>
+        </div>
+
+        <div class="story-stage">
+          <div class="stage-num">04</div>
+          <div class="stage-content">
+            <h3 class="stage-title">Today</h3>
+            <p class="stage-text">From Silverado to Ram TRX, we've built them all. Your truck's next chapter starts here — Industrial Area 4, Sharjah.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Spline 3D Screw Background -->
+      <div id="spline-bg"></div>
+    </div>
   </div>
 </div>
 
+<!-- REVIEWS SECTION -->
 <section class="reviews">
   <div class="reviews-inner">
     <div class="reviews-header reveal">
@@ -442,85 +387,31 @@
       <div class="rcard reveal d1">
         <div class="rcard-stars">★★★★★</div>
         <p class="rcard-text">"Got a double support rear hitch carrier. Good service, friendly staff. Lots of offroad accessories available. Good prices as well."</p>
-        <div class="rcard-author"><div class="rcard-initials">HI</div><div><div class="rcard-name">Hisham Irshad</div><div class="rcard-meta">Local Guide · 285 reviews · 2 months ago</div></div></div>
-        <div class="rcard-badge">Local Guide</div>
+        <div class="rcard-author"><div class="rcard-initials">HI</div><div><div class="rcard-name">Hisham Irshad</div><div class="rcard-meta">2 months ago</div></div></div>
       </div>
       <div class="rcard reveal d2">
         <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Very good quality with good price and also good service. Ehsan showed me everything — really helpful."</p>
-        <div class="rcard-author"><div class="rcard-initials">AO</div><div><div class="rcard-name">Amir Omid</div><div class="rcard-meta">1 month ago</div></div></div>
-      </div>
-      <div class="rcard reveal d1">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"One of the best car accessories shops in Sharjah. Amazing quality, staff, and products."</p>
-        <div class="rcard-author"><div class="rcard-initials">WS</div><div><div class="rcard-name">Wael Saeed</div><div class="rcard-meta">Local Guide · 173 reviews · 6 months ago</div></div></div>
-        <div class="rcard-badge">Local Guide</div>
-      </div>
-      <div class="rcard reveal d2">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"I installed a roof rack and it was great. 100% recommended — fantastic service."</p>
-        <div class="rcard-author"><div class="rcard-initials">JM</div><div><div class="rcard-name">Jamal Mohammed</div><div class="rcard-meta">2 weeks ago</div></div></div>
-      </div>
-      <div class="rcard reveal d3">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Quick work with good quality. Will definitely be back for more accessories."</p>
-        <div class="rcard-author"><div class="rcard-initials">IM</div><div><div class="rcard-name">Igor Melnikov</div><div class="rcard-meta">5 months ago</div></div></div>
+        <p class="rcard-text">"Best place for pickup accessories in Sharjah. Professional team, quality work. Highly recommended for any truck owner."</p>
+        <div class="rcard-author"><div class="rcard-initials">MR</div><div><div class="rcard-name">Mohammed R.</div><div class="rcard-meta">4 months ago</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="gallery-strip">
-  <div class="gs-head reveal">
-    <div><div class="tag" style="margin-bottom:14px;">The Builds</div><h2 class="gs-h2">GALLERY<br><span class="g">BUILDS.</span></h2></div>
-    <div class="gs-hint">Drag to explore</div>
-  </div>
-  <div class="gs-track drag-scroll">
-    <div class="gi" data-ph="ADD YOUR PHOTOS — Drag &amp; replace"><img src="images/bed-covers.png" alt="Bed covers — Chevrolet Silverado 2022"><div class="gi-lbl">Bed Covers — Silverado</div></div>
-    <div class="gi" data-ph="ADD YOUR PHOTOS"><img src="images/dodge-ram-trx.png" alt="Dodge Ram TRX 2020 — full build"><div class="gi-lbl">Full Build — Ram TRX</div></div>
-    <div class="gi" data-ph="ADD YOUR PHOTOS"><img src="images/shop-interior.png" alt="Juhrum showroom interior"><div class="gi-lbl">Our Showroom</div></div>
-    <div class="gi" data-ph="ADD PHOTO — Exterior accessories install"></div>
-    <div class="gi" data-ph="ADD PHOTO — Interior / upholstery work"></div>
-    <div class="gi" data-ph="ADD PHOTO — PPF / protection install"></div>
-    <div class="gi" data-ph="ADD PHOTO — Truck off-road in desert"></div>
-  </div>
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <a href="https://wa.me/9710503002898" class="cs-item" data-tip="Chat" target="_blank">
+    <div><div class="cs-label">WhatsApp</div><div class="cs-title">Message Us</div></div><div class="cs-arrow">→</div>
+  </a>
+  <a href="tel:+9710503002898" class="cs-item" data-tip="Call">
+    <div><div class="cs-label">Call Direct</div><div class="cs-title">050 300 2898</div></div><div class="cs-arrow">→</div>
+  </a>
+  <a href="contact.html" class="cs-item" data-tip="Visit">
+    <div><div class="cs-label">Industrial Area 4</div><div class="cs-title">Sharjah, UAE</div></div><div class="cs-arrow">→</div>
+  </a>
 </div>
 
-<div class="page-nav-band">
-  <a href="https://instagram.com/Jahrom.4x4.ae" target="_blank" class="pnb-item" data-tip="Instagram"><div><div class="pnb-label">Follow Us</div><div class="pnb-title">@Jahrom.4x4.ae</div></div><div class="pnb-arrow">↗</div></a>
-  <a href="products.html" class="pnb-item" data-tip="Products"><div><div class="pnb-label">Browse</div><div class="pnb-title">All Products</div></div><div class="pnb-arrow">→</div></a>
-  <a href="story.html" class="pnb-item" data-tip="Story"><div><div class="pnb-label">Learn More</div><div class="pnb-title">Our Story</div></div><div class="pnb-arrow">→</div></a>
-  <a href="https://wa.me/9710503002898" class="pnb-item" data-tip="Chat" target="_blank"><div><div class="pnb-label">Get a Quote</div><div class="pnb-title">WhatsApp</div></div><div class="pnb-arrow">→</div></a>
-</div>
-
-<div class="contact-final">
-  <div class="cf-inner">
-    <div>
-      <div class="tag reveal" style="margin-bottom:24px;">Get In Touch</div>
-      <h2 class="cf-h2 reveal d1">LET'S<br>BUILD<br><span class="g">YOUR</span><br><span class="s">TRUCK.</span></h2>
-      <p class="cf-body reveal d2">Know what you want or just starting — either way, we've got you. Message us on WhatsApp and our team responds fast.</p>
-      <div class="cf-info reveal d3">
-        <div class="cf-row"><span class="cf-key">Location</span><span class="cf-val">274, First Industrial Street<br>Industrial Area 4, Sharjah UAE</span></div>
-        <div class="cf-row"><span class="cf-key">Hours</span><span class="cf-val">8:00 AM – 11:00 PM, Every Day</span></div>
-        <div class="cf-row"><span class="cf-key">Phone</span><span class="cf-val">050 300 2898</span></div>
-        <div class="cf-row"><span class="cf-key">Rating</span><span class="cf-val">4.7 ★ Google Reviews</span></div>
-      </div>
-    </div>
-    <div class="cf-right reveal d2">
-      <a href="https://wa.me/9710503002898" class="wa-btn" target="_blank" data-tip="Chat">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>Message on WhatsApp</span>
-      </a>
-      <div class="map-box"></div>
-      <div class="soc-row">
-        <a href="https://instagram.com/Jahrom.4x4.ae" class="soc-lnk" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@Jahrom.4x4.UAE" class="soc-lnk" target="_blank">TikTok</a>
-        <a href="https://youtube.com/@jahrom_4x4_ae" class="soc-lnk" target="_blank">YouTube</a>
-      </div>
-    </div>
-  </div>
-</div>
-
+<!-- FOOTER -->
 <footer class="jfoot">
   <div class="jfoot-logo">JUHR<b>UM</b></div>
   <div class="jfoot-tag">Desert Iron — Built for Power</div>
@@ -529,12 +420,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+// PRELOADER
 (function(){
   const pl=document.getElementById('preload'),logo=document.getElementById('pllo'),bar=document.getElementById('plbar'),sub=document.getElementById('plsub');
   setTimeout(()=>logo.classList.add('up'),80);
   setTimeout(()=>{bar.classList.add('go');sub.classList.add('show');},240);
   setTimeout(()=>{pl.classList.add('exit');setTimeout(()=>pl.style.display='none',1100);startHero();},2000);
 })();
+
 function startHero(){
   document.getElementById('htag').classList.add('in');
   [0,1,2].forEach((i)=>setTimeout(()=>document.getElementById('hl'+i).classList.add('up'),i*120));
@@ -543,19 +436,21 @@ function startHero(){
   setTimeout(()=>document.getElementById('hstats').classList.add('in'),900);
   setTimeout(()=>document.getElementById('hscroll').classList.add('in'),1100);
 }
+
+// GOLD PARTICLES (BOOSTED VISIBILITY)
 (function(){
   const canvas=document.getElementById('jcanvas');
   const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
   R.setPixelRatio(Math.min(devicePixelRatio,2)); R.setSize(innerWidth,innerHeight);
   const scene=new THREE.Scene();
   const cam=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,.1,1000); cam.position.z=5;
-  const N=3500,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
+  const N=4500,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
   for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*12;pos[i*3+2]=(Math.random()-.5)*10;sc[i]=Math.random();rnd[i]=Math.random();}
   const geo=new THREE.BufferGeometry();
   geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
   geo.setAttribute('aS',new THREE.BufferAttribute(sc,1));
   geo.setAttribute('aR',new THREE.BufferAttribute(rnd,1));
-  const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uSz:{value:3.4*R.getPixelRatio()}},vertexShader:`uniform float uT;uniform vec2 uM;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;vec4 mv=modelViewMatrix*vec4(p,1.);vec2 sp=(projectionMatrix*mv).xy;float d=distance(sp,uM*2.);float rep=smoothstep(.9,0.,d)*.55;p.xy+=normalize(p.xy-uM)*rep;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.75;}`,fragmentShader:`varying float vA;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=smoothstep(.5,0.,d)*vA;gl_FragColor=vec4(.77,.6,.22,a*.68);}`});
+  const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uSz:{value:4.2*R.getPixelRatio()}},vertexShader:`uniform float uT;uniform vec2 uM;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;vec4 mv=modelViewMatrix*vec4(p,1.);vec2 sp=(projectionMatrix*mv).xy;float d=distance(sp,uM*2.);float rep=smoothstep(.9,0.,d)*.55;p.xy+=normalize(p.xy-uM)*rep;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.85;}`,fragmentShader:`varying float vA;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=smoothstep(.5,0.,d)*vA;gl_FragColor=vec4(.77,.6,.22,a*.82);}`});
   const pts=new THREE.Points(geo,mat); scene.add(pts);
   let mx=0,my=0;
   document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=-(e.clientY/innerHeight-.5)*2;});
@@ -563,25 +458,52 @@ function startHero(){
   (function animate(){requestAnimationFrame(animate);const t=clk.getElapsedTime();mat.uniforms.uT.value=t;mat.uniforms.uM.value.set(mx*.5,my*.5);cam.position.x+=(mx*.45-cam.position.x)*.04;cam.position.y+=(my*.3-cam.position.y)*.04;cam.lookAt(scene.position);pts.rotation.y=t*.018;R.render(scene,cam);})();
   window.addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);});
 })();
+
+// HORIZONTAL STORY SCROLL WITH SPLINE
 (function(){
-  [{id:'c3d0',shape:'ring',acc:0x999999},{id:'c3d1',shape:'sphere',acc:0x4455CC},{id:'c3d2',shape:'film',acc:0xC49A38},{id:'c3d3',shape:'seat',acc:0xAA7733}].forEach(cfg=>{
-    const canvas=document.getElementById(cfg.id); if(!canvas)return;
-    const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); R.setPixelRatio(Math.min(devicePixelRatio,2));
-    const scene=new THREE.Scene(); const cam=new THREE.PerspectiveCamera(50,1,.1,100); cam.position.z=3.5;
-    scene.add(new THREE.AmbientLight(0xffffff,.12));
-    const pl=new THREE.PointLight(cfg.acc,2.2,8); pl.position.set(2,2,2); scene.add(pl);
-    scene.add(new THREE.PointLight(0xffffff,.4,8)).position.set(-2,-1,1);
-    const mat=new THREE.MeshStandardMaterial({color:0x111111,metalness:.75,roughness:.28,emissive:cfg.acc,emissiveIntensity:.07});
-    let mesh;
-    if(cfg.shape==='ring'){mesh=new THREE.Mesh(new THREE.TorusGeometry(.9,.07,8,28),mat);scene.add(mesh);scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(.1,.46,.88),mat),{position:{x:-.95,y:0,z:0}}));}
-    else if(cfg.shape==='sphere'){mesh=new THREE.Mesh(new THREE.SphereGeometry(.88,32,32),new THREE.MeshStandardMaterial({color:0x08080e,metalness:.85,roughness:.08,emissive:cfg.acc,emissiveIntensity:.35}));scene.add(mesh);}
-    else if(cfg.shape==='film'){mesh=new THREE.Mesh(new THREE.PlaneGeometry(2,.04),new THREE.MeshStandardMaterial({color:cfg.acc,metalness:.9,roughness:.15,emissive:cfg.acc,emissiveIntensity:.2}));scene.add(mesh);for(let y=-.5;y<=.5;y+=.2){const f=new THREE.Mesh(new THREE.PlaneGeometry(2,.003),mat);f.position.y=y;scene.add(f);}}
-    else if(cfg.shape==='seat'){mesh=new THREE.Mesh(new THREE.BoxGeometry(1.2,1.2,.16),mat);scene.add(mesh);const s=new THREE.Mesh(new THREE.BoxGeometry(1.2,.16,.9),mat);s.position.set(0,-.68,.38);scene.add(s);}
-    const upd=()=>{const w=canvas.parentElement.offsetWidth||300,h=canvas.parentElement.offsetHeight||400;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();};upd();
-    let hov=false; const parent=canvas.closest('.pc3'); if(parent){parent.addEventListener('mouseenter',()=>hov=true);parent.addEventListener('mouseleave',()=>hov=false);}
-    const clk=new THREE.Clock();
-    (function animate(){requestAnimationFrame(animate);const t=clk.getElapsedTime();if(mesh){mesh.rotation.y=t*.38+(hov?.18:0);mesh.rotation.x=Math.sin(t*.28)*.13;}pl.intensity=hov?Math.sin(t*4)*.5+2.8:2.2;R.render(scene,cam);})();
-    window.addEventListener('resize',upd);
+  const wrapper = document.getElementById('story-horizontal');
+  const track = document.getElementById('story-track');
+  const splineBg = document.getElementById('spline-bg');
+  
+  if(!wrapper || !track) return;
+  
+  let splineLoaded = false;
+  
+  function loadSpline(){
+    if(splineLoaded) return;
+    splineLoaded = true;
+    
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@splinetool/runtime@1.9.44/build/runtime.js';
+    document.head.appendChild(script);
+    
+    script.onload = () => {
+      const canvas = document.createElement('spline-viewer');
+      canvas.setAttribute('url', 'https://prod.spline.design/HrsWHEf9-Gqp5AZc/scene.splinecode');
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      splineBg.appendChild(canvas);
+    };
+  }
+  
+  window.addEventListener('scroll', () => {
+    const rect = wrapper.getBoundingClientRect();
+    const wrapperTop = rect.top;
+    const wrapperHeight = rect.height;
+    const progress = Math.max(0, Math.min(1, -wrapperTop / (wrapperHeight - window.innerHeight)));
+    
+    // Move track horizontally through 4 stages (0% to 300%)
+    const translateX = progress * 300;
+    track.style.transform = `translateX(-${translateX}%)`;
+    
+    // Show Spline during stages 2-3 (25% - 75% of scroll)
+    if(progress >= 0.25 && progress <= 0.75){
+      if(!splineLoaded) loadSpline();
+      splineBg.classList.add('visible');
+    } else {
+      splineBg.classList.remove('visible');
+    }
   });
 })();
 </script>
