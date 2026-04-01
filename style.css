@@ -71,15 +71,17 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 800;
   padding: 28px 52px;
   display: flex; align-items: center; justify-content: space-between;
+  background: var(--black);
+  border-bottom: 1px solid rgba(196,154,56,.08);
 }
 .jnav::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(5,5,5,.88) 0%, transparent 100%);
+  background: transparent;
   pointer-events: none; z-index: -1;
   opacity: 0; transition: opacity .5s;
 }
-.jnav.opaque::after { opacity: 1; }
+.jnav.opaque::after { opacity: 0; }
 .jnav-logo {
   font-family: var(--fd); font-size: 21px; letter-spacing: .22em;
   color: var(--white); text-decoration: none; line-height: 1;
