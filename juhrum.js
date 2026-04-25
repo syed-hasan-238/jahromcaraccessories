@@ -43,9 +43,12 @@
 ;(function() {
   const nav = document.querySelector('.jnav');
   if (!nav) return;
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('opaque', window.scrollY > 60);
-  }, { passive: true });
+  // inner pages have always-opaque class set in HTML — no scroll logic needed
+  if (nav.classList.contains('always-opaque')) return;
+  // homepage: transparent at top, opaque once scrolled past hero
+  const setOpacity = () => nav.classList.toggle('opaque', window.scrollY > 80);
+  setOpacity();
+  window.addEventListener('scroll', setOpacity, { passive: true });
 })();
 
 // ── SCROLL REVEAL ─────────────────────────

@@ -71,17 +71,21 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 800;
   padding: 28px 52px;
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--black);
-  border-bottom: 1px solid rgba(196,154,56,.08);
-}
-.jnav::after {
-  content: '';
-  position: absolute; inset: 0;
   background: transparent;
-  pointer-events: none; z-index: -1;
-  opacity: 0; transition: opacity .5s;
+  border-bottom: 1px solid transparent;
+  transition: background .5s ease, border-color .5s ease;
 }
-.jnav.opaque::after { opacity: 0; }
+.jnav.opaque {
+  background: rgba(5,5,5,.96);
+  border-bottom-color: rgba(196,154,56,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* inner pages — always opaque */
+.jnav.always-opaque {
+  background: rgba(5,5,5,.96);
+  border-bottom-color: rgba(196,154,56,.08);
+}
 .jnav-logo {
   font-family: var(--fd); font-size: 21px; letter-spacing: .22em;
   color: var(--white); text-decoration: none; line-height: 1;

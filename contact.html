@@ -64,17 +64,11 @@
 
 /* map */
 .map-embed {
-  width: 100%; height: 280px; background: var(--surface);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; margin-top: 36px;
+  width: 100%; background: var(--surface);
+  position: relative; overflow: hidden;
   border: 1px solid rgba(196,154,56,.07);
 }
-.map-embed::before {
-  content: '[ Google Maps Embed — Industrial Area 4, First Industrial Street 274, Sharjah ]';
-  font-family: var(--fu); font-size: 9px; letter-spacing: .14em;
-  color: rgba(196,154,56,.18); text-transform: uppercase; text-align: center; padding: 20px;
-}
-/* To embed real map: replace this div with an <iframe> from Google Maps */
+
 
 /* WA button */
 .wa-big {
@@ -188,15 +182,15 @@
 <div id="jring"></div>
 <div id="jlabel"></div>
 
-<nav class="jnav">
-  <a href="index.html" class="jnav-logo"><img src="images/logo.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;filter:brightness(0) invert(1);vertical-align:middle;"></a>
+<nav class="jnav always-opaque">
+  <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
   <ul class="jnav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="products.html">Products</a></li>
     <li><a href="story.html">Our Story</a></li>
     <li><a href="contact.html" class="cur">Contact</a></li>
   </ul>
-  <a href="https://wa.me/9710503002898" class="jnav-wa" data-tip="WhatsApp">WhatsApp Us</a>
+  <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp">WhatsApp Us</a>
 </nav>
 
 <!-- HERO -->
@@ -215,17 +209,17 @@
 <div class="ticker">
   <div class="ticker-t">
     <div class="ticker-i">Industrial Area 4<span class="ticker-dot"></span></div>
-    <div class="ticker-i">First Industrial Street 274<span class="ticker-dot"></span></div>
+    <div class="ticker-i">330 First Industrial St<span class="ticker-dot"></span></div>
     <div class="ticker-i">Sharjah, UAE<span class="ticker-dot"></span></div>
     <div class="ticker-i">Open 8AM to 11PM<span class="ticker-dot"></span></div>
     <div class="ticker-i">Every Day<span class="ticker-dot"></span></div>
-    <div class="ticker-i">WhatsApp: 050 300 2898<span class="ticker-dot"></span></div>
+    <div class="ticker-i">WhatsApp: 050 302 1700<span class="ticker-dot"></span></div>
     <div class="ticker-i">Industrial Area 4<span class="ticker-dot"></span></div>
-    <div class="ticker-i">First Industrial Street 274<span class="ticker-dot"></span></div>
+    <div class="ticker-i">330 First Industrial St<span class="ticker-dot"></span></div>
     <div class="ticker-i">Sharjah, UAE<span class="ticker-dot"></span></div>
     <div class="ticker-i">Open 8AM to 11PM<span class="ticker-dot"></span></div>
     <div class="ticker-i">Every Day<span class="ticker-dot"></span></div>
-    <div class="ticker-i">WhatsApp: 050 300 2898<span class="ticker-dot"></span></div>
+    <div class="ticker-i">WhatsApp: 050 302 1700<span class="ticker-dot"></span></div>
   </div>
 </div>
 
@@ -235,7 +229,7 @@
     <h2 class="con-h2 reveal">FIND<br><span class="g">US.</span></h2>
     <div class="info-row reveal d1">
       <span class="info-key">Address</span>
-      <span class="info-val">274, First Industrial Street<br>Industrial Area 4, after ADNOC<br>Sharjah, United Arab Emirates</span>
+      <span class="info-val">330 First Industrial St<br>Industrial Area 4<br>Sharjah, United Arab Emirates</span>
     </div>
     <div class="info-row reveal d2">
       <span class="info-key">Hours</span>
@@ -243,16 +237,24 @@
     </div>
     <div class="info-row reveal d3">
       <span class="info-key">Phone</span>
-      <span class="info-val"><a href="tel:+9710503002898">+971 050 300 2898</a></span>
+      <span class="info-val"><a href="tel:+971503021700">+971 50 302 1700</a></span>
     </div>
     <div class="info-row reveal d4">
       <span class="info-key">Email</span>
       <span class="info-val"><a href="mailto:h_jahrom@yahoo.com">h_jahrom@yahoo.com</a></span>
     </div>
-    <div class="map-embed reveal d4"></div>
-    <!-- Replace map-embed div content with:
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="280" frameborder="0" allowfullscreen></iframe>
-    -->
+    <div class="map-embed reveal d4" style="padding:0;border:1px solid rgba(196,154,56,.12);overflow:hidden;margin-top:36px;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.0!2d55.4168!3d25.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f59582c29df73%3A0x223044947b43f24f!2sJahrom%20Car%20Accessories!5e0!3m2!1sen!2sae!4v1"
+        width="100%"
+        height="280"
+        style="border:0;display:block;filter:grayscale(1) invert(0.88) sepia(0.25) hue-rotate(180deg) saturate(0.7);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Jahrom Auto Accessories location">
+      </iframe>
+    </div>
 
     <div class="hours-grid reveal">
       <div class="hg-item today">
@@ -280,14 +282,14 @@
       The fastest way to reach us is WhatsApp. Send us a message with your truck model and what you're looking for — we'll come back to you with options and pricing, usually the same day.
     </p>
 
-    <a href="https://wa.me/9710503002898" class="wa-big reveal d1" target="_blank" data-tip="Chat">
+    <a href="https://wa.me/971503021700" class="wa-big reveal d1" target="_blank" data-tip="Chat">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       <span>Message on WhatsApp</span>
     </a>
 
-    <a href="tel:+9710503002898" class="tel-link reveal d2">
+    <a href="tel:+971503021700" class="tel-link reveal d2">
       <span>📞</span>
-      <span>Call: 050 300 2898</span>
+      <span>Call: 050 302 1700</span>
     </a>
 
     <a href="mailto:h_jahrom@yahoo.com" class="tel-link reveal d3">
@@ -298,9 +300,7 @@
     <div class="soc-block reveal d4">
       <p class="soc-block-title">Follow Our Builds</p>
       <div class="soc-btns">
-        <a href="https://instagram.com/Jahrom.4x4.ae" class="soc-btn" target="_blank" data-tip="Instagram">Instagram</a>
-        <a href="https://tiktok.com/@Jahrom.4x4.UAE" class="soc-btn" target="_blank" data-tip="TikTok">TikTok</a>
-        <a href="https://youtube.com/@jahrom_4x4_ae" class="soc-btn" target="_blank" data-tip="YouTube">YouTube</a>
+        <a href="https://www.instagram.com/jahrom.4x4.accessoires" class="soc-btn" target="_blank" data-tip="Instagram">Instagram</a>
       </div>
     </div>
   </div>
@@ -314,7 +314,7 @@
       <div class="dir-card reveal">
         <div class="dir-step">01</div>
         <div class="dir-title">From Dubai / Sharjah City</div>
-        <p class="dir-body">Take Emirates Road (E611) or Al Dhaid Road (E88) toward Sharjah Industrial Areas. Exit toward Industrial Area 4 — we're on First Industrial Street, building 274.</p>
+        <p class="dir-body">Take Emirates Road (E611) or Al Dhaid Road (E88) toward Sharjah Industrial Areas. Exit toward Industrial Area 4 — we're at 330 First Industrial St, Industrial Area 4.</p>
       </div>
       <div class="dir-card reveal d1">
         <div class="dir-step">02</div>
@@ -336,7 +336,7 @@
     <h2 class="cta-h reveal">COME IN.<br>BUILD IT.</h2>
     <p class="cta-sub reveal d1">No appointments needed. Walk in, tell us about your truck, and we'll show you what's possible.</p>
     <div class="cta-btns reveal d2">
-      <a href="https://wa.me/9710503002898" class="btn-dark" target="_blank" data-tip="Chat">Message on WhatsApp →</a>
+      <a href="https://wa.me/971503021700" class="btn-dark" target="_blank" data-tip="Chat">Message on WhatsApp →</a>
       <a href="products.html" class="btn-o" style="color:rgba(0,0,0,.5);border-color:rgba(0,0,0,.2);">Browse Products</a>
     </div>
   </div>
