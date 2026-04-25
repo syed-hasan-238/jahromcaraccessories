@@ -26,10 +26,56 @@
     requestAnimationFrame(loop);
   })();
 
+  // data-tip elements — expand ring + show label
   document.querySelectorAll('[data-tip]').forEach(el => {
     el.addEventListener('mouseenter', () => {
       ring.classList.add('big');
       label.textContent = el.dataset.tip;
+      label.classList.add('on');
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.classList.remove('big');
+      label.classList.remove('on');
+    });
+  });
+
+  // Phase 1: CTA buttons — ring grows larger + glow
+  document.querySelectorAll('.btn-g, .btn-o, .btn-dark').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('cta'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('cta'));
+  });
+
+  // Phase 1: Stats block — ring becomes crosshair
+  const statsEl = document.getElementById('hstats');
+  if (statsEl) {
+    statsEl.addEventListener('mouseenter', () => ring.classList.add('cross'));
+    statsEl.addEventListener('mouseleave', () => ring.classList.remove('cross'));
+  }
+
+  // Phase 1: Product / pcard — show EXPLORE label
+  document.querySelectorAll('.prod-card, .pcard').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.classList.add('big');
+      label.textContent = 'EXPLORE';
+      label.classList.add('on');
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.classList.remove('big');
+      label.classList.remove('on');
+    });
+    // track cursor position for directional glow
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--gy', ((e.clientY - r.top)  / r.height * 100) + '%');
+    });
+  });
+
+  // Phase 1: Story drag — directional arrow label
+  document.querySelectorAll('.drag-scroll').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.classList.add('big');
+      label.textContent = '← DRAG →';
       label.classList.add('on');
     });
     el.addEventListener('mouseleave', () => {

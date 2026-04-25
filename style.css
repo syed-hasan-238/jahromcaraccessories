@@ -46,6 +46,7 @@ body {
   background: var(--gold-hi); border-radius: 50%;
   pointer-events: none; z-index: 9999;
   transform: translate(-50%,-50%);
+  transition: transform .15s, background .2s;
 }
 #jring {
   position: fixed; width: 38px; height: 38px;
@@ -54,9 +55,24 @@ body {
   transform: translate(-50%,-50%);
   transition: width .4s cubic-bezier(.23,1,.32,1),
               height .4s cubic-bezier(.23,1,.32,1),
-              border-color .3s;
+              border-color .3s, border-radius .3s,
+              box-shadow .3s;
 }
+/* hover link */
 #jring.big { width: 68px; height: 68px; border-color: rgba(196,154,56,.55); }
+/* hover CTA buttons — larger + glow */
+#jring.cta {
+  width: 80px; height: 80px;
+  border-color: rgba(196,154,56,.7);
+  box-shadow: 0 0 20px rgba(196,154,56,.15);
+}
+/* hover stats — crosshair */
+#jring.cross {
+  width: 52px; height: 52px;
+  border-radius: 0;
+  border-color: rgba(196,154,56,.5);
+  transform: translate(-50%,-50%) rotate(45deg);
+}
 #jlabel {
   position: fixed; z-index: 9997; pointer-events: none;
   font-family: var(--fu); font-size: 8px; letter-spacing: .28em;
@@ -96,15 +112,23 @@ body {
   font-family: var(--fu); font-size: 10px; letter-spacing: .28em;
   text-transform: uppercase; color: var(--dim);
   text-decoration: none; transition: color .3s;
-  position: relative;
+  position: relative; padding-bottom: 6px;
 }
+/* double underline — first line */
 .jnav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0;
+  content: ''; position: absolute; bottom: 0; left: 0;
   width: 0; height: 1px; background: var(--gold);
   transition: width .4s cubic-bezier(.76,0,.24,1);
 }
+/* double underline — second line with gap */
+.jnav-links a::before {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: rgba(196,154,56,.35);
+  transition: width .4s cubic-bezier(.76,0,.24,1) .05s;
+}
 .jnav-links a:hover, .jnav-links a.cur { color: var(--gold); }
 .jnav-links a.cur::after, .jnav-links a:hover::after { width: 100%; }
+.jnav-links a.cur::before, .jnav-links a:hover::before { width: 100%; }
 .jnav-wa {
   font-family: var(--fu); font-size: 10px; letter-spacing: .2em;
   text-transform: uppercase; color: var(--black); background: var(--gold);
@@ -132,32 +156,65 @@ body {
   font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--black); background: var(--gold);
   padding: 15px 38px; text-decoration: none; position: relative; overflow: hidden;
-  transition: background .3s;
+  transition: background .3s, transform .12s;
 }
+/* diagonal shine sweep */
 .btn-g::before {
-  content: ''; position: absolute; inset:0; background: var(--gold-hi);
+  content: ''; position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.28) 50%, transparent 80%);
+  transform: skewX(-18deg);
+  transition: left .55s cubic-bezier(.76,0,.24,1);
+}
+.btn-g::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-hi);
   transform: scaleX(0); transform-origin: left;
   transition: transform .45s cubic-bezier(.76,0,.24,1);
+  z-index: 0;
 }
-.btn-g span { position: relative; z-index:1; }
-.btn-g:hover::before { transform: scaleX(1); }
+.btn-g span { position: relative; z-index: 1; }
+.btn-g:hover::before { left: 125%; }
+.btn-g:hover::after { transform: scaleX(1); }
+.btn-g:active { transform: scale(.97); }
 
 .btn-o {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--silver);
-  text-decoration: none; border-bottom: 1px solid rgba(174,174,174,.25);
-  padding-bottom: 4px; transition: color .3s, border-color .3s, gap .3s;
+  text-decoration: none; border: 1px solid rgba(174,174,174,.22);
+  padding: 14px 30px; position: relative; overflow: hidden;
+  transition: color .35s, gap .3s;
 }
-.btn-o:hover { color: var(--white); border-color: var(--white); gap: 16px; }
+/* gold fills from left on hover */
+.btn-o::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s cubic-bezier(.76,0,.24,1);
+  z-index: 0;
+}
+.btn-o span { position: relative; z-index: 1; }
+.btn-o:hover { color: var(--black); gap: 16px; }
+.btn-o:hover::before { transform: scaleX(1); }
+.btn-o:active { transform: scale(.97); }
 
 .btn-dark {
   display: inline-flex; align-items: center; gap: 12px;
   font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--white); background: var(--black);
-  padding: 15px 38px; text-decoration: none; transition: background .3s;
+  padding: 15px 38px; text-decoration: none; transition: background .3s, transform .12s;
+  border: 1px solid rgba(196,154,56,.15); position: relative; overflow: hidden;
 }
-.btn-dark:hover { background: #1a1a1a; }
+.btn-dark::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(196,154,56,.06);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s cubic-bezier(.76,0,.24,1);
+}
+.btn-dark:hover::before { transform: scaleX(1); }
+.btn-dark:active { transform: scale(.97); }
 
 /* ── TICKER ── */
 .ticker { background: var(--gold); overflow: hidden; padding: 17px 0; }
