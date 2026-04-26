@@ -4,28 +4,41 @@
    Inspired by Unseen.co editorial language
 ───────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@200;300;400;500;600&family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@200;300;400;500;600&family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@300;400;500&display=swap');
 
 :root {
+  /* ── CORE ── */
   --black:   #050505;
   --deep:    #090909;
   --surface: #101010;
   --lift:    #161616;
   --gold:    #C49A38;
-  --gold-hi: #E0B84A;
+  --gold-hi: #D4A93E;
   --gold-lo: #7C6022;
   --silver:  #AEAEAE;
   --dim:     #5A5A5A;
   --white:   #EDECE7;
-  --fd: 'Anton', sans-serif;           /* display — sharper than Bebas, more editorial */
-  --fu: 'Barlow Condensed', sans-serif; /* utility labels */
-  --fb: 'Inter', 'Barlow', sans-serif;  /* body — cleaner rhythm */
 
-  /* ── TRACKING SCALE (blueprint §4.3) ── */
-  --tk-tight:  0.01em;   /* headlines — density, power */
-  --tk-mid:    0.08em;   /* subheads — balanced */
-  --tk-wide:   0.28em;   /* labels — luxury spaciousness */
-  --tk-xwide:  0.40em;   /* micro-tags — almost abstract */
+  /* ── COOL SIDE ── */
+  --steel:    #7A8A99;   /* cold metal accent */
+  --ice:      #B8C5D0;   /* light cool highlight */
+  --midnight: #0A0E12;   /* cool-tinted dark bg */
+
+  /* ── WARM SIDE ── */
+  --copper:   #B87333;   /* warm metal accent */
+  --ember:    #D4956A;   /* warm highlight */
+  --charcoal: #120E0A;   /* warm-tinted dark bg */
+
+  /* ── FONTS ── */
+  --fd: 'Bebas Neue', sans-serif;
+  --fu: 'Barlow Condensed', sans-serif;
+  --fb: 'Inter', 'Barlow', sans-serif;
+
+  /* ── TRACKING SCALE ── */
+  --tk-tight:  0.01em;
+  --tk-mid:    0.08em;
+  --tk-wide:   0.28em;
+  --tk-xwide:  0.40em;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
