@@ -4,7 +4,7 @@
    Inspired by Unseen.co editorial language
 ───────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Barlow+Condensed:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@200;300;400;500;600&family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@300;400;500&display=swap');
 
 :root {
   --black:   #050505;
@@ -17,9 +17,15 @@
   --silver:  #AEAEAE;
   --dim:     #5A5A5A;
   --white:   #EDECE7;
-  --fd: 'Bebas Neue', sans-serif;
-  --fu: 'Barlow Condensed', sans-serif;
-  --fb: 'Barlow', sans-serif;
+  --fd: 'Anton', sans-serif;           /* display — sharper than Bebas, more editorial */
+  --fu: 'Barlow Condensed', sans-serif; /* utility labels */
+  --fb: 'Inter', 'Barlow', sans-serif;  /* body — cleaner rhythm */
+
+  /* ── TRACKING SCALE (blueprint §4.3) ── */
+  --tk-tight:  0.01em;   /* headlines — density, power */
+  --tk-mid:    0.08em;   /* subheads — balanced */
+  --tk-wide:   0.28em;   /* labels — luxury spaciousness */
+  --tk-xwide:  0.40em;   /* micro-tags — almost abstract */
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -30,8 +36,12 @@ body {
   color: var(--white);
   font-family: var(--fb);
   font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* no custom cursor on touch */
@@ -109,7 +119,7 @@ body {
 .jnav-logo b { color: var(--gold); font-weight: 400; }
 .jnav-links { display: flex; gap: 44px; list-style: none; }
 .jnav-links a {
-  font-family: var(--fu); font-size: 10px; letter-spacing: .28em;
+  font-family: var(--fu); font-size: 10px; letter-spacing: var(--tk-wide);
   text-transform: uppercase; color: var(--dim);
   text-decoration: none; transition: color .3s;
   position: relative; padding-bottom: 6px;
@@ -138,7 +148,7 @@ body {
 
 /* ── UTILS ── */
 .tag {
-  font-family: var(--fu); font-size: 9px; letter-spacing: .4em;
+  font-family: var(--fu); font-size: 9px; letter-spacing: var(--tk-xwide);
   text-transform: uppercase; color: var(--gold);
   display: flex; align-items: center; gap: 14px;
 }
@@ -153,12 +163,11 @@ body {
 /* ── BUTTONS ── */
 .btn-g {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
+  font-family: var(--fu); font-size: 11px; letter-spacing: var(--tk-mid);
   text-transform: uppercase; color: var(--black); background: var(--gold);
   padding: 15px 38px; text-decoration: none; position: relative; overflow: hidden;
   transition: background .3s, transform .12s;
 }
-/* diagonal shine sweep only — no fill layer underneath */
 .btn-g::before {
   content: ''; position: absolute;
   top: 0; left: -75%;
@@ -173,10 +182,9 @@ body {
 .btn-g:hover::before { left: 125%; }
 .btn-g:active { transform: scale(.97); }
 
-/* btn-o — clean ghost button, gold border grows on hover, text stays visible */
 .btn-o {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
+  font-family: var(--fu); font-size: 11px; letter-spacing: var(--tk-mid);
   text-transform: uppercase; color: var(--silver);
   text-decoration: none; border-bottom: 1px solid rgba(174,174,174,.25);
   padding-bottom: 4px; transition: color .3s, border-color .3s, gap .3s;
@@ -186,7 +194,7 @@ body {
 
 .btn-dark {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
+  font-family: var(--fu); font-size: 11px; letter-spacing: var(--tk-mid);
   text-transform: uppercase; color: var(--white); background: rgba(255,255,255,.04);
   padding: 15px 38px; text-decoration: none; transition: background .3s, transform .12s;
   border: 1px solid rgba(196,154,56,.18); position: relative; overflow: hidden;
