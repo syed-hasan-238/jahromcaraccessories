@@ -158,62 +158,40 @@ body {
   padding: 15px 38px; text-decoration: none; position: relative; overflow: hidden;
   transition: background .3s, transform .12s;
 }
-/* diagonal shine sweep */
+/* diagonal shine sweep only — no fill layer underneath */
 .btn-g::before {
   content: ''; position: absolute;
   top: 0; left: -75%;
   width: 50%; height: 100%;
-  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.28) 50%, transparent 80%);
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.35) 50%, transparent 80%);
   transform: skewX(-18deg);
-  transition: left .55s cubic-bezier(.76,0,.24,1);
+  transition: left .6s cubic-bezier(.76,0,.24,1);
+  z-index: 1;
 }
-.btn-g::after {
-  content: ''; position: absolute; inset: 0;
-  background: var(--gold-hi);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .45s cubic-bezier(.76,0,.24,1);
-  z-index: 0;
-}
-.btn-g span { position: relative; z-index: 1; }
+.btn-g span { position: relative; z-index: 2; }
+.btn-g:hover { background: var(--gold-hi); }
 .btn-g:hover::before { left: 125%; }
-.btn-g:hover::after { transform: scaleX(1); }
 .btn-g:active { transform: scale(.97); }
 
+/* btn-o — clean ghost button, gold border grows on hover, text stays visible */
 .btn-o {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--silver);
-  text-decoration: none; border: 1px solid rgba(174,174,174,.22);
-  padding: 14px 30px; position: relative; overflow: hidden;
-  transition: color .35s, gap .3s;
+  text-decoration: none; border-bottom: 1px solid rgba(174,174,174,.25);
+  padding-bottom: 4px; transition: color .3s, border-color .3s, gap .3s;
 }
-/* gold fills from left on hover */
-.btn-o::before {
-  content: ''; position: absolute; inset: 0;
-  background: var(--gold);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s cubic-bezier(.76,0,.24,1);
-  z-index: 0;
-}
-.btn-o span { position: relative; z-index: 1; }
-.btn-o:hover { color: var(--black); gap: 16px; }
-.btn-o:hover::before { transform: scaleX(1); }
-.btn-o:active { transform: scale(.97); }
+.btn-o:hover { color: var(--white); border-color: rgba(196,154,56,.6); gap: 16px; }
+.btn-o:active { opacity: .8; }
 
 .btn-dark {
   display: inline-flex; align-items: center; gap: 12px;
   font-family: var(--fu); font-size: 11px; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--white); background: var(--black);
+  text-transform: uppercase; color: var(--white); background: rgba(255,255,255,.04);
   padding: 15px 38px; text-decoration: none; transition: background .3s, transform .12s;
-  border: 1px solid rgba(196,154,56,.15); position: relative; overflow: hidden;
+  border: 1px solid rgba(196,154,56,.18); position: relative; overflow: hidden;
 }
-.btn-dark::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(196,154,56,.06);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s cubic-bezier(.76,0,.24,1);
-}
-.btn-dark:hover::before { transform: scaleX(1); }
+.btn-dark:hover { background: rgba(196,154,56,.08); border-color: rgba(196,154,56,.35); }
 .btn-dark:active { transform: scale(.97); }
 
 /* ── TICKER ── */
