@@ -44,16 +44,42 @@
 }
 .fb:hover, .fb.on { color: var(--gold); border-color: rgba(196,154,56,.28); background: rgba(196,154,56,.03); }
 
-/* ── PRODUCT GRID ── */
+/* ── ASYMMETRIC COLLAGE GRID ── */
 .prod-wrap { padding: 0 52px 120px; }
 .prod-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2px; max-width: 1400px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 55fr 30fr 35fr;
+  grid-template-rows: 480px 360px 520px 400px;
+  gap: 3px;
+  max-width: 1400px; margin: 0 auto;
 }
+
+/* Collage placement — irregular, intentional */
+.pcard:nth-child(1)  { grid-column:1; grid-row:1; }        /* large */
+.pcard:nth-child(2)  { grid-column:2/4; grid-row:1; }      /* wide short */
+.pcard:nth-child(3)  { grid-column:1/3; grid-row:2; }      /* wide short */
+.pcard:nth-child(4)  { grid-column:3; grid-row:2; }        /* small */
+.pcard:nth-child(5)  { grid-column:1; grid-row:3; }        /* tall */
+.pcard:nth-child(6)  { grid-column:2; grid-row:3; }        /* mid */
+.pcard:nth-child(7)  { grid-column:3; grid-row:3; }        /* mid */
+.pcard:nth-child(8)  { grid-column:1/3; grid-row:4; }      /* wide */
+.pcard:nth-child(9)  { grid-column:3; grid-row:4; }        /* small */
+.pcard:nth-child(10) { grid-column:1; grid-row:5; }        /* fallback */
+.pcard:nth-child(11) { grid-column:2/4; grid-row:5; }      /* fallback */
+.pcard:nth-child(12) { grid-column:1/4; grid-row:6; height:280px; } /* full-width CTA card */
+
 .pcard {
-  position: relative; aspect-ratio: 3/4;
-  background: var(--surface); overflow: hidden; cursor: none;
+  position: relative; background: var(--surface); overflow: hidden; cursor: none;
+  transition: transform .5s cubic-bezier(.23,1,.32,1);
 }
+.pcard:hover { transform: translateY(-3px); }
+/* image parallax wrapper */
+.pcard-img-wrap {
+  position: absolute; inset: -6%; z-index: 0;
+  transition: transform .7s cubic-bezier(.23,1,.32,1);
+}
+.pcard:hover .pcard-img-wrap { transform: scale(1.05) translateY(-1.5%); }
+.pcard-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 .pcard canvas { position: absolute!important; inset:0; width:100%!important; height:100%!important; z-index:0; }
 .pc-ph2 {
   position: absolute; inset: 0; z-index: 0;
@@ -67,7 +93,7 @@
 }
 .pcard-glow {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
-  background: radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(196,154,56,.09) 0%, transparent 58%);
+  background: radial-gradient(circle 280px at var(--gx,50%) var(--gy,50%), rgba(196,154,56,.10) 0%, transparent 65%);
   transition: opacity .4s;
 }
 .pcard:hover .pcard-glow { opacity: 1; }
@@ -75,7 +101,7 @@
   position: absolute; inset: 0; z-index: 3; pointer-events: none;
   border: 1px solid transparent; transition: border-color .4s;
 }
-.pcard:hover .pcard-border { border-color: rgba(196,154,56,.22); }
+.pcard:hover .pcard-border { border-color: rgba(196,154,56,.2); }
 .pcard-idx {
   position: absolute; top: 18px; right: 18px; z-index: 2;
   font-family: var(--fd); font-size: 12px; color: rgba(196,154,56,.22); letter-spacing: .08em;
@@ -83,16 +109,21 @@
 .pcard-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 24px; z-index: 2; }
 .pcard-cat {
   font-family: var(--fu); font-size: 8px; letter-spacing: .32em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+  transform: translateX(-8px); opacity: 0;
+  transition: transform .4s cubic-bezier(.76,0,.24,1), opacity .35s;
 }
+.pcard-cat::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: block; flex-shrink: 0; }
+.pcard:hover .pcard-cat { transform: translateX(0); opacity: 1; }
 .pcard-name { font-family: var(--fd); font-size: 26px; letter-spacing: .04em; color: var(--white); line-height: 1; }
 .pcard-spec {
   font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.65;
   margin-top: 10px; max-height: 0; overflow: hidden;
-  transition: max-height .5s cubic-bezier(.76,0,.24,1), opacity .4s;
-  opacity: 0;
+  transform: translateY(6px); opacity: 0;
+  transition: max-height .5s cubic-bezier(.76,0,.24,1), opacity .4s .06s, transform .4s .06s;
 }
-.pcard:hover .pcard-spec { max-height: 100px; opacity: 1; }
+.pcard:hover .pcard-spec { max-height: 120px; opacity: 1; transform: translateY(0); }
 .pcard-cta {
   display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
   font-family: var(--fu); font-size: 10px; letter-spacing: .22em;
@@ -101,6 +132,18 @@
 }
 .pcard-cta:hover { gap: 14px; }
 .pcard[data-hide] { display: none; }
+/* full-width card 12 special treatment */
+.pcard:nth-child(12) {
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(196,154,56,.04);
+  border: 1px solid rgba(196,154,56,.1);
+}
+.pcard:nth-child(12) .pcard-content {
+  position: relative; bottom: auto; padding: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 0 52px;
+}
+.pcard:nth-child(12) .pcard-name { font-size: 44px; }
 
 /* ── TRUCKS ── */
 .trucks { padding: 100px 52px; background: var(--surface); border-top: 1px solid rgba(196,154,56,.07); }
@@ -153,12 +196,19 @@
 
 @media(max-width:900px){
   .page-hero,.filter-wrap,.prod-wrap,.trucks,.cta-band{padding-left:24px;padding-right:24px;}
-  .prod-grid{grid-template-columns:1fr 1fr;}
+  .prod-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .pcard:nth-child(n){grid-column:auto;grid-row:auto;min-height:320px;}
+  .pcard:nth-child(12){grid-column:1/3;height:200px;}
+  .pcard:nth-child(12) .pcard-content{padding:0 24px;}
+  .pcard:nth-child(12) .pcard-name{font-size:28px;}
   .trucks-grid{grid-template-columns:1fr 1fr;}
   .cta-inner{flex-direction:column;align-items:flex-start;gap:40px;}
   .cta-right{align-items:flex-start;}
 }
-@media(max-width:560px){.prod-grid{grid-template-columns:1fr;}}
+@media(max-width:560px){
+  .prod-grid{grid-template-columns:1fr;}
+  .pcard:nth-child(12){grid-column:1;}
+}
 </style>
 </head>
 <body class="noise">
