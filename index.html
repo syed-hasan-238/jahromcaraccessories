@@ -19,7 +19,7 @@
 .pl-sub.show{opacity:1;}
 #preload.exit{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);}
 
-#hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 52px 80px;}
+#hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 52px 100px;}
 .hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
 .hero-video-bg video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%) scale(1.08);object-fit:cover;opacity:0;animation:videoFadeIn 2.5s ease-out 0.3s forwards;will-change:transform;}
 @keyframes videoFadeIn{0%{opacity:0;}100%{opacity:.88;}}
@@ -29,7 +29,7 @@
 .hero-veil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--black),transparent);}
 
 /* Mouse-reactive spotlight */
-.hero-spotlight{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 520px at var(--mx,50%) var(--my,50%),rgba(196,154,56,.10) 0%,transparent 70%);}
+.hero-spotlight{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 520px at var(--mx,50%) var(--my,50%),rgba(196,154,56,.11) 0%,transparent 70%);}
 
 /* Diagonal gold accent line */
 .hero-diagonal{position:absolute;top:0;right:0;width:55%;height:100%;z-index:2;pointer-events:none;overflow:hidden;}
@@ -46,8 +46,8 @@
 .h-tag b{width:28px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
 .h-tag.in{opacity:1;transform:none;}
 
-/* HEADLINE — restored to original scale, clean translateY entry */
-.h-h1{font-family:var(--fd);font-size:clamp(80px,13vw,188px);line-height:.88;letter-spacing:.022em;color:var(--white);}
+/* HEADLINE — constrained to never overflow into nav */
+.h-h1{font-family:var(--fd);font-size:clamp(72px,11vw,168px);line-height:.88;letter-spacing:.022em;color:var(--white);}
 .h-h1 .row{overflow:hidden;display:block;}
 .h-h1 .inner{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.76,0,.24,1);}
 .h-h1 .inner.up{transform:translateY(0);}
@@ -69,7 +69,7 @@
 
 /* Stats — glassmorphism bottom-right strip */
 .h-stats{
-  position:absolute;right:52px;bottom:80px;z-index:4;
+  position:absolute;right:52px;bottom:108px;z-index:4;
   display:flex;flex-direction:row;align-items:center;gap:0;
   opacity:0;transition:opacity 1.2s 1.2s;
   background:rgba(5,5,5,.45);
@@ -84,11 +84,11 @@
 .hst-l{font-family:var(--fu);font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-top:5px;white-space:nowrap;}
 .hst-div{width:1px;height:44px;background:linear-gradient(transparent,rgba(196,154,56,.25),transparent);}
 
-.h-scroll{position:absolute;right:52px;bottom:28px;z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity 1s 1.4s;}
+.h-scroll{position:absolute;right:72px;bottom:44px;z-index:4;display:flex;flex-direction:row;align-items:center;gap:10px;opacity:0;transition:opacity 1s 1.4s;}
 .h-scroll.in{opacity:1;}
-.h-scroll-line{width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:pulse 2.2s ease infinite;}
-.h-scroll span{font-family:var(--fu);font-size:7px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);writing-mode:vertical-rl;}
-@keyframes pulse{0%,100%{opacity:.9;transform:scaleY(1)}50%{opacity:.2;transform:scaleY(.4)}}
+.h-scroll-line{width:36px;height:1px;background:linear-gradient(to right,var(--gold),transparent);animation:pulseH 2.2s ease infinite;}
+.h-scroll span{font-family:var(--fu);font-size:7px;letter-spacing:.32em;text-transform:uppercase;color:rgba(196,154,56,.7);}
+@keyframes pulseH{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.25;transform:scaleX(.5)}}
 
 .ticker{background:var(--gold);overflow:hidden;padding:17px 0;position:relative;z-index:4;}
 .ticker-t{display:flex;white-space:nowrap;animation:jTicker 28s linear infinite;}
@@ -98,26 +98,105 @@
 
 .jnav-logo img{height:32px;width:auto;vertical-align:middle;}
 
-#products-section{position:relative;z-index:2;background:var(--black);padding:100px 52px;}
-.prod-head{max-width:1200px;margin:0 auto 60px;text-align:center;}
+#products-section{position:relative;z-index:2;background:var(--black);padding:120px 52px 100px;}
+.prod-head{max-width:1200px;margin:0 auto 72px;}
 .prod-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
 .prod-h2{font-family:var(--fd);font-size:clamp(60px,8vw,120px);line-height:.9;letter-spacing:.02em;color:var(--white);}
 .prod-h2 .g{color:var(--gold);}
-.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:1200px;margin:0 auto;}
-.prod-card{position:relative;aspect-ratio:4/5;background:var(--surface);overflow:hidden;cursor:none;transition:transform .3s;}
+
+/* ── ASYMMETRIC GRID ── */
+.prod-grid{
+  display:grid;
+  grid-template-columns:60fr 40fr;
+  grid-template-rows:520px 420px;
+  gap:3px;
+  max-width:1200px;margin:0 auto;
+}
+.prod-card:nth-child(1){grid-column:1;grid-row:1;}
+.prod-card:nth-child(2){grid-column:2;grid-row:1;}
+.prod-card:nth-child(3){grid-column:1;grid-row:2;}
+.prod-card:nth-child(4){grid-column:2;grid-row:2;}
+
+/* ── BASE CARD ── */
+.prod-card{
+  position:relative;background:var(--surface);overflow:hidden;cursor:none;
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+}
 .prod-card:hover{transform:translateY(-4px);}
-.prod-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-size:10px;letter-spacing:.14em;color:rgba(196,154,56,.12);text-transform:uppercase;text-align:center;padding:36px;z-index:0;}
-.prod-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,.97) 0%,rgba(5,5,5,.22) 55%,transparent 100%);}
-.prod-glow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(196,154,56,.09) 0%,transparent 60%);transition:opacity .4s;}
-.prod-card:hover .prod-glow{opacity:1;}
+
+/* image wrapper — parallax on hover */
+.prod-img-wrap{
+  position:absolute;inset:-6%;z-index:0;
+  transition:transform .7s cubic-bezier(.23,1,.32,1);
+}
+.prod-card:hover .prod-img-wrap{transform:scale(1.05) translateY(-1.5%);}
+.prod-img-wrap img{width:100%;height:100%;object-fit:cover;}
+
+/* base overlays */
+.prod-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,.97) 0%,rgba(5,5,5,.18) 60%,transparent 100%);}
 .prod-border{position:absolute;inset:0;z-index:3;pointer-events:none;border:1px solid transparent;transition:border-color .4s;}
-.prod-card:hover .prod-border{border-color:rgba(196,154,56,.22);}
-.prod-content{position:absolute;bottom:0;left:0;right:0;padding:32px 28px;z-index:2;}
-.prod-cat{font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.prod-name{font-family:var(--fd);font-size:32px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:12px;}
-.prod-desc{font-size:13px;font-weight:300;color:var(--silver);line-height:1.65;margin-bottom:16px;max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.76,0,.24,1),opacity .4s;opacity:0;}
-.prod-card:hover .prod-desc{max-height:120px;opacity:1;}
-.prod-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--fu);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .3s;}
+.prod-card:hover .prod-border{border-color:rgba(196,154,56,.2);}
+
+/* directional glow follows cursor */
+.prod-glow{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:radial-gradient(circle 280px at var(--gx,50%) var(--gy,50%),rgba(196,154,56,.1) 0%,transparent 70%);
+  transition:opacity .4s;}
+.prod-card:hover .prod-glow{opacity:1;}
+
+/* ── CATEGORY SIGNATURES ── */
+
+/* BED COVERS — horizontal line accent, steel cool tint */
+.prod-card[data-cat="beds"] .prod-img-wrap{filter:saturate(.7) brightness(.88);}
+.prod-card[data-cat="beds"]:hover .prod-img-wrap{filter:saturate(.9) brightness(1);}
+.prod-card[data-cat="beds"]::after{
+  content:'';position:absolute;left:0;top:42%;width:0;height:1px;
+  background:linear-gradient(to right,rgba(122,138,153,.55),rgba(122,138,153,.1),transparent);
+  z-index:3;transition:width .65s cubic-bezier(.76,0,.24,1);
+}
+.prod-card[data-cat="beds"]:hover::after{width:70%;}
+
+/* EXTERIOR — diagonal amber strike */
+.prod-card[data-cat="exterior"] .prod-img-wrap{filter:saturate(.75) sepia(.12) brightness(.85);}
+.prod-card[data-cat="exterior"]:hover .prod-img-wrap{filter:saturate(.95) sepia(.05) brightness(1);}
+.prod-card[data-cat="exterior"]::after{
+  content:'';position:absolute;
+  top:-20%;left:-8%;width:6px;height:140%;
+  background:linear-gradient(to bottom,transparent,rgba(196,154,56,.18),transparent);
+  transform:rotate(16deg) translateX(-60px);
+  z-index:3;transition:transform .6s cubic-bezier(.76,0,.24,1);
+}
+.prod-card[data-cat="exterior"]:hover::after{transform:rotate(16deg) translateX(420px);}
+
+/* AUDIO — concentric ring SVG, violet tint */
+.prod-card[data-cat="audio"]::after{content:none;}
+
+/* PPF — hex pattern already in HTML, cyan tint */
+.prod-card[data-cat="ppf"]::after{content:none;}
+
+/* ── CONTENT ── */
+.prod-content{position:absolute;bottom:0;left:0;right:0;padding:36px 32px;z-index:4;}
+.prod-cat{
+  font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+  transform:translateX(-8px);opacity:0;transition:transform .45s .05s cubic-bezier(.76,0,.24,1),opacity .4s .05s;
+}
+.prod-cat::before{content:'';width:20px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
+.prod-card:hover .prod-cat{transform:translateX(0);opacity:1;}
+.prod-name{font-family:var(--fd);font-size:30px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:14px;}
+.prod-desc{
+  font-size:13px;font-weight:300;color:var(--silver);line-height:1.7;margin-bottom:18px;
+  max-height:0;overflow:hidden;opacity:0;
+  transform:translateY(8px);
+  transition:max-height .55s cubic-bezier(.76,0,.24,1),opacity .4s .08s,transform .45s .08s;
+}
+.prod-card:hover .prod-desc{max-height:140px;opacity:1;transform:translateY(0);}
+.prod-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fu);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);text-decoration:none;
+  transition:gap .3s;
+}
 .prod-cta:hover{gap:14px;}
 
 .booking-mini{background:var(--surface);border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);padding:60px 52px;text-align:center;position:relative;z-index:2;}
@@ -198,7 +277,8 @@
   .hst-div{height:32px;}
   .h-scroll{display:none;}
   /* products */
-  .prod-grid{grid-template-columns:1fr;}
+  .prod-grid{grid-template-columns:1fr;grid-template-rows:auto;}
+  .prod-card{min-height:380px;}
   #products-section{padding:80px 24px;}
   /* reviews */
   .reviews-grid{grid-template-columns:1fr;}
@@ -305,77 +385,71 @@
 
 <section id="products-section">
   <div class="prod-head reveal">
-    <div class="prod-tag">What We Offer</div>
-    <h2 class="prod-h2">OUR <span class="g">SERVICES</span></h2>
+    <div class="prod-tag">Full Catalogue</div>
+    <h2 class="prod-h2">EVERY <span class="g">ACCESSORY.</span><br>EVERY TRUCK.</h2>
   </div>
   <div class="prod-grid">
-    <!-- Bed Covers — real photo -->
-    <div class="prod-card card3d reveal" data-tip="Inquire">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <img src="images/bed-covers.png" alt="Hardtop Tonneau Bed Covers" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div class="prod-ov"></div>
-        <div class="prod-glow"></div>
-        <div class="prod-border"></div>
-        <div class="prod-content">
-          <div class="prod-cat">Bed Covers</div>
-          <div class="prod-name">Hardtop Tonneau</div>
-          <div class="prod-desc">Aerospace-grade aluminium. Custom-fit to your exact model. Tested to 500 lb static load. Lock it, load it, forget it.</div>
-          <a href="https://wa.me/971503021700" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
-        </div>
+    <!-- Bed Covers — large left, real photo -->
+    <div class="prod-card reveal" data-cat="beds" data-tip="Inquire">
+      <div class="prod-img-wrap">
+        <img src="images/bed-covers.png" alt="Hardtop Tonneau Bed Covers">
+      </div>
+      <div class="prod-ov"></div>
+      <div class="prod-glow"></div>
+      <div class="prod-border"></div>
+      <div class="prod-content">
+        <div class="prod-cat">Bed Covers</div>
+        <div class="prod-name">Hardtop Tonneau</div>
+        <div class="prod-desc">Aerospace-grade aluminium. Custom-fit to your exact model. Tested to 500 lb static load. Lock it, load it, forget it.</div>
+        <a href="https://wa.me/971503021700" class="prod-cta" target="_blank">Request Price →</a>
       </div>
     </div>
 
-    <!-- Exterior Builds — dodge ram trx photo -->
-    <div class="prod-card card3d reveal d1" data-tip="Inquire">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <img src="images/dodge-ram-trx.png" alt="Exterior Builds — Bull bars, running boards, fender flares" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div class="prod-ov"></div>
-        <div class="prod-glow"></div>
-        <div class="prod-border"></div>
-        <div class="prod-content">
-          <div class="prod-cat">Exterior</div>
-          <div class="prod-name">Exterior Builds</div>
-          <div class="prod-desc">Bull bars, running boards, roof racks, fender flares. UAE desert-tested. Fitted to your exact model. No template jobs.</div>
-          <a href="https://wa.me/971503021700" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
-        </div>
+    <!-- Exterior Builds — small right, real photo -->
+    <div class="prod-card reveal d1" data-cat="exterior" data-tip="Inquire">
+      <div class="prod-img-wrap">
+        <img src="images/dodge-ram-trx.png" alt="Exterior Builds">
+      </div>
+      <div class="prod-ov"></div>
+      <div class="prod-glow"></div>
+      <div class="prod-border"></div>
+      <div class="prod-content">
+        <div class="prod-cat">Exterior</div>
+        <div class="prod-name">Exterior Builds</div>
+        <div class="prod-desc">Bull bars, running boards, roof racks, fender flares. UAE desert-tested. Fitted to your exact model. No template jobs.</div>
+        <a href="https://wa.me/971503021700" class="prod-cta" target="_blank">Request Price →</a>
       </div>
     </div>
 
-    <!-- Audio Systems — CSS atmospheric -->
-    <div class="prod-card card3d reveal d2" data-tip="Inquire">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,#1a1220 0%,#0a0a0a 60%,#050505 100%);"></div>
-        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 50% 35%,rgba(120,80,180,.18) 0%,transparent 60%),radial-gradient(circle at 30% 60%,rgba(196,154,56,.07) 0%,transparent 45%);"></div>
-        <!-- concentric rings decoration -->
-        <svg style="position:absolute;top:15%;left:50%;transform:translateX(-50%);width:55%;opacity:.09;z-index:0;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="70" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="50" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="30" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="12" fill="rgba(196,154,56,.3)"/></svg>
-        <div class="prod-ov"></div>
-        <div class="prod-glow"></div>
-        <div class="prod-border"></div>
-        <div class="prod-content">
-          <div class="prod-cat">Electronics</div>
-          <div class="prod-name">Audio & Screens</div>
-          <div class="prod-desc">Apple CarPlay, Android Auto, premium audio systems. Every unit professionally wired and calibrated. Full installation included.</div>
-          <a href="https://wa.me/971503021700" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
-        </div>
+    <!-- Audio Systems — small left, CSS atmospheric -->
+    <div class="prod-card reveal d2" data-cat="audio" data-tip="Inquire">
+      <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,#1a1220 0%,#0a0a0a 60%,#050505 100%);"></div>
+      <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 50% 35%,rgba(120,80,180,.18) 0%,transparent 60%),radial-gradient(circle at 30% 60%,rgba(196,154,56,.07) 0%,transparent 45%);"></div>
+      <svg style="position:absolute;top:12%;left:50%;transform:translateX(-50%);width:52%;opacity:.09;z-index:0;" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="70" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="50" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="30" fill="none" stroke="#C49A38" stroke-width="1"/><circle cx="100" cy="100" r="12" fill="rgba(196,154,56,.3)"/></svg>
+      <div class="prod-ov"></div>
+      <div class="prod-glow"></div>
+      <div class="prod-border"></div>
+      <div class="prod-content">
+        <div class="prod-cat">Electronics</div>
+        <div class="prod-name">Audio & Screens</div>
+        <div class="prod-desc">Apple CarPlay, Android Auto, premium audio systems. Every unit professionally wired and calibrated. Full installation included.</div>
+        <a href="https://wa.me/971503021700" class="prod-cta" target="_blank">Request Price →</a>
       </div>
     </div>
 
-    <!-- PPF / Protection — CSS atmospheric -->
-    <div class="prod-card card3d reveal d3" data-tip="Inquire">
-      <div class="card3d-inner" style="width:100%;height:100%;position:relative;">
-        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 40%,#0d1a14 0%,#070d0a 55%,#050505 100%);"></div>
-        <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 60% 30%,rgba(0,180,100,.09) 0%,transparent 50%),radial-gradient(circle at 30% 70%,rgba(196,154,56,.06) 0%,transparent 40%);"></div>
-        <!-- hex pattern decoration -->
-        <svg style="position:absolute;top:8%;right:8%;width:42%;opacity:.07;z-index:0;" viewBox="0 0 120 140"><polygon points="60,10 110,37.5 110,92.5 60,120 10,92.5 10,37.5" fill="none" stroke="#C49A38" stroke-width="1.5"/><polygon points="60,28 92,45.5 92,80.5 60,98 28,80.5 28,45.5" fill="none" stroke="#C49A38" stroke-width="1.5"/><polygon points="60,46 74,54 74,70 60,78 46,70 46,54" fill="rgba(196,154,56,.25)"/></svg>
-        <div class="prod-ov"></div>
-        <div class="prod-glow"></div>
-        <div class="prod-border"></div>
-        <div class="prod-content">
-          <div class="prod-cat">Protection</div>
-          <div class="prod-name">PPF & Ceramic</div>
-          <div class="prod-desc">Self-healing paint protection film. Ceramic coating that survives UAE heat and UV. Keep your truck factory-fresh for years.</div>
-          <a href="https://wa.me/971503021700" class="prod-cta" target="_blank" data-tip="Chat">Request Price →</a>
-        </div>
+    <!-- PPF / Protection — large right, CSS atmospheric -->
+    <div class="prod-card reveal d3" data-cat="ppf" data-tip="Inquire">
+      <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 40%,#0d1a14 0%,#070d0a 55%,#050505 100%);"></div>
+      <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 60% 30%,rgba(0,180,100,.09) 0%,transparent 50%),radial-gradient(circle at 30% 70%,rgba(196,154,56,.06) 0%,transparent 40%);"></div>
+      <svg style="position:absolute;top:8%;right:8%;width:42%;opacity:.07;z-index:0;" viewBox="0 0 120 140"><polygon points="60,10 110,37.5 110,92.5 60,120 10,92.5 10,37.5" fill="none" stroke="#C49A38" stroke-width="1.5"/><polygon points="60,28 92,45.5 92,80.5 60,98 28,80.5 28,45.5" fill="none" stroke="#C49A38" stroke-width="1.5"/><polygon points="60,46 74,54 74,70 60,78 46,70 46,54" fill="rgba(196,154,56,.25)"/></svg>
+      <div class="prod-ov"></div>
+      <div class="prod-glow"></div>
+      <div class="prod-border"></div>
+      <div class="prod-content">
+        <div class="prod-cat">Protection</div>
+        <div class="prod-name">PPF & Ceramic</div>
+        <div class="prod-desc">Self-healing paint protection film. Ceramic coating that survives UAE heat and UV. Keep your truck factory-fresh for years.</div>
+        <a href="https://wa.me/971503021700" class="prod-cta" target="_blank">Request Price →</a>
       </div>
     </div>
   </div>
@@ -582,6 +656,12 @@ function startHero(){
 
 // STORY BACKGROUND PARTICLES (per panel) — boosted to original hero intensity
 (function(){
+  let globalMx=0, globalMy=0;
+  document.addEventListener('mousemove',e=>{
+    globalMx=(e.clientX/innerWidth-.5)*2;
+    globalMy=-(e.clientY/innerHeight-.5)*2;
+  },{passive:true});
+
   ['particles-1','particles-2','particles-3','particles-4'].forEach(id=>{
     const canvas=document.getElementById(id);
     if(!canvas) return;
@@ -603,11 +683,12 @@ function startHero(){
     geo.setAttribute('aR',new THREE.BufferAttribute(rnd,1));
     const mat=new THREE.ShaderMaterial({
       transparent:true,depthWrite:false,
-      uniforms:{uT:{value:0},uSz:{value:3.8*R.getPixelRatio()}},
-      vertexShader:`uniform float uT;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.85;}`,
+      uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uSz:{value:3.8*R.getPixelRatio()}},
+      vertexShader:`uniform float uT;uniform vec2 uM;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;vec4 mv=modelViewMatrix*vec4(p,1.);vec2 sp=(projectionMatrix*mv).xy;float d=distance(sp,uM*2.);float rep=smoothstep(.9,0.,d)*.55;p.xy+=normalize(p.xy-uM)*rep;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.85;}`,
       fragmentShader:`varying float vA;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=smoothstep(.5,0.,d)*vA;gl_FragColor=vec4(.77,.6,.22,a*.75);}`
     });
     const pts=new THREE.Points(geo,mat); scene.add(pts);
+    let camX=0,camY=0;
     const clk=new THREE.Clock();
     function resize(){
       const w=canvas.parentElement.offsetWidth||window.innerWidth;
@@ -620,6 +701,11 @@ function startHero(){
       requestAnimationFrame(animate);
       const t=clk.getElapsedTime();
       mat.uniforms.uT.value=t;
+      mat.uniforms.uM.value.set(globalMx*.5,globalMy*.5);
+      camX+=(globalMx*.45-camX)*.04;
+      camY+=(globalMy*.3-camY)*.04;
+      cam.position.x=camX; cam.position.y=camY;
+      cam.lookAt(scene.position);
       pts.rotation.y=t*.018;
       R.render(scene,cam);
     })();
