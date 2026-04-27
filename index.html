@@ -62,9 +62,9 @@
 .h-rhythm span:nth-child(2){height:20px;opacity:.28;}
 .h-rhythm span:nth-child(3){height:7px;opacity:.12;}
 
-.h-sub{font-size:15px;font-weight:300;color:var(--silver);letter-spacing:.018em;max-width:420px;line-height:1.85;margin-top:30px;opacity:0;transform:translateY(16px);transition:opacity .9s .8s,transform .9s .8s;}
+.h-sub{font-size:15px;font-weight:300;color:var(--silver);letter-spacing:.018em;max-width:420px;line-height:1.85;margin-top:var(--sp-6);opacity:0;transform:translateY(16px);transition:opacity .9s .8s,transform .9s .8s;}
 .h-sub.in{opacity:1;transform:none;}
-.h-ctas{display:flex;gap:20px;align-items:center;margin-top:48px;pointer-events:all;opacity:0;transform:translateY(14px);transition:opacity .9s 1s,transform .9s 1s;}
+.h-ctas{display:flex;gap:20px;align-items:center;margin-top:var(--sp-8);pointer-events:all;opacity:0;transform:translateY(14px);transition:opacity .9s 1s,transform .9s 1s;}
 .h-ctas.in{opacity:1;transform:none;}
 
 /* Stats — glassmorphism bottom-right strip */
@@ -75,11 +75,11 @@
   background:rgba(5,5,5,.45);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(196,154,56,.14);
-  padding:22px 32px;
+  padding:var(--sp-5) var(--sp-6);
   box-shadow:0 4px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(196,154,56,.08);
 }
 .h-stats.in{opacity:1;}
-.hst{text-align:center;padding:0 24px;}
+.hst{text-align:center;padding:0 var(--sp-5);}
 .hst-n{font-family:var(--fd);font-size:38px;color:var(--gold);line-height:1;}
 .hst-l{font-family:var(--fu);font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-top:5px;white-space:nowrap;}
 .hst-div{width:1px;height:44px;background:linear-gradient(transparent,rgba(196,154,56,.25),transparent);}
@@ -98,9 +98,9 @@
 
 .jnav-logo img{height:32px;width:auto;vertical-align:middle;}
 
-#products-section{position:relative;z-index:2;background:var(--black);padding:120px 52px 100px;}
-.prod-head{max-width:1200px;margin:0 auto 72px;}
-.prod-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+#products-section{position:relative;z-index:2;background:var(--black);padding:var(--sp-10) var(--gutter) var(--sp-9);}
+.prod-head{max-width:1200px;margin:0 auto var(--sp-9);}
+.prod-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-4);}
 .prod-h2{font-family:var(--fd);font-size:clamp(60px,8vw,120px);line-height:.9;letter-spacing:.02em;color:var(--white);}
 .prod-h2 .g{color:var(--gold);}
 
@@ -174,7 +174,7 @@
 .prod-card[data-cat="ppf"]::after{content:none;}
 
 /* ── CONTENT ── */
-.prod-content{position:absolute;bottom:0;left:0;right:0;padding:36px 32px;z-index:4;}
+.prod-content{position:absolute;bottom:0;left:0;right:0;padding:var(--sp-8) var(--sp-6);z-index:4;}
 .prod-cat{
   font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;
   color:var(--gold);margin-bottom:10px;
@@ -183,9 +183,9 @@
 }
 .prod-cat::before{content:'';width:20px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
 .prod-card:hover .prod-cat{transform:translateX(0);opacity:1;}
-.prod-name{font-family:var(--fd);font-size:30px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:14px;}
+.prod-name{font-family:var(--fd);font-size:30px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:var(--sp-3);}
 .prod-desc{
-  font-size:13px;font-weight:300;color:var(--silver);line-height:1.7;margin-bottom:18px;
+  font-size:13px;font-weight:300;color:var(--silver);line-height:1.7;margin-bottom:var(--sp-4);
   max-height:0;overflow:hidden;opacity:0;
   transform:translateY(8px);
   transition:max-height .55s cubic-bezier(.76,0,.24,1),opacity .4s .08s,transform .45s .08s;
@@ -199,26 +199,26 @@
 }
 .prod-cta:hover{gap:14px;}
 
-.booking-mini{background:var(--charcoal);border-top:1px solid rgba(196,154,56,.1);border-bottom:1px solid rgba(196,154,56,.1);padding:60px 52px;text-align:center;position:relative;z-index:2;}
+.booking-mini{background:var(--charcoal);border-top:1px solid rgba(196,154,56,.1);border-bottom:1px solid rgba(196,154,56,.1);padding:var(--sp-9) var(--gutter);text-align:center;position:relative;z-index:2;}
 .booking-mini::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(184,115,51,.06) 0%,transparent 70%);}
 .booking-inner{max-width:800px;margin:0 auto;}
-.booking-h3{font-family:var(--fd);font-size:clamp(44px,6vw,72px);letter-spacing:.06em;color:var(--white);margin-bottom:16px;line-height:1;}
+.booking-h3{font-family:var(--fd);font-size:clamp(44px,6vw,72px);letter-spacing:.06em;color:var(--white);margin-bottom:var(--sp-4);line-height:1;}
 .booking-h3 .g{color:var(--gold);}
-.booking-text{font-size:15px;color:var(--silver);line-height:1.8;margin-bottom:32px;}
-.booking-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.booking-text{font-size:15px;color:var(--silver);line-height:1.8;margin-bottom:var(--sp-6);}
+.booking-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:var(--sp-5);}
 .booking-info{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
 
-.story-intro{padding:100px 52px 60px;max-width:800px;margin:0 auto;text-align:center;background:var(--deep);}
+.story-intro{padding:var(--sp-10) var(--gutter) var(--sp-9);max-width:800px;margin:0 auto;text-align:center;background:var(--deep);}
 .story-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
-.story-h2{font-family:var(--fd);font-size:clamp(60px,8vw,110px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:24px;}
+.story-h2{font-family:var(--fd);font-size:clamp(60px,8vw,110px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:var(--sp-6);}
 .story-h2 .g{color:var(--gold);}
 
 #story-pin-container{overflow:hidden;background:var(--deep);}
 .story-track{display:flex;will-change:transform;}
-.story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 52px;position:relative;background:var(--deep);}
+.story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);position:relative;background:var(--deep);}
 .panel-content{max-width:600px;position:relative;z-index:10;text-align:center;}
 .stage-num{font-family:var(--fd);font-size:200px;color:rgba(196,154,56,.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;z-index:0;pointer-events:none;user-select:none;}
-.stage-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);color:var(--gold);margin-bottom:20px;line-height:.95;}
+.stage-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);color:var(--gold);margin-bottom:var(--sp-5);line-height:.95;}
 .stage-text{font-size:16px;color:var(--silver);line-height:1.9;max-width:520px;margin:0 auto;}
 
 .spline-container{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1s ease;}
@@ -228,17 +228,17 @@
 .story-particles{position:absolute;inset:0;z-index:1;pointer-events:none;}
 
 .contact-strip{display:flex;border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);background:var(--charcoal);position:relative;z-index:2;}
-.cs-item{flex:1;padding:52px 44px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
+.cs-item{flex:1;padding:var(--sp-7) var(--sp-6);text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
 .cs-item:last-child{border-right:none;}.cs-item:hover{background:rgba(196,154,56,.04);}
 .cs-label{font-family:var(--fu);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
 .cs-title{font-family:var(--fd);font-size:30px;letter-spacing:.06em;color:var(--white);}
 .cs-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
 .cs-item:hover .cs-arrow{transform:translateX(7px);color:var(--gold);}
 
-.reviews{padding:100px 52px;background:var(--midnight);border-top:1px solid rgba(196,154,56,.07);position:relative;}
+.reviews{padding:var(--sp-9) var(--gutter);background:var(--midnight);border-top:1px solid rgba(196,154,56,.07);position:relative;}
 .reviews::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 60% at 80% 20%,rgba(122,138,153,.05) 0%,transparent 60%);}
 .reviews-inner{max-width:1200px;margin:0 auto;}
-.reviews-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
+.reviews-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:var(--sp-8);}
 .reviews-h2{font-family:var(--fd);font-size:clamp(48px,6vw,90px);line-height:.9;letter-spacing:.02em;color:var(--white);}
 .reviews-h2 .g{color:var(--gold);}
 .rating-summary{text-align:right;}
@@ -246,7 +246,7 @@
 .rating-stars{font-size:18px;margin-top:4px;letter-spacing:3px;}
 .rating-label{font-family:var(--fu);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-top:4px;}
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.rcard{background:var(--surface);padding:36px 28px;border:1px solid rgba(196,154,56,.05);transition:background .3s,border-color .3s;position:relative;}
+.rcard{background:var(--surface);padding:var(--sp-6) var(--sp-5);border:1px solid rgba(196,154,56,.05);transition:background .3s,border-color .3s;position:relative;}
 .rcard:hover{background:rgba(196,154,56,.03);border-color:rgba(196,154,56,.15);}
 .rcard-stars{font-size:14px;letter-spacing:2px;color:var(--gold);margin-bottom:16px;}
 .rcard-text{font-size:14px;font-weight:300;color:var(--silver);line-height:1.75;margin-bottom:20px;font-style:italic;}
@@ -255,7 +255,7 @@
 .rcard-name{font-family:var(--fu);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--white);}
 .rcard-meta{font-family:var(--fu);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:2px;}
 
-.jfoot{background:var(--deep);border-top:1px solid rgba(255,255,255,.04);padding:36px 52px;display:flex;align-items:center;justify-content:space-between;}
+.jfoot{background:var(--deep);border-top:1px solid rgba(255,255,255,.04);padding:var(--sp-6) var(--gutter);display:flex;align-items:center;justify-content:space-between;}
 .jfoot-logo{font-family:var(--fd);font-size:19px;letter-spacing:.2em;color:var(--white);}
 .jfoot-logo b{color:var(--gold);font-weight:400;}
 .jfoot-tag{font-family:var(--fu);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(196,154,56,.35);}
@@ -263,7 +263,7 @@
 
 @media (max-width: 900px) {
   /* hero mobile */
-  #hero{padding:90px 24px 100px;}
+  #hero{padding:90px 24px var(--sp-9);}
   .h-h1{font-size:clamp(72px,18vw,140px);}
   .h-rhythm{left:-16px;}
   .hero-diagonal{display:none;}
@@ -281,13 +281,13 @@
   /* products */
   .prod-grid{grid-template-columns:1fr;grid-template-rows:auto;}
   .prod-card{min-height:380px;}
-  #products-section{padding:80px 24px;}
+  #products-section{padding:var(--sp-9) 24px;}
   /* reviews */
   .reviews-grid{grid-template-columns:1fr;}
   .reviews-header{flex-direction:column;align-items:flex-start;gap:20px;}
   .booking-ctas{flex-direction:column;}
   /* story */
-  .story-panel{padding:0 24px;}
+  .story-panel{padding:0 var(--sp-5);}
   .contact-strip{flex-direction:column;}
 }
 @media (max-width: 560px) {
@@ -385,7 +385,7 @@
   </div>
 </div>
 
-<section id="products-section" style="position:relative;z-index:2;background:var(--black);padding:120px 52px;min-height:60vh;display:flex;align-items:center;justify-content:center;">
+<section id="products-section" style="position:relative;z-index:2;background:var(--black);padding:var(--sp-10) var(--gutter);min-height:60vh;display:flex;align-items:center;justify-content:center;">
   <div style="text-align:center;pointer-events:none;">
     <div style="font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(196,154,56,.3);margin-bottom:20px;">Coming Soon — Phase 11</div>
     <div style="font-family:var(--fd);font-size:clamp(44px,7vw,100px);color:rgba(255,255,255,.06);letter-spacing:.06em;line-height:.9;">3D TRUCK<br>GOES HERE</div>
@@ -396,8 +396,8 @@
 
 <section class="booking-mini reveal">
   <div class="booking-inner">
-    <h3 class="booking-h3">READY TO <span class="g">BUILD?</span></h3>
-    <p class="booking-text">Book a free consultation — we'll walk you through options for your truck and provide a personalized quote.</p>
+    <h3 class="booking-h3">YOUR TRUCK.<br><span class="g">YOUR TERMS.</span></h3>
+    <p class="booking-text">No waiting lists. No upselling. Tell us your truck, we'll tell you exactly what fits, what it costs, and when it's done.</p>
     <div class="booking-ctas">
       <a href="https://wa.me/971503021700" class="btn-g" data-tip="Chat" target="_blank"><span>WhatsApp Us</span></a>
       <a href="tel:+971503021700" class="btn-dark" data-tip="Call"><span>Call: 050 302 1700</span></a>
@@ -408,7 +408,7 @@
 
 <div class="story-intro">
   <div class="story-tag reveal">Our Journey</div>
-  <h2 class="story-h2 reveal d1">FROM VISION TO <span class="g">REALITY</span></h2>
+  <h2 class="story-h2 reveal d1" data-assemble>FROM VISION TO <span class="g">REALITY</span></h2>
 </div>
 
 <div id="story-pin-container">
@@ -419,7 +419,7 @@
       <div class="stage-num">01</div>
       <div class="panel-content">
         <h3 class="stage-title">Foundation</h3>
-        <p class="stage-text">Started in Sharjah's Industrial Area 4 with one clear goal: serious trucks deserve serious gear. No compromises, no shortcuts.</p>
+        <p class="stage-text">Industrial Area 4. 2019. One rule: serious trucks deserve serious gear. Everything else is negotiable.</p>
       </div>
     </div>
 
@@ -429,7 +429,7 @@
       <div class="stage-num">02</div>
       <div class="panel-content">
         <h3 class="stage-title">Craft</h3>
-        <p class="stage-text">Every bed cover custom-fitted. Every build hand-checked by our team. We don't do template jobs — your truck is unique, so is our work.</p>
+        <p class="stage-text">No templates. No rush jobs. Every fit verified twice. Your Silverado isn't our last Silverado — it's the only one that matters.</p>
       </div>
     </div>
 
@@ -439,7 +439,7 @@
       <div class="stage-num">03</div>
       <div class="panel-content">
         <h3 class="stage-title">Trusted</h3>
-        <p class="stage-text">4.7★ Google rating. 500+ trucks built across UAE. Word-of-mouth built what advertising couldn't. Trust earned, not bought.</p>
+        <p class="stage-text">4.7★ didn't come from marketing. It came from 500+ trucks that still look factory-fresh in UAE heat. Word travels.</p>
       </div>
     </div>
 
@@ -448,7 +448,7 @@
       <div class="stage-num">04</div>
       <div class="panel-content">
         <h3 class="stage-title">Today</h3>
-        <p class="stage-text">From Silverado to Ram TRX, we've built them all. Your truck's next chapter starts here — Industrial Area 4, Sharjah.</p>
+        <p class="stage-text">Ram TRX. F-150 Raptor. GMC Sierra Denali. Built them all. Your truck's next chapter starts in Industrial Area 4.</p>
       </div>
     </div>
 
@@ -468,17 +468,17 @@
     <div class="reviews-grid">
       <div class="rcard reveal">
         <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Such a great shop having all accessories for all 4x4 vehicles. Prices are very low and staff are friendly. Solution for Tundra, GMC, Dodge Ram, Ford F150 and much more."</p>
+        <p class="rcard-text">"Best shop for 4x4 accessories in Sharjah. They know their trucks — Tundra, GMC, Ram, F-150. Prices are honest and the team actually knows what they're doing."</p>
         <div class="rcard-author"><div class="rcard-initials">AA</div><div><div class="rcard-name">Adnan Aadi</div><div class="rcard-meta">6 months ago</div></div></div>
       </div>
       <div class="rcard reveal d1">
         <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Got a double support rear hitch carrier. Good service, friendly staff. Lots of offroad accessories available. Good prices as well."</p>
+        <p class="rcard-text">"Got a rear hitch carrier fitted same day. Fair prices, no nonsense. Good stock of offroad parts that you won't find elsewhere in Sharjah."</p>
         <div class="rcard-author"><div class="rcard-initials">HI</div><div><div class="rcard-name">Hisham Irshad</div><div class="rcard-meta">2 months ago</div></div></div>
       </div>
       <div class="rcard reveal d2">
         <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Best place for pickup accessories in Sharjah. Professional team, quality work. Highly recommended for any truck owner."</p>
+        <p class="rcard-text">"Professional team. Quality work. Every detail on my truck was handled properly — not rushed, not cut short. Highly recommended."</p>
         <div class="rcard-author"><div class="rcard-initials">MR</div><div><div class="rcard-name">Mohammed R.</div><div class="rcard-meta">4 months ago</div></div></div>
       </div>
     </div>
@@ -487,13 +487,13 @@
 
 <div class="contact-strip">
   <a href="https://wa.me/971503021700" class="cs-item" data-tip="Chat" target="_blank">
-    <div><div class="cs-label">WhatsApp</div><div class="cs-title">Message Us</div></div><div class="cs-arrow">→</div>
+    <div><div class="cs-label">WhatsApp — Fastest Response</div><div class="cs-title">Message Us Now</div></div><div class="cs-arrow">→</div>
   </a>
   <a href="tel:+971503021700" class="cs-item" data-tip="Call">
     <div><div class="cs-label">Call Direct</div><div class="cs-title">050 302 1700</div></div><div class="cs-arrow">→</div>
   </a>
   <a href="contact.html" class="cs-item" data-tip="Visit">
-    <div><div class="cs-label">Industrial Area 4</div><div class="cs-title">Sharjah, UAE</div></div><div class="cs-arrow">→</div>
+    <div><div class="cs-label">Walk In — No Appointment</div><div class="cs-title">Industrial Area 4, Sharjah</div></div><div class="cs-arrow">→</div>
   </a>
 </div>
 

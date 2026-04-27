@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <style>
 .page-hero {
-  padding: 160px 52px 96px;
+  padding: var(--sp-11) var(--gutter) var(--sp-9);
   position: relative; overflow: hidden;
   border-bottom: 1px solid rgba(196,154,56,.07);
 }
@@ -25,13 +25,13 @@
 .ph-h1 .s { -webkit-text-stroke: 1px rgba(237,236,231,.14); color: transparent; display: block; }
 .ph-sub {
   font-size: 14px; font-weight: 300; color: var(--silver);
-  max-width: 460px; line-height: 1.8; margin-top: 24px; letter-spacing: .015em;
+  max-width: 460px; line-height: 1.8; margin-top: var(--sp-5); letter-spacing: .015em;
 }
-.ph-cta { margin-top: 40px; }
+.ph-cta { margin-top: var(--sp-6); }
 
 /* ── FILTER ── */
 .filter-wrap {
-  padding: 48px 52px 44px;
+  padding: var(--sp-7) var(--gutter) var(--sp-6);
   display: flex; gap: 10px; flex-wrap: wrap;
   border-bottom: 1px solid rgba(255,255,255,.04);
   max-width: 1400px; margin: 0 auto;
@@ -45,7 +45,7 @@
 .fb:hover, .fb.on { color: var(--gold); border-color: rgba(196,154,56,.28); background: rgba(196,154,56,.03); }
 
 /* ── ASYMMETRIC COLLAGE GRID ── */
-.prod-wrap { padding: 0 52px 120px; }
+.prod-wrap { padding: 0 var(--gutter) var(--sp-10); }
 .prod-grid {
   display: grid;
   grid-template-columns: 55fr 30fr 35fr;
@@ -105,7 +105,7 @@
   position: absolute; top: 18px; right: 18px; z-index: 2;
   font-family: var(--fd); font-size: 12px; color: rgba(196,154,56,.22); letter-spacing: .08em;
 }
-.pcard-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 24px; z-index: 2; }
+.pcard-content { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--sp-6) var(--sp-5); z-index: 2; }
 .pcard-cat {
   font-family: var(--fu); font-size: 8px; letter-spacing: .32em;
   text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
@@ -115,16 +115,16 @@
 }
 .pcard-cat::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: block; flex-shrink: 0; }
 .pcard:hover .pcard-cat { transform: translateX(0); opacity: 1; }
-.pcard-name { font-family: var(--fd); font-size: 26px; letter-spacing: .04em; color: var(--white); line-height: 1; }
+.pcard-name { font-family: var(--fd); font-size: 26px; letter-spacing: .04em; color: var(--white); line-height: 1; margin-bottom: var(--sp-2); }
 .pcard-spec {
   font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.65;
-  margin-top: 10px; max-height: 0; overflow: hidden;
+  margin-top: var(--sp-3); max-height: 0; overflow: hidden;
   transform: translateY(6px); opacity: 0;
   transition: max-height .5s cubic-bezier(.76,0,.24,1), opacity .4s .06s, transform .4s .06s;
 }
 .pcard:hover .pcard-spec { max-height: 120px; opacity: 1; transform: translateY(0); }
 .pcard-cta {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  display: inline-flex; align-items: center; gap: 8px; margin-top: var(--sp-3);
   font-family: var(--fu); font-size: 10px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--gold); text-decoration: none;
   transition: gap .3s;
@@ -145,16 +145,16 @@
 .pcard:nth-child(12) .pcard-name { font-size: 44px; }
 
 /* ── TRUCKS ── */
-.trucks { padding: 100px 52px; background: var(--surface); border-top: 1px solid rgba(196,154,56,.07); }
+.trucks { padding: var(--sp-9) var(--gutter); background: var(--surface); border-top: 1px solid rgba(196,154,56,.07); }
 .trucks-inner { max-width: 1400px; margin: 0 auto; }
 .trucks-h2 {
   font-family: var(--fd); font-size: clamp(52px, 7vw, 100px);
-  line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: 60px;
+  line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: var(--sp-8);
 }
 .trucks-h2 .g { color: var(--gold); }
 .trucks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
 .tcard {
-  background: var(--black); padding: 44px 28px;
+  background: var(--black); padding: var(--sp-7) var(--sp-6);
   border: 1px solid rgba(196,154,56,.05);
   transition: all .3s; position: relative; overflow: hidden;
 }
@@ -166,13 +166,13 @@
 }
 .tcard:hover::after { transform: scaleX(1); }
 .tcard:hover { background: rgba(196,154,56,.03); }
-.tcard-icon { margin-bottom: 20px; opacity: .35; }
+.tcard-icon { margin-bottom: var(--sp-5); opacity: .35; }
 .tcard-name { font-family: var(--fd); font-size: 22px; letter-spacing: .05em; color: var(--white); margin-bottom: 8px; }
 .tcard-models { font-family: var(--fu); font-size: 11px; letter-spacing: .14em; color: var(--dim); line-height: 1.7; }
 
 /* ── CTA BAND ── */
 .cta-band {
-  padding: 100px 52px; background: var(--gold);
+  padding: var(--sp-9) var(--gutter); background: var(--gold);
   position: relative; overflow: hidden;
 }
 .cta-band::before {
@@ -194,7 +194,7 @@
 .cta-body { font-size: 14px; font-weight: 300; color: rgba(0,0,0,.5); max-width: 300px; text-align: right; line-height: 1.72; margin-bottom: 8px; }
 
 @media(max-width:900px){
-  .page-hero,.filter-wrap,.prod-wrap,.trucks,.cta-band{padding-left:24px;padding-right:24px;}
+  .page-hero,.filter-wrap,.prod-wrap,.trucks,.cta-band{padding-left:var(--sp-5);padding-right:var(--sp-5);}
   .prod-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
   .pcard:nth-child(n){grid-column:auto;grid-row:auto;min-height:320px;}
   .pcard:nth-child(12){grid-column:1/3;height:200px;}
@@ -230,12 +230,12 @@
 <div class="page-hero">
   <div class="ph-ambient">CAT</div>
   <div class="tag reveal" style="margin-bottom:22px;">Full Catalogue</div>
-  <h1 class="ph-h1 reveal d1">
+  <h1 class="ph-h1 reveal d1" data-assemble>
     EVERY<br>
     <span class="g">ACCESSORY.</span>
     <span class="s">EVERY TRUCK.</span>
   </h1>
-  <p class="ph-sub reveal d2">From hardtop bed covers to full exterior transformations — browse our complete range. No prices listed: every build is unique. Message us for a personalised quote.</p>
+  <p class="ph-sub reveal d2">Every accessory. Every truck. No catalogue prices — every build is unique to your vehicle. Message us and we'll give you a straight answer within the hour.</p>
   <div class="ph-cta reveal d3">
     <a href="https://wa.me/971503021700" class="btn-g" target="_blank" data-tip="WhatsApp"><span>Get a Quote on WhatsApp</span><span>→</span></a>
   </div>
@@ -261,7 +261,7 @@
     <div class="pcard-content">
       <div class="pcard-cat">Bed Covers</div>
       <div class="pcard-name">Hardtop Retractable</div>
-      <div class="pcard-spec">High-grade 6063-T5 aluminium slats. Powder-coated matte black. EPDM rubber weather seals. Supports up to 500 lbs distributed load. T-slot side rails for rack mounting. Fits F-150, Dodge Ram 1500/2500, GMC Sierra.</div>
+      <div class="pcard-spec">Aerospace-grade 6063-T5 aluminium. Powder-coated matte black. Tested to 500 lb static load. EPDM weather seals keep UAE dust out. Fits F-150, Ram 1500/2500, Sierra. Lock it, load it, forget it.</div>
       <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank">Request Price →</a>
     </div>
   </div>
@@ -273,7 +273,7 @@
     <div class="pcard-content">
       <div class="pcard-cat">Bed Covers</div>
       <div class="pcard-name">Soft Tri-Fold</div>
-      <div class="pcard-spec">Heavy-duty vinyl outer, foam core. Tool-free installation on most models. Velcro and buckle closure. Clamp-on mounting, no drilling required. Fits Ford F-Series, Dodge Ram, Toyota Tundra.</div>
+      <div class="pcard-spec">Heavy-duty UV-resistant vinyl. Clamp-on fit — zero drilling, zero damage. Folds open in seconds. Fits F-Series, Ram, Tundra. Lightweight protection that actually works in desert heat.</div>
       <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank">Request Price →</a>
     </div>
   </div>
@@ -285,7 +285,7 @@
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
       <div class="pcard-name">Bull Bars</div>
-      <div class="pcard-spec">Heavy-duty mild steel and stainless variants. Powder-coated black or polished finish. Integrated light mounting points. Brush guard and nudge bar options. Fits Ford F-150, Dodge Ram, GMC Sierra, Chevy Silverado.</div>
+      <div class="pcard-spec">Mild steel and stainless variants. Powder-coated black or polished. Integrated LED mount points. Brush guard and nudge bar options. Direct bolt-on for F-150, Ram, Sierra, Silverado. Built for wadi approaches, not car parks.</div>
       <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank">Request Price →</a>
     </div>
   </div>
@@ -297,7 +297,7 @@
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
       <div class="pcard-name">Running Boards</div>
-      <div class="pcard-spec">Aluminium and steel side steps. Power running boards available. Drop step options for lifted trucks. Non-slip step pads. Direct bolt-on fit for Ford, Dodge, GMC — no cutting required.</div>
+      <div class="pcard-spec">Aluminium and steel. Power retractable options available. Drop steps for lifted trucks. Non-slip surface, direct bolt-on — no cutting required. Ford, Dodge, GMC. Makes the entry effortless, makes the truck look intentional.</div>
       <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank">Request Price →</a>
     </div>
   </div>
@@ -309,7 +309,7 @@
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
       <div class="pcard-name">Roof Racks</div>
-      <div class="pcard-spec">Cab-mounted and full-length systems. Powder-coated steel, 150 kg load capacity. LED light bar mounting channels. Universal fit with model-specific brackets available.</div>
+      <div class="pcard-spec">Cab-mounted and full-length systems. Powder-coated steel rated to 150 kg. LED light bar channels built in. Model-specific brackets — no improvising, no flex. Overland-ready from day one.</div>
       <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank">Request Price →</a>
     </div>
   </div>

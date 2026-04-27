@@ -10,7 +10,7 @@
 /* ── STORY HERO ── */
 .story-hero {
   min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 160px 52px 100px;
+  justify-content: flex-end; padding: var(--sp-11) var(--gutter) var(--sp-9);
   position: relative; overflow: hidden; background: #050505;
 }
 .sh-canvas { position: absolute; inset: 0; z-index: 0; }
@@ -56,7 +56,7 @@
 }
 
 /* ── EDITORIAL SECTIONS ── */
-.ed { padding: 140px 52px; position: relative; overflow: hidden; }
+.ed { padding: var(--sp-10) var(--gutter); position: relative; overflow: hidden; }
 .ed.cool { background: #05080f; }
 .ed.warm { background: #0a0806; }
 .ed.cold { background: #050505; }
@@ -76,26 +76,26 @@
 
 /* Chapter markers */
 .ch-marker {
-  display: flex; align-items: center; gap: 20px; margin-bottom: 72px; position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 20px; margin-bottom: var(--sp-8); position: relative; z-index: 1;
 }
 .ch-num { font-family: var(--fd); font-size: 13px; letter-spacing: .1em; color: var(--gold); }
 .ch-line { flex: 1; height: 1px; background: rgba(196,154,56,.15); }
 .ch-title { font-family: var(--fu); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: var(--dim); }
 
 /* Two-col layout */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; position: relative; z-index: 1; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-11); align-items: center; position: relative; z-index: 1; }
 .two-col.flip { direction: rtl; }
 .two-col.flip > * { direction: ltr; }
 
 .ed-h2 {
   font-family: var(--fd); font-size: clamp(48px, 7vw, 108px);
-  line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: 32px;
+  line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: var(--sp-6);
 }
 .ed-h2 .g { color: var(--gold); }
 .ed-h2 .s { -webkit-text-stroke: 1px rgba(237,236,231,.14); color: transparent; display: block; }
 .ed-body {
   font-size: 15px; font-weight: 300; line-height: 1.9;
-  color: var(--silver); letter-spacing: .015em; margin-bottom: 22px;
+  color: var(--silver); letter-spacing: .015em; margin-bottom: var(--sp-5);
 }
 .ed-body strong { color: var(--white); font-weight: 400; }
 .ed-body em { color: var(--gold); font-style: normal; }
@@ -129,7 +129,7 @@
 
 /* pull quote */
 .pullquote {
-  padding: 100px 52px; background: var(--surface);
+  padding: var(--sp-9) var(--gutter); background: var(--surface);
   border-top: 1px solid rgba(196,154,56,.08);
   border-bottom: 1px solid rgba(196,154,56,.08);
   position: relative; overflow: hidden;
@@ -149,18 +149,18 @@
 .pq-attr { font-family: var(--fu); font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); }
 
 /* values grid */
-.values { padding: 140px 52px; background: var(--black); position: relative; overflow: hidden; }
+.values { padding: var(--sp-10) var(--gutter); background: var(--black); position: relative; overflow: hidden; }
 .values::before {
   content: 'VALUES'; position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
   font-family: var(--fd); font-size: 20vw; color: rgba(196,154,56,.018);
   pointer-events: none; line-height: 1; letter-spacing: .06em;
 }
 .values-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
-.values-h { font-family: var(--fd); font-size: clamp(52px, 7vw, 100px); line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: 72px; }
+.values-h { font-family: var(--fd); font-size: clamp(52px, 7vw, 100px); line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: var(--sp-8); }
 .values-h .g { color: var(--gold); }
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .vcard {
-  background: var(--surface); padding: 48px 32px;
+  background: var(--surface); padding: var(--sp-7) var(--sp-6);
   border: 1px solid rgba(196,154,56,.05);
   transition: background .4s, border-color .4s; position: relative; overflow: hidden;
 }
@@ -172,12 +172,12 @@
   transition: transform .5s cubic-bezier(.76,0,.24,1);
 }
 .vcard:hover::after { transform: scaleX(1); }
-.vcard-n { font-family: var(--fd); font-size: 68px; color: rgba(196,154,56,.08); line-height: 1; margin-bottom: 14px; }
+.vcard-n { font-family: var(--fd); font-size: 68px; color: rgba(196,154,56,.08); line-height: 1; margin-bottom: var(--sp-3); }
 .vcard-title { font-family: var(--fu); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--white); margin-bottom: 12px; }
 .vcard-body { font-size: 13px; font-weight: 300; color: var(--dim); line-height: 1.72; }
 
 /* numbers band */
-.nb { position: relative; z-index: 2; background: var(--gold); padding: 72px 52px; overflow: hidden; }
+.nb { position: relative; z-index: 2; background: var(--gold); padding: var(--sp-9) var(--gutter); overflow: hidden; }
 .nb::before {
   content: 'BUILT'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
   font-family: var(--fd); font-size: 22vw; letter-spacing: .1em;
@@ -208,8 +208,8 @@
 .np-item:hover .np-arrow { transform: translateX(7px); color: var(--gold); }
 
 @media(max-width:900px){
-  .story-hero,.ed,.pullquote,.values{padding-left:24px;padding-right:24px;}
-  .two-col{grid-template-columns:1fr;gap:48px;}
+  .story-hero,.ed,.pullquote,.values{padding-left:var(--sp-5);padding-right:var(--sp-5);}
+  .two-col{grid-template-columns:1fr;gap:var(--sp-7);}
   .two-col.flip{direction:ltr;}
   .values-grid{grid-template-columns:1fr;}
   .nb-grid{grid-template-columns:1fr 1fr;}
@@ -250,7 +250,7 @@
   </div>
   <div class="sh-content">
     <div class="tag reveal" style="margin-bottom:22px;">The Juhrum Story</div>
-    <h1 class="sh-h1 reveal d1">
+    <h1 class="sh-h1 reveal d1" data-assemble>
       FROM<br>
       <span class="g">PERSIA</span><br>
       TO THE<br>

@@ -10,7 +10,7 @@
 /* ── CONTACT HERO ── */
 .con-hero {
   min-height: 60vh; display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 160px 52px 72px;
+  justify-content: flex-end; padding: var(--sp-11) var(--gutter) var(--sp-8);
   position: relative; overflow: hidden;
   border-bottom: 1px solid rgba(196,154,56,.07);
 }
@@ -37,7 +37,7 @@
   border-bottom: 1px solid rgba(196,154,56,.07);
 }
 .con-left {
-  padding: 80px 52px; background: var(--charcoal);
+  padding: var(--sp-9) var(--gutter); background: var(--charcoal);
   border-right: 1px solid rgba(255,255,255,.04);
 }
 .con-right { padding: 80px 52px; background: var(--charcoal); }
@@ -50,7 +50,7 @@
 
 /* info rows */
 .info-row {
-  display: flex; gap: 20px; align-items: flex-start;
+  display: flex; gap: var(--sp-5); align-items: flex-start;
   padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.04);
 }
 .info-row:first-of-type { border-top: 1px solid rgba(255,255,255,.04); }
@@ -95,7 +95,7 @@
 }
 .tel-link:hover { border-color: rgba(196,154,56,.25); color: var(--gold); }
 
-.soc-block { margin-top: 32px; }
+.soc-block { margin-top: var(--sp-6); }
 .soc-block-title {
   font-family: var(--fu); font-size: 9px; letter-spacing: .3em;
   text-transform: uppercase; color: var(--dim); margin-bottom: 12px;
@@ -110,7 +110,7 @@
 
 /* hours grid */
 .hours-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 36px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: var(--sp-6);
 }
 .hg-item {
   background: var(--surface); padding: 20px 16px;
@@ -166,7 +166,7 @@
 .cta-btns { display: flex; gap: 16px; justify-content: center; align-items: center; }
 
 @media(max-width:900px){
-  .con-hero,.directions,.con-cta{padding-left:24px;padding-right:24px;}
+  .con-hero,.directions,.con-cta{padding-left:var(--sp-5);padding-right:var(--sp-5);}
   .con-main{grid-template-columns:1fr;}
   .con-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);padding:56px 24px;}
   .con-right{padding:56px 24px;}
@@ -202,7 +202,7 @@
     <span class="g">BUILD</span><br>
     <span class="s">YOURS.</span>
   </h1>
-  <p class="con-sub reveal d2">Whether you know exactly what you need or just starting to explore — we're here. Come in, call, or message us on WhatsApp. We respond fast.</p>
+  <p class="con-sub reveal d2">Know exactly what you want or just starting to look — either way, we respond fast. Message, call, or just show up. No appointment needed.</p>
 </div>
 
 <!-- TICKER -->
@@ -243,7 +243,7 @@
       <span class="info-key">Email</span>
       <span class="info-val"><a href="mailto:h_jahrom@yahoo.com">h_jahrom@yahoo.com</a></span>
     </div>
-    <div class="map-embed reveal d4" style="padding:0;border:1px solid rgba(196,154,56,.12);overflow:hidden;margin-top:36px;">
+    <div class="map-embed reveal d4" style="padding:0;border:1px solid rgba(196,154,56,.12);overflow:hidden;margin-top:var(--sp-6);">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.0!2d55.4168!3d25.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f59582c29df73%3A0x223044947b43f24f!2sJahrom%20Car%20Accessories!5e0!3m2!1sen!2sae!4v1"
         width="100%"
@@ -279,7 +279,7 @@
   <div class="con-right">
     <h2 class="con-h2 reveal">REACH<br><span class="g">OUT.</span></h2>
     <p style="font-size:14px;font-weight:300;color:var(--dim);line-height:1.8;margin-bottom:36px;letter-spacing:.015em;" class="reveal d1">
-      The fastest way to reach us is WhatsApp. Send us a message with your truck model and what you're looking for — we'll come back to you with options and pricing, usually the same day.
+      WhatsApp is fastest. Send your truck model and what you're after — we'll come back with options and pricing, usually within the hour. No forms, no waiting lists.
     </p>
 
     <a href="https://wa.me/971503021700" class="wa-big reveal d1" target="_blank" data-tip="Chat">
@@ -298,7 +298,7 @@
     </a>
 
     <div class="soc-block reveal d4">
-      <p class="soc-block-title">Follow Our Builds</p>
+      <p class="soc-block-title">See the builds. Follow us.</p>
       <div class="soc-btns">
         <a href="https://www.instagram.com/jahrom.4x4.accessoires" class="soc-btn" target="_blank" data-tip="Instagram">Instagram</a>
       </div>
@@ -314,17 +314,17 @@
       <div class="dir-card reveal">
         <div class="dir-step">01</div>
         <div class="dir-title">From Dubai / Sharjah City</div>
-        <p class="dir-body">Take Emirates Road (E611) or Al Dhaid Road (E88) toward Sharjah Industrial Areas. Exit toward Industrial Area 4 — we're at 330 First Industrial St, Industrial Area 4.</p>
+        <p class="dir-body">Take Emirates Road (E611) or Al Dhaid Road (E88) toward Sharjah Industrial Areas. Exit at Industrial Area 4 — we're at 330 First Industrial St.</p>
       </div>
       <div class="dir-card reveal d1">
         <div class="dir-step">02</div>
         <div class="dir-title">The Landmark</div>
-        <p class="dir-body">We're located in Industrial Area 4, immediately after the ADNOC petrol pump on First Industrial Street. Look for the shop on your left — you'll see trucks being fitted outside.</p>
+        <p class="dir-body">Look for the ADNOC petrol pump on First Industrial Street — we're immediately after it on your left. You'll see trucks being fitted outside. Hard to miss.</p>
       </div>
       <div class="dir-card reveal d2">
         <div class="dir-step">03</div>
         <div class="dir-title">Parking & Access</div>
-        <p class="dir-body">Free parking available directly outside the showroom. We have space to manoeuvre trucks and large vehicles. Open 8AM to 11PM every day — no appointment needed, just come in.</p>
+        <p class="dir-body">Free parking directly outside. Plenty of space for trucks. Open 8AM–11PM, every single day. No appointment, no waiting — just show up and we'll handle it from there.</p>
       </div>
     </div>
   </div>
