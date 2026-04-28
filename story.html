@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Story — Juhrum Auto Accessories</title>
 <meta name="description" content="The story of Juhrum — Persian craftsmanship, UAE desert culture, and five years of building the best pickup trucks in Sharjah.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
 <style>
 /* ── STORY HERO ── */
@@ -35,8 +37,9 @@
 .sh-stat-l { font-family: var(--fu); font-size: 7.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin-top: 2px; text-align: right; }
 .sh-stat-div { width: 1px; height: 18px; background: rgba(196,154,56,.2); margin-left: auto; }
 .sh-h1 {
-  font-family: var(--fd); font-size: clamp(68px, 11vw, 170px);
-  line-height: .88; letter-spacing: .025em; color: var(--white);
+  font-family: var(--fd); font-size: clamp(60px, 9vw, 148px);
+  line-height: .9; letter-spacing: .022em; color: var(--white);
+  overflow: hidden; width: 100%;
 }
 .sh-h1 .g { color: var(--gold); }
 .sh-h1 .s { -webkit-text-stroke: 1px rgba(237,236,231,.15); color: transparent; display: block; }
@@ -105,6 +108,7 @@
   position: relative; background: var(--surface); overflow: hidden;
   clip-path: inset(100% 0 0 0);
   transition: clip-path 1.1s cubic-bezier(.76,0,.24,1);
+  will-change: clip-path;
 }
 .img-block.in { clip-path: inset(0% 0 0 0); }
 .img-block canvas { position: absolute!important; inset: 0; width: 100%!important; height: 100%!important; }
@@ -208,23 +212,41 @@
 .np-item:hover .np-arrow { transform: translateX(7px); color: var(--gold); }
 
 @media(max-width:900px){
-  .story-hero,.ed,.pullquote,.values{padding-left:var(--sp-5);padding-right:var(--sp-5);}
-  .two-col{grid-template-columns:1fr;gap:var(--sp-7);}
-  .two-col.flip{direction:ltr;}
-  .values-grid{grid-template-columns:1fr;}
-  .nb-grid{grid-template-columns:1fr 1fr;}
-  .next-page{flex-direction:column;}
-  .np-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);}
+  .story-hero { padding: 120px 24px var(--sp-8); }
+  .sh-h1 { font-size: clamp(52px, 13vw, 110px); }
+  .sh-stats { display: none; }
+  .sh-diagonal { display: none; }
+  .ed { padding: var(--sp-8) 24px; }
+  .two-col { grid-template-columns: 1fr; gap: var(--sp-7); }
+  .two-col.flip { direction: ltr; }
+  .ed-h2 { font-size: clamp(44px, 11vw, 88px); }
+  .pullquote { padding: var(--sp-8) 24px; }
+  .pq-text { font-size: clamp(28px, 8vw, 52px); }
+  .values { padding: var(--sp-8) 24px; }
+  .values-grid { grid-template-columns: 1fr; }
+  .values-h { font-size: clamp(44px, 10vw, 80px); margin-bottom: var(--sp-7); }
+  .nb { padding: var(--sp-7) 24px; }
+  .nb-grid { grid-template-columns: 1fr 1fr; }
+  .dot-grid,.bracket,.cross-accent,.circle-accent,.ed-ambient { display: none; }
+  .jnav { padding: 20px 24px; }
+  .jnav-links { display: none; }
+}
+@media(max-width:560px){
+  .sh-h1 { font-size: clamp(44px, 15vw, 80px); }
+  .ed-h2 { font-size: clamp(38px, 12vw, 68px); }
+  .nb-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body class="noise">
 
 <div id="story-progress"></div>
+<a href="#main-content" class="skip-link">Skip to content</a>
 <div id="jcursor"></div>
 <div id="jring"></div>
 <div id="jlabel"></div>
 
+<main id="main-content" style="display:contents">
 <nav class="jnav">
   <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
   <ul class="jnav-links">
@@ -233,7 +255,7 @@
     <li><a href="story.html" class="cur">Our Story</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp">WhatsApp Us</a>
+  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
 </nav>
 
 <!-- STORY HERO -->
@@ -284,6 +306,8 @@
 <!-- CHAPTER 1: ORIGIN -->
 <div class="ed cool" id="ch1">
   <div class="ed-ambient">01</div>
+  <div class="dot-grid tr" style="opacity:.45;"></div>
+  <div class="bracket bl"></div>
   <div class="ch-marker">
     <span class="ch-num">01</span>
     <div class="ch-line"></div>
@@ -303,7 +327,7 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/shop-interior.png" alt="Jahrom shop interior — Hadi Ghanaatian" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+        <img src="images/shop-interior.png" alt="Jahrom shop interior — Hadi Ghanaatian" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
         <div class="img-badge">
           <div class="img-badge-n">5+</div>
           <span class="img-badge-l">Years of<br>Excellence</span>
@@ -331,6 +355,8 @@
 <!-- CHAPTER 2: THE ENVIRONMENT -->
 <div class="ed warm">
   <div class="ed-ambient">02</div>
+  <div class="dot-grid tl" style="opacity:.4;"></div>
+  <div class="bracket tr"></div>
   <div class="ch-marker">
     <span class="ch-num">02</span>
     <div class="ch-line"></div>
@@ -349,7 +375,7 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/dodge-ram-trx.png" alt="Truck built for UAE terrain" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.85) saturate(.9);">
+        <img src="images/dodge-ram-trx.png" alt="Truck built for UAE terrain" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.85) saturate(.9);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.6) 0%,transparent 50%),linear-gradient(135deg,rgba(196,154,56,.08) 0%,transparent 60%);"></div>
       </div>
     </div>
@@ -359,6 +385,8 @@
 <!-- CHAPTER 3: THE PRODUCT -->
 <div class="ed cold">
   <div class="ed-ambient">03</div>
+  <div class="dot-grid br" style="opacity:.4;"></div>
+  <div class="cross-accent" style="top:48px;left:48px;"></div>
   <div class="ch-marker">
     <span class="ch-num">03</span>
     <div class="ch-line"></div>
@@ -380,7 +408,7 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/bed-covers.png" alt="Jahrom product range — bed covers and accessories" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.8) saturate(.85);">
+        <img src="images/bed-covers.png" alt="Jahrom product range — bed covers and accessories" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.8) saturate(.85);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.55) 0%,transparent 55%);"></div>
       </div>
     </div>
@@ -389,7 +417,9 @@
 
 <!-- VALUES -->
 <div class="values">
-  <div class="values-inner">
+  <div class="circle-accent" style="width:400px;height:400px;bottom:-100px;right:-80px;opacity:.5;"></div>
+<div class="dot-grid tl" style="opacity:.5;"></div>
+<div class="values-inner">
     <h2 class="values-h reveal">THE <span class="g">JUHRUM</span><br>STANDARD.</h2>
     <div class="values-grid">
       <div class="vcard reveal">

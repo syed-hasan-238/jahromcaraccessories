@@ -107,20 +107,23 @@
 
 // ── READING PROGRESS BAR (top gold line) ──
 ;(function() {
-  // create if not already in HTML
   let bar = document.getElementById('jreadprogress');
   if (!bar) {
     bar = document.createElement('div');
     bar.id = 'jreadprogress';
     document.body.prepend(bar);
   }
+  let ticking = false;
   const update = () => {
     const scrolled = window.scrollY;
     const total = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.transform = `scaleX(${scrolled / total})`;
+    bar.style.transform = `scaleX(${total > 0 ? scrolled / total : 0})`;
+    ticking = false;
   };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
   update();
-  window.addEventListener('scroll', update, { passive: true });
 })();
 
 // ── SECTION DOT INDICATORS ────────────────
@@ -178,25 +181,23 @@
   lines.forEach(el => obs.observe(el));
 })();
 
-// ── CHAR ASSEMBLY for section headings ────
+// ── WORD ASSEMBLY for section headings ────
 ;(function() {
-  // only apply to elements with data-assemble attribute
   document.querySelectorAll('[data-assemble]').forEach(el => {
-    const text = el.textContent;
-    el.innerHTML = text.split('').map((ch, i) =>
-      `<span style="display:inline-block;opacity:0;transform:translateY(18px);transition:opacity .5s ${i * 0.028}s,transform .5s ${i * 0.028}s cubic-bezier(.76,0,.24,1)">${ch === ' ' ? '&nbsp;' : ch}</span>`
-    ).join('');
+    // split by words not chars — preserves word boundaries and prevents mid-word breaks
+    const words = el.innerHTML.split(/(\s+)/);
+    el.innerHTML = words.map((word, i) => {
+      if (/^\s+$/.test(word)) return ' ';
+      return `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span class="aw" style="display:inline-block;transform:translateY(110%);transition:transform .7s ${Math.floor(i/2) * 0.09}s cubic-bezier(.76,0,.24,1)">${word}</span></span>`;
+    }).join('');
 
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        el.querySelectorAll('span').forEach(s => {
-          s.style.opacity = '1';
-          s.style.transform = 'translateY(0)';
-        });
+        el.querySelectorAll('.aw').forEach(s => s.style.transform = 'translateY(0)');
         obs.unobserve(el);
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3 });
     obs.observe(el);
   });
 })();
@@ -269,14 +270,20 @@
 ;(function() {
   const parallaxEls = document.querySelectorAll('[data-parallax]');
   if (!parallaxEls.length) return;
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const sy = window.scrollY;
-    parallaxEls.forEach(el => {
-      const speed = parseFloat(el.dataset.parallax) || 0.15;
-      const rect = el.getBoundingClientRect();
-      const offset = (rect.top + sy - window.innerHeight * 0.5) * speed;
-      el.style.transform = `translateY(${offset}px)`;
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const sy = window.scrollY;
+      parallaxEls.forEach(el => {
+        const speed = parseFloat(el.dataset.parallax) || 0.15;
+        const rect = el.getBoundingClientRect();
+        const offset = (rect.top + sy - window.innerHeight * 0.5) * speed;
+        el.style.transform = `translateY(${offset}px)`;
+      });
+      ticking = false;
     });
+    ticking = true;
   }, { passive: true });
 })();
 

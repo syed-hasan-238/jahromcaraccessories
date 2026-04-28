@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Juhrum Auto Accessories</title>
 <meta name="description" content="Find Juhrum Auto Accessories in Sharjah Industrial Area 4. Open 8AM–11PM every day. Message us on WhatsApp for quotes and inquiries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
 <style>
 /* ── CONTACT HERO ── */
@@ -166,22 +168,40 @@
 .cta-btns { display: flex; gap: 16px; justify-content: center; align-items: center; }
 
 @media(max-width:900px){
-  .con-hero,.directions,.con-cta{padding-left:var(--sp-5);padding-right:var(--sp-5);}
-  .con-main{grid-template-columns:1fr;}
-  .con-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);padding:56px 24px;}
-  .con-right{padding:56px 24px;}
-  .dir-grid{grid-template-columns:1fr;}
-  .hours-grid{grid-template-columns:1fr;}
-  .cta-btns{flex-direction:column;}
+  /* hero */
+  .con-hero { padding: 120px 24px var(--sp-7); min-height: 50vh; }
+  .con-h1 { font-size: clamp(48px, 12vw, 100px); }
+  /* layout — stack columns */
+  .con-body { flex-direction: column; }
+  .con-left,.con-right { padding: var(--sp-7) 24px; }
+  .con-right { border-left: none; border-top: 1px solid rgba(196,154,56,.07); }
+  /* info grid */
+  .info-grid { grid-template-columns: 1fr; }
+  /* directions */
+  .directions { padding: var(--sp-7) 24px; }
+  .dir-grid { grid-template-columns: 1fr; }
+  /* map */
+  .con-cta { padding: var(--sp-7) 24px; }
+  /* nav */
+  .jnav { padding: 20px 24px; }
+  .jnav-links { display: none; }
+  /* decorations */
+  .dot-grid,.bracket,.cross-accent,.circle-accent { display: none; }
+}
+@media(max-width:560px){
+  .con-h1 { font-size: clamp(40px, 13vw, 80px); }
+  .wa-big { flex-direction: column; gap: 12px; padding: 20px 16px; }
 }
 </style>
 </head>
 <body class="noise">
 
+<a href="#main-content" class="skip-link">Skip to content</a>
 <div id="jcursor"></div>
 <div id="jring"></div>
 <div id="jlabel"></div>
 
+<main id="main-content" style="display:contents">
 <nav class="jnav">
   <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
   <ul class="jnav-links">
@@ -190,7 +210,7 @@
     <li><a href="story.html">Our Story</a></li>
     <li><a href="contact.html" class="cur">Contact</a></li>
   </ul>
-  <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp">WhatsApp Us</a>
+  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
 </nav>
 
 <!-- HERO -->
