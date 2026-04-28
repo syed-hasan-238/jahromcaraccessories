@@ -182,14 +182,16 @@
 })();
 
 // ── WORD ASSEMBLY for section headings ────
+// Only applies to elements with data-assemble — plain text only, no inner HTML tags
 ;(function() {
   document.querySelectorAll('[data-assemble]').forEach(el => {
-    // split by words not chars — preserves word boundaries and prevents mid-word breaks
-    const words = el.innerHTML.split(/(\s+)/);
-    el.innerHTML = words.map((word, i) => {
-      if (/^\s+$/.test(word)) return ' ';
-      return `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span class="aw" style="display:inline-block;transform:translateY(110%);transition:transform .7s ${Math.floor(i/2) * 0.09}s cubic-bezier(.76,0,.24,1)">${word}</span></span>`;
-    }).join('');
+    // safety check — skip if element has child elements (would corrupt HTML)
+    if (el.querySelector('*')) return;
+
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((word, i) =>
+      `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;"><span class="aw" style="display:inline-block;transform:translateY(110%);transition:transform .7s ${i * 0.09}s cubic-bezier(.76,0,.24,1);">${word}</span></span>`
+    ).join(' ');
 
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
