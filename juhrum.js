@@ -304,105 +304,126 @@
   imgs.forEach(el => obs.observe(el));
 })();
 
+
 // ═══════════════════════════════════════════════
-// PHASE 11 — TRUCK SCROLL SCRUB
+// PHASE 11 — TRUCK CANVAS SCROLL SCRUB
 // ═══════════════════════════════════════════════
 ;(function() {
   const outer    = document.getElementById('truck-scrub-outer');
   const sticky   = document.getElementById('truck-scrub-sticky');
-  const video    = document.getElementById('truck-video');
+  const canvas   = document.getElementById('truck-canvas');
+  const ctx      = canvas ? canvas.getContext('2d') : null;
   const progressBar = document.getElementById('ts-progress-bar');
   const cta      = document.getElementById('ts-cta');
   const hint     = document.getElementById('ts-scroll-hint');
+  const loading  = document.getElementById('ts-loading');
+  const loadFill = document.getElementById('ts-loading-fill');
+  const loadLabel= document.getElementById('ts-loading-label');
 
-  if (!outer || !video) return;
+  if (!outer || !canvas || !ctx) return;
 
-  // How many px of scroll maps to the full video (tune: bigger = slower scrub)
-  const SCROLL_MULTIPLIER = 4; // 4 * 100vh of scroll = full video
-
-  // Force buffer the video immediately
-  video.load();
-  video.addEventListener('loadedmetadata', () => {
-    video.currentTime = 0.001;
-  });
-
-  let duration = 0;
-  video.addEventListener('loadedmetadata', () => {
-    duration = video.duration;
-  });
-  // Fallback duration if metadata fires before listener
-  if (video.duration) duration = video.duration;
-
-  let isActive  = false;
+  const TOTAL_FRAMES = 98;
+  const frames = [];
+  let loadedCount = 0;
+  let ready = false;
+  let currentFrameIdx = -1;
+  let isActive = false;
   let hintHidden = false;
-  let ctaShown  = false;
-  let ticking   = false;
+  let ctaShown = false;
+  let ticking = false;
 
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
+  // Size canvas to fill viewport
+  function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    if (ready && currentFrameIdx >= 0) drawFrame(currentFrameIdx);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function drawFrame(idx) {
+    const img = frames[idx];
+    if (!img || !img.complete) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Center and fit the frame (object-contain style)
+    const scale = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+    const w = img.naturalWidth * scale;
+    const h = img.naturalHeight * scale;
+    const x = (canvas.width - w) / 2;
+    const y = (canvas.height - h) / 2;
+    ctx.drawImage(img, x, y, w, h);
+    currentFrameIdx = idx;
+  }
+
+  // Preload all frames
+  function preload() {
+    for (let i = 0; i < TOTAL_FRAMES; i++) {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        const pct = Math.round(loadedCount / TOTAL_FRAMES * 100);
+        if (loadFill) loadFill.style.width = pct + '%';
+        if (loadLabel) loadLabel.textContent = pct + '%';
+        if (loadedCount === TOTAL_FRAMES) {
+          ready = true;
+          if (loading) {
+            loading.style.opacity = '0';
+            setTimeout(() => { if (loading) loading.style.display = 'none'; }, 400);
+          }
+          drawFrame(0);
+          update();
+        }
+      };
+      img.src = 'frames/f' + i + '.webp';
+      frames[i] = img;
+    }
+  }
+
+  function getProgress() {
+    const rect   = outer.getBoundingClientRect();
+    const outerH = outer.offsetHeight;
+    const scrubH = outerH - window.innerHeight;
+    const scrolled = -rect.top;
+    if (scrolled < 0 || scrolled > scrubH) return null;
+    return Math.min(Math.max(scrolled / scrubH, 0), 1);
   }
 
   function update() {
     ticking = false;
+    if (!ready) return;
 
-    if (!duration && video.duration) duration = video.duration;
-    if (!duration) return;
+    const progress = getProgress();
 
-    const rect      = outer.getBoundingClientRect();
-    const outerH    = outer.offsetHeight;
-    const scrubH    = outerH - window.innerHeight; // px available for scrubbing
-    const scrolled  = -rect.top; // px past the section top
-
-    // Only active while section is in sticky range
-    if (scrolled < 0 || scrolled > scrubH) {
-      if (isActive) {
-        sticky.classList.remove('active');
-        isActive = false;
-      }
+    if (progress === null) {
+      if (isActive) { sticky.classList.remove('active'); isActive = false; }
       return;
     }
 
-    if (!isActive) {
-      sticky.classList.add('active');
-      isActive = true;
-    }
+    if (!isActive) { sticky.classList.add('active'); isActive = true; }
 
-    const progress = Math.min(Math.max(scrolled / scrubH, 0), 1);
+    // Draw the correct frame
+    const frameIdx = Math.min(Math.floor(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
+    if (frameIdx !== currentFrameIdx) drawFrame(frameIdx);
 
-    // Scrub the video
-    const targetTime = progress * duration;
-    // Clamp to prevent seeking past end
-    video.currentTime = Math.min(targetTime, duration - 0.01);
+    // Progress bar
+    if (progressBar) progressBar.style.width = (progress * 100) + '%';
 
-    // Update progress bar
-    progressBar.style.width = (progress * 100) + '%';
+    // Scroll hint
+    if (progress > 0.05 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    if (progress < 0.03 && hintHidden) { hint && hint.classList.remove('hide'); hintHidden = false; }
 
-    // Hide scroll hint once user has scrolled 5%
-    if (progress > 0.05 && !hintHidden) {
-      hint.classList.add('hide');
-      hintHidden = true;
-    }
-    if (progress < 0.03 && hintHidden) {
-      hint.classList.remove('hide');
-      hintHidden = false;
-    }
-
-    // Show CTA at 95%
-    if (progress >= 0.95 && !ctaShown) {
-      cta.classList.add('show');
-      ctaShown = true;
-    }
-    if (progress < 0.90 && ctaShown) {
-      cta.classList.remove('show');
-      ctaShown = false;
-    }
+    // CTA
+    if (progress >= 0.95 && !ctaShown) { cta && cta.classList.add('show'); ctaShown = true; }
+    if (progress < 0.90 && ctaShown) { cta && cta.classList.remove('show'); ctaShown = false; }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
 
-  // Run once on load in case user is mid-page
-  update();
+  preload();
 })();
+
 

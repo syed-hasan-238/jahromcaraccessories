@@ -455,15 +455,14 @@
       <div class="ts-progress-bar" id="ts-progress-bar"></div>
     </div>
 
-    <!-- The truck video -->
-    <video
-      id="truck-video"
-      src="truck-360.webm"
-      preload="auto"
-      muted
-      playsinline
-      webkit-playsinline
-    ></video>
+    <!-- Canvas frame scrubber -->
+    <canvas id="truck-canvas"></canvas>
+
+    <!-- Loading state -->
+    <div class="ts-loading" id="ts-loading">
+      <div class="ts-loading-bar"><div class="ts-loading-fill" id="ts-loading-fill"></div></div>
+      <div class="ts-loading-label" id="ts-loading-label">Loading</div>
+    </div>
 
     <!-- Gold corner accents -->
     <div class="ts-corner ts-corner-tl"></div>
