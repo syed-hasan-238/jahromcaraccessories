@@ -303,3 +303,106 @@
   }, { threshold: 0.15 });
   imgs.forEach(el => obs.observe(el));
 })();
+
+// ═══════════════════════════════════════════════
+// PHASE 11 — TRUCK SCROLL SCRUB
+// ═══════════════════════════════════════════════
+;(function() {
+  const outer    = document.getElementById('truck-scrub-outer');
+  const sticky   = document.getElementById('truck-scrub-sticky');
+  const video    = document.getElementById('truck-video');
+  const progressBar = document.getElementById('ts-progress-bar');
+  const cta      = document.getElementById('ts-cta');
+  const hint     = document.getElementById('ts-scroll-hint');
+
+  if (!outer || !video) return;
+
+  // How many px of scroll maps to the full video (tune: bigger = slower scrub)
+  const SCROLL_MULTIPLIER = 4; // 4 * 100vh of scroll = full video
+
+  // Force buffer the video immediately
+  video.load();
+  video.addEventListener('loadedmetadata', () => {
+    video.currentTime = 0.001;
+  });
+
+  let duration = 0;
+  video.addEventListener('loadedmetadata', () => {
+    duration = video.duration;
+  });
+  // Fallback duration if metadata fires before listener
+  if (video.duration) duration = video.duration;
+
+  let isActive  = false;
+  let hintHidden = false;
+  let ctaShown  = false;
+  let ticking   = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  function update() {
+    ticking = false;
+
+    if (!duration && video.duration) duration = video.duration;
+    if (!duration) return;
+
+    const rect      = outer.getBoundingClientRect();
+    const outerH    = outer.offsetHeight;
+    const scrubH    = outerH - window.innerHeight; // px available for scrubbing
+    const scrolled  = -rect.top; // px past the section top
+
+    // Only active while section is in sticky range
+    if (scrolled < 0 || scrolled > scrubH) {
+      if (isActive) {
+        sticky.classList.remove('active');
+        isActive = false;
+      }
+      return;
+    }
+
+    if (!isActive) {
+      sticky.classList.add('active');
+      isActive = true;
+    }
+
+    const progress = Math.min(Math.max(scrolled / scrubH, 0), 1);
+
+    // Scrub the video
+    const targetTime = progress * duration;
+    // Clamp to prevent seeking past end
+    video.currentTime = Math.min(targetTime, duration - 0.01);
+
+    // Update progress bar
+    progressBar.style.width = (progress * 100) + '%';
+
+    // Hide scroll hint once user has scrolled 5%
+    if (progress > 0.05 && !hintHidden) {
+      hint.classList.add('hide');
+      hintHidden = true;
+    }
+    if (progress < 0.03 && hintHidden) {
+      hint.classList.remove('hide');
+      hintHidden = false;
+    }
+
+    // Show CTA at 95%
+    if (progress >= 0.95 && !ctaShown) {
+      cta.classList.add('show');
+      ctaShown = true;
+    }
+    if (progress < 0.90 && ctaShown) {
+      cta.classList.remove('show');
+      ctaShown = false;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Run once on load in case user is mid-page
+  update();
+})();
+
