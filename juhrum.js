@@ -306,7 +306,7 @@
 
 
 // ═══════════════════════════════════════════════
-// PHASE 11 — TRUCK CANVAS SCROLL SCRUB
+// PHASE 11 — TRUCK CANVAS SCROLL SCRUB (lerp smoothed)
 // ═══════════════════════════════════════════════
 ;(function() {
   const outer    = document.getElementById('truck-scrub-outer');
@@ -323,106 +323,137 @@
   if (!outer || !canvas || !ctx) return;
 
   const TOTAL_FRAMES = 98;
+  // Smoothing factor: lower = smoother/slower catch-up (0.06–0.12 is the sweet spot)
+  // Oryzo/Apple use ~0.08. Lower feels more cinematic, higher feels more responsive.
+  const LERP = 0.08;
+
   const frames = [];
   let loadedCount = 0;
   let ready = false;
-  let currentFrameIdx = -1;
-  let isActive = false;
-  let hintHidden = false;
-  let ctaShown = false;
-  let ticking = false;
 
-  // Size canvas to fill viewport
+  // currentF is the SMOOTHED float frame index (what's drawn)
+  // targetF is the RAW scroll-derived frame index (what we're easing toward)
+  let currentF = 0;
+  let targetF  = 0;
+  let lastDrawnIdx = -1;
+  let rafId = null;
+
+  let isActive   = false;
+  let hintHidden = false;
+  let ctaShown   = false;
+
+  // ── Canvas sizing ──────────────────────────────
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
-    if (ready && currentFrameIdx >= 0) drawFrame(currentFrameIdx);
+    drawAtFloat(currentF);
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  function drawFrame(idx) {
-    const img = frames[idx];
-    if (!img || !img.complete) return;
+  // ── Draw at a float index (interpolates between two frames) ──
+  function drawAtFloat(f) {
+    const idxA = Math.floor(f);
+    const idxB = Math.min(idxA + 1, TOTAL_FRAMES - 1);
+    const t    = f - idxA; // 0..1 blend between frames
+
+    const imgA = frames[idxA];
+    const imgB = frames[idxB];
+    if (!imgA || !imgA.complete) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Center and fit the frame (object-contain style)
-    const scale = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
-    const w = img.naturalWidth * scale;
-    const h = img.naturalHeight * scale;
-    const x = (canvas.width - w) / 2;
+
+    const scale = Math.min(canvas.width / imgA.naturalWidth, canvas.height / imgA.naturalHeight);
+    const w = imgA.naturalWidth  * scale;
+    const h = imgA.naturalHeight * scale;
+    const x = (canvas.width  - w) / 2;
     const y = (canvas.height - h) / 2;
-    ctx.drawImage(img, x, y, w, h);
-    currentFrameIdx = idx;
+
+    // Draw frame A at full opacity
+    ctx.globalAlpha = 1;
+    ctx.drawImage(imgA, x, y, w, h);
+
+    // Cross-fade frame B on top for sub-frame smoothness
+    if (imgB && imgB.complete && t > 0.01) {
+      ctx.globalAlpha = t;
+      ctx.drawImage(imgB, x, y, w, h);
+      ctx.globalAlpha = 1;
+    }
   }
 
-  // Preload all frames
+  // ── Get raw scroll progress 0..1 ──────────────
+  function getRawProgress() {
+    const rect   = outer.getBoundingClientRect();
+    const scrubH = outer.offsetHeight - window.innerHeight;
+    const scrolled = -rect.top;
+    if (scrolled < 0 || scrolled > scrubH) return null;
+    return Math.min(Math.max(scrolled / scrubH, 0), 1);
+  }
+
+  // ── Main rAF loop — runs continuously while active ──
+  function loop() {
+    rafId = requestAnimationFrame(loop);
+    if (!ready) return;
+
+    const progress = getRawProgress();
+
+    // Outside section — freeze, don't loop
+    if (progress === null) {
+      if (isActive) { sticky.classList.remove('active'); isActive = false; }
+      return;
+    }
+    if (!isActive) { sticky.classList.add('active'); isActive = true; }
+
+    // Update target from scroll
+    targetF = progress * (TOTAL_FRAMES - 1);
+
+    // LERP: ease currentF toward targetF every frame
+    currentF += (targetF - currentF) * LERP;
+
+    // Only redraw if we've moved at least 0.1 of a frame
+    if (Math.abs(currentF - lastDrawnIdx) > 0.1) {
+      drawAtFloat(currentF);
+      lastDrawnIdx = currentF;
+    }
+
+    // Progress bar (use smoothed value for visual consistency)
+    const smoothProgress = currentF / (TOTAL_FRAMES - 1);
+    if (progressBar) progressBar.style.width = (smoothProgress * 100) + '%';
+
+    // Scroll hint
+    if (progress > 0.05 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    if (progress < 0.03 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
+
+    // CTA
+    if (progress >= 0.95 && !ctaShown) { cta && cta.classList.add('show'); ctaShown = true; }
+    if (progress < 0.90 && ctaShown)   { cta && cta.classList.remove('show'); ctaShown = false; }
+  }
+
+  // ── Preload all frames then start loop ─────────
   function preload() {
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
       img.onload = () => {
         loadedCount++;
         const pct = Math.round(loadedCount / TOTAL_FRAMES * 100);
-        if (loadFill) loadFill.style.width = pct + '%';
-        if (loadLabel) loadLabel.textContent = pct + '%';
+        if (loadFill)  loadFill.style.width    = pct + '%';
+        if (loadLabel) loadLabel.textContent   = pct + '%';
         if (loadedCount === TOTAL_FRAMES) {
           ready = true;
           if (loading) {
             loading.style.opacity = '0';
             setTimeout(() => { if (loading) loading.style.display = 'none'; }, 400);
           }
-          drawFrame(0);
-          update();
+          drawAtFloat(0);
         }
       };
-      img.src = 'frames/f' + i + '.webp';
-      frames[i] = img;
+      img.src    = 'frames/f' + i + '.webp';
+      frames[i]  = img;
     }
   }
 
-  function getProgress() {
-    const rect   = outer.getBoundingClientRect();
-    const outerH = outer.offsetHeight;
-    const scrubH = outerH - window.innerHeight;
-    const scrolled = -rect.top;
-    if (scrolled < 0 || scrolled > scrubH) return null;
-    return Math.min(Math.max(scrolled / scrubH, 0), 1);
-  }
-
-  function update() {
-    ticking = false;
-    if (!ready) return;
-
-    const progress = getProgress();
-
-    if (progress === null) {
-      if (isActive) { sticky.classList.remove('active'); isActive = false; }
-      return;
-    }
-
-    if (!isActive) { sticky.classList.add('active'); isActive = true; }
-
-    // Draw the correct frame
-    const frameIdx = Math.min(Math.floor(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
-    if (frameIdx !== currentFrameIdx) drawFrame(frameIdx);
-
-    // Progress bar
-    if (progressBar) progressBar.style.width = (progress * 100) + '%';
-
-    // Scroll hint
-    if (progress > 0.05 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
-    if (progress < 0.03 && hintHidden) { hint && hint.classList.remove('hide'); hintHidden = false; }
-
-    // CTA
-    if (progress >= 0.95 && !ctaShown) { cta && cta.classList.add('show'); ctaShown = true; }
-    if (progress < 0.90 && ctaShown) { cta && cta.classList.remove('show'); ctaShown = false; }
-  }
-
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-
+  // Start the rAF loop immediately (it self-governs when outside section)
+  loop();
   preload();
 })();
 
