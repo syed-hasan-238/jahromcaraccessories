@@ -306,7 +306,8 @@
 
 
 // ═══════════════════════════════════════════════
-// PHASE 11 — TRUCK CANVAS SCROLL SCRUB (lerp smoothed)
+// PHASE 11 — TRUCK CANVAS SCROLL SCRUB
+// Lerp smoothed + snap points + scene labels + Lenis-aware
 // ═══════════════════════════════════════════════
 ;(function() {
   const outer    = document.getElementById('truck-scrub-outer');
@@ -319,109 +320,164 @@
   const loading  = document.getElementById('ts-loading');
   const loadFill = document.getElementById('ts-loading-fill');
   const loadLabel= document.getElementById('ts-loading-label');
+  const sceneTag = document.getElementById('ts-scene-tag');
+  const sceneName= document.getElementById('ts-scene-name');
+  const sceneLabel = document.getElementById('ts-scene-label');
 
   if (!outer || !canvas || !ctx) return;
 
   const TOTAL_FRAMES = 98;
-  // Smoothing factor: lower = smoother/slower catch-up (0.06–0.12 is the sweet spot)
-  // Oryzo/Apple use ~0.08. Lower feels more cinematic, higher feels more responsive.
-  const LERP = 0.08;
+  const LERP = 0.07; // cinematic ease — lower = smoother
+
+  // ── Snap points (progress 0–1 mapped to video timestamps) ────────
+  // Video is 9.8s total. Frames sampled every 3rd = 98 frames.
+  // Timestamps: 0s=blank, 1.95s=accessories, 3s=side step, 5s=bed cover, 8s=front grill, 9s=end
+  const SCENES = [
+    { progress: 0,    tag: '01', name: 'Stock Truck'     },
+    { progress: 0.199,tag: '02', name: 'Accessories'     }, // 1.95/9.8
+    { progress: 0.306,tag: '03', name: 'Side Step'       }, // 3/9.8
+    { progress: 0.510,tag: '04', name: 'Bed Cover'       }, // 5/9.8
+    { progress: 0.816,tag: '05', name: 'Front Grille'    }, // 8/9.8
+    { progress: 1.0,  tag: '06', name: 'Full Build'      }, // 9/9.8
+  ];
+  const SNAP_THRESHOLD = 0.04; // within 4% of a snap = snap to it
 
   const frames = [];
   let loadedCount = 0;
   let ready = false;
 
-  // currentF is the SMOOTHED float frame index (what's drawn)
-  // targetF is the RAW scroll-derived frame index (what we're easing toward)
-  let currentF = 0;
-  let targetF  = 0;
+  let currentF     = 0; // smoothed (drawn)
+  let targetF      = 0; // raw scroll target
   let lastDrawnIdx = -1;
-  let rafId = null;
 
-  let isActive   = false;
-  let hintHidden = false;
-  let ctaShown   = false;
+  let isActive    = false;
+  let hintHidden  = false;
+  let ctaShown    = false;
+  let currentScene = -1;
 
-  // ── Canvas sizing ──────────────────────────────
+  // Snap state
+  let snapTimer    = null;
+  let isSnapping   = false;
+  let snapTargetP  = null; // progress to snap to
+  let lastScrollT  = 0;
+
+  // ── Canvas sizing ─────────────────────────────
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
-    drawAtFloat(currentF);
+    if (ready) drawFrame(Math.round(currentF));
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  // ── Draw at a float index (interpolates between two frames) ──
-  function drawAtFloat(f) {
-    const idxA = Math.floor(f);
-    const idxB = Math.min(idxA + 1, TOTAL_FRAMES - 1);
-    const t    = f - idxA; // 0..1 blend between frames
-
-    const imgA = frames[idxA];
-    const imgB = frames[idxB];
-    if (!imgA || !imgA.complete) return;
-
+  // ── Draw a single frame (no cross-fade = no ghosting) ────────────
+  function drawFrame(idx) {
+    idx = Math.min(Math.max(Math.round(idx), 0), TOTAL_FRAMES - 1);
+    const img = frames[idx];
+    if (!img || !img.complete) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const scale = Math.min(canvas.width / imgA.naturalWidth, canvas.height / imgA.naturalHeight);
-    const w = imgA.naturalWidth  * scale;
-    const h = imgA.naturalHeight * scale;
+    const scale = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+    const w = img.naturalWidth  * scale;
+    const h = img.naturalHeight * scale;
     const x = (canvas.width  - w) / 2;
     const y = (canvas.height - h) / 2;
-
-    // Draw frame A at full opacity
-    ctx.globalAlpha = 1;
-    ctx.drawImage(imgA, x, y, w, h);
-
-    // Cross-fade frame B on top for sub-frame smoothness
-    if (imgB && imgB.complete && t > 0.01) {
-      ctx.globalAlpha = t;
-      ctx.drawImage(imgB, x, y, w, h);
-      ctx.globalAlpha = 1;
-    }
+    ctx.drawImage(img, x, y, w, h);
+    lastDrawnIdx = idx;
   }
 
-  // ── Get raw scroll progress 0..1 ──────────────
+  // ── Get raw scroll progress 0..1 ─────────────
   function getRawProgress() {
-    const rect   = outer.getBoundingClientRect();
-    const scrubH = outer.offsetHeight - window.innerHeight;
-    const scrolled = -rect.top;
+    const scrollY = window.__lenis ? window.__lenis.scroll : window.scrollY;
+    const outerTop = outer.offsetTop;
+    const scrubH   = outer.offsetHeight - window.innerHeight;
+    const scrolled = scrollY - outerTop;
     if (scrolled < 0 || scrolled > scrubH) return null;
     return Math.min(Math.max(scrolled / scrubH, 0), 1);
   }
 
-  // ── Main rAF loop — runs continuously while active ──
-  function loop() {
-    rafId = requestAnimationFrame(loop);
-    if (!ready) return;
+  // ── Find nearest snap point to a progress value ───────────────────
+  function nearestSnap(p) {
+    let best = null, bestDist = Infinity;
+    for (const s of SCENES) {
+      const d = Math.abs(s.progress - p);
+      if (d < bestDist) { bestDist = d; best = s; }
+    }
+    return { scene: best, dist: bestDist };
+  }
 
+  // ── Animate scroll to a snap point ───────────────────────────────
+  function snapToProgress(targetP) {
+    if (isSnapping) return;
+    isSnapping = true;
+    const outerTop = outer.offsetTop;
+    const scrubH   = outer.offsetHeight - window.innerHeight;
+    const targetScrollY = outerTop + targetP * scrubH;
+
+    if (window.__lenis) {
+      window.__lenis.scrollTo(targetScrollY, { duration: 0.8, easing: t => 1 - Math.pow(1 - t, 3) });
+      setTimeout(() => { isSnapping = false; }, 900);
+    } else {
+      window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+      setTimeout(() => { isSnapping = false; }, 900);
+    }
+  }
+
+  // ── Update scene label ────────────────────────
+  function updateSceneLabel(progress) {
+    // Find which scene we're in (last scene whose progress <= current)
+    let activeIdx = 0;
+    for (let i = SCENES.length - 1; i >= 0; i--) {
+      if (progress >= SCENES[i].progress - 0.02) { activeIdx = i; break; }
+    }
+    if (activeIdx !== currentScene) {
+      currentScene = activeIdx;
+      const s = SCENES[activeIdx];
+      if (sceneTag)  { sceneTag.style.opacity  = '0'; setTimeout(() => { sceneTag.textContent  = s.tag;  sceneTag.style.opacity  = '1'; }, 150); }
+      if (sceneName) { sceneName.style.opacity = '0'; setTimeout(() => { sceneName.textContent = s.name; sceneName.style.opacity = '1'; }, 200); }
+    }
+  }
+
+  // ── Scroll stop detection → snap ─────────────
+  window.addEventListener('scroll', () => {
+    lastScrollT = Date.now();
+    if (snapTimer) clearTimeout(snapTimer);
+    if (isSnapping) return;
+    snapTimer = setTimeout(() => {
+      const p = getRawProgress();
+      if (p === null) return;
+      // Don't snap at the very start or end
+      if (p < 0.02 || p > 0.97) return;
+      const { scene, dist } = nearestSnap(p);
+      if (dist > 0.01 && dist < SNAP_THRESHOLD) {
+        snapToProgress(scene.progress);
+      }
+    }, 380); // wait 380ms after scroll stops
+  }, { passive: true });
+
+  // ── Main rAF loop — tied to GSAP ticker if available ─────────────
+  function tick() {
+    if (!ready) return;
     const progress = getRawProgress();
 
-    // Outside section — freeze, don't loop
     if (progress === null) {
       if (isActive) { sticky.classList.remove('active'); isActive = false; }
       return;
     }
     if (!isActive) { sticky.classList.add('active'); isActive = true; }
 
-    // Update target from scroll
     targetF = progress * (TOTAL_FRAMES - 1);
-
-    // LERP: ease currentF toward targetF every frame
     currentF += (targetF - currentF) * LERP;
 
-    // Only redraw if we've moved at least 0.1 of a frame
-    if (Math.abs(currentF - lastDrawnIdx) > 0.1) {
-      drawAtFloat(currentF);
-      lastDrawnIdx = currentF;
-    }
+    const roundedIdx = Math.round(currentF);
+    if (roundedIdx !== lastDrawnIdx) drawFrame(roundedIdx);
 
-    // Progress bar (use smoothed value for visual consistency)
-    const smoothProgress = currentF / (TOTAL_FRAMES - 1);
-    if (progressBar) progressBar.style.width = (smoothProgress * 100) + '%';
+    const smoothP = currentF / (TOTAL_FRAMES - 1);
+    if (progressBar) progressBar.style.width = (smoothP * 100) + '%';
 
-    // Scroll hint
-    if (progress > 0.05 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    updateSceneLabel(progress);
+
+    // Hint — animated arrow, hide once scrolled 6%
+    if (progress > 0.06 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
     if (progress < 0.03 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
 
     // CTA
@@ -429,32 +485,37 @@
     if (progress < 0.90 && ctaShown)   { cta && cta.classList.remove('show'); ctaShown = false; }
   }
 
-  // ── Preload all frames then start loop ─────────
+  function startLoop() {
+    if (window.gsap) {
+      gsap.ticker.add(tick);
+    } else {
+      (function loop() { tick(); requestAnimationFrame(loop); })();
+    }
+  }
+
+  // ── Preload all frames ────────────────────────
   function preload() {
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
       img.onload = () => {
         loadedCount++;
         const pct = Math.round(loadedCount / TOTAL_FRAMES * 100);
-        if (loadFill)  loadFill.style.width    = pct + '%';
-        if (loadLabel) loadLabel.textContent   = pct + '%';
+        if (loadFill)  loadFill.style.width  = pct + '%';
+        if (loadLabel) loadLabel.textContent = pct + '%';
         if (loadedCount === TOTAL_FRAMES) {
           ready = true;
           if (loading) {
             loading.style.opacity = '0';
             setTimeout(() => { if (loading) loading.style.display = 'none'; }, 400);
           }
-          drawAtFloat(0);
+          drawFrame(0);
         }
       };
-      img.src    = 'frames/f' + i + '.webp';
-      frames[i]  = img;
+      img.src   = 'frames/f' + i + '.webp';
+      frames[i] = img;
     }
   }
 
-  // Start the rAF loop immediately (it self-governs when outside section)
-  loop();
+  startLoop();
   preload();
 })();
-
-
