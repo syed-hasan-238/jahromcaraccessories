@@ -24,7 +24,7 @@
 .pl-bar-wrap.go::before{left:calc(100% - 6px);}
 .pl-bar{height:100%;background:linear-gradient(to right,var(--gold-lo),var(--gold));width:0;transition:width 1.5s cubic-bezier(.76,0,.24,1) .3s;}
 .pl-bar.go{width:100%;}
-.pl-sub{font-family:var(--fu);font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--dim);margin-top:16px;opacity:0;transition:opacity .4s .4s;position:relative;z-index:2;min-height:14px;}
+.pl-sub{font-family:var(--fu);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(196,154,56,.75);margin-top:16px;opacity:0;transition:opacity .4s .4s;position:relative;z-index:2;min-height:14px;}
 .pl-sub.show{opacity:1;}
 
 #hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 52px 100px;}
@@ -532,6 +532,7 @@
     <div class="ts-scroll-hint" id="ts-scroll-hint">
       <span class="ts-hint-icon">↓</span>
       <span class="ts-hint-text">Keep Scrolling</span>
+      <span class="ts-hint-sub">This is a 3D interactive showcase</span>
     </div>
   </div>
 </section>
@@ -772,10 +773,10 @@ function startHero(){
     const canvas=document.getElementById(id);
     if(!canvas) return;
     const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-    R.setPixelRatio(Math.min(devicePixelRatio,2));
+    R.setPixelRatio(Math.min(devicePixelRatio,1.5));
     const scene=new THREE.Scene();
     const cam=new THREE.PerspectiveCamera(58,1,.1,1000); cam.position.z=5;
-    const N=3200,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
+    const N=1600,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
     for(let i=0;i<N;i++){
       pos[i*3]=(Math.random()-.5)*20;
       pos[i*3+1]=(Math.random()-.5)*12;
@@ -803,8 +804,13 @@ function startHero(){
       R.setSize(w,h,false);
     }
     resize();
+    // Pause when offscreen for perf
+    let _vis = false;
+    const _obs = new IntersectionObserver(e=>{_vis=e[0].isIntersecting;},{threshold:0});
+    _obs.observe(canvas);
     (function animate(){
       requestAnimationFrame(animate);
+      if(!_vis) return; // skip render when scrolled away
       const t=clk.getElapsedTime();
       mat.uniforms.uT.value=t;
       mat.uniforms.uM.value.set(globalMx*.5,globalMy*.5);

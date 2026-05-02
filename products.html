@@ -550,7 +550,7 @@ document.querySelectorAll('.pcard').forEach(card=>{
   for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*12;pos[i*3+2]=(Math.random()-.5)*8;}
   const geo=new THREE.BufferGeometry();
   geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const mat=new THREE.PointsMaterial({color:0xC49A38,size:.04,transparent:true,opacity:.028,sizeAttenuation:true});
+  const mat=new THREE.PointsMaterial({color:0xC49A38,size:.04,transparent:true,opacity:.35,sizeAttenuation:true});
   const pts=new THREE.Points(geo,mat);
   scene.add(pts);
   const clk=new THREE.Clock();
