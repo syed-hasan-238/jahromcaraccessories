@@ -326,7 +326,7 @@
 
   if (!outer || !canvas || !ctx) return;
 
-  const TOTAL_FRAMES = 98;
+  const TOTAL_FRAMES = 294;
   const LERP = 0.07; // cinematic ease — lower = smoother
 
   // ── Snap points (progress 0–1 mapped to video timestamps) ────────
