@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Juhrum Auto Accessories</title>
+<meta name="description" content="Full catalogue of premium 4×4 and pickup truck accessories. Bed covers, exterior builds, PPF, audio, interior. Sharjah UAE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero {
+  padding: var(--sp-11) var(--gutter) var(--sp-9);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid rgba(196,154,56,.07);
+}
+.ph-ambient {
+  position: absolute; right: -2%; top: -10%;
+  font-family: var(--fd); font-size: 28vw; letter-spacing: .06em;
+  color: rgba(196,154,56,.025); pointer-events: none; line-height: 1;
+}
+.ph-h1 {
+  font-family: var(--fd); font-size: clamp(60px, 8.5vw, 140px);
+  line-height: .9; letter-spacing: .02em; color: var(--white);
+  overflow: hidden; width: 100%;
+}
+.ph-h1 .g { color: var(--gold); }
+.ph-h1 .s { -webkit-text-stroke: 1px rgba(237,236,231,.14); color: transparent; display: block; }
+.ph-sub {
+  font-size: 14px; font-weight: 300; color: var(--silver);
+  max-width: 460px; line-height: 1.8; margin-top: var(--sp-5); letter-spacing: .015em;
+}
+.ph-cta { margin-top: var(--sp-6); }
+
+/* ── FILTER ── */
+.filter-wrap {
+  padding: var(--sp-7) var(--gutter) var(--sp-6);
+  display: flex; gap: 10px; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  max-width: 1400px; margin: 0 auto;
+}
+.fb {
+  font-family: var(--fu); font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--dim); background: transparent;
+  border: 1px solid rgba(255,255,255,.07); padding: 10px 22px;
+  cursor: none; transition: all .3s;
+}
+.fb:hover, .fb.on { color: var(--gold); border-color: rgba(196,154,56,.28); background: rgba(196,154,56,.03); }
+
+/* ── ASYMMETRIC COLLAGE GRID ── */
+.prod-wrap { padding: 0 var(--gutter) var(--sp-10); }
+.prod-grid {
+  display: grid;
+  grid-template-columns: 55fr 30fr 35fr;
+  grid-template-rows: 480px 360px 520px 400px;
+  gap: 3px;
+  max-width: 1400px; margin: 0 auto;
+}
+
+/* Collage placement — irregular, intentional */
+.pcard:nth-child(1)  { grid-column:1; grid-row:1; }        /* large */
+.pcard:nth-child(2)  { grid-column:2/4; grid-row:1; }      /* wide short */
+.pcard:nth-child(3)  { grid-column:1/3; grid-row:2; }      /* wide short */
+.pcard:nth-child(4)  { grid-column:3; grid-row:2; }        /* small */
+.pcard:nth-child(5)  { grid-column:1; grid-row:3; }        /* tall */
+.pcard:nth-child(6)  { grid-column:2; grid-row:3; }        /* mid */
+.pcard:nth-child(7)  { grid-column:3; grid-row:3; }        /* mid */
+.pcard:nth-child(8)  { grid-column:1/3; grid-row:4; }      /* wide */
+.pcard:nth-child(9)  { grid-column:3; grid-row:4; }        /* small */
+.pcard:nth-child(10) { grid-column:1; grid-row:5; }        /* fallback */
+.pcard:nth-child(11) { grid-column:2/4; grid-row:5; }      /* fallback */
+.pcard:nth-child(12) { grid-column:1/4; grid-row:6; height:280px; } /* full-width CTA card */
+
+.pcard {
+  position: relative; background: var(--surface); overflow: hidden; cursor: none;
+  transition: transform .5s cubic-bezier(.23,1,.32,1);
+}
+.pcard:hover { transform: translateY(-3px); }
+/* image parallax wrapper */
+.pcard-img-wrap {
+  position: absolute; inset: -6%; z-index: 0;
+  transition: transform .7s cubic-bezier(.23,1,.32,1);
+}
+.pcard:hover .pcard-img-wrap { transform: scale(1.05) translateY(-1.5%); }
+.pcard-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.pc-ph2 {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fu); font-size: 9px; letter-spacing: .14em;
+  color: rgba(196,154,56,.1); text-transform: uppercase; text-align: center; padding: 36px;
+}
+.pcard-ov {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(5,5,5,.97) 0%, rgba(5,5,5,.22) 55%, transparent 100%);
+}
+.pcard-glow {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle 280px at var(--gx,50%) var(--gy,50%), rgba(196,154,56,.10) 0%, transparent 65%);
+  transition: opacity .4s;
+}
+.pcard:hover .pcard-glow { opacity: 1; }
+.pcard-border {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  border: 1px solid transparent; transition: border-color .4s;
+}
+.pcard:hover .pcard-border { border-color: rgba(196,154,56,.2); }
+.pcard-idx {
+  position: absolute; top: 18px; right: 18px; z-index: 2;
+  font-family: var(--fd); font-size: 12px; color: rgba(196,154,56,.22); letter-spacing: .08em;
+}
+.pcard-content { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--sp-6) var(--sp-5); z-index: 2; }
+.pcard-cat {
+  font-family: var(--fu); font-size: 8px; letter-spacing: .32em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+  transform: translateX(-8px); opacity: 0;
+  transition: transform .4s cubic-bezier(.76,0,.24,1), opacity .35s;
+}
+.pcard-cat::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: block; flex-shrink: 0; }
+.pcard:hover .pcard-cat { transform: translateX(0); opacity: 1; }
+.pcard-name { font-family: var(--fd); font-size: 26px; letter-spacing: .04em; color: var(--white); line-height: 1; margin-bottom: var(--sp-2); }
+.pcard-spec {
+  font-size: 11px; font-weight: 300; color: var(--dim); line-height: 1.65;
+  margin-top: var(--sp-3); max-height: 0; overflow: hidden;
+  transform: translateY(6px); opacity: 0;
+  transition: max-height .5s cubic-bezier(.76,0,.24,1), opacity .4s .06s, transform .4s .06s;
+}
+.pcard:hover .pcard-spec { max-height: 120px; opacity: 1; transform: translateY(0); }
+.pcard-cta {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: var(--sp-3);
+  font-family: var(--fu); font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold); text-decoration: none;
+  transition: gap .3s;
+}
+.pcard-cta:hover { gap: 14px; }
+.pcard[data-hide] { display: none; }
+/* full-width card 12 special treatment */
+.pcard:nth-child(12) {
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(196,154,56,.04);
+  border: 1px solid rgba(196,154,56,.1);
+}
+.pcard:nth-child(12) .pcard-content {
+  position: relative; bottom: auto; padding: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 0 52px;
+}
+.pcard:nth-child(12) .pcard-name { font-size: 44px; }
+
+/* ── TRUCKS ── */
+.trucks { padding: var(--sp-9) var(--gutter); background: var(--surface); border-top: 1px solid rgba(196,154,56,.07); }
+.trucks-inner { max-width: 1400px; margin: 0 auto; }
+.trucks-h2 {
+  font-family: var(--fd); font-size: clamp(52px, 7vw, 100px);
+  line-height: .9; letter-spacing: .02em; color: var(--white); margin-bottom: var(--sp-8);
+}
+.trucks-h2 .g { color: var(--gold); }
+.trucks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.tcard {
+  background: var(--black); padding: var(--sp-7) var(--sp-6);
+  border: 1px solid rgba(196,154,56,.05);
+  transition: all .3s; position: relative; overflow: hidden;
+}
+.tcard::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .45s cubic-bezier(.76,0,.24,1);
+}
+.tcard:hover::after { transform: scaleX(1); }
+.tcard:hover { background: rgba(196,154,56,.03); }
+.tcard-icon { margin-bottom: var(--sp-5); opacity: .35; }
+.tcard-name { font-family: var(--fd); font-size: 22px; letter-spacing: .05em; color: var(--white); margin-bottom: 8px; }
+.tcard-models { font-family: var(--fu); font-size: 11px; letter-spacing: .14em; color: var(--dim); line-height: 1.7; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  padding: var(--sp-9) var(--gutter); background: var(--gold);
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: 'GET IN TOUCH'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--fd); font-size: 14vw; letter-spacing: .08em;
+  color: rgba(0,0,0,.06); white-space: nowrap; pointer-events: none; line-height: 1;
+}
+.cta-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.cta-h2 {
+  font-family: var(--fd); font-size: clamp(52px, 8vw, 112px);
+  line-height: .88; letter-spacing: .02em; color: var(--black);
+}
+.cta-right { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; }
+.cta-body { font-size: 14px; font-weight: 300; color: rgba(0,0,0,.5); max-width: 300px; text-align: right; line-height: 1.72; margin-bottom: 8px; }
+
+@media(max-width:900px){
+  /* hero */
+  .page-hero { padding: 120px 24px var(--sp-8); }
+  .ph-h1 { font-size: clamp(48px, 12vw, 100px); }
+  .ph-sub { font-size: 13px; }
+  /* collage grid — 2 col on tablet */
+  .prod-wrap { padding: 0 24px var(--sp-8); }
+  .prod-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .pcard:nth-child(n) { grid-column: auto; grid-row: auto; min-height: 300px; }
+  .pcard:nth-child(12) { grid-column: 1 / 3; height: 200px; }
+  .pcard:nth-child(12) .pcard-content { padding: 0 24px; }
+  .pcard:nth-child(12) .pcard-name { font-size: 28px; }
+  /* trucks */
+  .trucks { padding: var(--sp-8) 24px; }
+  .trucks-grid { grid-template-columns: 1fr 1fr; }
+  /* cta */
+  .cta-band { padding: var(--sp-8) 24px; }
+  .cta-inner { flex-direction: column; align-items: flex-start; gap: var(--sp-7); }
+  .cta-right { align-items: flex-start; }
+  /* filter */
+  .filter-wrap { padding: var(--sp-6) 24px; overflow-x: auto; }
+  .filter-btns { flex-wrap: nowrap; }
+  /* nav */
+  .jnav { padding: 20px 24px; }
+  .jnav-links { display: none; }
+  /* decorations */
+  .dot-grid,.bracket,.cross-accent,.circle-accent { display: none; }
+}
+@media(max-width:560px){
+  .ph-h1 { font-size: clamp(40px, 13vw, 80px); }
+  .prod-grid { grid-template-columns: 1fr; }
+  .pcard:nth-child(12) { grid-column: 1; }
+  .trucks-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="noise">
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div id="jcursor"></div>
+<div id="jring"></div>
+<div id="jlabel"></div>
+
+<main id="main-content" style="display:contents">
+<nav class="jnav">
+  <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
+  <ul class="jnav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html" class="cur">Products</a></li>
+    <li><a href="story.html">Our Story</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
+</nav>
+
+<div class="page-hero">
+  <div class="ph-ambient">CAT</div>
+  <div class="tag reveal" style="margin-bottom:22px;">Full Catalogue</div>
+  <h1 class="ph-h1 reveal d1">
+    EVERY<br>
+    <span class="g">ACCESSORY.</span>
+    <span class="s">EVERY TRUCK.</span>
+  </h1>
+  <p class="ph-sub reveal d2">Every accessory. Every truck. No catalogue prices — every build is unique to your vehicle. Message us and we'll give you a straight answer within the hour.</p>
+  <div class="ph-cta reveal d3">
+    <a href="https://wa.me/971503021700" class="btn-g" target="_blank" data-tip="WhatsApp"><span>Get a Quote on WhatsApp</span><span>→</span></a>
+  </div>
+</div>
+
+<div class="filter-wrap">
+  <button class="fb on" data-f="all">All</button>
+  <button class="fb" data-f="beds">Bed Covers</button>
+  <button class="fb" data-f="exterior">Exterior</button>
+  <button class="fb" data-f="interior">Interior</button>
+  <button class="fb" data-f="electronics">Electronics</button>
+  <button class="fb" data-f="protection">Protection</button>
+  <button class="fb" data-f="custom">Custom</button>
+</div>
+
+<div class="prod-wrap">
+<div class="prod-grid" id="pgrid">
+
+  <div class="pcard reveal" data-cat="beds" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 30%,#1a1410 0%,#0a0a08 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="20%" y="55%" width="60%" height="8%" rx="2" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><rect x="18%" y="45%" width="64%" height="12%" rx="2" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">01</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Bed Covers</div>
+      <div class="pcard-name">Hardtop Retractable</div>
+      <div class="pcard-spec">Aerospace-grade 6063-T5 aluminium. Powder-coated matte black. Tested to 500 lb static load. EPDM weather seals keep UAE dust out. Fits F-150, Ram 1500/2500, Sierra. Lock it, load it, forget it.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d1" data-cat="beds" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 35%,#141210 0%,#0a0908 60%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="20%" y1="50%" x2="80%" y2="50%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="20%" y1="58%" x2="80%" y2="58%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="20%" y1="66%" x2="80%" y2="66%" stroke="#C49A38" stroke-width="1" opacity=".06"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">02</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Bed Covers</div>
+      <div class="pcard-name">Soft Tri-Fold</div>
+      <div class="pcard-spec">Heavy-duty UV-resistant vinyl. Clamp-on fit — zero drilling, zero damage. Folds open in seconds. Fits F-Series, Ram, Tundra. Lightweight protection that actually works in desert heat.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d2" data-cat="exterior" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,#18100a 0%,#0a0806 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="30%" y="40%" width="40%" height="5%" rx="30" fill="none" stroke="#C49A38" stroke-width="1.5" opacity=".13"/><circle cx="35%" cy="65%" r="6%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><circle cx="65%" cy="65%" r="6%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">03</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Exterior</div>
+      <div class="pcard-name">Bull Bars</div>
+      <div class="pcard-spec">Mild steel and stainless variants. Powder-coated black or polished. Integrated LED mount points. Brush guard and nudge bar options. Direct bolt-on for F-150, Ram, Sierra, Silverado. Built for wadi approaches, not car parks.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal" data-cat="exterior" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 30% 60%,#101814 0%,#080c0a 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="15%" y="52%" width="70%" height="6%" rx="1" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><line x1="20%" y1="48%" x2="20%" y2="62%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="80%" y1="48%" x2="80%" y2="62%" stroke="#C49A38" stroke-width="1" opacity=".1"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">04</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Exterior</div>
+      <div class="pcard-name">Running Boards</div>
+      <div class="pcard-spec">Aluminium and steel. Power retractable options available. Drop steps for lifted trucks. Non-slip surface, direct bolt-on — no cutting required. Ford, Dodge, GMC. Makes the entry effortless, makes the truck look intentional.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d1" data-cat="exterior" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 25%,#141010 0%,#0a0808 60%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="20%" y1="35%" x2="80%" y2="35%" stroke="#C49A38" stroke-width="1.5" opacity=".13"/><line x1="30%" y1="35%" x2="30%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="50%" y1="35%" x2="50%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="70%" y1="35%" x2="70%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">05</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Exterior</div>
+      <div class="pcard-name">Roof Racks</div>
+      <div class="pcard-spec">Cab-mounted and full-length systems. Powder-coated steel rated to 150 kg. LED light bar channels built in. Model-specific brackets — no improvising, no flex. Overland-ready from day one.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d2" data-cat="interior" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 40% 40%,#18100a 0%,#0c0906 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M30%,40% Q50%,30% 70%,40% L72%,65% Q50%,72% 28%,65% Z" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="30%" y1="48%" x2="70%" y2="48%" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">06</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Interior</div>
+      <div class="pcard-name">Seat Upholstery</div>
+      <div class="pcard-spec">Auto seat upholstery in full leather or leatherette. Custom colours and stitching patterns. Front and rear coverage. Airbag-compatible cutouts. Installed to factory finish standard.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal" data-cat="interior" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,#100e0a 0%,#090806 60%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="22%" y="38%" width="56%" height="35%" rx="3" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><path d="M22%,55% L78%,55%" stroke="#C49A38" stroke-width="1" opacity=".07" stroke-dasharray="3,4"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">07</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Interior</div>
+      <div class="pcard-name">Floor Leather & Mats</div>
+      <div class="pcard-spec">Full floor leather installation in all colours. Heavy-duty all-weather mats with model-specific fit. Anti-slip backing. Covers front, rear, and cargo area. UAE desert-proof construction.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d1" data-cat="electronics" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,#1a1220 0%,#0a0a0a 60%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="25%" y="35%" width="50%" height="32%" rx="3" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><circle cx="50%" cy="74%" r="5%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><circle cx="50%" cy="74%" r="2%" fill="rgba(196,154,56,.15)"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">08</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Electronics</div>
+      <div class="pcard-name">Screens & Audio</div>
+      <div class="pcard-spec">Head unit upgrades with Apple CarPlay, Android Auto. Premium audio: amplifiers, subwoofers, component speakers. Reverse cameras, dashcams, parking sensors. Full professional installation by our technical team.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d2" data-cat="protection" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 40%,#0d1a14 0%,#070d0a 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="50%,25% 78%,42% 78%,68% 50%,82% 22%,68% 22%,42%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".11"/><polygon points="50%,35% 68%,46% 68%,62% 50%,72% 32%,62% 32%,46%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">09</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Protection</div>
+      <div class="pcard-name">PPF & Paint Protection</div>
+      <div class="pcard-spec">Self-healing paint protection film. Full front-end, bonnet, full-body options. Clear and matte finishes. Protects against stone chips, scratches, UV fade. UAE heat and dust tested.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal" data-cat="protection" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 60% 40%,#0a1018 0%,#060a0e 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M25%,45% Q37%,35% 50%,45% Q63%,55% 75%,45%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><path d="M25%,55% Q37%,45% 50%,55% Q63%,65% 75%,55%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">10</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Protection</div>
+      <div class="pcard-name">Thermal Insulation</div>
+      <div class="pcard-spec">All types of thermal insulation for engine bay, cab, and cargo area. Reduces interior heat significantly in UAE summer. Improves AC efficiency. Professionally installed with OEM-quality adhesion.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d1" data-cat="protection" data-tip="Inquire">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,#0a100e 0%,#060a08 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50%" cy="48%" r="25%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/><circle cx="50%" cy="48%" r="15%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/><circle cx="50%" cy="48%" r="6%" fill="rgba(196,154,56,.12)"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">11</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Protection</div>
+      <div class="pcard-name">Concealed Protection</div>
+      <div class="pcard-spec">Concealed paint protection for high-impact areas — door edges, rockers, wheel arches. Invisible application. Protects resale value. Pairs perfectly with PPF for full coverage.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+    </div>
+  </div>
+
+  <div class="pcard reveal d2" data-cat="custom" data-tip="Talk">
+    <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 30% 40%,#1a0e0a 0%,#0c0806 55%,#050505 100%);"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="25%" y1="25%" x2="75%" y2="75%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="75%" y1="25%" x2="25%" y2="75%" stroke="#C49A38" stroke-width="1" opacity=".07"/><rect x="30%" y="35%" width="40%" height="30%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
+    <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
+    <div class="pcard-idx">12</div>
+    <div class="pcard-content">
+      <div class="pcard-cat">Custom</div>
+      <div class="pcard-name">Full Custom Builds</div>
+      <div class="pcard-spec">Have a vision? We source, spec, and install to your exact requirements. From single accessories to complete truck transformations — talk to our team and we'll make it happen.</div>
+      <a href="https://wa.me/971503021700" class="pcard-cta" target="_blank" rel="noopener noreferrer">Let's Talk →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- TRUCKS WE BUILD FOR -->
+<div class="trucks">
+  <div class="trucks-inner">
+    <h2 class="trucks-h2 reveal">TRUCKS WE<br><span class="g">BUILD FOR.</span></h2>
+    <div class="trucks-grid">
+      <div class="tcard reveal">
+        <div class="tcard-icon">
+          <svg width="52" height="32" viewBox="0 0 52 32" fill="none"><path d="M2 24L2 19L7 19L7 14L17 9L34 7L44 9L48 14L50 19L50 24" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="11" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="41" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><rect x="7" y="13" width="11" height="7" stroke="#C49A38" stroke-width=".8" fill="none" opacity=".4"/></svg>
+        </div>
+        <div class="tcard-name">Ford F-Series</div>
+        <div class="tcard-models">F-150 · F-250 · F-350<br>Raptor · Tremor · Lightning</div>
+      </div>
+      <div class="tcard reveal d1">
+        <div class="tcard-icon">
+          <svg width="52" height="32" viewBox="0 0 52 32" fill="none"><path d="M2 24L2 18L6 18L9 13L18 8L36 7L46 11L50 17L50 24" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="12" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="42" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><rect x="6" y="12" width="13" height="7" stroke="#C49A38" stroke-width=".8" fill="none" opacity=".4"/></svg>
+        </div>
+        <div class="tcard-name">Dodge Ram</div>
+        <div class="tcard-models">Ram 1500 · 2500 · 3500<br>TRX · Classic · Warlock</div>
+      </div>
+      <div class="tcard reveal d2">
+        <div class="tcard-icon">
+          <svg width="52" height="32" viewBox="0 0 52 32" fill="none"><path d="M3 24L3 18L7 18L10 12L22 8L38 7L47 11L50 18L50 24" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="12" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="43" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/></svg>
+        </div>
+        <div class="tcard-name">GMC / Chevrolet</div>
+        <div class="tcard-models">Sierra · Silverado 1500/2500<br>Canyon · Colorado</div>
+      </div>
+      <div class="tcard reveal d3">
+        <div class="tcard-icon">
+          <svg width="52" height="32" viewBox="0 0 52 32" fill="none"><path d="M2 24L2 17L6 17L9 11L24 7L42 7L48 11L50 18L50 24" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="11" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><circle cx="43" cy="26" r="3.5" stroke="#C49A38" stroke-width="1.2" fill="none"/><rect x="6" y="11" width="15" height="7" stroke="#C49A38" stroke-width=".8" fill="none" opacity=".4"/></svg>
+        </div>
+        <div class="tcard-name">Other 4×4s</div>
+        <div class="tcard-models">Toyota Tundra · Nissan Titan<br>Jeep Gladiator · And more</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="dot-grid tl" style="opacity:.5;"></div>
+  <div class="circle-accent" style="width:300px;height:300px;top:50%;right:-60px;transform:translateY(-50%);opacity:.4;"></div>
+  <div class="cta-inner">
+    <h2 class="cta-h2">DON'T SEE<br>WHAT YOU<br>NEED?</h2>
+    <div class="cta-right">
+      <p class="cta-body">We source products on request. If it exists and fits your truck, we can find it. Message us on WhatsApp and our team will get back to you the same day.</p>
+      <a href="https://wa.me/971503021700" class="btn-dark" target="_blank" data-tip="Chat">Message on WhatsApp →</a>
+      <a href="contact.html" class="btn-o" style="color:rgba(0,0,0,.5);border-color:rgba(0,0,0,.2);">Find Our Showroom</a>
+    </div>
+  </div>
+</div>
+
+<footer class="jfoot">
+  <div class="jfoot-logo">JUHR<b>UM</b></div>
+  <a href="index.html" style="font-family:var(--fu);font-size:9px;letter-spacing:.2em;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--dim)'">← Back to Home</a>
+  <div class="jfoot-copy">© 2025 Juhrum Auto Accessories, Sharjah UAE</div>
+</footer>
+
+
+<script>
+// FILTER
+document.querySelectorAll('.fb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const f=btn.dataset.f;
+    document.querySelectorAll('.pcard').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.cat===f)?'block':'none';
+    });
+  });
+});
+
+
+// 3d tilt
+document.querySelectorAll('.pcard').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const nx=((e.clientX-r.left)/r.width-.5)*2;
+    const ny=((e.clientY-r.top)/r.height-.5)*2;
+    card.style.transform=`perspective(900px) rotateY(${nx*8}deg) rotateX(${-ny*6}deg)`;
+    card.querySelector('.pcard-glow').style.setProperty('--gx',((e.clientX-r.left)/r.width*100)+'%');
+    card.querySelector('.pcard-glow').style.setProperty('--gy',((e.clientY-r.top)/r.height*100)+'%');
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transition='transform .7s cubic-bezier(.23,1,.32,1)';
+    card.style.transform='perspective(900px) rotateY(0) rotateX(0)';
+    setTimeout(()=>card.style.transition='',700);
+  });
+});
+</script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+// Lenis smooth scroll
+const lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+function lenisRaf(time) { lenis.raf(time); requestAnimationFrame(lenisRaf); }
+requestAnimationFrame(lenisRaf);
+lenis.on("scroll", () => window.dispatchEvent(new Event("scroll", { bubbles: false })));
+window.__lenis = lenis;
+</script>
+<script src="juhrum.js"></script>
+</body>
+</html>
