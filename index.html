@@ -448,17 +448,14 @@
 </div>
 
 <!-- ── PHASE 11: TRUCK SCROLL SCRUB ── -->
+<!-- ── PHASE 11: TRUCK SCROLL SCRUB ── -->
 <section id="truck-scrub-outer" data-section="products">
-  <!-- Grey wipe panel — slides up to reveal section -->
-  <div id="ts-wipe"></div>
 
   <div id="truck-scrub-sticky">
-    <!-- Background -->
-    <div class="ts-bg"></div>
 
     <!-- Top label -->
     <div class="ts-label-top">
-      <span class="ts-tag">3D Product Showcase</span>
+      <span class="ts-tag">Product Showcase</span>
       <span class="ts-divider"></span>
       <span class="ts-sub">Scroll to explore</span>
     </div>
@@ -468,7 +465,7 @@
       <div class="ts-progress-bar" id="ts-progress-bar"></div>
     </div>
 
-    <!-- Canvas frame scrubber -->
+    <!-- Canvas — left/center, slightly smaller -->
     <canvas id="truck-canvas"></canvas>
 
     <!-- Loading state -->
@@ -483,19 +480,52 @@
     <div class="ts-corner ts-corner-bl"></div>
     <div class="ts-corner ts-corner-br"></div>
 
-    <!-- Scene label — updates per snap point -->
-    <div class="ts-scene-label" id="ts-scene-label">
-      <span class="ts-scene-tag" id="ts-scene-tag"></span>
-      <span class="ts-scene-name" id="ts-scene-name"></span>
-    </div>
-
-    <!-- CTA — fades in at end -->
-    <div class="ts-cta-wrap" id="ts-cta">
-      <div class="ts-cta-line"></div>
-      <div class="ts-cta-label">View Catalogue for More</div>
-      <a href="products.html" class="btn-g ts-btn" data-tip="Catalogue">
-        <span>View More Products</span><span>→</span>
-      </a>
+    <!-- Right-side feature panels — scroll in per scene -->
+    <div class="ts-panels" id="ts-panels">
+      <div class="ts-panel" data-scene="0" id="ts-panel-0">
+        <span class="ts-panel-num">01</span>
+        <h3 class="ts-panel-title">The Base Build</h3>
+        <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-hint">↓ Keep scrolling</span>
+      </div>
+      <div class="ts-panel" data-scene="1" id="ts-panel-1">
+        <span class="ts-panel-num">02</span>
+        <h3 class="ts-panel-title">Full Safari Build</h3>
+        <p class="ts-panel-desc">Lights on. Accessories locked in. This is the complete Juhrum treatment — every exterior mod fitted flush, every light dialled in. Built for the UAE desert and beyond.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Exterior builds from AED 8,000</span>
+      </div>
+      <div class="ts-panel" data-scene="2" id="ts-panel-2">
+        <span class="ts-panel-num">03</span>
+        <h3 class="ts-panel-title">Power Side Step</h3>
+        <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill, flush when closed, solid underfoot when extended. No rattle. No gap.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Steps from AED 2,200 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="3" id="ts-panel-3">
+        <span class="ts-panel-num">04</span>
+        <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
+        <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, locks tight for highway speeds.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="4" id="ts-panel-4">
+        <span class="ts-panel-num">05</span>
+        <h3 class="ts-panel-title">Front Grille</h3>
+        <p class="ts-panel-desc">Custom billet and mesh grilles that transform the face of the truck. Every grille is fitted with OEM precision — no drilling, no gaps, no flex. Your truck's most visible statement.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Grilles from AED 1,800 fitted</span>
+      </div>
+      <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
+        <span class="ts-panel-num">06</span>
+        <h3 class="ts-panel-title">See the Full Catalogue</h3>
+        <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF, audio builds — the full Juhrum range. Every accessory sourced, every fitment guaranteed.</p>
+        <div class="ts-panel-line"></div>
+        <a href="products.html" class="btn-g" data-tip="Catalogue">
+          <span>View Full Catalogue</span><span>→</span>
+        </a>
+      </div>
     </div>
 
     <!-- Keep scrolling hint -->
@@ -801,26 +831,6 @@ gsap.ticker.lagSmoothing(0);
 // Dispatch native scroll so all window.scroll listeners still fire
 lenis.on('scroll', () => window.dispatchEvent(new Event('scroll', { bubbles: false })));
 window.__lenis = lenis;
-
-// ── TRUCK SECTION GREY WIPE-IN ────────────────────────────────────
-// When truck section enters viewport, a grey panel wipes up from below
-// revealing the grey background before the animation starts
-;(function() {
-  const outer = document.getElementById('truck-scrub-outer');
-  const wipeEl = document.getElementById('ts-wipe');
-  if (!outer || !wipeEl) return;
-  let wiped = false;
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !wiped) {
-        wiped = true;
-        wipeEl.classList.add('wipe-in');
-        obs.disconnect();
-      }
-    });
-  }, { threshold: 0.1 });
-  obs.observe(outer);
-})();
 
 // GSAP HORIZONTAL SCROLL (PROPER - LIKE LUMIÈRE)
 gsap.registerPlugin(ScrollTrigger);

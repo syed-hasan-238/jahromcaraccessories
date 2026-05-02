@@ -416,28 +416,8 @@ a:focus-visible, button:focus-visible {
    PHASE 11 — TRUCK SCROLL SCRUB
    ═══════════════════════════════════════════════ */
 
-/* Grey wipe panel */
-#ts-wipe {
-  position: absolute;
-  inset: 0;
-  background: #72726f;
-  z-index: 10;
-  transform: scaleY(0);
-  transform-origin: bottom center;
-  pointer-events: none;
-}
-#ts-wipe.wipe-in {
-  animation: tsWipe 1s cubic-bezier(.76,0,.24,1) forwards;
-}
-@keyframes tsWipe {
-  0%        { transform: scaleY(0); transform-origin: bottom center; }
-  49.999%   { transform: scaleY(1); transform-origin: bottom center; }
-  50%       { transform: scaleY(1); transform-origin: top center; }
-  100%      { transform: scaleY(0); transform-origin: top center; }
-}
-
 #truck-scrub-outer {
-  height: 500vh;
+  height: 800vh; /* more scroll = more time per scene */
   position: relative;
   z-index: 2;
 }
@@ -454,27 +434,44 @@ a:focus-visible, button:focus-visible {
   justify-content: center;
 }
 
-.ts-bg { display: none; }
+/* Gradient bridges to adjacent sections */
+/* Above: ticker (gold on black) → grey */
+#truck-scrub-sticky::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0) 100%);
+  z-index: 8;
+  pointer-events: none;
+}
+/* Below: grey → charcoal (#120E0A) */
+#truck-scrub-sticky::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #120E0A 0%, rgba(18,14,10,0) 100%);
+  z-index: 8;
+  pointer-events: none;
+}
 
+/* Top label */
 .ts-label-top {
   position: absolute;
-  top: 40px;
-  left: 52px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  z-index: 4;
-  opacity: 0;
-  transition: opacity .6s;
+  top: 52px; left: 52px;
+  display: flex; align-items: center; gap: 16px;
+  z-index: 10; opacity: 0; transition: opacity .6s;
 }
 #truck-scrub-sticky.active .ts-label-top { opacity: 1; }
 .ts-tag { font-family: var(--fu); font-size: 9px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); }
 .ts-divider { width: 24px; height: 1px; background: rgba(196,154,56,.4); }
-.ts-sub { font-family: var(--fu); font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: rgba(30,30,28,.55); }
+.ts-sub { font-family: var(--fu); font-size: 9px; letter-spacing: .32em; text-transform: uppercase; color: rgba(20,20,18,.5); }
 
+/* Progress bar */
 .ts-progress-wrap {
   position: absolute; bottom: 0; left: 0; right: 0;
-  height: 1px; background: rgba(196,154,56,.15); z-index: 5;
+  height: 1px; background: rgba(196,154,56,.15); z-index: 10;
 }
 .ts-progress-bar {
   height: 100%; width: 0%;
@@ -482,73 +479,141 @@ a:focus-visible, button:focus-visible {
   transition: width .04s linear;
 }
 
+/* Canvas — smaller, shifted slightly left, generous breathing room */
 #truck-canvas {
-  position: absolute; inset: 0;
+  position: absolute;
+  /* 58% wide, vertically centered with 10% top/bottom breathing room */
+  left: 0; top: 0;
   width: 100%; height: 100%;
-  z-index: 2; display: block;
+  z-index: 2;
+  display: block;
 }
 
+/* Loading */
 .ts-loading {
-  position: absolute; bottom: 44px; left: 50%;
-  transform: translateX(-50%); z-index: 6;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  transition: opacity .4s;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
 }
-.ts-loading-bar { width: 120px; height: 1px; background: rgba(196,154,56,.2); }
-.ts-loading-fill { height: 100%; width: 0%; background: var(--gold); transition: width .1s linear; }
-.ts-loading-label { font-family: var(--fu); font-size: 8px; letter-spacing: .36em; text-transform: uppercase; color: rgba(196,154,56,.6); }
+.ts-loading-bar { width: 140px; height: 1px; background: rgba(20,20,18,.2); }
+.ts-loading-fill { height: 100%; width: 0%; background: rgba(20,20,18,.6); transition: width .1s linear; }
+.ts-loading-label { font-family: var(--fu); font-size: 8px; letter-spacing: .36em; text-transform: uppercase; color: rgba(20,20,18,.5); }
 
-.ts-corner { position: absolute; width: 28px; height: 28px; z-index: 4; opacity: 0; transition: opacity .6s; }
+/* Gold corner accents */
+.ts-corner {
+  position: absolute; width: 24px; height: 24px;
+  z-index: 9; opacity: 0; transition: opacity .8s;
+}
 #truck-scrub-sticky.active .ts-corner { opacity: 1; }
-.ts-corner-tl { top: 28px; left: 28px; border-top: 1px solid rgba(196,154,56,.55); border-left: 1px solid rgba(196,154,56,.55); }
-.ts-corner-tr { top: 28px; right: 28px; border-top: 1px solid rgba(196,154,56,.55); border-right: 1px solid rgba(196,154,56,.55); }
-.ts-corner-bl { bottom: 28px; left: 28px; border-bottom: 1px solid rgba(196,154,56,.55); border-left: 1px solid rgba(196,154,56,.55); }
-.ts-corner-br { bottom: 28px; right: 28px; border-bottom: 1px solid rgba(196,154,56,.55); border-right: 1px solid rgba(196,154,56,.55); }
+.ts-corner-tl { top: 36px; left: 36px; border-top: 1px solid rgba(196,154,56,.5); border-left: 1px solid rgba(196,154,56,.5); }
+.ts-corner-tr { top: 36px; right: 36px; border-top: 1px solid rgba(196,154,56,.5); border-right: 1px solid rgba(196,154,56,.5); }
+.ts-corner-bl { bottom: 36px; left: 36px; border-bottom: 1px solid rgba(196,154,56,.5); border-left: 1px solid rgba(196,154,56,.5); }
+.ts-corner-br { bottom: 36px; right: 36px; border-bottom: 1px solid rgba(196,154,56,.5); border-right: 1px solid rgba(196,154,56,.5); }
 
-/* Scene label */
-.ts-scene-label {
-  position: absolute; bottom: 44px; left: 52px;
-  z-index: 5; opacity: 0; transition: opacity .6s;
-  display: flex; flex-direction: column; gap: 4px;
+/* Right-side feature panels */
+.ts-panels {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 38%;
+  z-index: 6;
+  display: flex; align-items: center;
+  pointer-events: none;
 }
-#truck-scrub-sticky.active .ts-scene-label { opacity: 1; }
-.ts-scene-tag { font-family: var(--fu); font-size: 8px; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); transition: opacity .15s; }
-.ts-scene-name { font-family: var(--fd); font-size: 20px; letter-spacing: .06em; color: rgba(20,20,18,.75); line-height: 1; transition: opacity .2s; }
 
-/* CTA */
-.ts-cta-wrap {
-  position: absolute; bottom: 60px; left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
-  z-index: 5; opacity: 0; pointer-events: none;
-  transition: opacity .7s cubic-bezier(.76,0,.24,1), transform .7s cubic-bezier(.76,0,.24,1);
+.ts-panel {
+  position: absolute;
+  right: 52px;
+  width: calc(100% - 52px - 40px);
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .55s cubic-bezier(.76,0,.24,1), transform .55s cubic-bezier(.76,0,.24,1);
+  pointer-events: none;
 }
-.ts-cta-wrap.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: all; }
-.ts-cta-line { width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent); margin: 0 auto; }
-.ts-cta-label { font-family: var(--fu); font-size: 8px; letter-spacing: .4em; text-transform: uppercase; color: rgba(196,154,56,.7); white-space: nowrap; }
+.ts-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.ts-panel-num {
+  font-family: var(--fu);
+  font-size: 8px;
+  letter-spacing: .44em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 14px;
+}
+.ts-panel-title {
+  font-family: var(--fd);
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: .03em;
+  color: #1a1a18;
+  line-height: .95;
+  margin-bottom: 20px;
+}
+.ts-panel-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(20,20,18,.7);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  max-width: 340px;
+}
+.ts-panel-line {
+  width: 32px; height: 1px;
+  background: rgba(196,154,56,.5);
+  margin-bottom: 18px;
+}
+.ts-panel-note {
+  font-family: var(--fu);
+  font-size: 8px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(196,154,56,.8);
+}
+.ts-panel-hint {
+  font-family: var(--fu);
+  font-size: 8px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(20,20,18,.45);
+  animation: bounceDown 1.8s ease infinite;
+  display: inline-block;
+}
+.ts-panel-cta .btn-g {
+  pointer-events: all;
+  /* override gold button for grey bg */
+  background: #1a1a18;
+  color: var(--gold);
+  border-color: #1a1a18;
+}
+.ts-panel-cta .btn-g:hover { background: #2a2a28; }
 
 /* Keep Scrolling hint */
 .ts-scroll-hint {
-  position: absolute; bottom: 44px; right: 52px;
+  position: absolute; bottom: 52px; left: 50%;
+  transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 6px;
-  z-index: 5; opacity: 0; transition: opacity .5s;
+  z-index: 9; opacity: 0; transition: opacity .5s;
 }
 #truck-scrub-sticky.active .ts-scroll-hint { opacity: 1; }
-.ts-scroll-hint.hide { opacity: 0 !important; pointer-events: none; }
-.ts-hint-icon { font-size: 16px; color: var(--gold); animation: bounceDown 1.6s ease infinite; line-height: 1; }
-.ts-hint-text { font-family: var(--fu); font-size: 7px; letter-spacing: .32em; text-transform: uppercase; color: rgba(196,154,56,.7); white-space: nowrap; }
+.ts-scroll-hint.hide { opacity: 0 !important; }
+.ts-hint-icon { font-size: 14px; color: rgba(20,20,18,.5); animation: bounceDown 1.6s ease infinite; line-height: 1; }
+.ts-hint-text { font-family: var(--fu); font-size: 7px; letter-spacing: .32em; text-transform: uppercase; color: rgba(20,20,18,.45); white-space: nowrap; }
 
 @keyframes bounceDown {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(5px); }
 }
 
+/* Mobile — panels go below canvas */
 @media (max-width: 900px) {
-  .ts-label-top { left: 24px; top: 24px; }
-  .ts-scene-label { left: 24px; bottom: 32px; }
-  .ts-scroll-hint { right: 24px; bottom: 32px; }
-  .ts-corner-tl { top: 16px; left: 16px; }
-  .ts-corner-tr { top: 16px; right: 16px; }
-  .ts-corner-bl { bottom: 16px; left: 16px; }
-  .ts-corner-br { bottom: 16px; right: 16px; }
+  .ts-panels { display: none; } /* simplify on mobile */
+  .ts-label-top { left: 24px; top: 28px; }
+  .ts-corner-tl { top: 18px; left: 18px; }
+  .ts-corner-tr { top: 18px; right: 18px; }
+  .ts-corner-bl { bottom: 18px; left: 18px; }
+  .ts-corner-br { bottom: 18px; right: 18px; }
 }

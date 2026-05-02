@@ -306,88 +306,99 @@
 
 
 // ═══════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════
 // PHASE 11 — TRUCK CANVAS SCROLL SCRUB
-// Lerp smoothed + snap points + scene labels + Lenis-aware
+// GSAP ScrollTrigger scrub (same method as Oryzo/Lusion)
+// Scene pauses + right-side feature panels
 // ═══════════════════════════════════════════════
 ;(function() {
-  const outer    = document.getElementById('truck-scrub-outer');
-  const sticky   = document.getElementById('truck-scrub-sticky');
-  const canvas   = document.getElementById('truck-canvas');
-  const ctx      = canvas ? canvas.getContext('2d') : null;
-  const progressBar = document.getElementById('ts-progress-bar');
-  const cta      = document.getElementById('ts-cta');
-  const hint     = document.getElementById('ts-scroll-hint');
-  const loading  = document.getElementById('ts-loading');
-  const loadFill = document.getElementById('ts-loading-fill');
-  const loadLabel= document.getElementById('ts-loading-label');
-  const sceneTag = document.getElementById('ts-scene-tag');
-  const sceneName= document.getElementById('ts-scene-name');
-  const sceneLabel = document.getElementById('ts-scene-label');
+  const outer   = document.getElementById('truck-scrub-outer');
+  const sticky  = document.getElementById('truck-scrub-sticky');
+  const canvas  = document.getElementById('truck-canvas');
+  const ctx     = canvas ? canvas.getContext('2d') : null;
+  const pbar    = document.getElementById('ts-progress-bar');
+  const hint    = document.getElementById('ts-scroll-hint');
+  const loading = document.getElementById('ts-loading');
+  const loadFill= document.getElementById('ts-loading-fill');
+  const loadLbl = document.getElementById('ts-loading-label');
 
   if (!outer || !canvas || !ctx) return;
 
-  const TOTAL_FRAMES = 294;
-  const LERP = 0.07; // cinematic ease — lower = smoother
+  const TOTAL  = 294;
+  const frames = new Array(TOTAL);
+  let loaded   = 0;
+  let ready    = false;
 
-  // ── Snap points (progress 0–1 mapped to video timestamps) ────────
-  // Video is 9.8s total. Frames sampled every 3rd = 98 frames.
-  // Timestamps: 0s=blank, 1.95s=accessories, 3s=side step, 5s=bed cover, 8s=front grill, 9s=end
+  // ── Scene definitions ────────────────────────
+  // progress 0–1, panel id, scroll weight (how much of total scroll to spend here)
   const SCENES = [
-    { progress: 0,    tag: '01', name: 'Stock Truck'     },
-    { progress: 0.199,tag: '02', name: 'Accessories'     }, // 1.95/9.8
-    { progress: 0.306,tag: '03', name: 'Side Step'       }, // 3/9.8
-    { progress: 0.510,tag: '04', name: 'Bed Cover'       }, // 5/9.8
-    { progress: 0.816,tag: '05', name: 'Front Grille'    }, // 8/9.8
-    { progress: 1.0,  tag: '06', name: 'Full Build'      }, // 9/9.8
+    { p: 0,     panel: 0, label: 'Stock Truck'   },
+    { p: 0.199, panel: 1, label: 'Accessories'   },
+    { p: 0.306, panel: 2, label: 'Side Step'     },
+    { p: 0.510, panel: 3, label: 'Bed Cover'     },
+    { p: 0.816, panel: 4, label: 'Front Grille'  },
+    { p: 1.0,   panel: 5, label: 'Full Build'    },
   ];
-  const SNAP_THRESHOLD = 0.04; // within 4% of a snap = snap to it
 
-  const frames = [];
-  let loadedCount = 0;
-  let ready = false;
-
-  let currentF     = 0; // smoothed (drawn)
-  let targetF      = 0; // raw scroll target
-  let lastDrawnIdx = -1;
-
-  let isActive    = false;
-  let hintHidden  = false;
-  let ctaShown    = false;
   let currentScene = -1;
+  let smoothF = 0;   // lerp-smoothed frame index
+  let targetF = 0;   // raw scroll-derived target
 
-  // Snap state
-  let snapTimer    = null;
-  let isSnapping   = false;
-  let snapTargetP  = null; // progress to snap to
-  let lastScrollT  = 0;
-
-  // ── Canvas sizing ─────────────────────────────
+  // ── Canvas resize ────────────────────────────
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
-    if (ready) drawFrame(Math.round(currentF));
+    if (ready) drawFrame(Math.round(smoothF));
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  // ── Draw a single frame (no cross-fade = no ghosting) ────────────
+  // ── Draw a single frame — no cross-fade, no ghosting ──
   function drawFrame(idx) {
-    idx = Math.min(Math.max(Math.round(idx), 0), TOTAL_FRAMES - 1);
+    idx = Math.min(Math.max(Math.round(idx), 0), TOTAL - 1);
     const img = frames[idx];
     if (!img || !img.complete) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const scale = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+
+    // Breathing room: truck occupies 80% of canvas with padding on all sides
+    const PAD_H = canvas.width  * 0.10; // 10% padding each side horizontally
+    const PAD_V = canvas.height * 0.10; // 10% padding top/bottom
+    const drawW = canvas.width  - PAD_H * 2;
+    const drawH = canvas.height - PAD_V * 2;
+
+    // On desktop with panels: shift canvas left so truck is centred in left 62%
+    const hasPanels = canvas.width > 900;
+    const availW = hasPanels ? canvas.width * 0.62 : canvas.width;
+
+    const scale = Math.min(availW / img.naturalWidth, drawH / img.naturalHeight) * 0.82;
     const w = img.naturalWidth  * scale;
     const h = img.naturalHeight * scale;
-    const x = (canvas.width  - w) / 2;
+    const x = hasPanels ? (availW - w) / 2 : (canvas.width - w) / 2;
     const y = (canvas.height - h) / 2;
+
     ctx.drawImage(img, x, y, w, h);
-    lastDrawnIdx = idx;
   }
 
-  // ── Get raw scroll progress 0..1 ─────────────
-  function getRawProgress() {
-    const scrollY = window.__lenis ? window.__lenis.scroll : window.scrollY;
+  // ── Panel switching ───────────────────────────
+  function updateScene(progress) {
+    let idx = 0;
+    for (let i = SCENES.length - 1; i >= 0; i--) {
+      if (progress >= SCENES[i].p - 0.01) { idx = i; break; }
+    }
+    if (idx === currentScene) return;
+    currentScene = idx;
+
+    // Deactivate all panels, activate current
+    document.querySelectorAll('.ts-panel').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+  }
+
+  // ── Scroll progress ───────────────────────────
+  function getProgress() {
+    const scrollY  = window.__lenis ? window.__lenis.scroll : window.scrollY;
     const outerTop = outer.offsetTop;
     const scrubH   = outer.offsetHeight - window.innerHeight;
     const scrolled = scrollY - outerTop;
@@ -395,97 +406,67 @@
     return Math.min(Math.max(scrolled / scrubH, 0), 1);
   }
 
-  // ── Find nearest snap point to a progress value ───────────────────
-  function nearestSnap(p) {
-    let best = null, bestDist = Infinity;
-    for (const s of SCENES) {
-      const d = Math.abs(s.progress - p);
-      if (d < bestDist) { bestDist = d; best = s; }
-    }
-    return { scene: best, dist: bestDist };
-  }
+  // ── Main tick — hooked into GSAP or rAF ──────
+  let lastDrawn = -1;
+  let hintHidden = false;
+  let isActive = false;
 
-  // ── Animate scroll to a snap point ───────────────────────────────
-  function snapToProgress(targetP) {
-    if (isSnapping) return;
-    isSnapping = true;
-    const outerTop = outer.offsetTop;
-    const scrubH   = outer.offsetHeight - window.innerHeight;
-    const targetScrollY = outerTop + targetP * scrubH;
-
-    if (window.__lenis) {
-      window.__lenis.scrollTo(targetScrollY, { duration: 0.8, easing: t => 1 - Math.pow(1 - t, 3) });
-      setTimeout(() => { isSnapping = false; }, 900);
-    } else {
-      window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
-      setTimeout(() => { isSnapping = false; }, 900);
-    }
-  }
-
-  // ── Update scene label ────────────────────────
-  function updateSceneLabel(progress) {
-    // Find which scene we're in (last scene whose progress <= current)
-    let activeIdx = 0;
-    for (let i = SCENES.length - 1; i >= 0; i--) {
-      if (progress >= SCENES[i].progress - 0.02) { activeIdx = i; break; }
-    }
-    if (activeIdx !== currentScene) {
-      currentScene = activeIdx;
-      const s = SCENES[activeIdx];
-      if (sceneTag)  { sceneTag.style.opacity  = '0'; setTimeout(() => { sceneTag.textContent  = s.tag;  sceneTag.style.opacity  = '1'; }, 150); }
-      if (sceneName) { sceneName.style.opacity = '0'; setTimeout(() => { sceneName.textContent = s.name; sceneName.style.opacity = '1'; }, 200); }
-    }
-  }
-
-  // ── Scroll stop detection → snap ─────────────
-  window.addEventListener('scroll', () => {
-    lastScrollT = Date.now();
-    if (snapTimer) clearTimeout(snapTimer);
-    if (isSnapping) return;
-    snapTimer = setTimeout(() => {
-      const p = getRawProgress();
-      if (p === null) return;
-      // Don't snap at the very start or end
-      if (p < 0.02 || p > 0.97) return;
-      const { scene, dist } = nearestSnap(p);
-      if (dist > 0.01 && dist < SNAP_THRESHOLD) {
-        snapToProgress(scene.progress);
-      }
-    }, 380); // wait 380ms after scroll stops
-  }, { passive: true });
-
-  // ── Main rAF loop — tied to GSAP ticker if available ─────────────
   function tick() {
     if (!ready) return;
-    const progress = getRawProgress();
-
-    if (progress === null) {
+    const p = getProgress();
+    if (p === null) {
       if (isActive) { sticky.classList.remove('active'); isActive = false; }
       return;
     }
     if (!isActive) { sticky.classList.add('active'); isActive = true; }
 
-    targetF = progress * (TOTAL_FRAMES - 1);
-    currentF += (targetF - currentF) * LERP;
+    // LERP — 0.065 = Oryzo-level cinematic smoothness
+    targetF  = p * (TOTAL - 1);
+    smoothF += (targetF - smoothF) * 0.065;
 
-    const roundedIdx = Math.round(currentF);
-    if (roundedIdx !== lastDrawnIdx) drawFrame(roundedIdx);
+    const idx = Math.round(smoothF);
+    if (idx !== lastDrawn) { drawFrame(idx); lastDrawn = idx; }
 
-    const smoothP = currentF / (TOTAL_FRAMES - 1);
-    if (progressBar) progressBar.style.width = (smoothP * 100) + '%';
+    if (pbar) pbar.style.width = (smoothF / (TOTAL - 1) * 100) + '%';
 
-    updateSceneLabel(progress);
+    updateScene(p);
 
-    // Hint — animated arrow, hide once scrolled 6%
-    if (progress > 0.06 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
-    if (progress < 0.03 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
-
-    // CTA
-    if (progress >= 0.95 && !ctaShown) { cta && cta.classList.add('show'); ctaShown = true; }
-    if (progress < 0.90 && ctaShown)   { cta && cta.classList.remove('show'); ctaShown = false; }
+    if (p > 0.04 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    if (p < 0.02 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
   }
 
-  function startLoop() {
+  // ── Snap on scroll stop ───────────────────────
+  let snapTimer = null;
+  let snapping  = false;
+  window.addEventListener('scroll', () => {
+    if (snapTimer) clearTimeout(snapTimer);
+    if (snapping) return;
+    snapTimer = setTimeout(() => {
+      const p = getProgress();
+      if (p === null || p < 0.01 || p > 0.99) return;
+      // Find nearest scene snap point
+      let best = null, bestD = Infinity;
+      for (const s of SCENES) {
+        const d = Math.abs(s.p - p);
+        if (d < bestD) { bestD = d; best = s; }
+      }
+      if (best && bestD > 0.008 && bestD < 0.06) {
+        snapping = true;
+        const outerTop = outer.offsetTop;
+        const scrubH   = outer.offsetHeight - window.innerHeight;
+        const targetY  = outerTop + best.p * scrubH;
+        if (window.__lenis) {
+          window.__lenis.scrollTo(targetY, { duration: 0.7, easing: t => 1 - Math.pow(1 - t, 3) });
+        } else {
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+        setTimeout(() => { snapping = false; }, 800);
+      }
+    }, 350);
+  }, { passive: true });
+
+  // ── Hook tick into GSAP (same as Oryzo approach) ──
+  function start() {
     if (window.gsap) {
       gsap.ticker.add(tick);
     } else {
@@ -493,29 +474,30 @@
     }
   }
 
-  // ── Preload all frames ────────────────────────
+  // ── Preload frames ────────────────────────────
   function preload() {
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
+    let done = 0;
+    for (let i = 0; i < TOTAL; i++) {
       const img = new Image();
       img.onload = () => {
-        loadedCount++;
-        const pct = Math.round(loadedCount / TOTAL_FRAMES * 100);
-        if (loadFill)  loadFill.style.width  = pct + '%';
-        if (loadLabel) loadLabel.textContent = pct + '%';
-        if (loadedCount === TOTAL_FRAMES) {
+        done++;
+        const pct = Math.round(done / TOTAL * 100);
+        if (loadFill) loadFill.style.width = pct + '%';
+        if (loadLbl)  loadLbl.textContent  = pct + '%';
+        if (done === TOTAL) {
           ready = true;
-          if (loading) {
-            loading.style.opacity = '0';
-            setTimeout(() => { if (loading) loading.style.display = 'none'; }, 400);
-          }
+          if (loading) { loading.style.opacity = '0'; setTimeout(() => loading.style.display='none', 400); }
           drawFrame(0);
+          // Activate first panel
+          const p0 = document.getElementById('ts-panel-0');
+          if (p0) { p0.classList.add('active'); currentScene = 0; }
         }
       };
-      img.src   = 'frames/f' + i + '.webp';
-      frames[i] = img;
+      img.src    = 'frames/f' + i + '.webp';
+      frames[i]  = img;
     }
   }
 
-  startLoop();
+  start();
   preload();
 })();

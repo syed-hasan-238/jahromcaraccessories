@@ -529,6 +529,15 @@ document.querySelectorAll('.pcard').forEach(card=>{
   });
 });
 </script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+// Lenis smooth scroll
+const lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+function lenisRaf(time) { lenis.raf(time); requestAnimationFrame(lenisRaf); }
+requestAnimationFrame(lenisRaf);
+lenis.on("scroll", () => window.dispatchEvent(new Event("scroll", { bubbles: false })));
+window.__lenis = lenis;
+</script>
 <script src="juhrum.js"></script>
 </body>
 </html>
