@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
 <style>
+.ph-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.page-hero { position: relative; overflow: hidden; }
 .page-hero {
   padding: var(--sp-11) var(--gutter) var(--sp-9);
   position: relative; overflow: hidden;
@@ -198,7 +200,9 @@
 
 @media(max-width:900px){
   /* hero */
-  .page-hero { padding: 120px 24px var(--sp-8); }
+  .ph-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.page-hero { position: relative; overflow: hidden; }
+.page-hero { padding: 120px 24px var(--sp-8); }
   .ph-h1 { font-size: clamp(48px, 12vw, 100px); }
   .ph-sub { font-size: 13px; }
   /* collage grid — 2 col on tablet */
@@ -255,6 +259,7 @@
 </nav>
 
 <div class="page-hero">
+  <canvas class="ph-canvas" id="productsCanvas"></canvas>
   <div class="ph-ambient">CAT</div>
   <div class="tag reveal" style="margin-bottom:22px;">Full Catalogue</div>
   <h1 class="ph-h1 reveal d1">
@@ -528,6 +533,30 @@ document.querySelectorAll('.pcard').forEach(card=>{
     setTimeout(()=>card.style.transition='',700);
   });
 });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(canvasId){
+  const canvas=document.getElementById(canvasId);
+  if(!canvas)return;
+  const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  R.setSize(innerWidth,innerHeight);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000);
+  cam.position.z=5;
+  const N=1800;
+  const pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*12;pos[i*3+2]=(Math.random()-.5)*8;}
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const mat=new THREE.PointsMaterial({color:0xC49A38,size:.04,transparent:true,opacity:.028,sizeAttenuation:true});
+  const pts=new THREE.Points(geo,mat);
+  scene.add(pts);
+  const clk=new THREE.Clock();
+  (function animate(){requestAnimationFrame(animate);const t=clk.getElapsedTime();pts.rotation.y=t*.015;pts.rotation.x=Math.sin(t*.08)*.04;R.render(scene,cam);})();
+  window.addEventListener('resize',()=>{R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();});
+})("productsCanvas");
 </script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
