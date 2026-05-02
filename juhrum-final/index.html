@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juhrum Auto Accessories — Desert Iron, Sharjah UAE</title>
+<meta name="description" content="Premium 4×4 and pickup truck accessories. Bed covers, exterior builds, audio, PPF, upholstery. Sharjah UAE — Industrial Area 4. 4.7★ Google Rating. Trusted 5+ years.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>
+#preload{position:fixed;inset:0;background:var(--black);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+/* windshield wiper exit — gold bar sweeps up then content lifts */
+#preload.wipe{transform:translateY(-100%);transition:transform .8s cubic-bezier(.76,0,.24,1) .5s;}
+#preload::after{content:'';position:absolute;inset:0;background:var(--gold);transform:translateY(100%);transition:transform .55s cubic-bezier(.76,0,.24,1);pointer-events:none;z-index:1;}
+#preload.wipe::after{transform:translateY(0);}
+.pl-logo-wrap{overflow:hidden;position:relative;z-index:2;}
+.pl-logo{font-family:var(--fd);font-size:clamp(44px,8vw,120px);letter-spacing:.12em;line-height:1;transform:translateY(110%);transition:transform 1s cubic-bezier(.76,0,.24,1) .1s;display:flex;align-items:center;gap:14px;}
+.pl-logo img{height:.78em;width:auto;}
+.pl-logo.up{transform:translateY(0);}
+/* blueprint-style schematic progress bar */
+.pl-bar-wrap{width:200px;height:1px;background:rgba(196,154,56,.12);margin-top:28px;position:relative;z-index:2;}
+.pl-bar-wrap::before{content:'';position:absolute;top:-3px;left:-1px;width:7px;height:7px;background:var(--gold);transition:left 1.5s cubic-bezier(.76,0,.24,1) .3s;}
+.pl-bar-wrap.go::before{left:calc(100% - 6px);}
+.pl-bar{height:100%;background:linear-gradient(to right,var(--gold-lo),var(--gold));width:0;transition:width 1.5s cubic-bezier(.76,0,.24,1) .3s;}
+.pl-bar.go{width:100%;}
+.pl-sub{font-family:var(--fu);font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--dim);margin-top:16px;opacity:0;transition:opacity .4s .4s;position:relative;z-index:2;min-height:14px;}
+.pl-sub.show{opacity:1;}
+
+#hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 52px 100px;}
+.hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-video-bg video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%) scale(1.08);object-fit:cover;opacity:0;animation:videoFadeIn 2.5s ease-out 0.3s forwards;will-change:transform;}
+@keyframes videoFadeIn{0%{opacity:0;}100%{opacity:.88;}}
+
+/* Multi-stop radial veil */
+.hero-veil{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 80% 60% at 30% 40%,rgba(5,5,5,.4) 0%,rgba(10,14,18,.65) 40%,rgba(5,5,5,.85) 100%),linear-gradient(165deg,rgba(122,138,153,.08) 0%,transparent 50%,rgba(184,115,51,.06) 100%);}
+.hero-veil::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--black),transparent);}
+
+/* Mouse-reactive spotlight */
+.hero-spotlight{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 520px at var(--mx,50%) var(--my,50%),rgba(196,154,56,.11) 0%,transparent 70%);will-change:background;}
+
+/* Diagonal gold accent line */
+.hero-diagonal{position:absolute;top:0;right:0;width:55%;height:100%;z-index:2;pointer-events:none;overflow:hidden;}
+.hero-diagonal::before{content:'';position:absolute;top:-10%;right:18%;width:1px;height:120%;background:linear-gradient(to bottom,transparent 0%,rgba(196,154,56,.12) 20%,rgba(196,154,56,.22) 50%,rgba(196,154,56,.08) 80%,transparent 100%);transform:rotate(-12deg);transform-origin:top center;}
+.hero-diagonal::after{content:'';position:absolute;top:-10%;right:24%;width:1px;height:120%;background:linear-gradient(to bottom,transparent 0%,rgba(196,154,56,.06) 30%,rgba(196,154,56,.1) 50%,transparent 100%);transform:rotate(-12deg);transform-origin:top center;}
+
+/* Dust particle canvas */
+#hero-dust{position:absolute;inset:0;z-index:2;pointer-events:none;}
+
+.hero-content{position:relative;z-index:4;pointer-events:none;max-width:780px;}
+
+/* Tag line */
+.h-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:22px;opacity:0;transform:translateY(14px);transition:opacity .8s .1s,transform .8s .1s;}
+.h-tag b{width:28px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
+.h-tag.in{opacity:1;transform:none;}
+
+/* HEADLINE — constrained to never overflow into nav */
+.h-h1{font-family:var(--fd);font-size:clamp(72px,11vw,168px);line-height:.88;letter-spacing:.022em;color:var(--white);}
+.h-h1 .row{overflow:hidden;display:block;}
+.h-h1 .inner{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.76,0,.24,1);will-change:transform;}
+.h-h1 .inner.up{transform:translateY(0);}
+.h-h1 .g{color:var(--gold);}
+.h-h1 .s{-webkit-text-stroke:1px rgba(237,236,231,.18);color:transparent;}
+
+/* Vertical rhythm gold markers — flush left of headline block */
+.h-rhythm{position:absolute;left:-20px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:5px;pointer-events:none;opacity:0;transition:opacity 1s 1.3s;}
+.h-rhythm.in{opacity:1;}
+.h-rhythm span{width:1px;background:var(--gold);display:block;}
+.h-rhythm span:nth-child(1){height:44px;opacity:.65;}
+.h-rhythm span:nth-child(2){height:20px;opacity:.28;}
+.h-rhythm span:nth-child(3){height:7px;opacity:.12;}
+
+.h-sub{font-size:15px;font-weight:300;color:var(--silver);letter-spacing:.018em;max-width:420px;line-height:1.85;margin-top:var(--sp-6);opacity:0;transform:translateY(16px);transition:opacity .9s .8s,transform .9s .8s;}
+.h-sub.in{opacity:1;transform:none;}
+.h-ctas{display:flex;gap:20px;align-items:center;margin-top:var(--sp-8);pointer-events:all;opacity:0;transform:translateY(14px);transition:opacity .9s 1s,transform .9s 1s;}
+.h-ctas.in{opacity:1;transform:none;}
+
+/* Stats — glassmorphism bottom-right strip */
+.h-stats{
+  position:absolute;right:52px;bottom:108px;z-index:4;
+  display:flex;flex-direction:row;align-items:center;gap:0;
+  opacity:0;transition:opacity 1.2s 1.2s;
+  background:rgba(5,5,5,.45);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(196,154,56,.14);
+  padding:var(--sp-5) var(--sp-6);
+  box-shadow:0 4px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(196,154,56,.08);
+}
+.h-stats.in{opacity:1;}
+.hst{text-align:center;padding:0 var(--sp-5);}
+.hst-n{font-family:var(--fd);font-size:38px;color:var(--gold);line-height:1;}
+.hst-l{font-family:var(--fu);font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-top:5px;white-space:nowrap;}
+.hst-div{width:1px;height:44px;background:linear-gradient(transparent,rgba(196,154,56,.25),transparent);}
+
+.h-scroll{position:absolute;right:72px;bottom:44px;z-index:4;display:flex;flex-direction:row;align-items:center;gap:10px;opacity:0;transition:opacity 1s 1.4s;}
+.h-scroll.in{opacity:1;}
+.h-scroll-line{width:36px;height:1px;background:linear-gradient(to right,var(--gold),transparent);animation:pulseH 2.2s ease infinite;}
+.h-scroll span{font-family:var(--fu);font-size:7px;letter-spacing:.32em;text-transform:uppercase;color:rgba(196,154,56,.7);}
+@keyframes pulseH{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.25;transform:scaleX(.5)}}
+
+.ticker{background:var(--gold);overflow:hidden;padding:17px 0;position:relative;z-index:4;}
+.ticker-t{display:flex;white-space:nowrap;animation:jTicker 28s linear infinite;}
+.ticker-i{font-family:var(--fd);font-size:12px;letter-spacing:.26em;color:var(--black);padding:0 44px;display:flex;align-items:center;gap:44px;flex-shrink:0;}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:rgba(0,0,0,.3);}
+@keyframes jTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.jnav-logo img{height:32px;width:auto;vertical-align:middle;}
+
+#products-section{position:relative;z-index:2;background:var(--black);padding:var(--sp-10) var(--gutter) var(--sp-9);}
+.prod-head{max-width:1200px;margin:0 auto var(--sp-9);}
+.prod-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-4);}
+.prod-h2{font-family:var(--fd);font-size:clamp(60px,8vw,120px);line-height:.9;letter-spacing:.02em;color:var(--white);}
+.prod-h2 .g{color:var(--gold);}
+
+/* ── ASYMMETRIC GRID ── */
+.prod-grid{
+  display:grid;
+  grid-template-columns:60fr 40fr;
+  grid-template-rows:520px 420px;
+  gap:3px;
+  max-width:1200px;margin:0 auto;
+}
+.prod-card:nth-child(1){grid-column:1;grid-row:1;}
+.prod-card:nth-child(2){grid-column:2;grid-row:1;}
+.prod-card:nth-child(3){grid-column:1;grid-row:2;}
+.prod-card:nth-child(4){grid-column:2;grid-row:2;}
+
+/* ── BASE CARD ── */
+.prod-card{
+  position:relative;background:var(--surface);overflow:hidden;cursor:none;
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+}
+.prod-card:hover{transform:translateY(-4px);}
+
+/* image wrapper — parallax on hover */
+.prod-img-wrap{
+  position:absolute;inset:-6%;z-index:0;
+  transition:transform .7s cubic-bezier(.23,1,.32,1);
+}
+.prod-card:hover .prod-img-wrap{transform:scale(1.05) translateY(-1.5%);}
+.prod-img-wrap img{width:100%;height:100%;object-fit:cover;}
+
+/* base overlays */
+.prod-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,.97) 0%,rgba(5,5,5,.18) 60%,transparent 100%);}
+.prod-border{position:absolute;inset:0;z-index:3;pointer-events:none;border:1px solid transparent;transition:border-color .4s;}
+.prod-card:hover .prod-border{border-color:rgba(196,154,56,.2);}
+
+/* directional glow follows cursor */
+.prod-glow{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:radial-gradient(circle 280px at var(--gx,50%) var(--gy,50%),rgba(196,154,56,.1) 0%,transparent 70%);
+  transition:opacity .4s;}
+.prod-card:hover .prod-glow{opacity:1;}
+
+/* ── CATEGORY SIGNATURES ── */
+
+/* BED COVERS — horizontal line accent, steel cool tint */
+.prod-card[data-cat="beds"] .prod-img-wrap{filter:saturate(.7) brightness(.88);}
+.prod-card[data-cat="beds"]:hover .prod-img-wrap{filter:saturate(.9) brightness(1);}
+.prod-card[data-cat="beds"]::after{
+  content:'';position:absolute;left:0;top:42%;width:0;height:1px;
+  background:linear-gradient(to right,rgba(122,138,153,.55),rgba(122,138,153,.1),transparent);
+  z-index:3;transition:width .65s cubic-bezier(.76,0,.24,1);
+}
+.prod-card[data-cat="beds"]:hover::after{width:70%;}
+
+/* EXTERIOR — diagonal amber strike */
+.prod-card[data-cat="exterior"] .prod-img-wrap{filter:saturate(.75) sepia(.12) brightness(.85);}
+.prod-card[data-cat="exterior"]:hover .prod-img-wrap{filter:saturate(.95) sepia(.05) brightness(1);}
+.prod-card[data-cat="exterior"]::after{
+  content:'';position:absolute;
+  top:-20%;left:-8%;width:6px;height:140%;
+  background:linear-gradient(to bottom,transparent,rgba(196,154,56,.18),transparent);
+  transform:rotate(16deg) translateX(-60px);
+  z-index:3;transition:transform .6s cubic-bezier(.76,0,.24,1);
+}
+.prod-card[data-cat="exterior"]:hover::after{transform:rotate(16deg) translateX(420px);}
+
+/* AUDIO — concentric ring SVG, violet tint */
+.prod-card[data-cat="audio"]::after{content:none;}
+
+/* PPF — hex pattern already in HTML, cyan tint */
+.prod-card[data-cat="ppf"]::after{content:none;}
+
+/* ── CONTENT ── */
+.prod-content{position:absolute;bottom:0;left:0;right:0;padding:var(--sp-8) var(--sp-6);z-index:4;}
+.prod-cat{
+  font-family:var(--fu);font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+  transform:translateX(-8px);opacity:0;transition:transform .45s .05s cubic-bezier(.76,0,.24,1),opacity .4s .05s;
+}
+.prod-cat::before{content:'';width:20px;height:1px;background:var(--gold);display:block;flex-shrink:0;}
+.prod-card:hover .prod-cat{transform:translateX(0);opacity:1;}
+.prod-name{font-family:var(--fd);font-size:30px;letter-spacing:.04em;color:var(--white);line-height:1;margin-bottom:var(--sp-3);}
+.prod-desc{
+  font-size:13px;font-weight:300;color:var(--silver);line-height:1.7;margin-bottom:var(--sp-4);
+  max-height:0;overflow:hidden;opacity:0;
+  transform:translateY(8px);
+  transition:max-height .55s cubic-bezier(.76,0,.24,1),opacity .4s .08s,transform .45s .08s;
+}
+.prod-card:hover .prod-desc{max-height:140px;opacity:1;transform:translateY(0);}
+.prod-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fu);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);text-decoration:none;
+  transition:gap .3s;
+}
+.prod-cta:hover{gap:14px;}
+
+.booking-mini{background:var(--charcoal);border-top:1px solid rgba(196,154,56,.1);border-bottom:1px solid rgba(196,154,56,.1);padding:var(--sp-9) var(--gutter);text-align:center;position:relative;z-index:2;}
+.booking-mini::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(184,115,51,.06) 0%,transparent 70%);}
+.booking-inner{max-width:800px;margin:0 auto;}
+.booking-h3{font-family:var(--fd);font-size:clamp(44px,6vw,72px);letter-spacing:.06em;color:var(--white);margin-bottom:var(--sp-4);line-height:1;}
+.booking-h3 .g{color:var(--gold);}
+.booking-text{font-size:15px;color:var(--silver);line-height:1.8;margin-bottom:var(--sp-6);}
+.booking-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:var(--sp-5);}
+.booking-info{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
+
+.story-intro{padding:var(--sp-10) var(--gutter) var(--sp-9);max-width:800px;margin:0 auto;text-align:center;background:var(--deep);}
+.story-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.story-h2{font-family:var(--fd);font-size:clamp(52px,6.5vw,96px);line-height:.9;letter-spacing:.02em;color:var(--white);margin-bottom:var(--sp-6);overflow:hidden;width:100%;}
+.story-h2 .g{color:var(--gold);}
+
+#story-pin-container{overflow:hidden;background:var(--deep);}
+.story-track{display:flex;will-change:transform;}
+.story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);position:relative;background:var(--deep);}
+.panel-content{max-width:600px;position:relative;z-index:10;text-align:center;}
+.stage-num{font-family:var(--fd);font-size:200px;color:rgba(196,154,56,.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;z-index:0;pointer-events:none;user-select:none;}
+.stage-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);color:var(--gold);margin-bottom:var(--sp-5);line-height:.95;}
+.stage-text{font-size:16px;color:var(--silver);line-height:1.9;max-width:520px;margin:0 auto;}
+
+.spline-container{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1s ease;}
+.spline-container.active{opacity:1;}
+.spline-container spline-viewer{width:100%;height:100%;pointer-events:all;}
+
+.story-particles{position:absolute;inset:0;z-index:1;pointer-events:none;}
+
+.contact-strip{display:flex;border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);background:var(--charcoal);position:relative;z-index:2;}
+.cs-item{flex:1;padding:var(--sp-7) var(--sp-6);text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
+.cs-item:last-child{border-right:none;}.cs-item:hover{background:rgba(196,154,56,.04);}
+.cs-label{font-family:var(--fu);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cs-title{font-family:var(--fd);font-size:30px;letter-spacing:.06em;color:var(--white);}
+.cs-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
+.cs-item:hover .cs-arrow{transform:translateX(7px);color:var(--gold);}
+
+.reviews{padding:var(--sp-9) var(--gutter);background:var(--midnight);border-top:1px solid rgba(196,154,56,.07);position:relative;}
+.reviews::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 60% at 80% 20%,rgba(122,138,153,.05) 0%,transparent 60%);}
+.reviews-inner{max-width:1200px;margin:0 auto;}
+.reviews-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:var(--sp-8);}
+.reviews-h2{font-family:var(--fd);font-size:clamp(48px,6vw,90px);line-height:.9;letter-spacing:.02em;color:var(--white);}
+.reviews-h2 .g{color:var(--gold);}
+.rating-summary{text-align:right;}
+.rating-num{font-family:var(--fd);font-size:64px;color:var(--gold);line-height:1;}
+.rating-stars{font-size:18px;margin-top:4px;letter-spacing:3px;}
+.rating-label{font-family:var(--fu);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-top:4px;}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rcard{background:var(--surface);padding:var(--sp-6) var(--sp-5);border:1px solid rgba(196,154,56,.05);transition:background .3s,border-color .3s;position:relative;}
+.rcard:hover{background:rgba(196,154,56,.03);border-color:rgba(196,154,56,.15);}
+.rcard-stars{font-size:14px;letter-spacing:2px;color:var(--gold);margin-bottom:16px;}
+.rcard-text{font-size:14px;font-weight:300;color:var(--silver);line-height:1.75;margin-bottom:20px;font-style:italic;}
+.rcard-author{display:flex;align-items:center;gap:12px;}
+.rcard-initials{width:36px;height:36px;border-radius:50%;background:rgba(196,154,56,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;color:var(--gold);flex-shrink:0;}
+.rcard-name{font-family:var(--fu);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--white);}
+.rcard-meta{font-family:var(--fu);font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:2px;}
+
+.jfoot{background:var(--deep);border-top:1px solid rgba(255,255,255,.04);padding:var(--sp-6) var(--gutter);display:flex;align-items:center;justify-content:space-between;}
+.jfoot-logo{font-family:var(--fd);font-size:19px;letter-spacing:.2em;color:var(--white);}
+.jfoot-logo b{color:var(--gold);font-weight:400;}
+.jfoot-tag{font-family:var(--fu);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(196,154,56,.35);}
+.jfoot-copy{font-family:var(--fu);font-size:9px;letter-spacing:.15em;color:var(--dim);}
+
+/* ══════════════════════════════════════════
+   PHASE 9 — MOBILE (rethought, not resized)
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+
+  /* ── HERO ── */
+  #hero { padding: 90px 24px 120px; }
+  .h-h1 { font-size: clamp(68px, 16vw, 130px); }
+  .h-rhythm { display: none; }
+  .hero-diagonal { display: none; }
+  .h-sub { font-size: 14px; max-width: 100%; margin-top: var(--sp-5); }
+  .h-ctas { margin-top: var(--sp-6); gap: 16px; }
+  .h-stats {
+    left: 24px; right: 24px; bottom: 20px;
+    padding: 14px 16px; gap: 0;
+    flex-direction: row; justify-content: space-between;
+    backdrop-filter: blur(12px);
+  }
+  .hst { padding: 0 10px; }
+  .hst-n { font-size: 24px; }
+  .hst-l { font-size: 6.5px; letter-spacing: .18em; }
+  .hst-div { height: 28px; }
+  .h-scroll { display: none; }
+
+  /* ── TICKER ── */
+  .ticker-i { font-size: 11px; }
+
+  /* ── PRODUCTS PLACEHOLDER ── */
+  #products-section { padding: var(--sp-8) 24px; min-height: 40vh; }
+
+  /* ── REVIEWS ── */
+  .reviews { padding: var(--sp-8) 24px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .reviews-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  /* ── BOOKING ── */
+  .booking-mini { padding: var(--sp-8) 24px; }
+  .booking-ctas { flex-direction: column; gap: 12px; }
+  .booking-ctas .btn-g,
+  .booking-ctas .btn-dark { width: 100%; justify-content: center; }
+
+  /* ── STORY JOURNEY ── */
+  .story-intro { padding: var(--sp-8) 24px var(--sp-7); }
+  .story-h2 { font-size: clamp(44px, 12vw, 80px); }
+  .story-panel { padding: 0 24px; }
+  .stage-title { font-size: clamp(28px, 8vw, 48px); }
+  .stage-text { font-size: 14px; }
+
+  /* ── CONTACT STRIP ── */
+  .contact-strip { flex-direction: column; }
+  .cs-item { border-right: none !important; border-bottom: 1px solid rgba(196,154,56,.08); }
+
+  /* ── FOOTER ── */
+  .jfoot { flex-direction: column; gap: 20px; align-items: flex-start; }
+
+  /* ── NAV ── */
+  .jnav { padding: 20px 24px; }
+  .jnav-links { display: none; }
+  .jnav-wa { font-size: 9px; padding: 10px 16px; }
+
+  /* ── DOTS INDICATOR ── */
+  #jdots { display: none; }
+
+  /* ── DECORATIONS ── */
+  .dot-grid, .bracket, .cross-accent, .circle-accent { display: none; }
+}
+
+@media (max-width: 560px) {
+  .h-h1 { font-size: clamp(56px, 18vw, 96px); }
+  .h-stats { display: none; }
+  .h-ctas { flex-direction: column; gap: 10px; }
+  .h-ctas .btn-g { width: 100%; justify-content: center; }
+  .h-ctas .btn-o { width: 100%; }
+  .story-h2 { font-size: clamp(38px, 13vw, 64px); }
+}
+
+/* ── CHROMEBOOK / SMALL LAPTOP (1366px) ── */
+@media (max-width: 1366px) {
+  .h-h1 { font-size: clamp(64px, 9vw, 140px); }
+  .prod-h2 { font-size: clamp(52px, 7vw, 100px); }
+  .booking-h3 { font-size: clamp(40px, 5vw, 64px); }
+  .stage-num { font-size: clamp(120px, 12vw, 200px); }
+  .rating-num { font-size: clamp(44px, 5vw, 64px); }
+  .hst-n { font-size: clamp(24px, 3vw, 38px); }
+}
+</style>
+</head>
+<body class="noise">
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div id="jcursor"></div>
+<div id="jring"></div>
+<div id="jlabel"></div>
+
+<div id="preload">
+  <div class="pl-logo-wrap">
+    <div class="pl-logo" id="pllo">
+      <img src="images/logo-transparent.png" alt="Juhrum">
+      <span style="color:var(--white)">JUHR</span><span style="color:var(--gold)">UM</span>
+    </div>
+  </div>
+  <div class="pl-bar-wrap" id="plbarwrap"><div class="pl-bar" id="plbar"></div></div>
+  <div class="pl-sub" id="plsub">Desert Iron — Est. 2019 — Sharjah UAE</div>
+</div>
+
+<main id="main-content" style="display:contents">
+<nav class="jnav">
+  <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories"></a>
+  <ul class="jnav-links">
+    <li><a href="index.html" class="cur">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="story.html">Our Story</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline id="hero-vid">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-veil"></div>
+  <div class="hero-spotlight" id="hero-spotlight"></div>
+  <div class="hero-diagonal"></div>
+  <canvas id="hero-dust"></canvas>
+
+  <div class="bracket tl" style="top:92px;left:52px;z-index:4;"></div>
+  <div class="bracket br-c" style="bottom:72px;right:52px;z-index:4;display:block;"></div>
+  <div class="hero-content">
+    <div class="h-tag" id="htag"><b></b>Sharjah, UAE — Industrial Area 4 — Est. 2019</div>
+    <div style="position:relative;">
+      <div class="h-rhythm" id="hrhythm">
+        <span></span><span></span><span></span>
+      </div>
+      <h1 class="h-h1">
+        <span class="row"><span class="inner" id="hl0">DESERT</span></span>
+        <span class="row"><span class="inner g" id="hl1">IRON.</span></span>
+        <span class="row"><span class="inner s" id="hl2">BUILT.</span></span>
+      </h1>
+    </div>
+    <p class="h-sub" id="hsub">Built for drivers who don't compromise. Five years. 500+ builds. Every truck hand-fitted in Sharjah's Industrial Area 4.</p>
+    <div class="h-ctas" id="hctas">
+      <a href="#truck-scrub-outer" class="btn-g" data-tip="Explore"><span>View Products</span><span>→</span></a>
+      <a href="#story-pin-container" class="btn-o">Our Story</a>
+    </div>
+  </div>
+
+  <div class="h-stats" id="hstats">
+    <div class="hst"><div class="hst-n" id="hs0">5+</div><div class="hst-l">Years Active</div></div>
+    <div class="hst-div"></div>
+    <div class="hst"><div class="hst-n" id="hs1">4.7★</div><div class="hst-l">Google Rating</div></div>
+    <div class="hst-div"></div>
+    <div class="hst"><div class="hst-n" id="hs2">500+</div><div class="hst-l">Trucks Built</div></div>
+  </div>
+  <div class="h-scroll" id="hscroll"><div class="h-scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-t">
+    <div class="ticker-i">Bed Covers<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Exterior Builds<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Audio Systems<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Paint Protection<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Upholstery<span class="ticker-dot"></span></div>
+    <div class="ticker-i">4.7★ Google Rating<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Sharjah UAE<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Bed Covers<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Exterior Builds<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Audio Systems<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Paint Protection<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Upholstery<span class="ticker-dot"></span></div>
+    <div class="ticker-i">4.7★ Google Rating<span class="ticker-dot"></span></div>
+    <div class="ticker-i">Sharjah UAE<span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- ── PHASE 11: TRUCK SCROLL SCRUB ── -->
+<!-- ── PHASE 11: TRUCK SCROLL SCRUB ── -->
+<section id="truck-scrub-outer" data-section="products">
+
+  <div id="truck-scrub-sticky">
+
+    <!-- Top label -->
+    <div class="ts-label-top">
+      <span class="ts-tag">Product Showcase</span>
+      <span class="ts-divider"></span>
+      <span class="ts-sub">Scroll to explore</span>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="ts-progress-wrap">
+      <div class="ts-progress-bar" id="ts-progress-bar"></div>
+    </div>
+
+    <!-- Canvas — left/center, slightly smaller -->
+    <canvas id="truck-canvas"></canvas>
+
+    <!-- Loading state -->
+    <div class="ts-loading" id="ts-loading">
+      <div class="ts-loading-bar"><div class="ts-loading-fill" id="ts-loading-fill"></div></div>
+      <div class="ts-loading-label" id="ts-loading-label">Loading</div>
+    </div>
+
+    <!-- Gold corner accents -->
+    <div class="ts-corner ts-corner-tl"></div>
+    <div class="ts-corner ts-corner-tr"></div>
+    <div class="ts-corner ts-corner-bl"></div>
+    <div class="ts-corner ts-corner-br"></div>
+
+    <!-- Right-side feature panels — scroll in per scene -->
+    <div class="ts-panels" id="ts-panels">
+      <div class="ts-panel" data-scene="0" id="ts-panel-0">
+        <span class="ts-panel-num">01</span>
+        <h3 class="ts-panel-title">The Base Build</h3>
+        <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-hint">↓ Keep scrolling</span>
+      </div>
+      <div class="ts-panel" data-scene="1" id="ts-panel-1">
+        <span class="ts-panel-num">02</span>
+        <h3 class="ts-panel-title">Full Safari Build</h3>
+        <p class="ts-panel-desc">Lights on. Accessories locked in. This is the complete Juhrum treatment — every exterior mod fitted flush, every light dialled in. Built for the UAE desert and beyond.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Exterior builds from AED 8,000</span>
+      </div>
+      <div class="ts-panel" data-scene="2" id="ts-panel-2">
+        <span class="ts-panel-num">03</span>
+        <h3 class="ts-panel-title">Power Side Step</h3>
+        <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill, flush when closed, solid underfoot when extended. No rattle. No gap.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Steps from AED 2,200 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="3" id="ts-panel-3">
+        <span class="ts-panel-num">04</span>
+        <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
+        <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, locks tight for highway speeds.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="4" id="ts-panel-4">
+        <span class="ts-panel-num">05</span>
+        <h3 class="ts-panel-title">Front Grille</h3>
+        <p class="ts-panel-desc">Custom billet and mesh grilles that transform the face of the truck. Every grille is fitted with OEM precision — no drilling, no gaps, no flex. Your truck's most visible statement.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Grilles from AED 1,800 fitted</span>
+      </div>
+      <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
+        <span class="ts-panel-num">06</span>
+        <h3 class="ts-panel-title">See the Full Catalogue</h3>
+        <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF, audio builds — the full Juhrum range. Every accessory sourced, every fitment guaranteed.</p>
+        <div class="ts-panel-line"></div>
+        <a href="products.html" class="btn-g" data-tip="Catalogue">
+          <span>View Full Catalogue</span><span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Keep scrolling hint -->
+    <div class="ts-scroll-hint" id="ts-scroll-hint">
+      <span class="ts-hint-icon">↓</span>
+      <span class="ts-hint-text">Keep Scrolling</span>
+    </div>
+  </div>
+</section>
+
+<section class="booking-mini reveal">
+  <div class="booking-inner">
+    <h3 class="booking-h3">YOUR TRUCK.<br><span class="g">YOUR TERMS.</span></h3>
+    <p class="booking-text">No waiting lists. No upselling. Tell us your truck, we'll tell you exactly what fits, what it costs, and when it's done.</p>
+    <div class="booking-ctas">
+      <a href="https://wa.me/971503021700" class="btn-g" data-tip="Chat" target="_blank" rel="noopener noreferrer"><span>WhatsApp Us</span></a>
+      <a href="tel:+971503021700" class="btn-dark" data-tip="Call"><span>Call: 050 302 1700</span></a>
+    </div>
+    <div class="booking-info">Open 8:00 AM – 11:00 PM, Every Day</div>
+  </div>
+</section>
+
+<div class="story-intro" style="position:relative;">
+  <div class="dot-grid" style="top:auto;left:auto;bottom:0;right:0;opacity:.3;width:120px;height:120px;"></div>
+  <div class="story-tag reveal">Our Journey</div>
+  <h2 class="story-h2 reveal d1" >FROM VISION TO <span class="g">REALITY</span></h2>
+</div>
+
+<div id="story-pin-container">
+  <div class="story-track" id="story-track">
+    
+    <div class="story-panel">
+      <canvas class="story-particles" id="particles-1"></canvas>
+      <div class="stage-num">01</div>
+      <div class="panel-content">
+        <h3 class="stage-title">Foundation</h3>
+        <p class="stage-text">Industrial Area 4. 2019. One rule: serious trucks deserve serious gear. Everything else is negotiable.</p>
+      </div>
+    </div>
+
+    <div class="story-panel">
+      <canvas class="story-particles" id="particles-2"></canvas>
+      <div class="spline-container" id="spline-stage-2"></div>
+      <div class="stage-num">02</div>
+      <div class="panel-content">
+        <h3 class="stage-title">Craft</h3>
+        <p class="stage-text">No templates. No rush jobs. Every fit verified twice. Your Silverado isn't our last Silverado — it's the only one that matters.</p>
+      </div>
+    </div>
+
+    <div class="story-panel">
+      <canvas class="story-particles" id="particles-3"></canvas>
+      <div class="spline-container" id="spline-stage-3"></div>
+      <div class="stage-num">03</div>
+      <div class="panel-content">
+        <h3 class="stage-title">Trusted</h3>
+        <p class="stage-text">4.7★ didn't come from marketing. It came from 500+ trucks that still look factory-fresh in UAE heat. Word travels.</p>
+      </div>
+    </div>
+
+    <div class="story-panel">
+      <canvas class="story-particles" id="particles-4"></canvas>
+      <div class="stage-num">04</div>
+      <div class="panel-content">
+        <h3 class="stage-title">Today</h3>
+        <p class="stage-text">Ram TRX. F-150 Raptor. GMC Sierra Denali. Built them all. Your truck's next chapter starts in Industrial Area 4.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="reviews">
+  <div class="dot-grid tr" style="opacity:.55;"></div>
+  <div class="dot-grid" style="bottom:40px;left:40px;opacity:.3;"></div>
+  <div class="bracket bl"></div>
+  <div class="bracket tr"></div>
+  <div class="cross-accent" style="top:52px;left:52px;opacity:.5;"></div>
+  <div class="reviews-inner">
+    <div class="reviews-header reveal">
+      <h2 class="reviews-h2">WHAT THEY<br><span class="g">SAY.</span></h2>
+      <div class="rating-summary">
+        <div class="rating-num">4.7</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-label">Google Reviews</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="rcard reveal">
+        <div class="rcard-stars">★★★★★</div>
+        <p class="rcard-text">"Best shop for 4x4 accessories in Sharjah. They know their trucks — Tundra, GMC, Ram, F-150. Prices are honest and the team actually knows what they're doing."</p>
+        <div class="rcard-author"><div class="rcard-initials">AA</div><div><div class="rcard-name">Adnan Aadi</div><div class="rcard-meta">6 months ago</div></div></div>
+      </div>
+      <div class="rcard reveal d1">
+        <div class="rcard-stars">★★★★★</div>
+        <p class="rcard-text">"Got a rear hitch carrier fitted same day. Fair prices, no nonsense. Good stock of offroad parts that you won't find elsewhere in Sharjah."</p>
+        <div class="rcard-author"><div class="rcard-initials">HI</div><div><div class="rcard-name">Hisham Irshad</div><div class="rcard-meta">2 months ago</div></div></div>
+      </div>
+      <div class="rcard reveal d2">
+        <div class="rcard-stars">★★★★★</div>
+        <p class="rcard-text">"Professional team. Quality work. Every detail on my truck was handled properly — not rushed, not cut short. Highly recommended."</p>
+        <div class="rcard-author"><div class="rcard-initials">MR</div><div><div class="rcard-name">Mohammed R.</div><div class="rcard-meta">4 months ago</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-strip" style="position:relative;">
+  <div class="dot-grid" style="top:0;right:0;opacity:.25;width:100px;height:100%;background-size:16px 16px;"></div>
+  <a href="https://wa.me/971503021700" class="cs-item" data-tip="Chat" target="_blank" rel="noopener noreferrer">
+    <div><div class="cs-label">WhatsApp — Fastest Response</div><div class="cs-title">Message Us Now</div></div><div class="cs-arrow">→</div>
+  </a>
+  <a href="tel:+971503021700" class="cs-item" data-tip="Call">
+    <div><div class="cs-label">Call Direct</div><div class="cs-title">050 302 1700</div></div><div class="cs-arrow">→</div>
+  </a>
+  <a href="contact.html" class="cs-item" data-tip="Visit">
+    <div><div class="cs-label">Walk In — No Appointment</div><div class="cs-title">Industrial Area 4, Sharjah</div></div><div class="cs-arrow">→</div>
+  </a>
+</div>
+
+<footer class="jfoot">
+  <div class="jfoot-logo">JUHR<b>UM</b></div>
+  <div class="jfoot-tag">Desert Iron — Built for Power</div>
+  <div class="jfoot-copy">© 2025 Juhrum Auto Accessories, Sharjah UAE</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/runtime@1.9.44/build/runtime.js"></script>
+<script>
+// PRELOADER
+(function(){
+  const pl=document.getElementById('preload'),logo=document.getElementById('pllo'),bar=document.getElementById('plbar'),bwrap=document.getElementById('plbarwrap'),sub=document.getElementById('plsub');
+  const steps=['Calibrating...','Building...','Ready.'];
+  let si=0;
+  // logo rises
+  setTimeout(()=>logo.classList.add('up'),80);
+  // bar starts + first text
+  setTimeout(()=>{
+    bwrap.classList.add('go');
+    bar.classList.add('go');
+    sub.textContent=steps[0];
+    sub.classList.add('show');
+  },240);
+  // cycle text
+  setTimeout(()=>{sub.style.opacity='0';setTimeout(()=>{sub.textContent=steps[1];sub.style.opacity='1';},220);},900);
+  setTimeout(()=>{sub.style.opacity='0';setTimeout(()=>{sub.textContent=steps[2];sub.style.opacity='1';},220);},1500);
+  // wiper exit: gold bar sweeps up, then whole preloader lifts
+  setTimeout(()=>{
+    pl.classList.add('wipe');
+    setTimeout(()=>{pl.style.display='none';},1400);
+    startHero();
+  },2100);
+})();
+
+function startHero(){
+  document.getElementById('htag').classList.add('in');
+  [0,1,2].forEach((i)=>setTimeout(()=>document.getElementById('hl'+i).classList.add('up'),i*130));
+  setTimeout(()=>document.getElementById('hsub').classList.add('in'),550);
+  setTimeout(()=>document.getElementById('hctas').classList.add('in'),750);
+  setTimeout(()=>document.getElementById('hrhythm').classList.add('in'),1000);
+  setTimeout(()=>{
+    document.getElementById('hstats').classList.add('in');
+  },1100);
+  setTimeout(()=>document.getElementById('hscroll').classList.add('in'),1300);
+}
+
+// HERO MOUSE SPOTLIGHT
+;(function(){
+  const el=document.getElementById('hero-spotlight');
+  if(!el)return;
+  let tx=50,ty=50,cx=50,cy=50;
+  document.addEventListener('mousemove',e=>{
+    tx=(e.clientX/innerWidth)*100;
+    ty=(e.clientY/innerHeight)*100;
+  },{passive:true});
+  (function raf(){
+    cx+=(tx-cx)*.08; cy+=(ty-cy)*.08;
+    el.style.setProperty('--mx',cx+'%');
+    el.style.setProperty('--my',cy+'%');
+    requestAnimationFrame(raf);
+  })();
+})();
+
+// HERO DUST PARTICLES
+;(function(){
+  const canvas=document.getElementById('hero-dust');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+  // sparse slow dust
+  for(let i=0;i<55;i++){
+    pts.push({
+      x:Math.random()*1.2-.1,
+      y:Math.random(),
+      s:Math.random()*.9+.3,
+      a:Math.random()*.18+.04,
+      sp:Math.random()*.00008+.00003,
+      dx:(Math.random()-.5)*.00015
+    });
+  }
+  (function loop(){
+    requestAnimationFrame(loop);
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.y-=p.sp; p.x+=p.dx;
+      if(p.y<-.02){p.y=1.02;p.x=Math.random()*1.2-.1;}
+      if(p.x<-.05||p.x>1.05){p.dx*=-1;}
+      ctx.beginPath();
+      ctx.arc(p.x*W,p.y*H,p.s,0,Math.PI*2);
+      ctx.fillStyle=`rgba(196,154,56,${p.a + 0.05})`;
+      ctx.fill();
+    });
+  })();
+})();
+
+// HERO VIDEO PARALLAX ON SCROLL
+;(function(){
+  const vid=document.getElementById('hero-vid');
+  if(!vid)return;
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    const hero=document.getElementById('hero');
+    if(!hero||y>hero.offsetHeight)return;
+    const pct=y/hero.offsetHeight;
+    vid.style.transform=`translate(-50%,-50%) scale(1.08) translateY(${pct*8}%)`;
+  },{passive:true});
+})();
+
+// STORY BACKGROUND PARTICLES (per panel) — boosted to original hero intensity
+(function(){
+  let globalMx=0, globalMy=0;
+  document.addEventListener('mousemove',e=>{
+    globalMx=(e.clientX/innerWidth-.5)*2;
+    globalMy=-(e.clientY/innerHeight-.5)*2;
+  },{passive:true});
+
+  ['particles-1','particles-2','particles-3','particles-4'].forEach(id=>{
+    const canvas=document.getElementById(id);
+    if(!canvas) return;
+    const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+    R.setPixelRatio(Math.min(devicePixelRatio,2));
+    const scene=new THREE.Scene();
+    const cam=new THREE.PerspectiveCamera(58,1,.1,1000); cam.position.z=5;
+    const N=3200,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
+    for(let i=0;i<N;i++){
+      pos[i*3]=(Math.random()-.5)*20;
+      pos[i*3+1]=(Math.random()-.5)*12;
+      pos[i*3+2]=(Math.random()-.5)*10;
+      sc[i]=Math.random();
+      rnd[i]=Math.random();
+    }
+    const geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    geo.setAttribute('aS',new THREE.BufferAttribute(sc,1));
+    geo.setAttribute('aR',new THREE.BufferAttribute(rnd,1));
+    const mat=new THREE.ShaderMaterial({
+      transparent:true,depthWrite:false,
+      uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uSz:{value:3.8*R.getPixelRatio()}},
+      vertexShader:`uniform float uT;uniform vec2 uM;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;vec4 mv=modelViewMatrix*vec4(p,1.);vec2 sp=(projectionMatrix*mv).xy;float d=distance(sp,uM*2.);float rep=smoothstep(.9,0.,d)*.55;p.xy+=normalize(p.xy-uM)*rep;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.85;}`,
+      fragmentShader:`varying float vA;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=smoothstep(.5,0.,d)*vA;gl_FragColor=vec4(.77,.6,.22,a*.75);}`
+    });
+    const pts=new THREE.Points(geo,mat); scene.add(pts);
+    let camX=0,camY=0;
+    const clk=new THREE.Clock();
+    function resize(){
+      const w=canvas.parentElement.offsetWidth||window.innerWidth;
+      const h=canvas.parentElement.offsetHeight||window.innerHeight;
+      cam.aspect=w/h||1; cam.updateProjectionMatrix();
+      R.setSize(w,h,false);
+    }
+    resize();
+    (function animate(){
+      requestAnimationFrame(animate);
+      const t=clk.getElapsedTime();
+      mat.uniforms.uT.value=t;
+      mat.uniforms.uM.value.set(globalMx*.5,globalMy*.5);
+      camX+=(globalMx*.45-camX)*.04;
+      camY+=(globalMy*.3-camY)*.04;
+      cam.position.x=camX; cam.position.y=camY;
+      cam.lookAt(scene.position);
+      pts.rotation.y=t*.018;
+      R.render(scene,cam);
+    })();
+    window.addEventListener('resize',resize);
+  });
+})();
+
+// ── LENIS SMOOTH SCROLL ───────────────────────────────────────────
+const lenis = new Lenis({
+  duration: 1.15,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothTouch: false,
+  touchMultiplier: 1.5,
+});
+gsap.ticker.add(time => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+// Dispatch native scroll so all window.scroll listeners still fire
+lenis.on('scroll', () => window.dispatchEvent(new Event('scroll', { bubbles: false })));
+window.__lenis = lenis;
+
+// GSAP HORIZONTAL SCROLL (PROPER - LIKE LUMIÈRE)
+gsap.registerPlugin(ScrollTrigger);
+(function(){
+  const pin=document.getElementById('story-pin-container');
+  const track=document.getElementById('story-track');
+  if(!pin || !track) return;
+  
+  const panels=track.querySelectorAll('.story-panel');
+  const totalWidth=(panels.length-1)*window.innerWidth;
+  
+  const tween=gsap.to(track,{
+    x:-totalWidth,
+    ease:'none',
+    scrollTrigger:{
+      trigger:pin,
+      start:'top top',
+      end:`+=${totalWidth+window.innerWidth}`,
+      scrub:1,
+      pin:true,
+      anticipatePin:1
+    }
+  });
+  
+  // Load Spline on stages 2 & 3
+  let splineLoaded=false;
+  function loadSpline(){
+    if(splineLoaded) return;
+    splineLoaded=true;
+    
+    const s2=document.getElementById('spline-stage-2');
+    const s3=document.getElementById('spline-stage-3');
+    
+    [s2,s3].forEach(container=>{
+      const viewer=document.createElement('spline-viewer');
+      viewer.setAttribute('url','https://prod.spline.design/HrsWHEf9-Gqp5AZc/scene.splinecode');
+      viewer.style.filter='saturate(0.9) brightness(0.85)';
+      container.appendChild(viewer);
+    });
+    
+    // Activate on scroll
+    ScrollTrigger.create({
+      trigger:panels[1],
+      containerAnimation:tween,
+      start:'left center',
+      end:'right center',
+      onEnter:()=>s2.classList.add('active'),
+      onLeave:()=>s2.classList.remove('active'),
+      onEnterBack:()=>s2.classList.add('active'),
+      onLeaveBack:()=>s2.classList.remove('active')
+    });
+    
+    ScrollTrigger.create({
+      trigger:panels[2],
+      containerAnimation:tween,
+      start:'left center',
+      end:'right center',
+      onEnter:()=>s3.classList.add('active'),
+      onLeave:()=>s3.classList.remove('active'),
+      onEnterBack:()=>s3.classList.add('active'),
+      onLeaveBack:()=>s3.classList.remove('active')
+    });
+  }
+  
+  ScrollTrigger.create({
+    trigger:pin,
+    start:'top center',
+    onEnter:loadSpline
+  });
+})();
+</script>
+<script src="juhrum.js"></script>
+</body>
+</html>
