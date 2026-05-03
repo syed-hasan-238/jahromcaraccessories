@@ -355,29 +355,50 @@
   window.addEventListener('resize', resizeCanvas);
 
   // ── Draw a single frame — no cross-fade, no ghosting ──
+  // Smoothly interpolated layout values for scene transitions
+  let camX = 0.5; // 0=left, 0.5=center, 1=right (as fraction of availW)
+  let camScale = 0.78; // base scale
+  let smCamX = 0.5, smCamScale = 0.78; // smoothed values
+
   function drawFrame(idx) {
     idx = Math.min(Math.max(Math.round(idx), 0), TOTAL - 1);
     const img = frames[idx];
     if (!img || !img.complete) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Breathing room: truck occupies 80% of canvas with padding on all sides
-    const PAD_H = canvas.width  * 0.10; // 10% padding each side horizontally
-    const PAD_V = canvas.height * 0.10; // 10% padding top/bottom
-    const drawW = canvas.width  - PAD_H * 2;
-    const drawH = canvas.height - PAD_V * 2;
-
-    // On desktop with panels: shift canvas left so truck is centred in left 62%
     const hasPanels = canvas.width > 900;
-    const availW = hasPanels ? canvas.width * 0.62 : canvas.width;
+    const availW = hasPanels ? canvas.width * 0.60 : canvas.width;
+    const PAD_V  = canvas.height * 0.12;
+    const drawH  = canvas.height - PAD_V * 2;
 
-    const scale = Math.min(availW / img.naturalWidth, drawH / img.naturalHeight) * 0.82;
+    // Scene-based target layout
+    // Scene 0: centred, small (intro)
+    // Scenes 1+: slightly left, slightly larger (panel revealed on right)
+    let targetScale, targetX;
+    if (currentScene <= 0) {
+      targetScale = 0.75;
+      targetX = 0.5; // centred in availW
+    } else if (currentScene >= SCENES.length - 1) {
+      targetScale = 0.78;
+      targetX = 0.45;
+    } else {
+      targetScale = 0.82;
+      targetX = 0.42; // shifted left
+    }
+
+    // Lerp the layout smoothly
+    smCamScale += (targetScale - smCamScale) * 0.04;
+    smCamX     += (targetX     - smCamX)     * 0.04;
+
+    const baseScale = Math.min(availW / img.naturalWidth, drawH / img.naturalHeight);
+    const scale = baseScale * smCamScale;
     const w = img.naturalWidth  * scale;
     const h = img.naturalHeight * scale;
-    const x = hasPanels ? (availW - w) / 2 : (canvas.width - w) / 2;
+    const x = hasPanels
+      ? (availW * smCamX) - w / 2
+      : (canvas.width - w) / 2;
     const y = (canvas.height - h) / 2;
 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, x, y, w, h);
   }
 
@@ -422,7 +443,7 @@
 
     // LERP — 0.065 = Oryzo-level cinematic smoothness
     targetF  = p * (TOTAL - 1);
-    smoothF += (targetF - smoothF) * 0.065;
+    smoothF += (targetF - smoothF) * 0.055;
 
     const idx = Math.round(smoothF);
     if (idx !== lastDrawn) { drawFrame(idx); lastDrawn = idx; }

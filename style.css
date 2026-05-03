@@ -193,7 +193,7 @@ body {
 .jnav-links { display: flex; gap: 44px; list-style: none; }
 .jnav-links a {
   font-family: var(--fu); font-size: 11px; letter-spacing: var(--tk-wide);
-  text-transform: uppercase; color: rgba(196,154,56,.65);
+  text-transform: uppercase; color: rgba(210,205,195,.7);
   text-decoration: none; transition: color .3s;
   position: relative; padding-bottom: 6px;
 }
@@ -417,7 +417,7 @@ a:focus-visible, button:focus-visible {
    ═══════════════════════════════════════════════ */
 
 #truck-scrub-outer {
-  height: 800vh; /* more scroll = more time per scene */
+  height: 1000vh; /* luxurious pace */
   position: relative;
   z-index: 2;
 }
@@ -568,10 +568,11 @@ a:focus-visible, button:focus-visible {
 }
 .ts-panel-note {
   font-family: var(--fu);
-  font-size: 8px;
-  letter-spacing: .32em;
+  font-size: 10px;
+  letter-spacing: .28em;
   text-transform: uppercase;
-  color: rgba(196,154,56,.8);
+  color: rgba(196,154,56,1);
+  font-weight: 500;
 }
 .ts-panel-hint {
   font-family: var(--fu);
@@ -591,12 +592,12 @@ a:focus-visible, button:focus-visible {
 }
 .ts-panel-cta .btn-g:hover { background: #2a2a28; }
 
-/* Keep Scrolling hint — centered, prominent */
+/* Keep Scrolling hint — centered, above gradient */
 .ts-scroll-hint {
-  position: absolute; bottom: 48px; left: 50%;
+  position: absolute; bottom: 200px; left: 50%;
   transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px;
-  z-index: 9; opacity: 0; transition: opacity .6s;
+  z-index: 11; opacity: 0; transition: opacity .6s;
 }
 #truck-scrub-sticky.active .ts-scroll-hint { opacity: 1; }
 .ts-scroll-hint.hide { opacity: 0 !important; }
@@ -628,4 +629,20 @@ a:focus-visible, button:focus-visible {
   .ts-corner-tr { top: 18px; right: 18px; }
   .ts-corner-bl { bottom: 18px; left: 18px; }
   .ts-corner-br { bottom: 18px; right: 18px; }
+}
+
+/* ── Logo watermark — subtle large bg text on inner pages ── */
+.page-hero::after,
+.con-hero::after {
+  content: 'J';
+  position: absolute;
+  bottom: -5%;
+  right: 5%;
+  font-family: var(--fd);
+  font-size: 40vw;
+  color: rgba(196,154,56,.018);
+  pointer-events: none;
+  line-height: 1;
+  z-index: 0;
+  letter-spacing: -.02em;
 }

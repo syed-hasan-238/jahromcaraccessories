@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>Products — Juhrum Auto Accessories</title>
 <meta name="description" content="Full catalogue of premium 4×4 and pickup truck accessories. Bed covers, exterior builds, PPF, audio, interior. Sharjah UAE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,16 +18,14 @@
   border-bottom: 1px solid rgba(196,154,56,.07);
 }
 .ph-ambient {
-  position: absolute; right: -2%; top: -10%;
-  font-family: var(--fd); font-size: 28vw; letter-spacing: .06em;
-  color: rgba(196,154,56,.025); pointer-events: none; line-height: 1;
+  display: none;
 }
 .ph-h1 {
   font-family: var(--fd); font-size: clamp(60px, 8.5vw, 140px);
   line-height: .9; letter-spacing: .02em; color: var(--white);
   overflow: hidden; width: 100%;
 }
-.ph-h1 .g { color: var(--gold); }
+.ph-h1 .g { color: #e8e0d0; }
 .ph-h1 .s { -webkit-text-stroke: 1px rgba(237,236,231,.14); color: transparent; display: block; }
 .ph-sub {
   font-size: 14px; font-weight: 300; color: var(--silver);
@@ -259,6 +258,9 @@
 </nav>
 
 <div class="page-hero">
+  <div class="dot-grid tr" style="opacity:.18;"></div>
+  <div class="bracket tl" style="top:100px;left:52px;z-index:4;"></div>
+  <div class="cross-accent" style="bottom:60px;right:60px;opacity:.3;"></div>
   <canvas class="ph-canvas" id="productsCanvas"></canvas>
   <div class="ph-ambient">CAT</div>
   <div class="tag reveal" style="margin-bottom:22px;">Full Catalogue</div>
