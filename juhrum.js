@@ -402,27 +402,16 @@
     ctx.drawImage(img, x, y, w, h);
   }
 
-  // ── Feed scrolling — text column moves up as progress advances ──
-  const feed = document.getElementById('ts-feed');
+  // ── Panel switching ───────────────────────────
   function updateScene(progress) {
-    // Scroll the feed vertically based on progress
-    // Feed reveals panels as progress moves through scenes
-    if (feed) {
-      const panels = feed.querySelectorAll('.ts-panel');
-      const totalH = feed.scrollHeight - (feed.parentElement ? feed.parentElement.clientHeight : window.innerHeight * 0.6);
-      // Map progress 0→1 to feed scroll 0→totalH
-      // Add small deadzone at start so panel 0 is visible first
-      const feedP = Math.max(0, (progress - 0.05) / 0.9);
-      feed.style.transform = `translateY(-${Math.min(feedP, 1) * totalH}px)`;
-    }
-
-    // Update active panel for CSS highlight
     let idx = 0;
     for (let i = SCENES.length - 1; i >= 0; i--) {
       if (progress >= SCENES[i].p - 0.01) { idx = i; break; }
     }
     if (idx === currentScene) return;
     currentScene = idx;
+
+    // Deactivate all panels, activate current
     document.querySelectorAll('.ts-panel').forEach((el, i) => {
       el.classList.toggle('active', i === idx);
     });
@@ -463,9 +452,8 @@
 
     updateScene(p);
 
-    // Keep scrolling hint: hide only when CTA is showing (at end)
-    if (p >= 0.95 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
-    if (p < 0.90 && hintHidden)   { hint && hint.classList.remove('hide'); hintHidden = false; }
+    if (p > 0.04 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    if (p < 0.02 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
   }
 
   // ── Snap on scroll stop ───────────────────────

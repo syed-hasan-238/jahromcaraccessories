@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>Juhrum — Desert Iron, Sharjah</title>
 <meta name="description" content="Premium 4×4 and pickup truck accessories. Bed covers, exterior builds, audio, PPF, upholstery. Sharjah UAE — Industrial Area 4. 4.7★ Google Rating. Trusted 5+ years.">
@@ -95,8 +95,8 @@
 
 .h-scroll{position:absolute;right:72px;bottom:44px;z-index:4;display:flex;flex-direction:row;align-items:center;gap:10px;opacity:0;transition:opacity 1s 1.4s;}
 .h-scroll.in{opacity:1;}
-.h-scroll-line{width:44px;height:1px;background:linear-gradient(to right,var(--gold),transparent);animation:pulseH 2.2s ease infinite;}
-.h-scroll span{font-family:var(--fu);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(196,154,56,.9);}
+.h-scroll-line{width:36px;height:1px;background:linear-gradient(to right,var(--gold),transparent);animation:pulseH 2.2s ease infinite;}
+.h-scroll span{font-family:var(--fu);font-size:7px;letter-spacing:.32em;text-transform:uppercase;color:rgba(196,154,56,.7);}
 @keyframes pulseH{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.25;transform:scaleX(.5)}}
 
 .ticker{background:var(--gold);overflow:hidden;padding:17px 0;position:relative;z-index:4;}
@@ -215,7 +215,7 @@
 .booking-h3 .g{color:var(--gold);}
 .booking-text{font-size:15px;color:var(--silver);line-height:1.8;margin-bottom:var(--sp-6);}
 .booking-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:var(--sp-5);}
-.booking-info{font-family:var(--fu);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(196,154,56,.6);}
+.booking-info{font-family:var(--fu);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);}
 
 .story-intro{padding:var(--sp-10) var(--gutter) var(--sp-9);max-width:800px;margin:0 auto;text-align:center;background:var(--deep);}
 .story-tag{font-family:var(--fu);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
@@ -239,7 +239,7 @@
 .contact-strip{display:flex;border-top:1px solid rgba(196,154,56,.08);border-bottom:1px solid rgba(196,154,56,.08);background:var(--charcoal);position:relative;z-index:2;}
 .cs-item{flex:1;padding:var(--sp-7) var(--sp-6);text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.04);transition:background .35s;}
 .cs-item:last-child{border-right:none;}.cs-item:hover{background:rgba(196,154,56,.04);}
-.cs-label{font-family:var(--fu);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cs-label{font-family:var(--fu);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
 .cs-title{font-family:var(--fd);font-size:30px;letter-spacing:.06em;color:var(--white);}
 .cs-arrow{font-family:var(--fd);font-size:28px;color:rgba(196,154,56,.28);transition:transform .3s,color .3s;}
 .cs-item:hover .cs-arrow{transform:translateX(7px);color:var(--gold);}
@@ -348,8 +348,7 @@
 
 /* ── CHROMEBOOK / SMALL LAPTOP (1366px) ── */
 @media (max-width: 1366px) {
-  .h-h1 { font-size: clamp(52px, 7.5vw, 110px); }
-  #hero { padding: 80px 52px 80px; }
+  .h-h1 { font-size: clamp(64px, 9vw, 140px); }
   .prod-h2 { font-size: clamp(52px, 7vw, 100px); }
   .booking-h3 { font-size: clamp(40px, 5vw, 64px); }
   .stage-num { font-size: clamp(120px, 12vw, 200px); }
@@ -427,7 +426,7 @@
     <div class="hst-div"></div>
     <div class="hst"><div class="hst-n" id="hs2">500+</div><div class="hst-l">Trucks Built</div></div>
   </div>
-  <div class="h-scroll" id="hscroll"><div class="h-scroll-nudge" id="hscroll-nudge"><span class="h-scroll-arrow">↓</span><span class="h-scroll-label">Scroll to explore the 3D showcase</span></div></div>
+  <div class="h-scroll" id="hscroll"><div class="h-scroll-line"></div><span>Scroll</span></div>
 </section>
 
 <div class="ticker">
@@ -482,53 +481,51 @@
     <div class="ts-corner ts-corner-bl"></div>
     <div class="ts-corner ts-corner-br"></div>
 
-    <!-- Right-side scrolling text feed -->
+    <!-- Right-side feature panels — scroll in per scene -->
     <div class="ts-panels" id="ts-panels">
-      <div class="ts-feed" id="ts-feed">
-        <div class="ts-panel" data-scene="0" id="ts-panel-0">
-          <span class="ts-panel-num">01</span>
-          <h3 class="ts-panel-title">The Base Build</h3>
-          <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong. The foundation has to be right before anything else goes on.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Full exterior assessments, complimentary</span>
-        </div>
-        <div class="ts-panel" data-scene="1" id="ts-panel-1">
-          <span class="ts-panel-num">02</span>
-          <h3 class="ts-panel-title">Full Safari Build</h3>
-          <p class="ts-panel-desc">Lights on. Every accessory locked in flush. This is the complete Juhrum treatment — roof rack, front grill, side steps, bed cover, all fitted to OEM tolerances. Built for UAE desert terrain and beyond. Not a single part added without purpose.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Full safari builds from AED 8,000 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="2" id="ts-panel-2">
-          <span class="ts-panel-num">03</span>
-          <h3 class="ts-panel-title">Power Side Step</h3>
-          <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill — flush when closed, solid underfoot when extended. No rattle. No gap. No compromise. Every weld, every bracket, fitted by hand in Sharjah.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Power side steps from AED 2,200 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="3" id="ts-panel-3">
-          <span class="ts-panel-num">04</span>
-          <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
-          <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down tight. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, seals completely at highway speeds. Keeps cargo dry and secure across UAE conditions.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="4" id="ts-panel-4">
-          <span class="ts-panel-num">05</span>
-          <h3 class="ts-panel-title">Front Grille</h3>
-          <p class="ts-panel-desc">Custom billet and mesh grilles that transform the entire face of the truck. Every grille fitted with OEM-level precision — no drilling, no visible gaps, no flex under speed. Your truck's most visible statement, done properly.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Custom grilles from AED 1,800 fitted</span>
-        </div>
-        <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
-          <span class="ts-panel-num">06</span>
-          <h3 class="ts-panel-title">See Everything</h3>
-          <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF wrap, audio builds, interior upholstery — the full Juhrum range. Every accessory sourced from trusted suppliers. Every fitment guaranteed by our team in Industrial Area 4.</p>
-          <div class="ts-panel-line"></div>
-          <a href="products.html" class="btn-g ts-btn" data-tip="Catalogue">
-            <span>View Full Catalogue</span><span>→</span>
-          </a>
-        </div>
+      <div class="ts-panel" data-scene="0" id="ts-panel-0">
+        <span class="ts-panel-num">01</span>
+        <h3 class="ts-panel-title">The Base Build</h3>
+        <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-hint">↓ Keep scrolling</span>
+      </div>
+      <div class="ts-panel" data-scene="1" id="ts-panel-1">
+        <span class="ts-panel-num">02</span>
+        <h3 class="ts-panel-title">Full Safari Build</h3>
+        <p class="ts-panel-desc">Lights on. Accessories locked in. This is the complete Juhrum treatment — every exterior mod fitted flush, every light dialled in. Built for the UAE desert and beyond.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Exterior builds from AED 8,000</span>
+      </div>
+      <div class="ts-panel" data-scene="2" id="ts-panel-2">
+        <span class="ts-panel-num">03</span>
+        <h3 class="ts-panel-title">Power Side Step</h3>
+        <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill, flush when closed, solid underfoot when extended. No rattle. No gap.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Steps from AED 2,200 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="3" id="ts-panel-3">
+        <span class="ts-panel-num">04</span>
+        <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
+        <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, locks tight for highway speeds.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="4" id="ts-panel-4">
+        <span class="ts-panel-num">05</span>
+        <h3 class="ts-panel-title">Front Grille</h3>
+        <p class="ts-panel-desc">Custom billet and mesh grilles that transform the face of the truck. Every grille is fitted with OEM precision — no drilling, no gaps, no flex. Your truck's most visible statement.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Grilles from AED 1,800 fitted</span>
+      </div>
+      <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
+        <span class="ts-panel-num">06</span>
+        <h3 class="ts-panel-title">See the Full Catalogue</h3>
+        <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF, audio builds — the full Juhrum range. Every accessory sourced, every fitment guaranteed.</p>
+        <div class="ts-panel-line"></div>
+        <a href="products.html" class="btn-g" data-tip="Catalogue">
+          <span>View Full Catalogue</span><span>→</span>
+        </a>
       </div>
     </div>
 
@@ -564,12 +561,8 @@
     
     <div class="story-panel">
       <canvas class="story-particles" id="particles-1"></canvas>
-      <div class="bracket tl" style="top:36px;left:36px;"></div>
-      <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
       <div class="stage-num">01</div>
       <div class="panel-content">
-        <span class="stage-tag">The Origin — 01 / 04</span>
-        <div class="stage-rule"></div>
         <h3 class="stage-title">Foundation</h3>
         <p class="stage-text">Industrial Area 4. 2019. One rule: serious trucks deserve serious gear. Everything else is negotiable.</p>
       </div>
@@ -577,13 +570,9 @@
 
     <div class="story-panel">
       <canvas class="story-particles" id="particles-2"></canvas>
-      <div class="bracket tl" style="top:36px;left:36px;"></div>
-      <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
       <div class="spline-container" id="spline-stage-2"></div>
       <div class="stage-num">02</div>
       <div class="panel-content">
-        <span class="stage-tag">The Method — 02 / 04</span>
-        <div class="stage-rule"></div>
         <h3 class="stage-title">Craft</h3>
         <p class="stage-text">No templates. No rush jobs. Every fit verified twice. Your Silverado isn't our last Silverado — it's the only one that matters.</p>
       </div>
@@ -591,13 +580,9 @@
 
     <div class="story-panel">
       <canvas class="story-particles" id="particles-3"></canvas>
-      <div class="bracket tl" style="top:36px;left:36px;"></div>
-      <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
       <div class="spline-container" id="spline-stage-3"></div>
       <div class="stage-num">03</div>
       <div class="panel-content">
-        <span class="stage-tag">The Proof — 03 / 04</span>
-        <div class="stage-rule"></div>
         <h3 class="stage-title">Trusted</h3>
         <p class="stage-text">4.7★ didn't come from marketing. It came from 500+ trucks that still look factory-fresh in UAE heat. Word travels.</p>
       </div>
@@ -605,12 +590,8 @@
 
     <div class="story-panel">
       <canvas class="story-particles" id="particles-4"></canvas>
-      <div class="bracket tl" style="top:36px;left:36px;"></div>
-      <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
       <div class="stage-num">04</div>
       <div class="panel-content">
-        <span class="stage-tag">The Present — 04 / 04</span>
-        <div class="stage-rule"></div>
         <h3 class="stage-title">Today</h3>
         <p class="stage-text">Ram TRX. F-150 Raptor. GMC Sierra Denali. Built them all. Your truck's next chapter starts in Industrial Area 4.</p>
       </div>
@@ -794,25 +775,26 @@ function startHero(){
     if(!canvas) return;
     const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
     R.setPixelRatio(Math.min(devicePixelRatio,1.5));
-    R.setSize(innerWidth,innerHeight);
     const scene=new THREE.Scene();
-    const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000);
-    cam.position.z=5;
-    const N=1800;
-    const pos=new Float32Array(N*3);
-    for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*20;pos[i*3+1]=(Math.random()-.5)*12;pos[i*3+2]=(Math.random()-.5)*8;}
+    const cam=new THREE.PerspectiveCamera(58,1,.1,1000); cam.position.z=5;
+    const N=1600,pos=new Float32Array(N*3),sc=new Float32Array(N),rnd=new Float32Array(N);
+    for(let i=0;i<N;i++){
+      pos[i*3]=(Math.random()-.5)*20;
+      pos[i*3+1]=(Math.random()-.5)*12;
+      pos[i*3+2]=(Math.random()-.5)*10;
+      sc[i]=Math.random();
+      rnd[i]=Math.random();
+    }
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    const mat=new THREE.PointsMaterial({color:0xC49A38,size:.04,transparent:true,opacity:.35,sizeAttenuation:true});
-    const pts=new THREE.Points(geo,mat);
-    scene.add(pts);
-    const clk=new THREE.Clock();
-    let _vis=false;
-    const _obs=new IntersectionObserver(e=>{_vis=e[0].isIntersecting;},{threshold:0});
-    _obs.observe(canvas);
-    (function animate(){requestAnimationFrame(animate);if(!_vis)return;const t=clk.getElapsedTime();pts.rotation.y=t*.015;pts.rotation.x=Math.sin(t*.08)*.04;R.render(scene,cam);})();
-    window.addEventListener('resize',()=>{R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();});
-  });
+    geo.setAttribute('aS',new THREE.BufferAttribute(sc,1));
+    geo.setAttribute('aR',new THREE.BufferAttribute(rnd,1));
+    const mat=new THREE.ShaderMaterial({
+      transparent:true,depthWrite:false,
+      uniforms:{uT:{value:0},uM:{value:new THREE.Vector2()},uSz:{value:3.8*R.getPixelRatio()}},
+      vertexShader:`uniform float uT;uniform vec2 uM;uniform float uSz;attribute float aS;attribute float aR;varying float vA;void main(){vec3 p=position;p.x+=sin(uT*.35+aR*6.28)*.1*aR;p.y+=cos(uT*.25+aR*3.14)*.08*aR;p.z+=sin(uT*.18+aR*9.)*.05;vec4 mv=modelViewMatrix*vec4(p,1.);vec2 sp=(projectionMatrix*mv).xy;float d=distance(sp,uM*2.);float rep=smoothstep(.9,0.,d)*.55;p.xy+=normalize(p.xy-uM)*rep;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*aS*(1.+sin(uT+aR*6.28)*.28);vA=aS*.85;}`,
+      fragmentShader:`varying float vA;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=smoothstep(.5,0.,d)*vA;gl_FragColor=vec4(.77,.6,.22,a*.75);}`
+    });
     const pts=new THREE.Points(geo,mat); scene.add(pts);
     let camX=0,camY=0;
     const clk=new THREE.Clock();
