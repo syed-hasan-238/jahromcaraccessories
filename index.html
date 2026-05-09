@@ -25,7 +25,7 @@
 .pl-bar-wrap.go::before{left:calc(100% - 6px);}
 .pl-bar{height:100%;background:linear-gradient(to right,var(--gold-lo),var(--gold));width:0;transition:width 1.5s cubic-bezier(.76,0,.24,1) .3s;}
 .pl-bar.go{width:100%;}
-.pl-sub{font-family:var(--fu);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(196,154,56,.95);margin-top:20px;opacity:0;transition:opacity .4s .4s;position:relative;z-index:2;min-height:16px;}
+.pl-sub{font-family:var(--fu);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:rgba(196,154,56,.95);margin-top:20px;opacity:0;transition:opacity .4s .4s;position:relative;z-index:2;min-height:16px;}
 .pl-sub.show{opacity:1;}
 
 #hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 52px 100px;}
@@ -56,7 +56,7 @@
 .h-tag.in{opacity:1;transform:none;}
 
 /* HEADLINE — constrained to never overflow into nav */
-.h-h1{font-family:var(--fd);font-size:clamp(56px,8.5vw,148px);line-height:.88;letter-spacing:.022em;color:var(--white);}
+.h-h1{font-family:var(--fd);font-size:clamp(52px,7.8vw,138px);line-height:.88;letter-spacing:.022em;color:var(--white);}
 .h-h1 .row{overflow:hidden;display:block;}
 .h-h1 .inner{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.76,0,.24,1);will-change:transform;}
 .h-h1 .inner.up{transform:translateY(0);}
@@ -223,6 +223,35 @@
 .story-h2 .g{color:var(--gold);}
 
 #story-pin-container{overflow:hidden;background:var(--deep);}
+/* Story panel images */
+.story-panel-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.story-panel-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.22;
+  filter: grayscale(40%) contrast(1.1);
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+.story-panel:hover .story-panel-img img {
+  transform: scale(1.0);
+}
+/* Dark vignette over image so text stays legible */
+.story-panel-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, rgba(10,8,6,.7) 100%);
+  z-index: 1;
+}
+
 .story-track{display:flex;will-change:transform;transform:translateZ(0);}
 .story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);position:relative;background:var(--deep);}
 .panel-content{max-width:600px;position:relative;z-index:10;text-align:center;transform:translateZ(0);backface-visibility:hidden;}
@@ -467,7 +496,7 @@
       <div class="ts-progress-bar" id="ts-progress-bar"></div>
     </div>
 
-    <!-- Canvas — left/center, slightly smaller -->
+    <!-- Canvas -->
     <canvas id="truck-canvas"></canvas>
 
     <!-- Loading state -->
@@ -482,61 +511,59 @@
     <div class="ts-corner ts-corner-bl"></div>
     <div class="ts-corner ts-corner-br"></div>
 
-    <!-- Right-side scrolling text feed -->
+    <!-- Right-side feature panels -->
     <div class="ts-panels" id="ts-panels">
-      <div class="ts-feed" id="ts-feed">
-        <div class="ts-panel" data-scene="0" id="ts-panel-0">
-          <span class="ts-panel-num">01</span>
-          <h3 class="ts-panel-title">The Base Build</h3>
-          <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong. The foundation has to be right before anything else goes on.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Full exterior assessments, complimentary</span>
-        </div>
-        <div class="ts-panel" data-scene="1" id="ts-panel-1">
-          <span class="ts-panel-num">02</span>
-          <h3 class="ts-panel-title">Full Safari Build</h3>
-          <p class="ts-panel-desc">Lights on. Every accessory locked in flush. This is the complete Juhrum treatment — roof rack, front grill, side steps, bed cover, all fitted to OEM tolerances. Built for UAE desert terrain and beyond. Not a single part added without purpose.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Full safari builds from AED 8,000 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="2" id="ts-panel-2">
-          <span class="ts-panel-num">03</span>
-          <h3 class="ts-panel-title">Power Side Step</h3>
-          <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill — flush when closed, solid underfoot when extended. No rattle. No gap. No compromise. Every weld, every bracket, fitted by hand in Sharjah.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Power side steps from AED 2,200 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="3" id="ts-panel-3">
-          <span class="ts-panel-num">04</span>
-          <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
-          <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down tight. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, seals completely at highway speeds. Keeps cargo dry and secure across UAE conditions.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
-        </div>
-        <div class="ts-panel" data-scene="4" id="ts-panel-4">
-          <span class="ts-panel-num">05</span>
-          <h3 class="ts-panel-title">Front Grille</h3>
-          <p class="ts-panel-desc">Custom billet and mesh grilles that transform the entire face of the truck. Every grille fitted with OEM-level precision — no drilling, no visible gaps, no flex under speed. Your truck's most visible statement, done properly.</p>
-          <div class="ts-panel-line"></div>
-          <span class="ts-panel-note">Custom grilles from AED 1,800 fitted</span>
-        </div>
-        <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
-          <span class="ts-panel-num">06</span>
-          <h3 class="ts-panel-title">See Everything</h3>
-          <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF wrap, audio builds, interior upholstery — the full Juhrum range. Every accessory sourced from trusted suppliers. Every fitment guaranteed by our team in Industrial Area 4.</p>
-          <div class="ts-panel-line"></div>
-          <a href="products.html" class="btn-g ts-btn" data-tip="Catalogue">
-            <span>View Full Catalogue</span><span>→</span>
-          </a>
-        </div>
+      <div class="ts-panel" data-scene="0" id="ts-panel-0">
+        <span class="ts-panel-num">01</span>
+        <h3 class="ts-panel-title">The Base Build</h3>
+        <p class="ts-panel-desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-hint">↓ Keep scrolling</span>
+      </div>
+      <div class="ts-panel" data-scene="1" id="ts-panel-1">
+        <span class="ts-panel-num">02</span>
+        <h3 class="ts-panel-title">Full Safari Build</h3>
+        <p class="ts-panel-desc">Lights on. Accessories locked in. This is the complete Juhrum treatment — every exterior mod fitted flush, every light dialled in. Built for the UAE desert and beyond.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Exterior builds from AED 8,000</span>
+      </div>
+      <div class="ts-panel" data-scene="2" id="ts-panel-2">
+        <span class="ts-panel-num">03</span>
+        <h3 class="ts-panel-title">Power Side Step</h3>
+        <p class="ts-panel-desc">Electric retractable side steps that deploy the moment you open the door. Precision-fitted to your truck's sill, flush when closed, solid underfoot when extended. No rattle. No gap.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Steps from AED 2,200 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="3" id="ts-panel-3">
+        <span class="ts-panel-num">04</span>
+        <h3 class="ts-panel-title">Tri-Fold Bed Cover</h3>
+        <p class="ts-panel-desc">Hard tri-fold tonneau covers that lock your bed down. Weatherproof, low-profile, and strong enough to stand on. Opens fully in seconds, locks tight for highway speeds.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Bed covers from AED 3,400 fitted</span>
+      </div>
+      <div class="ts-panel" data-scene="4" id="ts-panel-4">
+        <span class="ts-panel-num">05</span>
+        <h3 class="ts-panel-title">Front Grille</h3>
+        <p class="ts-panel-desc">Custom billet and mesh grilles that transform the face of the truck. Every grille is fitted with OEM precision — no drilling, no gaps, no flex. Your truck's most visible statement.</p>
+        <div class="ts-panel-line"></div>
+        <span class="ts-panel-note">Grilles from AED 1,800 fitted</span>
+      </div>
+      <div class="ts-panel ts-panel-cta" data-scene="5" id="ts-panel-5">
+        <span class="ts-panel-num">06</span>
+        <h3 class="ts-panel-title">See the Full Catalogue</h3>
+        <p class="ts-panel-desc">Roof racks, snorkels, winches, lighting rigs, PPF, audio builds — the full Juhrum range. Every accessory sourced, every fitment guaranteed.</p>
+        <div class="ts-panel-line"></div>
+        <a href="products.html" class="btn-g" data-tip="Catalogue">
+          <span>View Full Catalogue</span><span>→</span>
+        </a>
       </div>
     </div>
 
-    <!-- Keep scrolling hint -->
+    <!-- Scroll hint — bottom-left, always visible when active -->
     <div class="ts-scroll-hint" id="ts-scroll-hint">
       <span class="ts-hint-icon">↓</span>
-      <span class="ts-hint-text">Keep Scrolling</span>
-      <span class="ts-hint-sub">This is a 3D interactive showcase</span>
+      <span class="ts-hint-text">Scroll to Build</span>
+      <span class="ts-hint-sub">Keep scrolling for 3D interactive showcase</span>
     </div>
   </div>
 </section>
@@ -563,6 +590,7 @@
   <div class="story-track" id="story-track">
     
     <div class="story-panel">
+      <div class="story-panel-img"><img src="images/shop-interior.jpg" alt="Juhrum workshop" loading="lazy"></div>
       <canvas class="story-particles" id="particles-1"></canvas>
       <div class="bracket tl" style="top:36px;left:36px;"></div>
       <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
@@ -576,6 +604,7 @@
     </div>
 
     <div class="story-panel">
+      <div class="story-panel-img"><img src="images/shop-install.jpg" alt="Juhrum fitting in action" loading="lazy"></div>
       <canvas class="story-particles" id="particles-2"></canvas>
       <div class="bracket tl" style="top:36px;left:36px;"></div>
       <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
@@ -590,6 +619,7 @@
     </div>
 
     <div class="story-panel">
+      <div class="story-panel-img"><img src="images/customer-happy.jpg" alt="Satisfied Juhrum customer" loading="lazy"></div>
       <canvas class="story-particles" id="particles-3"></canvas>
       <div class="bracket tl" style="top:36px;left:36px;"></div>
       <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
@@ -604,6 +634,7 @@
     </div>
 
     <div class="story-panel">
+      <div class="story-panel-img"><img src="images/desert-drive.jpg" alt="Truck in UAE desert" loading="lazy"></div>
       <canvas class="story-particles" id="particles-4"></canvas>
       <div class="bracket tl" style="top:36px;left:36px;"></div>
       <div class="bracket br-c" style="bottom:36px;right:36px;"></div>
@@ -676,6 +707,9 @@
   </a>
   <a href="https://www.tiktok.com/@jahromautoaccessorie" class="cs-item" data-tip="TikTok" target="_blank" rel="noopener noreferrer">
     <div><div class="cs-label">Follow on TikTok</div><div class="cs-title">@jahromautoaccessorie</div></div><div class="cs-arrow">↗</div>
+  </a>
+  <a href="https://www.instagram.com/juhrum_auto_accessories" class="cs-item" data-tip="Instagram" target="_blank" rel="noopener noreferrer">
+    <div><div class="cs-label">Follow on Instagram</div><div class="cs-title">@juhrum_auto_accessories</div></div><div class="cs-arrow">↗</div>
   </a>
 </div>
 
@@ -866,14 +900,14 @@ gsap.registerPlugin(ScrollTrigger);
   // ── Subtle cursor parallax on panel content only (won't fight GSAP) ──
   let jMx=0,jMy=0;
   document.addEventListener('mousemove', e=>{
-    jMx=(e.clientX/window.innerWidth-.5)*12;
-    jMy=(e.clientY/window.innerHeight-.5)*8;
+    jMx=(e.clientX/window.innerWidth-.5)*22;
+    jMy=(e.clientY/window.innerHeight-.5)*14;
   },{passive:true});
   (function jParallax(){
     requestAnimationFrame(jParallax);
     document.querySelectorAll('.panel-content').forEach(el=>{
       const cx=parseFloat(el.dataset.px||0), cy=parseFloat(el.dataset.py||0);
-      const nx=cx+(jMx-cx)*.035, ny=cy+(jMy-cy)*.035;
+      const nx=cx+(jMx-cx)*.06, ny=cy+(jMy-cy)*.06;
       el.dataset.px=nx; el.dataset.py=ny;
       el.style.transform=`translate(${nx}px,${ny}px) translateZ(0)`;
     });
