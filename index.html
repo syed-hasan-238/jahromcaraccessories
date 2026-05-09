@@ -813,35 +813,6 @@ function startHero(){
     (function animate(){requestAnimationFrame(animate);if(!_vis)return;const t=clk.getElapsedTime();pts.rotation.y=t*.015;pts.rotation.x=Math.sin(t*.08)*.04;R.render(scene,cam);})();
     window.addEventListener('resize',()=>{R.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();});
   });
-    const pts=new THREE.Points(geo,mat); scene.add(pts);
-    let camX=0,camY=0;
-    const clk=new THREE.Clock();
-    function resize(){
-      const w=canvas.parentElement.offsetWidth||window.innerWidth;
-      const h=canvas.parentElement.offsetHeight||window.innerHeight;
-      cam.aspect=w/h||1; cam.updateProjectionMatrix();
-      R.setSize(w,h,false);
-    }
-    resize();
-    // Pause when offscreen for perf
-    let _vis = false;
-    const _obs = new IntersectionObserver(e=>{_vis=e[0].isIntersecting;},{threshold:0});
-    _obs.observe(canvas);
-    (function animate(){
-      requestAnimationFrame(animate);
-      if(!_vis) return; // skip render when scrolled away
-      const t=clk.getElapsedTime();
-      mat.uniforms.uT.value=t;
-      mat.uniforms.uM.value.set(globalMx*.5,globalMy*.5);
-      camX+=(globalMx*.45-camX)*.04;
-      camY+=(globalMy*.3-camY)*.04;
-      cam.position.x=camX; cam.position.y=camY;
-      cam.lookAt(scene.position);
-      pts.rotation.y=t*.018;
-      R.render(scene,cam);
-    })();
-    window.addEventListener('resize',resize);
-  });
 })();
 
 // ── LENIS SMOOTH SCROLL ───────────────────────────────────────────
