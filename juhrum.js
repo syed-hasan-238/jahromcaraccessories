@@ -402,16 +402,27 @@
     ctx.drawImage(img, x, y, w, h);
   }
 
-  // ── Panel switching ───────────────────────────
+  // ── Feed scrolling — text column moves up as progress advances ──
+  const feed = document.getElementById('ts-feed');
   function updateScene(progress) {
+    // Scroll the feed vertically based on progress
+    // Feed reveals panels as progress moves through scenes
+    if (feed) {
+      const panels = feed.querySelectorAll('.ts-panel');
+      const totalH = feed.scrollHeight - (feed.parentElement ? feed.parentElement.clientHeight : window.innerHeight * 0.6);
+      // Map progress 0→1 to feed scroll 0→totalH
+      // Add small deadzone at start so panel 0 is visible first
+      const feedP = Math.max(0, (progress - 0.05) / 0.9);
+      feed.style.transform = `translateY(-${Math.min(feedP, 1) * totalH}px)`;
+    }
+
+    // Update active panel for CSS highlight
     let idx = 0;
     for (let i = SCENES.length - 1; i >= 0; i--) {
       if (progress >= SCENES[i].p - 0.01) { idx = i; break; }
     }
     if (idx === currentScene) return;
     currentScene = idx;
-
-    // Deactivate all panels, activate current
     document.querySelectorAll('.ts-panel').forEach((el, i) => {
       el.classList.toggle('active', i === idx);
     });
@@ -452,8 +463,9 @@
 
     updateScene(p);
 
-    if (p > 0.04 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
-    if (p < 0.02 && hintHidden)  { hint && hint.classList.remove('hide'); hintHidden = false; }
+    // Keep scrolling hint: hide only when CTA is showing (at end)
+    if (p >= 0.95 && !hintHidden) { hint && hint.classList.add('hide'); hintHidden = true; }
+    if (p < 0.90 && hintHidden)   { hint && hint.classList.remove('hide'); hintHidden = false; }
   }
 
   // ── Snap on scroll stop ───────────────────────
@@ -498,25 +510,48 @@
   // ── Preload frames ────────────────────────────
   function preload() {
     let done = 0;
+
+    function onFrameDone(i) {
+      done++;
+      const pct = Math.round(done / TOTAL * 100);
+      if (loadFill) loadFill.style.width = pct + '%';
+      if (loadLbl)  loadLbl.textContent  = pct + '%';
+      if (done === TOTAL) {
+        finishLoad();
+      }
+    }
+
+    function finishLoad() {
+      ready = true;
+      if (loading) { loading.style.opacity = '0'; setTimeout(() => loading.style.display='none', 400); }
+      // Use first successfully loaded frame index for initial draw
+      const firstLoaded = frames.findIndex(f => f && f.complete && f.naturalWidth > 0);
+      drawFrame(Math.max(0, firstLoaded));
+      // Activate first panel
+      const p0 = document.getElementById('ts-panel-0');
+      if (p0) { p0.classList.add('active'); currentScene = 0; }
+    }
+
     for (let i = 0; i < TOTAL; i++) {
       const img = new Image();
-      img.onload = () => {
-        done++;
-        const pct = Math.round(done / TOTAL * 100);
-        if (loadFill) loadFill.style.width = pct + '%';
-        if (loadLbl)  loadLbl.textContent  = pct + '%';
-        if (done === TOTAL) {
-          ready = true;
-          if (loading) { loading.style.opacity = '0'; setTimeout(() => loading.style.display='none', 400); }
-          drawFrame(0);
-          // Activate first panel
-          const p0 = document.getElementById('ts-panel-0');
-          if (p0) { p0.classList.add('active'); currentScene = 0; }
-        }
+      img.onload  = () => onFrameDone(i);
+      img.onerror = () => {
+        // Count failed frames so loader never stalls
+        console.warn('Frame failed to load: frames/f' + i + '.webp');
+        onFrameDone(i);
       };
       img.src    = 'frames/f' + i + '.webp';
       frames[i]  = img;
     }
+
+    // Absolute safety net: if after 12s still not done, force-complete
+    setTimeout(() => {
+      if (!ready) {
+        console.warn('Preloader timeout — forcing completion at', done + '/' + TOTAL, 'frames loaded');
+        done = TOTAL;
+        finishLoad();
+      }
+    }, 12000);
   }
 
   start();
