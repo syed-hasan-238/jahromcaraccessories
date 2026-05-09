@@ -237,6 +237,27 @@
   .ed-h2 { font-size: clamp(38px, 12vw, 68px); }
   .nb-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Page scroll indicator ── */
+.page-scroll-hint {
+  position: absolute; bottom: 44px; right: 52px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  z-index: 10; opacity: 0; animation: fadeInHint 1s ease 1.6s forwards;
+  pointer-events: none;
+}
+@keyframes fadeInHint { to { opacity: 1; } }
+.page-scroll-hint-icon {
+  font-size: 22px; color: var(--gold);
+  animation: bounceDownPage 1.8s ease infinite; line-height: 1; align-self: flex-end;
+}
+.page-scroll-hint-text {
+  font-family: var(--fu); font-size: 10px; letter-spacing: .3em;
+  text-transform: uppercase; color: rgba(196,154,56,.85); white-space: nowrap;
+}
+@keyframes bounceDownPage {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
 </style>
 </head>
 <body class="noise">
@@ -283,6 +304,10 @@
       <span class="s">DESERT.</span>
     </h1>
     <p class="sh-sub reveal d2">Five years. 500+ builds. One rule: your truck deserves precision-grade gear. Everything else is negotiable.</p>
+  <div class="page-scroll-hint">
+    <span class="page-scroll-hint-icon">↓</span>
+    <span class="page-scroll-hint-text">Scroll Down</span>
+  </div>
     <div class="sh-scroll reveal d3">
       <a href="#ch1" class="btn-o">Read the Story</a>
     </div>

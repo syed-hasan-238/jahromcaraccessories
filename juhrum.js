@@ -357,8 +357,8 @@
   // ── Draw a single frame — no cross-fade, no ghosting ──
   // Smoothly interpolated layout values for scene transitions
   let camX = 0.5; // 0=left, 0.5=center, 1=right (as fraction of availW)
-  let camScale = 0.78; // base scale
-  let smCamX = 0.5, smCamScale = 0.78; // smoothed values
+  let camScale = 0.85; // base scale
+  let smCamX = 0.5, smCamScale = 0.85; // smoothed values
 
   function drawFrame(idx) {
     idx = Math.min(Math.max(Math.round(idx), 0), TOTAL - 1);
@@ -375,13 +375,13 @@
     // Scenes 1+: slightly left, slightly larger (panel revealed on right)
     let targetScale, targetX;
     if (currentScene <= 0) {
-      targetScale = 0.75;
+      targetScale = 0.82;
       targetX = 0.5; // centred in availW
     } else if (currentScene >= SCENES.length - 1) {
-      targetScale = 0.78;
+      targetScale = 0.85;
       targetX = 0.45;
     } else {
-      targetScale = 0.82;
+      targetScale = 0.88;
       targetX = 0.42; // shifted left
     }
 

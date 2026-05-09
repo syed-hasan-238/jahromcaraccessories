@@ -197,6 +197,27 @@
   .con-h1 { font-size: clamp(40px, 13vw, 80px); }
   .wa-big { flex-direction: column; gap: 12px; padding: 20px 16px; }
 }
+
+/* ── Page scroll indicator ── */
+.page-scroll-hint {
+  position: absolute; bottom: 44px; right: 52px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  z-index: 10; opacity: 0; animation: fadeInHint 1s ease 1.6s forwards;
+  pointer-events: none;
+}
+@keyframes fadeInHint { to { opacity: 1; } }
+.page-scroll-hint-icon {
+  font-size: 22px; color: var(--gold);
+  animation: bounceDownPage 1.8s ease infinite; line-height: 1; align-self: flex-end;
+}
+.page-scroll-hint-text {
+  font-family: var(--fu); font-size: 10px; letter-spacing: .3em;
+  text-transform: uppercase; color: rgba(196,154,56,.85); white-space: nowrap;
+}
+@keyframes bounceDownPage {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
 </style>
 </head>
 <body class="noise">
@@ -219,7 +240,7 @@
 </nav>
 
 <!-- HERO -->
-<div class="con-hero">
+<div class="con-hero" style="position:relative;">
   <div class="dot-grid tr" style="opacity:.15;"></div>
   <div class="bracket tl" style="top:100px;left:52px;z-index:4;"></div>
   <div class="cross-accent" style="bottom:60px;right:60px;opacity:.25;"></div>
@@ -232,6 +253,10 @@
     <span class="s">YOURS.</span>
   </h1>
   <p class="con-sub reveal d2">Know exactly what you want or just starting to look — either way, we respond fast. Message, call, or just show up. No appointment needed.</p>
+  <div class="page-scroll-hint">
+    <span class="page-scroll-hint-icon">↓</span>
+    <span class="page-scroll-hint-text">Scroll Down</span>
+  </div>
 </div>
 
 <!-- TICKER -->
