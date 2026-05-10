@@ -863,3 +863,153 @@ a:focus-visible, button:focus-visible {
   text-transform: uppercase;
   color: var(--gold);
 }
+
+/* ── CONTACT STRIP: 3 items only ── */
+.contact-strip {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+.cs-title {
+  font-size: clamp(18px, 2.2vw, 32px) !important;
+  white-space: normal !important;
+}
+.cs-label {
+  font-size: clamp(9px, .85vw, 12px) !important;
+}
+
+/* ── NAV LINKS: bigger ── */
+.jnav-links a {
+  font-size: 12px !important;
+  letter-spacing: .18em !important;
+}
+
+/* ── FOOTER: bigger text ── */
+.jfoot-tag {
+  font-size: 11px !important;
+  letter-spacing: .2em !important;
+}
+.jfoot-copy {
+  font-size: 11px !important;
+  letter-spacing: .12em !important;
+}
+
+/* ── HERO SPACING FIX: prevent text overlapping bracket/tagline ── */
+#hero {
+  padding-top: 130px !important;
+}
+.h-tag {
+  margin-bottom: 28px !important;
+}
+.hero-content {
+  max-width: 680px;
+}
+
+/* ── SCROLL HINT: always visible, gold pulse ── */
+.h-scroll {
+  right: 52px !important;
+  bottom: 52px !important;
+  opacity: 0;
+  transition: opacity 1s 1.4s;
+}
+.h-scroll.in { opacity: 1 !important; }
+.h-scroll-nudge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.h-scroll-arrow-big {
+  font-size: 32px !important;
+  color: var(--gold);
+  animation: nudgeDown 1.4s ease infinite !important;
+}
+.h-scroll-lbl {
+  font-size: 11px !important;
+  letter-spacing: .28em !important;
+  color: var(--gold) !important;
+  opacity: 1 !important;
+}
+
+/* Scroll pulse animation */
+@keyframes heroPulse {
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(28px); }
+  50%  { transform: translateY(0); }
+  65%  { transform: translateY(18px); }
+  80%  { transform: translateY(0); }
+  90%  { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+body.pulse-hint {
+  overflow: hidden;
+}
+
+/* ── RTL GLOBAL LAYOUT ── */
+[dir="rtl"] #hero {
+  padding-left: 52px;
+  padding-right: 52px;
+}
+[dir="rtl"] .hero-content {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  text-align: right !important;
+}
+[dir="rtl"] .h-h1 .row { text-align: right !important; }
+[dir="rtl"] .h-tag { flex-direction: row-reverse; }
+[dir="rtl"] .h-ctas { flex-direction: row-reverse; }
+[dir="rtl"] .h-stats {
+  right: auto !important;
+  left: 52px !important;
+}
+[dir="rtl"] .h-scroll {
+  right: auto !important;
+  left: 52px !important;
+}
+[dir="rtl"] .booking-ctas { flex-direction: row-reverse; }
+[dir="rtl"] .rcard-text,
+[dir="rtl"] .rcard-name,
+[dir="rtl"] .rcard-meta,
+[dir="rtl"] .stage-text,
+[dir="rtl"] .stage-title,
+[dir="rtl"] .stage-tag { text-align: right !important; }
+[dir="rtl"] .panel-content { align-items: flex-end !important; text-align: right; }
+[dir="rtl"] .ts-panels {
+  right: auto !important;
+  left: 40px !important;
+}
+[dir="rtl"] .ts-panel { text-align: right; }
+[dir="rtl"] .ts-scroll-hint {
+  right: auto !important;
+  left: 40px !important;
+  text-align: right;
+}
+[dir="rtl"] .jfoot { direction: rtl; }
+[dir="rtl"] .contact-strip { direction: rtl; }
+[dir="rtl"] .cs-item { flex-direction: row-reverse; }
+[dir="rtl"] .cs-arrow { transform: scaleX(-1); }
+[dir="rtl"] .lang-switcher { margin-right: 0; margin-left: 16px; }
+[dir="rtl"] #lang-dropdown { right: auto; left: 0; }
+[dir="rtl"] .jnav { flex-direction: row-reverse; }
+[dir="rtl"] .jnav-links { flex-direction: row-reverse; }
+[dir="rtl"] .reviews-grid { direction: rtl; }
+[dir="rtl"] .rcard-author { flex-direction: row-reverse; }
+[dir="rtl"] .two-col { direction: rtl; }
+[dir="rtl"] .vcard, [dir="rtl"] .contact-left { text-align: right; direction: rtl; }
+[dir="rtl"] .soc-block { text-align: right; }
+[dir="rtl"] .soc-btns { flex-direction: row-reverse; }
+
+/* ── STORY PAGE ch-marker RTL ── */
+[dir="rtl"] .ch-marker { flex-direction: row-reverse; }
+[dir="rtl"] .ed-h2, [dir="rtl"] .ed-body { text-align: right; }
+[dir="rtl"] .story-img-gallery { direction: rtl; }
+
+/* ── Mobile contact strip ── */
+@media (max-width: 768px) {
+  .contact-strip {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column;
+  }
+  .cs-title { font-size: 22px !important; }
+  .cs-label { font-size: 11px !important; }
+}
