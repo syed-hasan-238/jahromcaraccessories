@@ -231,12 +231,24 @@
 <nav class="jnav">
   <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
   <ul class="jnav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="products.html">Products</a></li>
-    <li><a href="story.html">Our Story</a></li>
-    <li><a href="contact.html" class="cur">Contact</a></li>
+    <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+    <li><a href="products.html" data-i18n="nav_products">Products</a></li>
+    <li><a href="story.html" data-i18n="nav_story">Our Story</a></li>
+    <li><a href="contact.html" class="cur" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
+  <div style="display:flex;align-items:center;gap:0;">
+    <div class="lang-switcher">
+      <button id="lang-btn">EN ▾</button>
+      <div id="lang-dropdown">
+        <div class="lang-option active" data-lang="en">EN <span class="lang-native">English</span></div>
+        <div class="lang-option" data-lang="ar">AR <span class="lang-native">عربي</span></div>
+        <div class="lang-option" data-lang="ur">UR <span class="lang-native">اردو</span></div>
+        <div class="lang-option" data-lang="fa">FA <span class="lang-native">فارسی</span></div>
+        <div class="lang-option" data-lang="hi">HI <span class="lang-native">हिन्दी</span></div>
+      </div>
+    </div>
+    <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp" aria-label="Contact us on WhatsApp" data-i18n="nav_whatsapp">WhatsApp Us</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -352,11 +364,16 @@
     </a>
 
     <div class="soc-block reveal d4">
-      <p class="soc-block-title">See the builds. Follow us.</p>
+      <p class="soc-block-title" data-i18n="contact_social_title">See the builds. Follow us.</p>
       <div class="soc-btns">
-        <a href="https://www.instagram.com/juhrum_auto_accessories" class="soc-btn" target="_blank" data-tip="Instagram">Instagram</a>
-        <a href="https://www.youtube.com/@Juhrum_auto_accessories" class="soc-btn" target="_blank" data-tip="YouTube">YouTube</a>
-        <a href="https://www.tiktok.com/@jahromautoaccessorie" class="soc-btn" target="_blank" data-tip="TikTok">TikTok</a>
+        <a href="https://www.instagram.com/juhrum_auto_accessories" class="soc-btn" target="_blank" data-tip="Instagram" data-i18n="contact_instagram">Instagram</a>
+        <a href="https://www.youtube.com/@Juhrum_auto_accessories" class="soc-btn" target="_blank" data-tip="YouTube" data-i18n="contact_youtube">YouTube</a>
+        <a href="https://www.tiktok.com/@jahromautoaccessorie" class="soc-btn" target="_blank" data-tip="TikTok" data-i18n="contact_tiktok">TikTok</a>
+      </div>
+      <!-- Shop photo -->
+      <div class="contact-shop-photo reveal d5" style="margin-top:32px;">
+        <img src="images/shop-front-bed.jpg" alt="Juhrum Auto Accessories — Industrial Area 4, Sharjah" loading="lazy">
+        <div class="contact-shop-label">Industrial Area 4 — Sharjah, UAE</div>
       </div>
     </div>
   </div>
@@ -438,5 +455,6 @@ lenis.on("scroll", () => window.dispatchEvent(new Event("scroll", { bubbles: fal
 window.__lenis = lenis;
 </script>
 <script src="juhrum.js"></script>
+<script src="lang.js"></script>
 </body>
 </html>

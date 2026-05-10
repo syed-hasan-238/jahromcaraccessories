@@ -272,12 +272,24 @@
 <nav class="jnav">
   <a href="index.html" class="jnav-logo"><img src="images/logo-transparent.png" alt="Juhrum Auto Accessories" style="height:26px;width:auto;vertical-align:middle;"></a>
   <ul class="jnav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="products.html">Products</a></li>
-    <li><a href="story.html" class="cur">Our Story</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+    <li><a href="products.html" data-i18n="nav_products">Products</a></li>
+    <li><a href="story.html" class="cur" data-i18n="nav_story">Our Story</a></li>
+    <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <a href="https://wa.me/971503021700" class="jnav-wa" aria-label="Contact Juhrum on WhatsApp" data-tip="WhatsApp" aria-label="Contact us on WhatsApp">WhatsApp Us</a>
+  <div style="display:flex;align-items:center;gap:0;">
+    <div class="lang-switcher">
+      <button id="lang-btn">EN ▾</button>
+      <div id="lang-dropdown">
+        <div class="lang-option active" data-lang="en">EN <span class="lang-native">English</span></div>
+        <div class="lang-option" data-lang="ar">AR <span class="lang-native">عربي</span></div>
+        <div class="lang-option" data-lang="ur">UR <span class="lang-native">اردو</span></div>
+        <div class="lang-option" data-lang="fa">FA <span class="lang-native">فارسی</span></div>
+        <div class="lang-option" data-lang="hi">HI <span class="lang-native">हिन्दी</span></div>
+      </div>
+    </div>
+    <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp" aria-label="Contact us on WhatsApp" data-i18n="nav_whatsapp">WhatsApp Us</a>
+  </div>
 </nav>
 
 <!-- STORY HERO -->
@@ -340,19 +352,19 @@
   <div class="ch-marker">
     <span class="ch-num">01</span>
     <div class="ch-line"></div>
-    <span class="ch-title">The Origin</span>
+    <span class="ch-title" data-i18n="story_ch1_title">The Origin</span>
   </div>
   <div class="two-col">
     <div>
       <h2 class="ed-h2 reveal">
-        BORN IN<br>
-        <span class="g">IRAN.</span><br>
-        BUILT IN<br>
-        <span class="s">SHARJAH.</span>
+        <span data-i18n="story_ch1_h2_line1">BORN IN</span><br>
+        <span class="g" data-i18n="story_ch1_h2_line2">IRAN.</span><br>
+        <span data-i18n="story_ch1_h2_line3">BUILT IN</span><br>
+        <span class="s" data-i18n="story_ch1_h2_line4">SHARJAH.</span>
       </h2>
-      <p class="ed-body reveal d1">The story of Juhrum begins not in the UAE, but in <em>Iran</em> — a country with one of the most passionate car cultures in the world. Founded by Hadi Ghanaatian, Juhrum carries the DNA of Persian attention to detail: <strong>the belief that anything worth doing is worth doing perfectly.</strong></p>
-      <p class="ed-body reveal d2">When Hadi established the shop in Sharjah's Industrial Area 4, he brought that same obsession with him. He knew exactly what serious truck owners wanted — not just parts, but <strong>accessories that genuinely elevated their vehicle</strong>. Products chosen with care, fitted with precision, backed with knowledge.</p>
-      <p class="ed-body reveal d3">More than five years later, Juhrum has become <em>the go-to destination</em> for pickup truck owners across the UAE who refuse to compromise.</p>
+      <p class="ed-body reveal d1" data-i18n="story_ch1_body1">The story of Juhrum begins not in the UAE, but in <em>Iran</em> — a country with one of the most passionate car cultures in the world. Founded by Hadi Ghanaatian, Juhrum carries the DNA of Persian attention to detail: <strong>the belief that anything worth doing is worth doing perfectly.</strong></p>
+      <p class="ed-body reveal d2" data-i18n="story_ch1_body2">When Hadi established the shop in Sharjah's Industrial Area 4, he brought that same obsession with him. He knew exactly what serious truck owners wanted — not just parts, but <strong>accessories that genuinely elevated their vehicle</strong>. Products chosen with care, fitted with precision, backed with knowledge.</p>
+      <p class="ed-body reveal d3" data-i18n="story_ch1_body3">More than five years later, Juhrum has become <em>the go-to destination</em> for pickup truck owners across the UAE who refuse to compromise.</p>
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
@@ -360,6 +372,22 @@
         <div class="img-badge">
           <div class="img-badge-n">5+</div>
           <span class="img-badge-l">Years of<br>Excellence</span>
+        </div>
+      </div>
+      <!-- Shop exterior photos -->
+      <div class="story-img-gallery reveal d2">
+        <div class="img-block" style="aspect-ratio:4/3;overflow:hidden;position:relative;">
+          <img src="images/shop-ext-1.jpg" alt="Juhrum storefront" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.45) 0%,transparent 60%);"></div>
+        </div>
+        <div class="img-block" style="aspect-ratio:4/3;overflow:hidden;position:relative;">
+          <img src="images/shop-ext-2.jpg" alt="Juhrum shop with truck" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.45) 0%,transparent 60%);"></div>
+        </div>
+        <div class="img-block" style="aspect-ratio:16/9;overflow:hidden;position:relative;grid-column:span 2;">
+          <img src="images/shop-front-bed.jpg" alt="Juhrum shop front" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.4) 0%,transparent 60%);"></div>
+          <div style="position:absolute;bottom:14px;left:18px;z-index:3;font-family:var(--fu);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">Industrial Area 4, Sharjah</div>
         </div>
       </div>
     </div>
@@ -389,23 +417,29 @@
   <div class="ch-marker">
     <span class="ch-num">02</span>
     <div class="ch-line"></div>
-    <span class="ch-title">The Environment</span>
+    <span class="ch-title" data-i18n="story_ch2_title">The Environment</span>
   </div>
   <div class="two-col flip">
     <div>
       <h2 class="ed-h2 reveal">
-        BUILT FOR<br>
-        <span class="g">UAE</span><br>
-        <span class="s">TERRAIN.</span>
+        <span data-i18n="story_ch2_h2_line1">BUILT FOR</span><br>
+        <span class="g" data-i18n="story_ch2_h2_line2">UAE</span><br>
+        <span class="s" data-i18n="story_ch2_h2_line3">TERRAIN.</span>
       </h2>
-      <p class="ed-body reveal d1">48°C summers. Sand in every seal. UV that destroys cheap coatings within months. <strong>The UAE is one of the most punishing environments on earth for truck accessories</strong> — and most shops ignore that.</p>
-      <p class="ed-body reveal d2">We don't. Every product at Juhrum has been tested against this climate — not in a lab, but in the real heat of Sharjah summers. <em>Bed covers that lock out desert dust. PPF that doesn't yellow. Thermal insulation that actually works.</em></p>
-      <p class="ed-body reveal d3">If it can't handle a full UAE year, <strong>it doesn't earn a place in our showroom. Full stop.</strong></p>
+      <p class="ed-body reveal d1" data-i18n="story_ch2_body1">48°C summers. Sand in every seal. UV that destroys cheap coatings within months. <strong>The UAE is one of the most punishing environments on earth for truck accessories</strong> — and most shops ignore that.</p>
+      <p class="ed-body reveal d2" data-i18n="story_ch2_body2">We don't. Every product at Juhrum has been tested against this climate — not in a lab, but in the real heat of Sharjah summers. <em>Bed covers that lock out desert dust. PPF that doesn't yellow. Thermal insulation that actually works.</em></p>
+      <p class="ed-body reveal d3" data-i18n="story_ch2_body3">If it can't handle a full UAE year, <strong>it doesn't earn a place in our showroom. Full stop.</strong></p>
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/dodge-ram-trx.png" alt="Truck built for UAE terrain" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.85) saturate(.9);">
+        <img src="images/bronco-desert.png" alt="Ford Bronco in UAE desert — the terrain Juhrum builds for" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.88) saturate(.95);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.6) 0%,transparent 50%),linear-gradient(135deg,rgba(196,154,56,.08) 0%,transparent 60%);"></div>
+      </div>
+      <!-- Desert action shot -->
+      <div class="img-block reveal d2" style="aspect-ratio:16/9;overflow:hidden;position:relative;margin-top:14px;">
+        <img src="images/truck-dunes.png" alt="Truck powering through UAE sand dunes" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.85) saturate(.9);">
+        <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.5) 0%,transparent 55%);"></div>
+        <div style="position:absolute;bottom:14px;left:18px;z-index:3;font-family:var(--fu);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">UAE Desert — Built to Handle This</div>
       </div>
     </div>
   </div>
@@ -676,5 +710,6 @@ lenis.on("scroll", () => window.dispatchEvent(new Event("scroll", { bubbles: fal
 window.__lenis = lenis;
 </script>
 <script src="juhrum.js"></script>
+<script src="lang.js"></script>
 </body>
 </html>

@@ -695,3 +695,171 @@ a:focus-visible, button:focus-visible {
   text-transform: uppercase; color: var(--gold);
   display: block; margin-bottom: 20px;
 }
+
+/* ── LANGUAGE DROPDOWN ── */
+.lang-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+#lang-btn {
+  font-family: var(--fu);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  background: transparent;
+  border: 1px solid rgba(196,154,56,.25);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: color .3s, border-color .3s;
+  white-space: nowrap;
+}
+#lang-btn:hover {
+  color: var(--gold);
+  border-color: rgba(196,154,56,.6);
+}
+#lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #0e0e0c;
+  border: 1px solid rgba(196,154,56,.15);
+  min-width: 160px;
+  z-index: 9999;
+  box-shadow: 0 20px 60px rgba(0,0,0,.7);
+}
+#lang-dropdown.open { display: block; }
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  font-family: var(--fu);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(196,154,56,.06);
+  transition: background .2s, color .2s;
+}
+.lang-option:last-child { border-bottom: none; }
+.lang-option:hover { background: rgba(196,154,56,.07); color: var(--white); }
+.lang-option.active { color: var(--gold); }
+.lang-option .lang-native {
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: .7;
+}
+
+/* ── CONTACT STRIP FIX — proper scaling for 6 items ── */
+.contact-strip {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr);
+}
+.cs-item {
+  min-width: 0;
+  padding: var(--sp-7) clamp(12px, 1.8vw, var(--sp-6)) !important;
+}
+.cs-title {
+  font-size: clamp(14px, 1.6vw, 26px) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cs-label {
+  font-size: clamp(9px, .8vw, 12px) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cs-arrow {
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+/* ── RTL GLOBAL TWEAKS ── */
+[dir="rtl"] .cs-arrow { margin-left: 0; margin-right: 8px; transform: scaleX(-1); }
+[dir="rtl"] .cs-item { flex-direction: row-reverse; }
+[dir="rtl"] .jnav { flex-direction: row-reverse; }
+[dir="rtl"] .jnav-links { flex-direction: row-reverse; }
+[dir="rtl"] .lang-switcher { margin-right: 0; margin-left: 16px; }
+[dir="rtl"] #lang-dropdown { right: auto; left: 0; }
+
+/* Mobile contact strip */
+@media (max-width: 768px) {
+  .contact-strip {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column;
+  }
+  .cs-title { font-size: 22px !important; white-space: normal; }
+  .cs-label { font-size: 11px !important; white-space: normal; }
+  .cs-item { padding: var(--sp-6) var(--sp-5) !important; }
+}
+
+/* ── STORY PAGE — image gallery ── */
+.story-img-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+.story-img-gallery .img-block {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.story-img-gallery .img-block.tall {
+  aspect-ratio: 3/4;
+  grid-row: span 2;
+}
+.story-img-caption {
+  font-family: var(--fu);
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ── CONTACT PAGE — shop photo ── */
+.contact-shop-photo {
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  border: 1px solid rgba(196,154,56,.1);
+}
+.contact-shop-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.85) saturate(.8) contrast(1.05);
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.contact-shop-photo:hover img { transform: scale(1.03); }
+.contact-shop-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,.5) 0%, transparent 50%);
+  pointer-events: none;
+}
+.contact-shop-label {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  z-index: 2;
+  font-family: var(--fu);
+  font-size: 9px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
