@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>!function(){var t=localStorage.getItem("juhrum-theme")||"dark",r=t==="device"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;document.documentElement.setAttribute("data-theme",r)}()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>Our Story — Juhrum Auto Accessories</title>
 <meta name="description" content="The story of Juhrum — Persian craftsmanship, UAE desert culture, and five years of building the best pickup trucks in Sharjah.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jahromcaraccessories.vercel.app/story.html">
+<meta property="og:title" content="Our Story — Juhrum Auto Accessories">
+<meta property="og:description" content="From Iran to Sharjah's Industrial Area 4. The story of Juhrum — Persian craftsmanship, UAE desert standards, and 5+ years building the finest pickup trucks in the UAE.">
+<meta property="og:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<meta property="og:site_name" content="Juhrum Auto Accessories">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<meta name="theme-color" content="#C49A38">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
@@ -278,6 +288,14 @@
     <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
+    <div class="theme-switcher">
+      <button id="theme-btn" aria-label="Switch theme">🌑 Dark</button>
+      <div id="theme-dropdown">
+        <div class="theme-option active" data-theme-val="dark"><span class="theme-option-icon">🌑</span> Dark</div>
+        <div class="theme-option" data-theme-val="light"><span class="theme-option-icon">☀</span> Light</div>
+        <div class="theme-option" data-theme-val="device"><span class="theme-option-icon">⬡</span> Device Default</div>
+      </div>
+    </div>
     <div class="lang-switcher">
       <button id="lang-btn">EN ▾</button>
       <div id="lang-dropdown">
@@ -368,7 +386,7 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/shop-interior.png" alt="Jahrom shop interior — Hadi Ghanaatian" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+        <img src="images/shop-interior.png" alt="Jahrom shop interior — Hadi Ghanaatian" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.6) saturate(.8);">
         <div class="img-badge">
           <div class="img-badge-n">5+</div>
           <span class="img-badge-l">Years of<br>Excellence</span>
@@ -377,15 +395,15 @@
       <!-- Shop exterior photos -->
       <div class="story-img-gallery reveal d2">
         <div class="img-block" style="aspect-ratio:4/3;overflow:hidden;position:relative;">
-          <img src="images/shop-ext-1.jpg" alt="Juhrum storefront" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <img src="images/shop-ext-1.jpg" alt="Juhrum storefront" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.52) saturate(.75) contrast(1.05);">
           <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.45) 0%,transparent 60%);"></div>
         </div>
         <div class="img-block" style="aspect-ratio:4/3;overflow:hidden;position:relative;">
-          <img src="images/shop-ext-2.jpg" alt="Juhrum shop with truck" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <img src="images/shop-ext-2.jpg" alt="Juhrum shop with truck" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.52) saturate(.75) contrast(1.05);">
           <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.45) 0%,transparent 60%);"></div>
         </div>
         <div class="img-block" style="aspect-ratio:16/9;overflow:hidden;position:relative;grid-column:span 2;">
-          <img src="images/shop-front-bed.jpg" alt="Juhrum shop front" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.82) saturate(.85) contrast(1.05);">
+          <img src="images/shop-front-bed.jpg" alt="Juhrum shop front" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.52) saturate(.75) contrast(1.05);">
           <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.4) 0%,transparent 60%);"></div>
           <div style="position:absolute;bottom:14px;left:18px;z-index:3;font-family:var(--fu);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">Industrial Area 4, Sharjah</div>
         </div>
@@ -432,12 +450,12 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/bronco-desert.png" alt="Ford Bronco in UAE desert — the terrain Juhrum builds for" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.88) saturate(.95);">
+        <img src="images/ford-raptor-dunes.jpg" alt="Ford Raptor powering through UAE desert dunes" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.55) saturate(.8) contrast(1.05);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.6) 0%,transparent 50%),linear-gradient(135deg,rgba(196,154,56,.08) 0%,transparent 60%);"></div>
       </div>
       <!-- Desert action shot -->
       <div class="img-block reveal d2" style="aspect-ratio:16/9;overflow:hidden;position:relative;margin-top:14px;">
-        <img src="images/truck-dunes.png" alt="Truck powering through UAE sand dunes" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.85) saturate(.9);">
+        <img src="images/ford-f250-sunset.jpg" alt="Ford F-250 truck at golden hour in UAE desert" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.55) saturate(.85) contrast(1.05);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.5) 0%,transparent 55%);"></div>
         <div style="position:absolute;bottom:14px;left:18px;z-index:3;font-family:var(--fu);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">UAE Desert — Built to Handle This</div>
       </div>
@@ -471,7 +489,7 @@
     </div>
     <div style="position:relative; padding-bottom:32px;">
       <div class="img-block reveal d1" style="aspect-ratio:3/4;overflow:hidden;">
-        <img src="images/bed-covers.png" alt="Jahrom product range — bed covers and accessories" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.8) saturate(.85);">
+        <img src="images/chevrolet-desert.jpg" alt="Chevrolet truck in desert terrain" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.55) saturate(.8) contrast(1.05);">
         <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,5,5,.55) 0%,transparent 55%);"></div>
       </div>
     </div>
@@ -543,6 +561,28 @@
     <div><div class="np-label">Get a Quote</div><div class="np-title">WhatsApp Us</div></div>
     <div class="np-arrow">↗</div>
   </a>
+</div>
+
+<!-- BRAND LOGO STRIP -->
+<div class="brand-strip">
+  <div class="brand-track">
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+  </div>
 </div>
 
 <footer class="jfoot">
@@ -711,5 +751,36 @@ window.__lenis = lenis;
 </script>
 <script src="juhrum.js"></script>
 <script src="lang.js"></script>
+
+<a href="https://wa.me/971503021700" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<script>
+(function() {
+  var STORAGE_KEY = 'juhrum-theme';
+  var mq = window.matchMedia('(prefers-color-scheme: light)');
+  function apply(val) {
+    var r = val === 'device' ? (mq.matches ? 'light' : 'dark') : val;
+    document.documentElement.setAttribute('data-theme', r);
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = val === 'light' ? '\u2600 Light' : val === 'device' ? '\u2B21 Auto' : '\uD83C\uDF11 Dark';
+    document.querySelectorAll('.theme-option').forEach(function(o) { o.classList.toggle('active', o.getAttribute('data-theme-val') === val); });
+  }
+  function init() {
+    apply(localStorage.getItem(STORAGE_KEY) || 'dark');
+    var btn = document.getElementById('theme-btn'), dd = document.getElementById('theme-dropdown');
+    if (!btn || !dd) return;
+    btn.style.pointerEvents = 'all'; btn.style.cursor = 'pointer';
+    btn.addEventListener('click', function(e) { e.stopPropagation(); dd.classList.toggle('open'); });
+    document.querySelectorAll('.theme-option').forEach(function(o) {
+      o.style.cursor = 'pointer';
+      o.addEventListener('click', function(e) { e.stopPropagation(); var v = o.getAttribute('data-theme-val'); localStorage.setItem(STORAGE_KEY, v); apply(v); dd.classList.remove('open'); });
+    });
+    document.addEventListener('click', function() { dd.classList.remove('open'); });
+    mq.addEventListener('change', function() { if ((localStorage.getItem(STORAGE_KEY)||'dark') === 'device') apply('device'); });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+})();
+</script>
 </body>
 </html>

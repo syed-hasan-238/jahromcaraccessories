@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>!function(){var t=localStorage.getItem("juhrum-theme")||"dark",r=t==="device"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;document.documentElement.setAttribute("data-theme",r)}()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>Juhrum — Desert Iron, Sharjah</title>
 <meta name="description" content="Premium 4×4 and pickup truck accessories. Bed covers, exterior builds, audio, PPF, upholstery. Sharjah UAE — Industrial Area 4. 4.7★ Google Rating. Trusted 5+ years.">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jahromcaraccessories.vercel.app/">
+<meta property="og:title" content="Juhrum — Desert Iron. Built for UAE Trucks.">
+<meta property="og:description" content="Sharjah's most trusted pickup truck accessories shop. Bed covers, bull bars, PPF, upholstery, audio — fitted to your exact truck. 4.7★ · 500+ trucks built · 5 years in the UAE.">
+<meta property="og:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Juhrum Auto Accessories">
+<meta property="og:locale" content="en_AE">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Juhrum — Desert Iron. Built for UAE Trucks.">
+<meta name="twitter:description" content="Sharjah's most trusted pickup truck accessories shop. Bed covers, bull bars, PPF, upholstery, audio — fitted to your exact truck. 4.7★ · 500+ trucks built.">
+<meta name="twitter:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<!-- Theme -->
+<meta name="theme-color" content="#C49A38">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
@@ -95,7 +113,7 @@
 
 .h-scroll{position:absolute;right:72px;bottom:44px;z-index:4;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;transition:opacity 1s 1.4s;}
 .h-scroll.in{opacity:1;}
-.h-scroll-arrow-big{font-size:28px;color:var(--gold);line-height:1;animation:nudgeDown 1.8s ease infinite;display:block;}
+.h-scroll-arrow-big{font-size:22px;color:var(--gold);line-height:1;animation:nudgeDown 1.8s ease infinite;display:block;}
 .h-scroll-lbl{font-family:var(--fu);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(196,154,56,.9);white-space:nowrap;}
 @keyframes pulseH{0%,100%{opacity:.9;transform:scaleX(1)}50%{opacity:.25;transform:scaleX(.5)}}
 
@@ -415,6 +433,14 @@
     <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
+    <div class="theme-switcher">
+      <button id="theme-btn" aria-label="Switch theme">☀ Light</button>
+      <div id="theme-dropdown">
+        <div class="theme-option active" data-theme-val="dark"><span class="theme-option-icon">🌑</span> Dark</div>
+        <div class="theme-option" data-theme-val="light"><span class="theme-option-icon">☀</span> Light</div>
+        <div class="theme-option" data-theme-val="device"><span class="theme-option-icon">⬡</span> Device Default</div>
+      </div>
+    </div>
     <div class="lang-switcher">
       <button id="lang-btn">EN ▾</button>
       <div id="lang-dropdown">
@@ -589,6 +615,85 @@
       <a href="tel:+971503021700" class="btn-dark" data-tip="Call"><span data-i18n="booking_btn_call">Call: 050 302 1700</span></a>
     </div>
     <div class="booking-info" data-i18n="booking_info">Open 8:00 AM – 11:00 PM, Every Day</div>
+  </div>
+</section>
+
+<!-- BRAND LOGO STRIP -->
+<div class="brand-strip">
+  <div class="brand-track" id="brandTrack">
+    <!-- Ford -->
+    <div class="brand-item">
+      <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg>
+    </div>
+    <!-- Toyota -->
+    <div class="brand-item">
+      <span class="brand-wordmark">TOYOTA</span>
+    </div>
+    <!-- GMC -->
+    <div class="brand-item">
+      <span class="brand-wordmark">GMC</span>
+    </div>
+    <!-- Nissan -->
+    <div class="brand-item">
+      <span class="brand-wordmark">NISSAN</span>
+    </div>
+    <!-- Mercedes -->
+    <div class="brand-item">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg>
+    </div>
+    <!-- Mitsubishi -->
+    <div class="brand-item">
+      <span class="brand-wordmark">MITSUBISHI</span>
+    </div>
+    <!-- Chevrolet -->
+    <div class="brand-item">
+      <span class="brand-wordmark">CHEVROLET</span>
+    </div>
+    <!-- Dodge -->
+    <div class="brand-item">
+      <span class="brand-wordmark">DODGE</span>
+    </div>
+    <!-- Repeat for seamless loop -->
+    <div class="brand-item">
+      <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg>
+    </div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg>
+    </div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+  </div>
+</div>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-text-side">
+      <div class="tag reveal">Find Us</div>
+      <h2 class="map-h2 reveal d1">VISIT THE<br><span class="g">SHOWROOM.</span></h2>
+      <p class="map-body reveal d2">Walk in, walk around, see the quality for yourself. Our team is on the floor every day — ready to talk trucks, accessories, and custom builds.</p>
+      <div class="map-details reveal d3">
+        <div class="map-detail-row"><span class="md-icon">◈</span><span>Industrial Area 4, Sharjah, UAE</span></div>
+        <div class="map-detail-row"><span class="md-icon">◷</span><span>Open 8:00 AM – 11:00 PM, Every Day</span></div>
+        <div class="map-detail-row"><span class="md-icon">◉</span><span>050 302 1700</span></div>
+      </div>
+      <div class="reveal d4" style="margin-top:8px;">
+        <a href="https://wa.me/971503021700" class="btn-g" target="_blank" rel="noopener" data-tip="Chat"><span>WhatsApp Us First</span><span>→</span></a>
+      </div>
+    </div>
+    <div class="map-embed-wrap reveal d2">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.0!2d55.4168!3d25.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f59582c29df73%3A0x223044947b43f24f!2sJahrom%20Car%20Accessories!5e0!3m2!1sen!2sae!4v1"
+        title="Juhrum Auto Accessories location — Industrial Area 4, Sharjah"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
   </div>
 </section>
 
@@ -967,25 +1072,29 @@ gsap.registerPlugin(ScrollTrigger);
 <script src="lang.js"></script>
 <script>
 // ── SCROLL PULSE HINT ──
-// After 3s, bounce the page 2 sets of 2 quick pulses, then return
+// After 5s, bounce the page — 2 pulses, one after the other like a ball bouncing
 (function() {
   var done = false;
   setTimeout(function() {
     if (done || window.scrollY > 50) return;
     done = true;
-    var target = Math.min(120, window.innerHeight * 0.15);
-    var timings = [0, 180, 360, 580]; // 2 pairs
-    timings.forEach(function(delay, i) {
+    var target = Math.min(90, window.innerHeight * 0.11);
+    // First bounce — bigger
+    window.scrollTo({ top: target, behavior: 'smooth' });
+    setTimeout(function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Second bounce — smaller, like ball losing energy
       setTimeout(function() {
-        window.scrollTo({ top: target, behavior: 'smooth' });
+        if (window.scrollY > 50) return;
+        window.scrollTo({ top: Math.round(target * 0.55), behavior: 'smooth' });
         setTimeout(function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 280);
-      }, delay * (i < 2 ? 1 : 1.4));
-    });
-  }, 3000);
+        }, 420);
+      }, 560);
+    }, 480);
+  }, 6500);
 
-  // Also cancel if user already scrolled
+  // Cancel if user already scrolled
   window.addEventListener('scroll', function() { done = true; }, { once: true, passive: true });
 })();
 
@@ -1000,6 +1109,65 @@ document.addEventListener('DOMContentLoaded', function() {
     nudge.style.cursor = 'pointer';
   }
 });
+</script>
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/971503021700" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── THEME SWITCHER ──
+(function() {
+  var STORAGE_KEY = 'juhrum-theme';
+  var mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+
+  function applyTheme(val) {
+    var resolved = val;
+    if (val === 'device') resolved = mediaQuery.matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', resolved);
+    var btn = document.getElementById('theme-btn');
+    if (btn) {
+      btn.textContent = val === 'light' ? '☀ Light' : val === 'device' ? '⬡ Auto' : '🌑 Dark';
+    }
+    document.querySelectorAll('.theme-option').forEach(function(o) {
+      o.classList.toggle('active', o.getAttribute('data-theme-val') === val);
+    });
+  }
+
+  function init() {
+    var saved = localStorage.getItem(STORAGE_KEY) || 'dark';
+    applyTheme(saved);
+
+    var btn = document.getElementById('theme-btn');
+    var dropdown = document.getElementById('theme-dropdown');
+    if (!btn || !dropdown) return;
+
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.theme-option').forEach(function(opt) {
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var val = opt.getAttribute('data-theme-val');
+        localStorage.setItem(STORAGE_KEY, val);
+        applyTheme(val);
+        dropdown.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', function() { dropdown.classList.remove('open'); });
+    mediaQuery.addEventListener('change', function() {
+      var cur = localStorage.getItem(STORAGE_KEY) || 'dark';
+      if (cur === 'device') applyTheme('device');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
 </script>
 </body>
 </html>

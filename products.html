@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>!function(){var t=localStorage.getItem("juhrum-theme")||"dark",r=t==="device"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;document.documentElement.setAttribute("data-theme",r)}()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>Products — Juhrum Auto Accessories</title>
 <meta name="description" content="Full catalogue of premium 4×4 and pickup truck accessories. Bed covers, exterior builds, PPF, audio, interior. Sharjah UAE.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jahromcaraccessories.vercel.app/products.html">
+<meta property="og:title" content="Products — Juhrum Auto Accessories, Sharjah">
+<meta property="og:description" content="Browse bed covers, bull bars, roof racks, PPF, audio, upholstery and more — all fitted to your exact truck. Sharjah's premium 4x4 accessories shop.">
+<meta property="og:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<meta property="og:site_name" content="Juhrum Auto Accessories">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jahromcaraccessories.vercel.app/images/dodge-ram-trx.png">
+<meta name="theme-color" content="#C49A38">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="style.css">
@@ -246,7 +256,7 @@
 }
 @keyframes fadeInHint { to { opacity: 1; } }
 .page-scroll-hint-icon {
-  font-size: 22px; color: var(--gold);
+  font-size: 22.7px; color: var(--gold);
   animation: bounceDownPage 1.8s ease infinite; line-height: 1; align-self: flex-end;
 }
 .page-scroll-hint-text {
@@ -257,7 +267,7 @@
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(6px); }
 }
-.pcard:hover .pcard-img-wrap img { opacity: 0.28; transform: scale(1.04); }
+.pcard:hover .pcard-img-wrap img { opacity: 0.55; transform: scale(1.04); }
 </style>
 </head>
 <body class="noise">
@@ -277,6 +287,14 @@
     <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
+    <div class="theme-switcher">
+      <button id="theme-btn" aria-label="Switch theme">☀ Light</button>
+      <div id="theme-dropdown">
+        <div class="theme-option active" data-theme-val="dark"><span class="theme-option-icon">🌑</span> Dark</div>
+        <div class="theme-option" data-theme-val="light"><span class="theme-option-icon">☀</span> Light</div>
+        <div class="theme-option" data-theme-val="device"><span class="theme-option-icon">⬡</span> Device Default</div>
+      </div>
+    </div>
     <div class="lang-switcher">
       <button id="lang-btn">EN ▾</button>
       <div id="lang-dropdown">
@@ -330,9 +348,8 @@
 
   <div class="pcard reveal" data-cat="beds" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 30%,#1a1410 0%,#0a0a08 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="20%" y="55%" width="60%" height="8%" rx="2" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><rect x="18%" y="45%" width="64%" height="12%" rx="2" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/rollcover.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/rollcover.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">01</div>
     <div class="pcard-content">
       <div class="pcard-cat">Bed Covers</div>
@@ -344,9 +361,8 @@
 
   <div class="pcard reveal d1" data-cat="beds" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 35%,#141210 0%,#0a0908 60%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="20%" y1="50%" x2="80%" y2="50%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="20%" y1="58%" x2="80%" y2="58%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="20%" y1="66%" x2="80%" y2="66%" stroke="#C49A38" stroke-width="1" opacity=".06"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/trifoldbedcover.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/trifoldbedcover.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">02</div>
     <div class="pcard-content">
       <div class="pcard-cat">Bed Covers</div>
@@ -358,9 +374,8 @@
 
   <div class="pcard reveal d2" data-cat="exterior" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,#18100a 0%,#0a0806 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="30%" y="40%" width="40%" height="5%" rx="30" fill="none" stroke="#C49A38" stroke-width="1.5" opacity=".13"/><circle cx="35%" cy="65%" r="6%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><circle cx="65%" cy="65%" r="6%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/bullbar.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/bullbar.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">03</div>
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
@@ -372,9 +387,8 @@
 
   <div class="pcard reveal" data-cat="exterior" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 30% 60%,#101814 0%,#080c0a 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="15%" y="52%" width="70%" height="6%" rx="1" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><line x1="20%" y1="48%" x2="20%" y2="62%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="80%" y1="48%" x2="80%" y2="62%" stroke="#C49A38" stroke-width="1" opacity=".1"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/sidestep.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/sidestep.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">04</div>
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
@@ -386,9 +400,8 @@
 
   <div class="pcard reveal d1" data-cat="exterior" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 25%,#141010 0%,#0a0808 60%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="20%" y1="35%" x2="80%" y2="35%" stroke="#C49A38" stroke-width="1.5" opacity=".13"/><line x1="30%" y1="35%" x2="30%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="50%" y1="35%" x2="50%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/><line x1="70%" y1="35%" x2="70%" y2="65%" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/roofrack.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/roofrack.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">05</div>
     <div class="pcard-content">
       <div class="pcard-cat">Exterior</div>
@@ -400,9 +413,8 @@
 
   <div class="pcard reveal d2" data-cat="interior" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 40% 40%,#18100a 0%,#0c0906 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M30%,40% Q50%,30% 70%,40% L72%,65% Q50%,72% 28%,65% Z" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="30%" y1="48%" x2="70%" y2="48%" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/seats.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/seats.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">06</div>
     <div class="pcard-content">
       <div class="pcard-cat">Interior</div>
@@ -414,9 +426,8 @@
 
   <div class="pcard reveal" data-cat="interior" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,#100e0a 0%,#090806 60%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="22%" y="38%" width="56%" height="35%" rx="3" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><path d="M22%,55% L78%,55%" stroke="#C49A38" stroke-width="1" opacity=".07" stroke-dasharray="3,4"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/floormats.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/floormats.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">07</div>
     <div class="pcard-content">
       <div class="pcard-cat">Interior</div>
@@ -428,9 +439,8 @@
 
   <div class="pcard reveal d1" data-cat="electronics" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,#1a1220 0%,#0a0a0a 60%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><rect x="25%" y="35%" width="50%" height="32%" rx="3" fill="none" stroke="#C49A38" stroke-width="1" opacity=".12"/><circle cx="50%" cy="74%" r="5%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><circle cx="50%" cy="74%" r="2%" fill="rgba(196,154,56,.15)"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/audio.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/audio.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">08</div>
     <div class="pcard-content">
       <div class="pcard-cat">Electronics</div>
@@ -442,9 +452,8 @@
 
   <div class="pcard reveal d2" data-cat="protection" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 40% 40%,#0d1a14 0%,#070d0a 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="50%,25% 78%,42% 78%,68% 50%,82% 22%,68% 22%,42%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".11"/><polygon points="50%,35% 68%,46% 68%,62% 50%,72% 32%,62% 32%,46%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/underbody.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/underbody.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">09</div>
     <div class="pcard-content">
       <div class="pcard-cat">Protection</div>
@@ -456,9 +465,8 @@
 
   <div class="pcard reveal" data-cat="protection" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 60% 40%,#0a1018 0%,#060a0e 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M25%,45% Q37%,35% 50%,45% Q63%,55% 75%,45%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".1"/><path d="M25%,55% Q37%,45% 50%,55% Q63%,65% 75%,55%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/enginebay.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/enginebay.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">10</div>
     <div class="pcard-content">
       <div class="pcard-cat">Protection</div>
@@ -470,9 +478,8 @@
 
   <div class="pcard reveal d1" data-cat="protection" data-tip="Inquire">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,#0a100e 0%,#060a08 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50%" cy="48%" r="25%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/><circle cx="50%" cy="48%" r="15%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".07"/><circle cx="50%" cy="48%" r="6%" fill="rgba(196,154,56,.12)"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/ppf.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/ppf.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">11</div>
     <div class="pcard-content">
       <div class="pcard-cat">Protection</div>
@@ -484,9 +491,8 @@
 
   <div class="pcard reveal d2" data-cat="custom" data-tip="Talk">
     <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 30% 40%,#1a0e0a 0%,#0c0806 55%,#050505 100%);"></div>
-    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="25%" y1="25%" x2="75%" y2="75%" stroke="#C49A38" stroke-width="1" opacity=".1"/><line x1="75%" y1="25%" x2="25%" y2="75%" stroke="#C49A38" stroke-width="1" opacity=".07"/><rect x="30%" y="35%" width="40%" height="30%" fill="none" stroke="#C49A38" stroke-width="1" opacity=".08"/></svg>
     <div class="pcard-ov"></div><div class="pcard-glow"></div><div class="pcard-border"></div>
-    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/custombuilds.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.18;filter:grayscale(20%) contrast(1.05);transition:opacity .4s,transform .6s;"></div>
+    <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/custombuilds.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">12</div>
     <div class="pcard-content">
       <div class="pcard-cat">Custom</div>
@@ -547,6 +553,28 @@
       <a href="https://wa.me/971503021700" class="btn-dark" target="_blank" data-tip="Chat">Message on WhatsApp →</a>
       <a href="contact.html" class="btn-o" style="color:rgba(0,0,0,.5);border-color:rgba(0,0,0,.2);">Find Our Showroom</a>
     </div>
+  </div>
+</div>
+
+<!-- BRAND LOGO STRIP -->
+<div class="brand-strip">
+  <div class="brand-track">
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
   </div>
 </div>
 
@@ -623,5 +651,48 @@ window.__lenis = lenis;
 </script>
 <script src="juhrum.js"></script>
 <script src="lang.js"></script>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/971503021700" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<script>
+(function() {
+  var STORAGE_KEY = 'juhrum-theme';
+  var mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+  function applyTheme(val) {
+    var resolved = val;
+    if (val === 'device') resolved = mediaQuery.matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', resolved);
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = val === 'light' ? '☀ Light' : val === 'device' ? '⬡ Auto' : '🌑 Dark';
+    document.querySelectorAll('.theme-option').forEach(function(o) {
+      o.classList.toggle('active', o.getAttribute('data-theme-val') === val);
+    });
+  }
+  function init() {
+    var saved = localStorage.getItem(STORAGE_KEY) || 'dark';
+    applyTheme(saved);
+    var btn = document.getElementById('theme-btn');
+    var dropdown = document.getElementById('theme-dropdown');
+    if (!btn || !dropdown) return;
+    btn.style.pointerEvents = 'all'; btn.style.cursor = 'pointer';
+    btn.addEventListener('click', function(e) { e.stopPropagation(); dropdown.classList.toggle('open'); });
+    document.querySelectorAll('.theme-option').forEach(function(opt) {
+      opt.style.cursor = 'pointer';
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var val = opt.getAttribute('data-theme-val');
+        localStorage.setItem(STORAGE_KEY, val);
+        applyTheme(val);
+        dropdown.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', function() { dropdown.classList.remove('open'); });
+    mediaQuery.addEventListener('change', function() { if ((localStorage.getItem(STORAGE_KEY)||'dark') === 'device') applyTheme('device'); });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+})();
+</script>
 </body>
 </html>

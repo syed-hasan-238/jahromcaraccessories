@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>!function(){var t=localStorage.getItem("juhrum-theme")||"dark",r=t==="device"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;document.documentElement.setAttribute("data-theme",r)}()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
@@ -237,6 +238,14 @@
     <li><a href="contact.html" class="cur" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0;">
+    <div class="theme-switcher">
+      <button id="theme-btn" aria-label="Switch theme">🌑 Dark</button>
+      <div id="theme-dropdown">
+        <div class="theme-option active" data-theme-val="dark"><span class="theme-option-icon">🌑</span> Dark</div>
+        <div class="theme-option" data-theme-val="light"><span class="theme-option-icon">☀</span> Light</div>
+        <div class="theme-option" data-theme-val="device"><span class="theme-option-icon">⬡</span> Device Default</div>
+      </div>
+    </div>
     <div class="lang-switcher">
       <button id="lang-btn">EN ▾</button>
       <div id="lang-dropdown">
@@ -415,6 +424,28 @@
   </div>
 </div>
 
+<!-- BRAND LOGO STRIP -->
+<div class="brand-strip">
+  <div class="brand-track">
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+    <div class="brand-item"><svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="100" cy="40" rx="98" ry="37" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="100" cy="40" rx="88" ry="29" fill="none" stroke="currentColor" stroke-width="2"/><text x="100" y="53" font-family="serif" font-style="italic" font-size="42" text-anchor="middle" fill="currentColor">Ford</text></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">TOYOTA</span></div>
+    <div class="brand-item"><span class="brand-wordmark">GMC</span></div>
+    <div class="brand-item"><span class="brand-wordmark">NISSAN</span></div>
+    <div class="brand-item"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="37" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="1"/><line x1="40" y1="10" x2="40" y2="40" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="14" y2="57" stroke="currentColor" stroke-width="3"/><line x1="40" y1="40" x2="66" y2="57" stroke="currentColor" stroke-width="3"/></svg></div>
+    <div class="brand-item"><span class="brand-wordmark">MITSUBISHI</span></div>
+    <div class="brand-item"><span class="brand-wordmark">CHEVROLET</span></div>
+    <div class="brand-item"><span class="brand-wordmark">DODGE</span></div>
+  </div>
+</div>
+
 <footer class="jfoot">
   <div class="jfoot-logo">JUHR<b>UM</b></div>
   <div class="jfoot-tag" data-i18n="footer_tag">Industrial Area 4, Sharjah UAE</div>
@@ -456,5 +487,36 @@ window.__lenis = lenis;
 </script>
 <script src="juhrum.js"></script>
 <script src="lang.js"></script>
+
+<a href="https://wa.me/971503021700" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<script>
+(function() {
+  var STORAGE_KEY = 'juhrum-theme';
+  var mq = window.matchMedia('(prefers-color-scheme: light)');
+  function apply(val) {
+    var r = val === 'device' ? (mq.matches ? 'light' : 'dark') : val;
+    document.documentElement.setAttribute('data-theme', r);
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = val === 'light' ? '\u2600 Light' : val === 'device' ? '\u2B21 Auto' : '\uD83C\uDF11 Dark';
+    document.querySelectorAll('.theme-option').forEach(function(o) { o.classList.toggle('active', o.getAttribute('data-theme-val') === val); });
+  }
+  function init() {
+    apply(localStorage.getItem(STORAGE_KEY) || 'dark');
+    var btn = document.getElementById('theme-btn'), dd = document.getElementById('theme-dropdown');
+    if (!btn || !dd) return;
+    btn.style.pointerEvents = 'all'; btn.style.cursor = 'pointer';
+    btn.addEventListener('click', function(e) { e.stopPropagation(); dd.classList.toggle('open'); });
+    document.querySelectorAll('.theme-option').forEach(function(o) {
+      o.style.cursor = 'pointer';
+      o.addEventListener('click', function(e) { e.stopPropagation(); var v = o.getAttribute('data-theme-val'); localStorage.setItem(STORAGE_KEY, v); apply(v); dd.classList.remove('open'); });
+    });
+    document.addEventListener('click', function() { dd.classList.remove('open'); });
+    mq.addEventListener('change', function() { if ((localStorage.getItem(STORAGE_KEY)||'dark') === 'device') apply('device'); });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+})();
+</script>
 </body>
 </html>

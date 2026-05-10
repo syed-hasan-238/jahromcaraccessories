@@ -720,13 +720,21 @@ function juhrumInitLang() {
   const dropdown = document.getElementById('lang-dropdown');
   if (!btn || !dropdown) return;
 
+  // Ensure pointer-events are not blocked
+  btn.style.pointerEvents = 'all';
+  btn.style.cursor = 'pointer';
+  dropdown.style.pointerEvents = 'all';
+
   btn.addEventListener('click', e => {
     e.stopPropagation();
+    e.preventDefault();
     dropdown.classList.toggle('open');
   });
 
   document.querySelectorAll('.lang-option').forEach(opt => {
-    opt.addEventListener('click', () => {
+    opt.style.cursor = 'pointer';
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
       juhrumApplyLang(opt.getAttribute('data-lang'));
       dropdown.classList.remove('open');
     });
