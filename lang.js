@@ -727,12 +727,11 @@ function juhrumInitLang() {
 
   function toggleDropdown(e) {
     e.stopPropagation();
-    e.preventDefault();
     dropdown.classList.toggle('open');
   }
 
-  btn.addEventListener('mousedown', toggleDropdown);
-  btn.addEventListener('touchstart', toggleDropdown, { passive: false });
+  btn.addEventListener('click', toggleDropdown);
+  btn.addEventListener('touchend', (e) => { e.preventDefault(); toggleDropdown(e); });
 
   document.querySelectorAll('.lang-option').forEach(opt => {
     opt.style.cursor = 'pointer';
@@ -740,16 +739,15 @@ function juhrumInitLang() {
 
     function selectLang(e) {
       e.stopPropagation();
-      e.preventDefault();
       juhrumApplyLang(opt.getAttribute('data-lang'));
       dropdown.classList.remove('open');
     }
 
-    opt.addEventListener('mousedown', selectLang);
-    opt.addEventListener('touchstart', selectLang, { passive: false });
+    opt.addEventListener('click', selectLang);
+    opt.addEventListener('touchend', (e) => { e.preventDefault(); selectLang(e); });
   });
 
-  document.addEventListener('mousedown', () => dropdown.classList.remove('open'));
+  document.addEventListener('click', () => dropdown.classList.remove('open'));
 }
 
 document.addEventListener('DOMContentLoaded', juhrumInitLang);
