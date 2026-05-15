@@ -519,6 +519,49 @@ const JUHRUM_LANGS = {
 };
 
 // ─────────────────────────────────────────────────────
+// Font injection helper
+// ─────────────────────────────────────────────────────
+const FONT_CSS = {
+  'Noto Sans Arabic': `
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap');
+    body, [data-i18n], .jnav-links a, .cs-label, .cs-title,
+    .ed-body, .sh-sub, .jnav-wa, .btn-g span, .btn-dark span, .btn-o,
+    .booking-text, .h-sub, .ts-panel-desc, .ts-panel-note, .ts-panel-hint,
+    .ts-panel-title, .booking-info, .stage-text, .stage-title, .stage-tag,
+    .rcard-text, .rcard-name, .reviews-h2, .story-h2, .booking-h3,
+    .jfoot-tag, .jfoot-copy, .ts-hint-text, .ts-hint-sub, .h-tag,
+    .hst-l, .h-scroll-lbl, .soc-block-title, .soc-btn, .vcard-body,
+    .vcard-title, .tick, .ticker-i { font-family: 'Noto Sans Arabic', sans-serif !important; letter-spacing: 0 !important; }
+    .booking-h3, .h-h1, .reviews-h2, .story-h2, .stage-title, .ed-h2 {
+      font-family: 'Noto Sans Arabic', sans-serif !important;
+      font-size: 0.75em; line-height: 1.15 !important;
+    }
+  `,
+  'Noto Nastaliq Urdu': `
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
+    body, [data-i18n], .jnav-links a, .cs-label, .cs-title,
+    .ed-body, .sh-sub, .jnav-wa, .btn-g span, .btn-dark span, .btn-o,
+    .booking-text, .h-sub, .ts-panel-desc, .ts-panel-note, .ts-panel-hint,
+    .ts-panel-title, .booking-info, .stage-text, .stage-title, .stage-tag,
+    .rcard-text, .rcard-name, .reviews-h2, .story-h2, .booking-h3,
+    .jfoot-tag, .jfoot-copy, .ts-hint-text, .ts-hint-sub, .h-tag,
+    .hst-l, .h-scroll-lbl, .soc-block-title, .soc-btn, .vcard-body,
+    .vcard-title { font-family: 'Noto Nastaliq Urdu', serif !important; letter-spacing: 0 !important; line-height: 2 !important; }
+    .booking-h3, .h-h1, .reviews-h2, .story-h2, .stage-title, .ed-h2 {
+      font-family: 'Noto Nastaliq Urdu', serif !important;
+      font-size: 0.65em; line-height: 1.5 !important;
+    }
+  `,
+  'Noto Sans Devanagari': `
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700&display=swap');
+    [data-i18n], .jnav-links a, .h-sub, .booking-text, .ts-panel-desc,
+    .stage-text, .rcard-text, .rcard-name, .jfoot-tag, .jfoot-copy,
+    .cs-label, .cs-title, .hst-l, .booking-info, .soc-block-title,
+    .soc-btn, .vcard-body, .vcard-title { font-family: 'Noto Sans Devanagari', sans-serif !important; letter-spacing: 0 !important; }
+  `,
+};
+
+// ─────────────────────────────────────────────────────
 // Core apply function
 // ─────────────────────────────────────────────────────
 function juhrumApplyLang(code) {
@@ -527,7 +570,7 @@ function juhrumApplyLang(code) {
 
   localStorage.setItem('juhrum-lang', code);
 
-  // dir + lang attr
+  // Set html dir + lang — CSS [dir="rtl"] rules handle all layout
   document.documentElement.setAttribute('lang', code);
   document.documentElement.setAttribute('dir', lang.dir);
 
@@ -538,216 +581,111 @@ function juhrumApplyLang(code) {
     fontStyle.id = 'juhrum-lang-font';
     document.head.appendChild(fontStyle);
   }
+  fontStyle.textContent = lang.font ? (FONT_CSS[lang.font] || '') : '';
 
-  if (lang.font === 'Noto Sans Arabic') {
-    fontStyle.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap');
-      body, [data-i18n], .jnav-links a, .cs-label, .cs-title,
-      .ed-body, .sh-sub, .jnav-wa, .btn-g span, .btn-dark span, .btn-o,
-      .booking-text, .h-sub, .ts-panel-desc, .ts-panel-note, .ts-panel-hint,
-      .ts-panel-title, .booking-info, .stage-text, .stage-title, .stage-tag,
-      .rcard-text, .rcard-name, .reviews-h2, .story-h2, .booking-h3,
-      .jfoot-tag, .jfoot-copy, .ts-hint-text, .ts-hint-sub, .h-tag,
-      .hst-l, .h-scroll-lbl, .soc-block-title, .soc-btn, .vcard-body,
-      .vcard-title, .tick, .ticker-i { font-family: 'Noto Sans Arabic', sans-serif !important; letter-spacing: 0 !important; }
-      .booking-h3, .h-h1, .reviews-h2, .story-h2, .stage-title, .ed-h2 {
-        font-family: 'Noto Sans Arabic', sans-serif !important;
-        font-size: 0.75em; line-height: 1.15 !important;
-      }
-      [dir="rtl"] .h-h1 .row { text-align: right; }
-    `;
-  } else if (lang.font === 'Noto Nastaliq Urdu') {
-    fontStyle.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
-      body, [data-i18n], .jnav-links a, .cs-label, .cs-title,
-      .ed-body, .sh-sub, .jnav-wa, .btn-g span, .btn-dark span, .btn-o,
-      .booking-text, .h-sub, .ts-panel-desc, .ts-panel-note, .ts-panel-hint,
-      .ts-panel-title, .booking-info, .stage-text, .stage-title, .stage-tag,
-      .rcard-text, .rcard-name, .reviews-h2, .story-h2, .booking-h3,
-      .jfoot-tag, .jfoot-copy, .ts-hint-text, .ts-hint-sub, .h-tag,
-      .hst-l, .h-scroll-lbl, .soc-block-title, .soc-btn, .vcard-body,
-      .vcard-title { font-family: 'Noto Nastaliq Urdu', serif !important; letter-spacing: 0 !important; line-height: 2 !important; }
-      .booking-h3, .h-h1, .reviews-h2, .story-h2, .stage-title, .ed-h2 {
-        font-family: 'Noto Nastaliq Urdu', serif !important;
-        font-size: 0.65em; line-height: 1.5 !important;
-      }
-      [dir="rtl"] .h-h1 .row { text-align: right; }
-    `;
-  } else if (lang.font === 'Noto Sans Devanagari') {
-    fontStyle.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600;700&display=swap');
-      [data-i18n], .jnav-links a, .h-sub, .booking-text, .ts-panel-desc,
-      .stage-text, .rcard-text, .rcard-name, .jfoot-tag, .jfoot-copy,
-      .cs-label, .cs-title, .hst-l, .booking-info, .soc-block-title,
-      .soc-btn, .vcard-body, .vcard-title { font-family: 'Noto Sans Devanagari', sans-serif !important; letter-spacing: 0 !important; }
-    `;
-  } else {
-    fontStyle.textContent = '';
-  }
-
-  // Translate all data-i18n elements
+  // Translate all [data-i18n] elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (lang.t[key] !== undefined) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = lang.t[key];
-      } else {
-        el.textContent = lang.t[key];
-      }
+    const val = lang.t[key];
+    if (val === undefined) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.textContent = val;
     }
   });
 
-  // Preloader steps — patch the inline JS array live
+  // Preloader steps (patched for live use)
   window.__juhrumLangSteps = [lang.t.pl_step1, lang.t.pl_step2, lang.t.pl_step3];
 
-  // Update dropdown label
+  // Update button label
   const btn = document.getElementById('lang-btn');
   if (btn) btn.textContent = lang.label + ' ▾';
 
-  // Update active option
+  // Update active state on options
   document.querySelectorAll('.lang-option').forEach(opt => {
     opt.classList.toggle('active', opt.getAttribute('data-lang') === code);
   });
-
-  // RTL/LTR layout patches
-  applyLayoutDir(lang.dir);
-}
-
-function applyLayoutDir(dir) {
-  const rtl = dir === 'rtl';
-
-  // Hero content alignment
-  const heroContent = document.querySelector('.hero-content');
-  if (heroContent) {
-    heroContent.style.marginLeft = rtl ? 'auto' : '0';
-    heroContent.style.marginRight = rtl ? '0' : 'auto';
-    heroContent.style.textAlign = rtl ? 'right' : 'left';
-  }
-
-  // Hero tag direction
-  const htag = document.querySelector('.h-tag');
-  if (htag) htag.style.flexDirection = rtl ? 'row-reverse' : 'row';
-
-  // h-h1 rows
-  document.querySelectorAll('.h-h1 .row').forEach(r => {
-    r.style.textAlign = rtl ? 'right' : 'left';
-  });
-
-  // h-ctas
-  const hctas = document.querySelector('.h-ctas');
-  if (hctas) hctas.style.flexDirection = rtl ? 'row-reverse' : 'row';
-
-  // Stats block
-  const hstats = document.querySelector('.h-stats');
-  if (hstats) {
-    hstats.style.right = rtl ? 'auto' : '0';
-    hstats.style.left = rtl ? '0' : 'auto';
-  }
-
-  // Scroll hint
-  const hscroll = document.querySelector('.h-scroll');
-  if (hscroll) {
-    hscroll.style.right = rtl ? 'auto' : '72px';
-    hscroll.style.left = rtl ? '72px' : 'auto';
-  }
-
-  // Booking CTAs
-  const bctas = document.querySelector('.booking-ctas');
-  if (bctas) bctas.style.flexDirection = rtl ? 'row-reverse' : 'row';
-
-  // Story intro
-  const storyIntro = document.querySelector('.story-intro');
-  if (storyIntro) storyIntro.style.direction = dir;
-
-  // Two-col story sections
-  document.querySelectorAll('.two-col').forEach(tc => {
-    tc.style.direction = dir;
-  });
-
-  // Reviews grid
-  const rg = document.querySelector('.reviews-grid');
-  if (rg) rg.style.direction = dir;
-
-  // rcard text
-  document.querySelectorAll('.rcard-text, .rcard-name, .rcard-meta').forEach(el => {
-    el.style.textAlign = rtl ? 'right' : 'left';
-  });
-
-  // Contact strip arrows
-  document.querySelectorAll('.cs-arrow').forEach(a => {
-    if (a.textContent === '→' || a.textContent === '←') {
-      a.textContent = rtl ? '←' : '→';
-    }
-  });
-
-  // Contact info cards
-  document.querySelectorAll('.vcard, .vcard-body, .contact-left').forEach(el => {
-    el.style.textAlign = rtl ? 'right' : 'left';
-    el.style.direction = dir;
-  });
-
-  // Footer
-  const foot = document.querySelector('.jfoot');
-  if (foot) foot.style.direction = dir;
-
-  // Ticker direction
-  const ticker = document.querySelector('.ticker');
-  if (ticker) ticker.style.direction = 'ltr'; // always scrolls LTR
-
-  // ts-panels
-  document.querySelectorAll('.ts-panel').forEach(p => {
-    p.style.textAlign = rtl ? 'right' : 'left';
-    p.style.direction = dir;
-  });
-
-  // ts-scroll-hint
-  const tsh = document.querySelector('.ts-scroll-hint');
-  if (tsh) {
-    tsh.style.right = rtl ? 'auto' : '0';
-    tsh.style.left = rtl ? '0' : 'auto';
-    tsh.style.textAlign = rtl ? 'right' : 'left';
-  }
 }
 
 // ─────────────────────────────────────────────────────
-// Init
+// Dropdown init — called once, safely after DOM ready
 // ─────────────────────────────────────────────────────
 function juhrumInitLang() {
+  // Apply saved or default language immediately
   const saved = localStorage.getItem('juhrum-lang') || 'en';
   juhrumApplyLang(saved);
 
-  const btn = document.getElementById('lang-btn');
+  const btn      = document.getElementById('lang-btn');
   const dropdown = document.getElementById('lang-dropdown');
   if (!btn || !dropdown) return;
 
-  // Ensure pointer-events and cursor are not blocked
-  btn.style.pointerEvents = 'all';
-  btn.style.cursor = 'pointer';
-  dropdown.style.pointerEvents = 'all';
+  // Force interactability — override any inherited pointer-events:none
+  btn.style.cssText += '; pointer-events: all !important; cursor: pointer !important; position: relative; z-index: 10000;';
+  dropdown.style.cssText += '; pointer-events: all !important;';
 
-  function toggleDropdown(e) {
-    e.stopPropagation();
-    dropdown.classList.toggle('open');
+  let isOpen = false;
+
+  function openDropdown() {
+    isOpen = true;
+    dropdown.classList.add('open');
   }
 
-  btn.addEventListener('click', toggleDropdown);
-  btn.addEventListener('touchend', (e) => { e.preventDefault(); toggleDropdown(e); });
+  function closeDropdown() {
+    isOpen = false;
+    dropdown.classList.remove('open');
+  }
 
+  function toggleDropdown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    isOpen ? closeDropdown() : openDropdown();
+  }
+
+  // Use mousedown instead of click — fires before blur events and is harder to block
+  btn.addEventListener('mousedown', toggleDropdown);
+  btn.addEventListener('touchend', toggleDropdown);
+
+  // Language options
   document.querySelectorAll('.lang-option').forEach(opt => {
-    opt.style.cursor = 'pointer';
-    opt.style.pointerEvents = 'all';
+    opt.style.cssText += '; pointer-events: all !important; cursor: pointer !important;';
 
-    function selectLang(e) {
+    function pickLang(e) {
+      e.preventDefault();
       e.stopPropagation();
       juhrumApplyLang(opt.getAttribute('data-lang'));
-      dropdown.classList.remove('open');
+      closeDropdown();
     }
 
-    opt.addEventListener('click', selectLang);
-    opt.addEventListener('touchend', (e) => { e.preventDefault(); selectLang(e); });
+    opt.addEventListener('mousedown', pickLang);
+    opt.addEventListener('touchend', pickLang);
   });
 
-  document.addEventListener('click', () => dropdown.classList.remove('open'));
+  // Close on outside interaction
+  document.addEventListener('mousedown', e => {
+    if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener('touchstart', e => {
+    if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+      closeDropdown();
+    }
+  }, { passive: true });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDropdown();
+  });
 }
 
-document.addEventListener('DOMContentLoaded', juhrumInitLang);
+// ─────────────────────────────────────────────────────
+// Boot — works whether script is defer or inline
+// ─────────────────────────────────────────────────────
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', juhrumInitLang);
+} else {
+  // DOM already ready (script loaded late / not deferred)
+  juhrumInitLang();
+}

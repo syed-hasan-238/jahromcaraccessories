@@ -713,6 +713,7 @@ a:focus-visible, button:focus-visible {
   display: flex;
   align-items: center;
   margin-right: 16px;
+  z-index: 10000; /* must exceed nav z-index (800) and any overlay */
 }
 #lang-btn {
   font-family: var(--fu);
@@ -723,9 +724,14 @@ a:focus-visible, button:focus-visible {
   background: transparent;
   border: 1px solid rgba(196,154,56,.25);
   padding: 8px 14px;
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: all !important;
   transition: color .3s, border-color .3s;
   white-space: nowrap;
+  position: relative;
+  z-index: 10000;
+  -webkit-user-select: none;
+  user-select: none;
 }
 #lang-btn:hover {
   color: var(--gold);
@@ -736,11 +742,13 @@ a:focus-visible, button:focus-visible {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
+  left: auto;
   background: #0e0e0c;
   border: 1px solid rgba(196,154,56,.15);
-  min-width: 160px;
-  z-index: 9999;
-  box-shadow: 0 20px 60px rgba(0,0,0,.7);
+  min-width: 175px;
+  z-index: 10001;
+  box-shadow: 0 20px 60px rgba(0,0,0,.8);
+  pointer-events: all !important;
 }
 #lang-dropdown.open { display: block; }
 .lang-option {
@@ -753,9 +761,12 @@ a:focus-visible, button:focus-visible {
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--silver);
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: all !important;
   border-bottom: 1px solid rgba(196,154,56,.06);
   transition: background .2s, color .2s;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .lang-option:last-child { border-bottom: none; }
 .lang-option:hover { background: rgba(196,154,56,.07); color: var(--white); }
@@ -765,6 +776,7 @@ a:focus-visible, button:focus-visible {
   letter-spacing: 0;
   text-transform: none;
   opacity: .7;
+  font-family: inherit;
 }
 
 /* ── CONTACT STRIP FIX — proper scaling for 6 items ── */
