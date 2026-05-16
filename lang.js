@@ -73,6 +73,7 @@ const JUHRUM_LANGS = {
       cs_call_label:'Call Direct', cs_call_val:'050 302 1700',
       cs_visit_label:'Walk In — No Appointment', cs_visit_val:'Industrial Area 4, Sharjah',
       footer_tag:'Desert Iron — Built for Power',
+      story_page_link:'View Full Story',
       footer_copy:'© 2025 Juhrum Auto Accessories, Sharjah UAE',
       contact_hero_tag:'Get In Touch',
       contact_hero_h1_l1:'COME IN.', contact_hero_h1_l2:'BUILD IT.',
@@ -170,7 +171,7 @@ const JUHRUM_LANGS = {
       cs_call_label:'اتصل مباشرة', cs_call_val:'050 302 1700',
       cs_visit_label:'تفضل بدون موعد', cs_visit_val:'المنطقة الصناعية 4، الشارجة',
       footer_tag:'حديد الصحراء — مبني للقوة',
-      footer_copy:'© 2025 جهروم لإكسسوارات السيارات، الشارقة الإمارات',
+      story_page_link:'اقرأ القصة الكاملة', footer_copy:'© 2025 جهروم لإكسسوارات السيارات، الشارقة الإمارات',
       contact_hero_tag:'تواصل معنا',
       contact_hero_h1_l1:'تعال.', contact_hero_h1_l2:'ابنِه.',
       contact_hero_sub:'ما تحتاج موعد. تعال وحدثنا عن سيارتك وبنشوفك وش ممكن.',
@@ -250,7 +251,7 @@ const JUHRUM_LANGS = {
       cs_whatsapp_label:'WhatsApp — سب سے تیز', cs_whatsapp_val:'ابھی میسج کریں',
       cs_call_label:'براہ راست کال', cs_call_val:'050 302 1700',
       cs_visit_label:'بغیر اپوائنٹمنٹ آئیں', cs_visit_val:'انڈسٹریل ایریا 4، شارجہ',
-      footer_tag:'ڈیزرٹ آئرن — طاقت کے لیے بنایا', footer_copy:'© 2025 جہروم آٹو اکسیسریز، شارجہ یو اے ای',
+      footer_tag:'ڈیزرٹ آئرن — طاقت کے لیے بنایا', story_page_link:'پوری کہانی پڑھیں', footer_copy:'© 2025 جہروم آٹو اکسیسریز، شارجہ یو اے ای',
       contact_hero_tag:'رابطہ کریں', contact_hero_h1_l1:'آئیں.', contact_hero_h1_l2:'بنائیں.',
       contact_hero_sub:'اپوائنٹمنٹ نہیں چاہیے۔ آئیں، اپنی گاڑی بتائیں، ہم دکھائیں گے کیا ممکن ہے۔',
       contact_btn_wa:'WhatsApp پر میسج', contact_btn_call:'کال: 050 302 1700',
@@ -328,7 +329,7 @@ const JUHRUM_LANGS = {
       cs_whatsapp_label:'واتساپ — سریع‌ترین پاسخ', cs_whatsapp_val:'همین الان پیام بده',
       cs_call_label:'تماس مستقیم', cs_call_val:'050 302 1700',
       cs_visit_label:'بدون وقت قبلی بیا', cs_visit_val:'منطقه صنعتی ۴، شارجه',
-      footer_tag:'آهن صحرا — ساخته برای قدرت', footer_copy:'© 2025 جهرم لوازم یدکی خودرو، شارجه امارات',
+      footer_tag:'آهن صحرا — ساخته برای قدرت', story_page_link:'داستان کامل', footer_copy:'© 2025 جهرم لوازم یدکی خودرو، شارجه امارات',
       contact_hero_tag:'تماس با ما', contact_hero_h1_l1:'بیا.', contact_hero_h1_l2:'بسازیم.',
       contact_hero_sub:'وقت قبلی نمی‌خواد. بیا، از ماشینت بگو، نشونت می‌دیم چی ممکنه.',
       contact_btn_wa:'پیام در واتساپ', contact_btn_call:'تماس: 050 302 1700',
@@ -406,7 +407,8 @@ const JUHRUM_LANGS = {
       cs_whatsapp_label:'WhatsApp — सबसे तेज़ जवाब', cs_whatsapp_val:'अभी मैसेज करें',
       cs_call_label:'सीधे कॉल करें', cs_call_val:'050 302 1700',
       cs_visit_label:'बिना अपॉइंटमेंट आएं', cs_visit_val:'इंडस्ट्रियल एरिया 4, शारजाह',
-      footer_tag:'डेज़र्ट आयरन — ताक़त के लिए बनाया', footer_copy:'© 2025 जुहरुम ऑटो एक्सेसरीज़, शारजाह UAE',
+      footer_tag:'डेज़र्ट आयरन — ताक़त के लिए बनाया', story_page_link:'पूरी कहानी पढ़ें',
+      footer_copy:'© 2025 जुहरुम ऑटो एक्सेसरीज़, शारजाह UAE',
       contact_hero_tag:'हमसे संपर्क करें', contact_hero_h1_l1:'आएं.', contact_hero_h1_l2:'बनाएं.',
       contact_hero_sub:'अपॉइंटमेंट नहीं चाहिए। आएं, गाड़ी बताएं, हम दिखाएंगे क्या मुमकिन है।',
       contact_btn_wa:'WhatsApp पर मैसेज', contact_btn_call:'कॉल: 050 302 1700',
@@ -574,40 +576,65 @@ function applyLayoutDir(dir) {
 // ─────────────────────────────────────────────────────
 // Init — attaches click listeners to lang-btn + options
 // ─────────────────────────────────────────────────────
+let _langInitDone = false;
+
 function juhrumInitLang() {
   // Apply saved language immediately
   const saved = localStorage.getItem('juhrum-lang') || 'en';
   juhrumApplyLang(saved);
 
+  // Guard: only bind DOM listeners once
+  if (_langInitDone) return;
+
   const btn = document.getElementById('lang-btn');
   const dropdown = document.getElementById('lang-dropdown');
   if (!btn || !dropdown) return;
 
-  // Remove any stale listeners by cloning (avoids double-bind if called twice)
-  const newBtn = btn.cloneNode(true);
-  btn.parentNode.replaceChild(newBtn, btn);
-  const newDropdown = dropdown.cloneNode(true);
-  newBtn.parentNode.replaceChild(newDropdown, dropdown);
+  _langInitDone = true;
 
-  function toggleDropdown(e) {
+  // Track whether last open/close was touch to prevent ghost click
+  let _openedByTouch = false;
+
+  function openDropdown() { dropdown.classList.add('open'); }
+  function closeDropdown() { dropdown.classList.remove('open'); }
+  function toggleDropdown() { dropdown.classList.toggle('open'); }
+
+  // Click (desktop)
+  btn.addEventListener('click', function(e) {
+    if (_openedByTouch) { _openedByTouch = false; return; }
     e.stopPropagation();
-    newDropdown.classList.toggle('open');
-  }
-
-  newBtn.addEventListener('click', toggleDropdown);
-  newBtn.addEventListener('touchend', e => { e.preventDefault(); toggleDropdown(e); });
-
-  newDropdown.querySelectorAll('.lang-option').forEach(opt => {
-    function selectLang(e) {
-      e.stopPropagation();
-      juhrumApplyLang(opt.getAttribute('data-lang'));
-      newDropdown.classList.remove('open');
-    }
-    opt.addEventListener('click', selectLang);
-    opt.addEventListener('touchend', e => { e.preventDefault(); selectLang(e); });
+    toggleDropdown();
   });
 
-  document.addEventListener('click', () => newDropdown.classList.remove('open'));
+  // Touch (mobile) — prevent ghost click from firing document close
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    _openedByTouch = true;
+    toggleDropdown();
+    // Clear flag after ghost click window
+    setTimeout(() => { _openedByTouch = false; }, 400);
+  });
+
+  dropdown.querySelectorAll('.lang-option').forEach(opt => {
+    function selectLang() {
+      juhrumApplyLang(opt.getAttribute('data-lang'));
+      closeDropdown();
+    }
+    opt.addEventListener('click', function(e) {
+      e.stopPropagation();
+      selectLang();
+    });
+    opt.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      selectLang();
+    });
+  });
+
+  // Close on outside click/touch (only when open)
+  document.addEventListener('click', function() { closeDropdown(); });
+  document.addEventListener('touchend', function() { closeDropdown(); });
 }
 
 // Expose globally so inline scripts on each page can also trigger it

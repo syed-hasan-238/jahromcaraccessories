@@ -3,7 +3,7 @@
 <head>
 <script>!function(){var t=localStorage.getItem("juhrum-theme")||"dark",r=t==="device"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;document.documentElement.setAttribute("data-theme",r);var l=localStorage.getItem("juhrum-lang");if(l&&l!=="en"){document.documentElement.setAttribute("lang",l);var rtl=["ar","fa","ur"];if(rtl.indexOf(l)>-1)document.documentElement.setAttribute("dir","rtl");}}()</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="images/logo.png" type="image/png">
 <title>About Juhrum Auto Accessories Sharjah | Trusted Truck Specialists Since 2019</title>
 <meta name="description" content="The story of Juhrum — 5+ years building premium pickup trucks in Sharjah's Industrial Area 4. Persian craftsmanship meets UAE desert standards. 500+ trucks built. 4.7★ Google rating.">
@@ -68,7 +68,8 @@
 .sh-canvas { position: absolute; inset: 0; z-index: 0; }
 .sh-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: radial-gradient(ellipse 80% 70% at 20% 60%,rgba(5,5,5,.5) 0%,rgba(5,5,5,.82) 60%,rgba(5,5,5,.95) 100%);
+  background: linear-gradient(to right, rgba(5,5,5,.95) 0%, rgba(5,5,5,.78) 40%, rgba(5,5,5,.3) 75%, rgba(5,5,5,.08) 100%),
+    linear-gradient(to top, rgba(5,5,5,.9) 0%, transparent 55%);
 }
 .sh-diagonal {
   position: absolute; top: 0; right: 0; width: 50%; height: 100%; z-index: 2; pointer-events: none; overflow: hidden;
@@ -87,8 +88,8 @@
 .sh-stat-l { font-family: var(--fu); font-size: 7.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin-top: 2px; text-align: right; }
 .sh-stat-div { width: 1px; height: 18px; background: rgba(196,154,56,.2); margin-left: auto; }
 .sh-h1 {
-  font-family: var(--fd); font-size: clamp(60px, 9vw, 148px);
-  line-height: .9; letter-spacing: .022em; color: var(--white);
+  font-family: var(--fd); font-size: clamp(68px, 10.5vw, 168px);
+  line-height: .87; letter-spacing: .018em; color: var(--white);
   overflow: hidden; width: 100%;
 }
 .sh-h1 .g { color: #e8e0d0; }
