@@ -713,7 +713,6 @@ a:focus-visible, button:focus-visible {
   display: flex;
   align-items: center;
   margin-right: 16px;
-  z-index: 10000; /* must exceed nav z-index (800) and any overlay */
 }
 #lang-btn {
   font-family: var(--fu);
@@ -724,14 +723,9 @@ a:focus-visible, button:focus-visible {
   background: transparent;
   border: 1px solid rgba(196,154,56,.25);
   padding: 8px 14px;
-  cursor: pointer !important;
-  pointer-events: all !important;
+  cursor: pointer;
   transition: color .3s, border-color .3s;
   white-space: nowrap;
-  position: relative;
-  z-index: 10000;
-  -webkit-user-select: none;
-  user-select: none;
 }
 #lang-btn:hover {
   color: var(--gold);
@@ -742,13 +736,11 @@ a:focus-visible, button:focus-visible {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  left: auto;
   background: #0e0e0c;
   border: 1px solid rgba(196,154,56,.15);
-  min-width: 175px;
-  z-index: 10001;
-  box-shadow: 0 20px 60px rgba(0,0,0,.8);
-  pointer-events: all !important;
+  min-width: 160px;
+  z-index: 9999;
+  box-shadow: 0 20px 60px rgba(0,0,0,.7);
 }
 #lang-dropdown.open { display: block; }
 .lang-option {
@@ -761,12 +753,9 @@ a:focus-visible, button:focus-visible {
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--silver);
-  cursor: pointer !important;
-  pointer-events: all !important;
+  cursor: pointer;
   border-bottom: 1px solid rgba(196,154,56,.06);
   transition: background .2s, color .2s;
-  -webkit-user-select: none;
-  user-select: none;
 }
 .lang-option:last-child { border-bottom: none; }
 .lang-option:hover { background: rgba(196,154,56,.07); color: var(--white); }
@@ -776,7 +765,6 @@ a:focus-visible, button:focus-visible {
   letter-spacing: 0;
   text-transform: none;
   opacity: .7;
-  font-family: inherit;
 }
 
 /* ── CONTACT STRIP FIX — proper scaling for 6 items ── */
@@ -1599,4 +1587,439 @@ body.pulse-hint {
 [data-theme="light"] .brand-item .brand-wordmark {
   fill: #1A1410;
   color: #1A1410;
+}
+
+
+/* ═══════════════════════════════════════════════
+   JUHRUM v6 — MOBILE OVERHAUL
+   Covers all 17 audit issues + lang/theme fixes
+   ═══════════════════════════════════════════════ */
+
+/* ── MOBILE NAV: hamburger drawer ── */
+.mob-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 8px;
+  z-index: 901;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+  transition: transform 0.35s cubic-bezier(.76,0,.24,1), opacity 0.25s;
+  transform-origin: center;
+}
+.mob-nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mob-nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mob-nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mobile drawer overlay */
+.mob-nav-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 899;
+  pointer-events: none;
+}
+.mob-nav-drawer.open { pointer-events: all; }
+.mob-nav-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,5,.7);
+  opacity: 0;
+  transition: opacity 0.35s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.mob-nav-drawer.open .mob-nav-backdrop { opacity: 1; }
+.mob-nav-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: min(80vw, 320px);
+  height: 100%;
+  background: #090909;
+  border-left: 1px solid rgba(196,154,56,.12);
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(.76,0,.24,1);
+  display: flex;
+  flex-direction: column;
+  padding: 80px 36px 40px;
+  gap: 0;
+  overflow-y: auto;
+}
+.mob-nav-drawer.open .mob-nav-panel { transform: translateX(0); }
+
+/* Nav links inside drawer */
+.mob-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 40px;
+}
+.mob-nav-links li {
+  border-bottom: 1px solid rgba(196,154,56,.06);
+}
+.mob-nav-links a {
+  display: block;
+  font-family: var(--fd);
+  font-size: 32px;
+  letter-spacing: .04em;
+  color: rgba(210,205,195,.8);
+  text-decoration: none;
+  padding: 16px 0;
+  transition: color 0.25s, padding-left 0.25s;
+}
+.mob-nav-links a:hover,
+.mob-nav-links a.cur { color: var(--gold); padding-left: 6px; }
+
+/* WA button inside drawer */
+.mob-nav-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fu);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 14px 24px;
+  text-decoration: none;
+  margin-top: 8px;
+  min-height: 44px;
+}
+.mob-nav-wa:hover { background: var(--gold-hi); }
+
+/* Drawer gold accent line top */
+.mob-nav-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 36px; right: 36px;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  opacity: .3;
+}
+
+/* ── MOBILE NAV RIGHT CONTROLS: compact ── */
+@media (max-width: 900px) {
+  .mob-nav-toggle { display: flex; }
+  .mob-nav-drawer { display: block; }
+
+  /* Compact nav right strip */
+  .jnav > div:last-child {
+    gap: 6px !important;
+  }
+  /* Hide WhatsApp text label in nav, keep as icon-only pill */
+  .jnav-wa {
+    font-size: 10px !important;
+    padding: 10px 14px !important;
+    letter-spacing: .12em !important;
+    white-space: nowrap;
+    min-height: 36px;
+  }
+  /* Compact theme + lang buttons */
+  #theme-btn {
+    font-size: 10px !important;
+    padding: 7px 10px !important;
+    letter-spacing: .12em !important;
+  }
+  #lang-btn {
+    font-size: 10px !important;
+    padding: 7px 10px !important;
+    letter-spacing: .12em !important;
+  }
+  /* Dropdowns: ensure they don't clip off-screen */
+  #theme-dropdown,
+  #lang-dropdown {
+    right: 0 !important;
+    left: auto !important;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 901px) {
+  .mob-nav-toggle { display: none !important; }
+  .mob-nav-drawer { display: none !important; }
+}
+
+/* ── HERO: hide large logo mark on mobile (issue #16) ── */
+@media (max-width: 900px) {
+  #hero-logo-mark { display: none !important; }
+  #hero { padding-top: 100px !important; }
+  .h-scroll { right: 24px !important; bottom: 36px !important; }
+  /* Ensure hero bracket doesn't overlap content */
+  .bracket.tl { top: 90px !important; left: 24px !important; }
+}
+
+/* ── HERO STATS: guaranteed readable on narrow screens (issue #6) ── */
+@media (max-width: 420px) {
+  .h-stats {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    padding: 12px 16px !important;
+  }
+  .hst-n { font-size: 20px !important; }
+  .hst-l { font-size: 6px !important; letter-spacing: .12em !important; }
+}
+
+/* ── TRUCK SCRUB: mobile panel below canvas (issue #3) ── */
+@media (max-width: 900px) {
+  /* Reduce scrub height so the below-panel is reachable */
+  #truck-scrub-outer { height: 700vh; }
+
+  /* Mobile panel strip — shown below the canvas */
+  .ts-mobile-panel {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(196,154,56,.12);
+    padding: 28px 24px 24px;
+    position: relative;
+    z-index: 10;
+    min-height: 100px;
+    transition: opacity .45s;
+  }
+  .ts-mobile-panel-num {
+    font-family: var(--fu);
+    font-size: 9px;
+    letter-spacing: .44em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .ts-mobile-panel-title {
+    font-family: var(--fd);
+    font-size: clamp(26px, 7vw, 40px);
+    letter-spacing: .03em;
+    color: var(--white);
+    line-height: .95;
+    margin-bottom: 12px;
+  }
+  .ts-mobile-panel-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--silver);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .ts-mobile-panel-note {
+    font-family: var(--fu);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .ts-mobile-panel-cta { margin-top: 16px; }
+}
+@media (min-width: 901px) {
+  .ts-mobile-panel { display: none; }
+}
+
+/* ── STORY HORIZONTAL SCROLL: vertical stack on mobile (issue #4) ── */
+@media (max-width: 900px) {
+  /* Override GSAP pinning — story sections become vertical */
+  #story-pin-container {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  #story-track {
+    display: flex !important;
+    flex-direction: column !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+  .story-panel {
+    width: 100% !important;
+    min-height: 80vh;
+    flex-shrink: 0;
+  }
+}
+
+/* ── PRODUCT CARDS: touch-reveal on mobile (issue #5) ── */
+/* On touch devices, show content by default — no hover required */
+@media (hover: none) {
+  .pcard-cat {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+  .pcard-spec {
+    max-height: 160px !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .pcard-cta {
+    opacity: 1 !important;
+  }
+  /* Tap to expand alternative — pcard gets active state via JS */
+  .pcard-name {
+    font-size: 22px;
+  }
+  .prod-card .pcard-cat { opacity: 1 !important; transform: none !important; }
+  .prod-card .pcard-spec { max-height: 120px !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── FILTER ROW: scroll affordance (issue #10) ── */
+@media (max-width: 900px) {
+  .filter-wrap {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-right: 40px !important; /* space for fade edge */
+    /* Fade edge hint */
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+  .filter-wrap::-webkit-scrollbar { display: none; }
+  .fb {
+    flex-shrink: 0;
+    cursor: pointer !important; /* override cursor:none on touch */
+    min-height: 44px; /* touch target */
+  }
+}
+
+/* ── PRODUCT CARDS CTA (card 12): stack on small screens (issue #11) ── */
+@media (max-width: 560px) {
+  .pcard:nth-child(12) .pcard-content {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+    padding: 24px !important;
+  }
+  .pcard:nth-child(12) .pcard-name { font-size: 24px !important; }
+  .pcard:nth-child(12) { height: auto !important; min-height: 160px !important; }
+}
+
+/* ── STORY IMAGE GALLERY: single column on mobile (issue #12) ── */
+@media (max-width: 600px) {
+  .story-img-gallery {
+    grid-template-columns: 1fr !important;
+  }
+  .story-img-gallery .img-block.tall {
+    aspect-ratio: 4/3 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* ── CONTACT PAGE: force single column grid (issue #7) ── */
+@media (max-width: 900px) {
+  .con-main {
+    grid-template-columns: 1fr !important;
+  }
+  .con-right {
+    border-left: none !important;
+    border-top: 1px solid rgba(196,154,56,.1) !important;
+    padding-top: 40px !important;
+  }
+}
+
+/* ── FLOATING WA: offset from booking CTAs (issue #13) ── */
+@media (max-width: 900px) {
+  .wa-float {
+    bottom: 80px; /* lift above any bottom-anchored content */
+    left: 16px;
+  }
+}
+
+/* ── BUTTON TOUCH TARGETS: minimum 44px (issue #9) ── */
+.btn-g, .btn-dark {
+  min-height: 44px;
+}
+.btn-o {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-bottom: 4px;
+}
+@media (max-width: 900px) {
+  .booking-ctas {
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100%;
+  }
+  .booking-ctas .btn-g,
+  .booking-ctas .btn-dark {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+    text-align: center;
+  }
+}
+
+/* ── FOOTER: center on mobile (issue #14) ── */
+@media (max-width: 900px) {
+  .jfoot {
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* ── MAP SECTION: mobile (existing, reinforced) ── */
+@media (max-width: 600px) {
+  .map-inner { gap: 24px; }
+  .map-embed-wrap iframe { height: 220px; }
+  .map-h2 { font-size: clamp(36px, 10vw, 64px); }
+}
+
+/* ── GENERAL MOBILE SPACING ── */
+@media (max-width: 900px) {
+  /* Section padding reduction */
+  .booking-mini { padding: var(--sp-8) 24px !important; }
+  .reviews { padding: var(--sp-8) 24px !important; }
+  section.booking-mini .booking-inner { gap: var(--sp-6) !important; }
+}
+
+/* ── RTL MOBILE NAV ── */
+[dir="rtl"] .mob-nav-panel {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid rgba(196,154,56,.12);
+  transform: translateX(-100%);
+}
+[dir="rtl"] .mob-nav-drawer.open .mob-nav-panel {
+  transform: translateX(0);
+}
+[dir="rtl"] .mob-nav-panel::before {
+  background: linear-gradient(to left, var(--gold), transparent);
+}
+[dir="rtl"] .mob-nav-links a { padding: 16px 0; }
+[dir="rtl"] .mob-nav-links a:hover,
+[dir="rtl"] .mob-nav-links a.cur { padding-left: 0; padding-right: 6px; }
+
+/* Light theme mobile nav drawer */
+[data-theme="light"] .mob-nav-panel {
+  background: #EDE4D6;
+  border-color: rgba(139,100,30,.15);
+}
+[data-theme="light"] .mob-nav-links a { color: #5C4A2A; }
+[data-theme="light"] .mob-nav-links a:hover,
+[data-theme="light"] .mob-nav-links a.cur { color: var(--gold); }
+[data-theme="light"] .mob-nav-backdrop { background: rgba(240,234,222,.6); }
+
+
+/* Dropdown positioning on very narrow screens */
+@media (max-width: 480px) {
+  .theme-switcher,
+  .lang-switcher { position: static; }
+  #theme-dropdown,
+  #lang-dropdown {
+    position: fixed;
+    top: 64px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    z-index: 9999;
+  }
 }

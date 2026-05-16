@@ -426,6 +426,8 @@
     document.querySelectorAll('.ts-panel').forEach((el, i) => {
       el.classList.toggle('active', i === idx);
     });
+    // Broadcast scene change for mobile panel strip
+    window.dispatchEvent(new CustomEvent('juhrumScene', { detail: idx }));
   }
 
   // ── Scroll progress ───────────────────────────

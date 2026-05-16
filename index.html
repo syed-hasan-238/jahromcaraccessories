@@ -597,9 +597,9 @@
     <li><a href="story.html" data-i18n="nav_story">Our Story</a></li>
     <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:0;">
+  <div style="display:flex;align-items:center;gap:6px;">
     <div class="theme-switcher">
-      <button id="theme-btn" aria-label="Switch theme">☀ Light</button>
+      <button id="theme-btn" aria-label="Switch theme">🌑 Dark</button>
       <div id="theme-dropdown">
         <div class="theme-option active" data-theme-val="dark"><span class="theme-option-icon">🌑</span> Dark</div>
         <div class="theme-option" data-theme-val="light"><span class="theme-option-icon">☀</span> Light</div>
@@ -617,8 +617,25 @@
       </div>
     </div>
     <a href="https://wa.me/971503021700" class="jnav-wa" data-tip="WhatsApp" aria-label="Contact us on WhatsApp" data-i18n="nav_whatsapp">WhatsApp Us</a>
+    <button class="mob-nav-toggle" id="mob-nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mob-nav-drawer" id="mob-nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mob-nav-backdrop" id="mob-nav-backdrop"></div>
+  <div class="mob-nav-panel">
+    <ul class="mob-nav-links">
+      <li><a href="index.html" class="cur" data-i18n="nav_home">Home</a></li>
+      <li><a href="products.html" data-i18n="nav_products">Products</a></li>
+      <li><a href="story.html" data-i18n="nav_story">Our Story</a></li>
+      <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <a href="https://wa.me/971503021700" class="mob-nav-wa" target="_blank" rel="noopener" data-i18n="nav_whatsapp">WhatsApp Us</a>
+  </div>
+</div>
 
 <section id="hero">
   <div class="hero-video-bg">
@@ -777,6 +794,15 @@
     </div>
   </div>
 </section>
+
+<!-- Mobile-only: product info panels shown below canvas -->
+<div id="ts-mobile-panels" class="ts-mobile-panel" aria-live="polite">
+  <span class="ts-mobile-panel-num" id="ts-mob-num">01</span>
+  <h3 class="ts-mobile-panel-title" id="ts-mob-title" data-i18n="ts_p0_title">The Base Build</h3>
+  <p class="ts-mobile-panel-desc" id="ts-mob-desc" data-i18n="ts_p0_desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+  <span class="ts-mobile-panel-note" id="ts-mob-note"></span>
+  <div class="ts-mobile-panel-cta" id="ts-mob-cta"></div>
+</div>
 
 <section class="booking-mini reveal">
   <div class="booking-inner">
@@ -1160,16 +1186,19 @@ gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', () => window.dispatchEvent(new Event('scroll', { bubbles: false })));
 window.__lenis = lenis;
 
-// GSAP HORIZONTAL SCROLL (PROPER - LIKE LUMIÈRE)
+// GSAP HORIZONTAL SCROLL — desktop only (900px+)
 gsap.registerPlugin(ScrollTrigger);
 (function(){
   const pin=document.getElementById('story-pin-container');
   const track=document.getElementById('story-track');
   if(!pin || !track) return;
-  
+
+  // On mobile: CSS already stacks panels vertically; skip GSAP pinning entirely
+  if(window.innerWidth <= 900) return;
+
   const panels=track.querySelectorAll('.story-panel');
   const totalWidth=(panels.length-1)*window.innerWidth;
-  
+
   const tween=gsap.to(track,{
     x:-totalWidth,
     ease:'none',
@@ -1182,8 +1211,8 @@ gsap.registerPlugin(ScrollTrigger);
       anticipatePin:1
     }
   });
-  
-  // ── Subtle cursor parallax on panel content only (won't fight GSAP) ──
+
+  // ── Subtle cursor parallax on panel content only ──
   let jMx=0,jMy=0;
   document.addEventListener('mousemove', e=>{
     jMx=(e.clientX/window.innerWidth-.5)*22;
@@ -1204,46 +1233,79 @@ gsap.registerPlugin(ScrollTrigger);
   function loadSpline(){
     if(splineLoaded) return;
     splineLoaded=true;
-    
     const s2=document.getElementById('spline-stage-2');
     const s3=document.getElementById('spline-stage-3');
-    
     [s2,s3].forEach(container=>{
       const viewer=document.createElement('spline-viewer');
       viewer.setAttribute('url','https://prod.spline.design/HrsWHEf9-Gqp5AZc/scene.splinecode');
       viewer.style.filter='saturate(0.9) brightness(0.85)';
       container.appendChild(viewer);
     });
-    
-    // Activate on scroll
     ScrollTrigger.create({
-      trigger:panels[1],
-      containerAnimation:tween,
-      start:'left center',
-      end:'right center',
-      onEnter:()=>s2.classList.add('active'),
-      onLeave:()=>s2.classList.remove('active'),
-      onEnterBack:()=>s2.classList.add('active'),
-      onLeaveBack:()=>s2.classList.remove('active')
+      trigger:panels[1], containerAnimation:tween,
+      start:'left center', end:'right center',
+      onEnter:()=>s2.classList.add('active'), onLeave:()=>s2.classList.remove('active'),
+      onEnterBack:()=>s2.classList.add('active'), onLeaveBack:()=>s2.classList.remove('active')
     });
-    
     ScrollTrigger.create({
-      trigger:panels[2],
-      containerAnimation:tween,
-      start:'left center',
-      end:'right center',
-      onEnter:()=>s3.classList.add('active'),
-      onLeave:()=>s3.classList.remove('active'),
-      onEnterBack:()=>s3.classList.add('active'),
-      onLeaveBack:()=>s3.classList.remove('active')
+      trigger:panels[2], containerAnimation:tween,
+      start:'left center', end:'right center',
+      onEnter:()=>s3.classList.add('active'), onLeave:()=>s3.classList.remove('active'),
+      onEnterBack:()=>s3.classList.add('active'), onLeaveBack:()=>s3.classList.remove('active')
     });
   }
-  
-  ScrollTrigger.create({
-    trigger:pin,
-    start:'top center',
-    onEnter:loadSpline
+  ScrollTrigger.create({ trigger:pin, start:'top center', onEnter:loadSpline });
+})();
+
+// ── MOBILE TRUCK PANEL UPDATER ──
+// Updates the below-canvas info strip as the truck scrub scrolls through scenes
+;(function(){
+  if(window.innerWidth > 900) return;
+  const outer = document.getElementById('truck-scrub-outer');
+  const mobPanel = document.getElementById('ts-mobile-panels');
+  if(!outer || !mobPanel) return;
+
+  const scenes = [
+    { num:'01', titleKey:'ts_p0_title', descKey:'ts_p0_desc', noteKey:null, cta:null },
+    { num:'02', titleKey:'ts_p1_title', descKey:'ts_p1_desc', noteKey:'ts_p1_note', cta:null },
+    { num:'03', titleKey:'ts_p2_title', descKey:'ts_p2_desc', noteKey:'ts_p2_note', cta:null },
+    { num:'04', titleKey:'ts_p3_title', descKey:'ts_p3_desc', noteKey:'ts_p3_note', cta:null },
+    { num:'05', titleKey:'ts_p4_title', descKey:'ts_p4_desc', noteKey:'ts_p4_note', cta:null },
+    { num:'06', titleKey:'ts_p5_title', descKey:'ts_p5_desc', noteKey:null, cta:'products.html' }
+  ];
+
+  // Read translations from desktop panels (already translated by lang.js)
+  function getFromPanel(sceneIdx, field) {
+    const p = document.getElementById('ts-panel-'+sceneIdx);
+    if(!p) return '';
+    const el = p.querySelector('[data-i18n="'+field+'"]');
+    return el ? el.textContent : '';
+  }
+
+  let lastScene = -1;
+  function updateMobPanel(sceneIdx) {
+    if(sceneIdx === lastScene) return;
+    lastScene = sceneIdx;
+    const s = scenes[sceneIdx];
+    if(!s) return;
+    document.getElementById('ts-mob-num').textContent = s.num;
+    document.getElementById('ts-mob-title').textContent = getFromPanel(sceneIdx, s.titleKey);
+    document.getElementById('ts-mob-desc').textContent = getFromPanel(sceneIdx, s.descKey);
+    const noteEl = document.getElementById('ts-mob-note');
+    noteEl.textContent = s.noteKey ? getFromPanel(sceneIdx, s.noteKey) : '';
+    const ctaEl = document.getElementById('ts-mob-cta');
+    if(s.cta) {
+      ctaEl.innerHTML = '<a href="products.html" class="btn-g" style="display:inline-flex;align-items:center;gap:10px;"><span data-i18n="ts_p5_btn">'+getFromPanel(sceneIdx, 'ts_p5_btn')+'</span><span>→</span></a>';
+    } else {
+      ctaEl.innerHTML = '';
+    }
+  }
+
+  // Listen to scene changes broadcast by juhrum.js truck scrub
+  window.addEventListener('juhrumScene', function(e) {
+    updateMobPanel(e.detail || 0);
   });
+  updateMobPanel(0);
 })();
 </script>
 <script src="juhrum.js" defer></script>
@@ -1320,59 +1382,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script>
-// ── THEME SWITCHER ──
-(function() {
-  var STORAGE_KEY = 'juhrum-theme';
-  var mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-
-  function applyTheme(val) {
-    var resolved = val;
-    if (val === 'device') resolved = mediaQuery.matches ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', resolved);
-    var btn = document.getElementById('theme-btn');
-    if (btn) {
-      btn.textContent = val === 'light' ? '☀ Light' : val === 'device' ? '⬡ Auto' : '🌑 Dark';
-    }
-    document.querySelectorAll('.theme-option').forEach(function(o) {
-      o.classList.toggle('active', o.getAttribute('data-theme-val') === val);
-    });
-  }
-
-  function init() {
-    var saved = localStorage.getItem(STORAGE_KEY) || 'dark';
-    applyTheme(saved);
-
-    var btn = document.getElementById('theme-btn');
-    var dropdown = document.getElementById('theme-dropdown');
-    if (!btn || !dropdown) return;
-
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      dropdown.classList.toggle('open');
-    });
-
-    document.querySelectorAll('.theme-option').forEach(function(opt) {
-      opt.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var val = opt.getAttribute('data-theme-val');
-        localStorage.setItem(STORAGE_KEY, val);
-        applyTheme(val);
-        dropdown.classList.remove('open');
-      });
-    });
-
-    document.addEventListener('click', function() { dropdown.classList.remove('open'); });
-    mediaQuery.addEventListener('change', function() {
-      var cur = localStorage.getItem(STORAGE_KEY) || 'dark';
-      if (cur === 'device') applyTheme('device');
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else { init(); }
-})();
-</script>
+<script src="juhrum-ui.js" defer></script>
 </body>
 </html>
