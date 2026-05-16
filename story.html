@@ -68,8 +68,7 @@
 .sh-canvas { position: absolute; inset: 0; z-index: 0; }
 .sh-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to right, rgba(5,5,5,.95) 0%, rgba(5,5,5,.78) 40%, rgba(5,5,5,.3) 75%, rgba(5,5,5,.08) 100%),
-    linear-gradient(to top, rgba(5,5,5,.9) 0%, transparent 55%);
+  background: radial-gradient(ellipse 80% 70% at 20% 60%,rgba(5,5,5,.5) 0%,rgba(5,5,5,.82) 60%,rgba(5,5,5,.95) 100%);
 }
 .sh-diagonal {
   position: absolute; top: 0; right: 0; width: 50%; height: 100%; z-index: 2; pointer-events: none; overflow: hidden;
@@ -88,8 +87,8 @@
 .sh-stat-l { font-family: var(--fu); font-size: 7.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin-top: 2px; text-align: right; }
 .sh-stat-div { width: 1px; height: 18px; background: rgba(196,154,56,.2); margin-left: auto; }
 .sh-h1 {
-  font-family: var(--fd); font-size: clamp(68px, 10.5vw, 168px);
-  line-height: .87; letter-spacing: .018em; color: var(--white);
+  font-family: var(--fd); font-size: clamp(60px, 9vw, 148px);
+  line-height: .9; letter-spacing: .022em; color: var(--white);
   overflow: hidden; width: 100%;
 }
 .sh-h1 .g { color: #e8e0d0; }
