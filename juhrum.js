@@ -435,11 +435,13 @@
   }
 
   // ── Scroll progress ───────────────────────────
+  // Uses getBoundingClientRect for reliability on mobile (avoids Lenis lag on touch)
   function getProgress() {
-    const scrollY  = window.__lenis ? window.__lenis.scroll : window.scrollY;
-    const outerTop = outer.offsetTop;
-    const scrubH   = outer.offsetHeight - window.innerHeight;
-    const scrolled = scrollY - outerTop;
+    const rect    = outer.getBoundingClientRect();
+    const scrubH  = outer.offsetHeight - window.innerHeight;
+    if (scrubH <= 0) return null;
+    // rect.top is negative once we've scrolled into the section
+    const scrolled = -rect.top;
     if (scrolled < 0 || scrolled > scrubH) return null;
     return Math.min(Math.max(scrolled / scrubH, 0), 1);
   }
@@ -491,7 +493,7 @@
       }
       if (best && bestD > 0.008 && bestD < 0.06) {
         snapping = true;
-        const outerTop = outer.offsetTop;
+        const outerTop = outer.getBoundingClientRect().top + (window.__lenis ? window.__lenis.scroll : window.scrollY);
         const scrubH   = outer.offsetHeight - window.innerHeight;
         const targetY  = outerTop + best.p * scrubH;
         if (window.__lenis) {

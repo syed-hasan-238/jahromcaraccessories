@@ -1788,7 +1788,7 @@ body.pulse-hint {
 
 /* ── TRUCK SCRUB: mobile — panel overlaid INSIDE sticky at bottom ── */
 @media (max-width: 900px) {
-  #truck-scrub-outer { height: 600vh; }
+  #truck-scrub-outer { height: 400vh; } /* 400vh = 4 screens, enough for 6 scenes */
 
   /* Panel now sits inside the sticky viewport, bottom-anchored */
   .ts-mobile-panel {
@@ -2372,18 +2372,21 @@ body.pulse-hint {
 @media (max-width: 900px) {
   .story-swipe-hint {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     position: absolute;
     bottom: 36px;
-    right: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 20;
     pointer-events: none;
+    text-align: center;
   }
   .story-swipe-arrow {
-    font-size: 24px;
-    color: rgba(196,154,56,.85);
-    animation: swipeRight 1.8s ease infinite;
+    font-size: 26px;
+    color: rgba(196,154,56,.9);
+    animation: bounceDown 1.6s ease infinite;
     display: block;
     line-height: 1;
   }
@@ -2392,27 +2395,18 @@ body.pulse-hint {
     font-size: 9px;
     letter-spacing: .28em;
     text-transform: uppercase;
-    color: rgba(196,154,56,.65);
+    color: rgba(196,154,56,.7);
     white-space: nowrap;
   }
-  /* Last panel: scroll-down indicator at bottom center */
+  /* Last panel uses same style */
   .story-swipe-down {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
+    bottom: 36px;
   }
   .story-swipe-down .story-swipe-arrow {
-    animation: bounceDown 1.6s ease infinite;
-    font-size: 28px;
+    font-size: 30px;
   }
 }
-@keyframes swipeRight {
-  0%, 100% { transform: translateX(0); opacity: 1; }
-  50% { transform: translateX(8px); opacity: .7; }
-}
+
 
 /* ── STORY PANEL IMG: restored on mobile ── */
 @media (max-width: 900px) {
