@@ -803,23 +803,29 @@
       </div>
     </div>
 
-    <!-- Scroll hint -->
+    <!-- Scroll hint — desktop + mobile -->
     <div class="ts-scroll-hint" id="ts-scroll-hint">
       <span class="ts-hint-icon">↓</span>
       <span class="ts-hint-text" data-i18n="ts_hint_text">Scroll to Build</span>
       <span class="ts-hint-sub" data-i18n="ts_hint_sub">Keep scrolling for 3D interactive showcase</span>
     </div>
+
+    <!-- Mobile-only: "keep scrolling DOWN" prompt fixed top of canvas -->
+    <div class="ts-mob-scroll-prompt" id="ts-mob-scroll-prompt">
+      <span class="ts-mob-prompt-icon">↓</span>
+      <span class="ts-mob-prompt-text">Keep scrolling DOWN to see the truck build</span>
+    </div>
+
+    <!-- Mobile-only: product info overlaid at bottom of sticky canvas -->
+    <div id="ts-mobile-panels" class="ts-mobile-panel" aria-live="polite">
+      <span class="ts-mobile-panel-num" id="ts-mob-num">01</span>
+      <h3 class="ts-mobile-panel-title" id="ts-mob-title" data-i18n="ts_p0_title">The Base Build</h3>
+      <p class="ts-mobile-panel-desc" id="ts-mob-desc" data-i18n="ts_p0_desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
+      <span class="ts-mobile-panel-note" id="ts-mob-note"></span>
+      <div class="ts-mobile-panel-cta" id="ts-mob-cta"></div>
+    </div>
   </div>
 </section>
-
-<!-- Mobile-only: product info panels shown below canvas -->
-<div id="ts-mobile-panels" class="ts-mobile-panel" aria-live="polite">
-  <span class="ts-mobile-panel-num" id="ts-mob-num">01</span>
-  <h3 class="ts-mobile-panel-title" id="ts-mob-title" data-i18n="ts_p0_title">The Base Build</h3>
-  <p class="ts-mobile-panel-desc" id="ts-mob-desc" data-i18n="ts_p0_desc">Every Juhrum build starts with the stock truck — a blank canvas. We assess the vehicle, plan the build, and source every accessory to spec. Nothing gets fitted that doesn't belong.</p>
-  <span class="ts-mobile-panel-note" id="ts-mob-note"></span>
-  <div class="ts-mobile-panel-cta" id="ts-mob-cta"></div>
-</div>
 
 <section class="booking-mini reveal">
   <div class="booking-inner">
@@ -933,6 +939,11 @@
         <h3 class="stage-title" data-i18n="stage1_title">Foundation</h3>
         <p class="stage-text" data-i18n="stage1_text">Industrial Area 4. 2019. One rule: serious trucks deserve serious gear. Everything else is negotiable.</p>
       </div>
+      <!-- Mobile swipe indicator -->
+      <div class="story-swipe-hint">
+        <span class="story-swipe-arrow">→</span>
+        <span class="story-swipe-label">Swipe to continue</span>
+      </div>
     </div>
 
     <div class="story-panel">
@@ -947,6 +958,10 @@
         <div class="stage-rule"></div>
         <h3 class="stage-title" data-i18n="stage2_title">Craft</h3>
         <p class="stage-text" data-i18n="stage2_text">No templates. No rush jobs. Every fit verified twice. Your Silverado isn't our last Silverado — it's the only one that matters.</p>
+      </div>
+      <div class="story-swipe-hint">
+        <span class="story-swipe-arrow">→</span>
+        <span class="story-swipe-label">Swipe to continue</span>
       </div>
     </div>
 
@@ -963,6 +978,10 @@
         <h3 class="stage-title" data-i18n="stage3_title">Trusted</h3>
         <p class="stage-text" data-i18n="stage3_text">4.7★ didn't come from marketing. It came from 500+ trucks that still look factory-fresh in UAE heat. Word travels.</p>
       </div>
+      <div class="story-swipe-hint">
+        <span class="story-swipe-arrow">→</span>
+        <span class="story-swipe-label">Swipe to continue</span>
+      </div>
     </div>
 
     <div class="story-panel">
@@ -976,6 +995,11 @@
         <div class="stage-rule"></div>
         <h3 class="stage-title" data-i18n="stage4_title">Today</h3>
         <p class="stage-text" data-i18n="stage4_text">Ram TRX. F-150 Raptor. GMC Sierra Denali. Built them all. Your truck's next chapter starts in Industrial Area 4.</p>
+      </div>
+      <!-- Last panel: scroll down to exit horizontal section -->
+      <div class="story-swipe-hint story-swipe-down">
+        <span class="story-swipe-arrow">↓</span>
+        <span class="story-swipe-label">Scroll down to continue</span>
       </div>
     </div>
 
@@ -1416,6 +1440,23 @@ document.addEventListener('DOMContentLoaded', function() {
       var reviews = document.querySelector('.reviews');
       if (reviews) reviews.scrollIntoView({ behavior: 'smooth' });
     });
+  }
+
+  // Truck scroll prompt: hide once user enters the scrub section
+  var truckPrompt = document.getElementById('ts-mob-scroll-prompt');
+  var truckOuter  = document.getElementById('truck-scrub-outer');
+  if (truckPrompt && truckOuter) {
+    window.addEventListener('scroll', function() {
+      var rect = truckOuter.getBoundingClientRect();
+      // Hide prompt once truck section is > 15% scrolled through
+      var scrolled = -rect.top;
+      var total    = truckOuter.offsetHeight - window.innerHeight;
+      if (scrolled > total * 0.15) {
+        truckPrompt.classList.add('hide');
+      } else if (scrolled < total * 0.05) {
+        truckPrompt.classList.remove('hide');
+      }
+    }, { passive: true });
   }
 
   // "View Products" -> scroll to 06 catalogue block first

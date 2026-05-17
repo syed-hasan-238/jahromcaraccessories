@@ -66,7 +66,7 @@ body {
   font-weight: 300;
   font-size: 15px;
   line-height: 1.7;
-  overflow-x: hidden;
+  /* overflow-x moved to individual sections — body overflow:hidden breaks position:sticky on iOS */
   cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1786,20 +1786,20 @@ body.pulse-hint {
   .hst-l { font-size: 6px !important; letter-spacing: .12em !important; }
 }
 
-/* ── TRUCK SCRUB: mobile — proper height and canvas rendering ── */
+/* ── TRUCK SCRUB: mobile — panel overlaid INSIDE sticky at bottom ── */
 @media (max-width: 900px) {
-  /* Keep reasonable scroll height for 6 scene transitions */
   #truck-scrub-outer { height: 600vh; }
 
-  /* Mobile panel strip — shown below the canvas */
+  /* Panel now sits inside the sticky viewport, bottom-anchored */
   .ts-mobile-panel {
-    background: var(--charcoal);
-    border-top: 1px solid rgba(196,154,56,.12);
-    padding: 28px 24px 24px;
-    position: relative;
-    z-index: 10;
-    min-height: 100px;
-    transition: opacity .45s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 12;
+    background: linear-gradient(to top, rgba(5,5,5,.97) 0%, rgba(5,5,5,.88) 70%, rgba(5,5,5,0) 100%);
+    padding: 52px 24px 28px;
+    pointer-events: none;
   }
   .ts-mobile-panel-num {
     font-family: var(--fu);
@@ -1808,32 +1808,32 @@ body.pulse-hint {
     text-transform: uppercase;
     color: var(--gold);
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .ts-mobile-panel-title {
     font-family: var(--fd);
-    font-size: clamp(26px, 7vw, 40px);
+    font-size: clamp(24px, 7vw, 38px);
     letter-spacing: .03em;
     color: var(--white);
-    line-height: .95;
-    margin-bottom: 12px;
+    line-height: .92;
+    margin-bottom: 10px;
   }
   .ts-mobile-panel-desc {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 300;
-    color: var(--silver);
-    line-height: 1.75;
-    margin-bottom: 12px;
+    color: rgba(210,205,195,.8);
+    line-height: 1.7;
+    margin-bottom: 8px;
   }
   .ts-mobile-panel-note {
     font-family: var(--fu);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--gold);
     font-weight: 600;
   }
-  .ts-mobile-panel-cta { margin-top: 16px; }
+  .ts-mobile-panel-cta { margin-top: 12px; pointer-events: all; }
 }
 @media (min-width: 901px) {
   .ts-mobile-panel { display: none; }
@@ -1858,7 +1858,14 @@ body.pulse-hint {
     font-size: 14px !important;
   }
   .story-panel-img {
-    display: none; /* hide decorative image on mobile panels to save space */
+    /* images kept — user wants them visible on mobile */
+    max-width: 160px;
+    margin: 0 auto 20px;
+  }
+  .story-panel-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
 
@@ -2302,5 +2309,115 @@ body.pulse-hint {
   /* Mobile panel strip below canvas — ensure visible */
   .ts-mobile-panel {
     display: block !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE FIXES — v8b additions
+   ══════════════════════════════════════════ */
+
+/* ── TRUCK: "Keep scrolling DOWN" top prompt — mobile only ── */
+.ts-mob-scroll-prompt {
+  display: none;
+}
+@media (max-width: 900px) {
+  .ts-mob-scroll-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    top: 72px; /* below nav */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 14;
+    background: rgba(5,5,5,.65);
+    border: 1px solid rgba(196,154,56,.18);
+    padding: 10px 20px;
+    border-radius: 2px;
+    pointer-events: none;
+    animation: promptPulse 2.4s ease infinite;
+    white-space: nowrap;
+  }
+  .ts-mob-prompt-icon {
+    font-size: 22px;
+    color: var(--gold);
+    line-height: 1;
+    animation: bounceDown 1.4s ease infinite;
+    display: block;
+  }
+  .ts-mob-prompt-text {
+    font-family: var(--fu);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(196,154,56,.9);
+  }
+  /* Fade prompt out once user has scrolled into the section */
+  .ts-mob-scroll-prompt.hide {
+    opacity: 0;
+    transition: opacity .6s;
+    pointer-events: none;
+  }
+}
+@keyframes promptPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .6; }
+}
+
+/* ── STORY PANELS: swipe indicator — mobile only ── */
+.story-swipe-hint {
+  display: none;
+}
+@media (max-width: 900px) {
+  .story-swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 36px;
+    right: 24px;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .story-swipe-arrow {
+    font-size: 24px;
+    color: rgba(196,154,56,.85);
+    animation: swipeRight 1.8s ease infinite;
+    display: block;
+    line-height: 1;
+  }
+  .story-swipe-label {
+    font-family: var(--fu);
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: rgba(196,154,56,.65);
+    white-space: nowrap;
+  }
+  /* Last panel: scroll-down indicator at bottom center */
+  .story-swipe-down {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  .story-swipe-down .story-swipe-arrow {
+    animation: bounceDown 1.6s ease infinite;
+    font-size: 28px;
+  }
+}
+@keyframes swipeRight {
+  0%, 100% { transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(8px); opacity: .7; }
+}
+
+/* ── STORY PANEL IMG: restored on mobile ── */
+@media (max-width: 900px) {
+  /* Make sure story panels are position:relative for absolute children */
+  .story-panel {
+    position: relative;
   }
 }
