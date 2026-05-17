@@ -2208,7 +2208,7 @@ body.pulse-hint {
   section, .booking-mini, .reviews, .story-intro, .contact-strip, .jfoot {
     max-width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    /* NOTE: NO overflow:hidden here — it kills position:sticky on #truck-scrub-outer */
   }
   .story-intro {
     padding: 52px 24px 36px;
