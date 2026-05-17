@@ -32,28 +32,32 @@
     if (!btn || !dd) return;
 
     // Guard against double-init
-    if (btn.dataset.themeInit === '1') return;
-    btn.dataset.themeInit = '1';
+    if (btn._themeBound) return;
+    btn._themeBound = true;
 
-    // Use pointerup for reliable mouse + touch without double-fire
-    btn.addEventListener('pointerup', function(e) {
+    var themeOpen = false;
+    function openTDD() { themeOpen = true; dd.classList.add('open'); }
+    function closeTDD() { themeOpen = false; dd.classList.remove('open'); }
+
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
+      // Close lang dropdown
       var langDD = document.getElementById('lang-dropdown');
       if (langDD) langDD.classList.remove('open');
-      dd.classList.toggle('open');
+      themeOpen ? closeTDD() : openTDD();
     });
 
     dd.querySelectorAll('.theme-option').forEach(function (opt) {
-      opt.addEventListener('pointerup', function(e) {
+      opt.addEventListener('click', function(e) {
         e.stopPropagation();
         var val = opt.getAttribute('data-theme-val');
         localStorage.setItem(THEME_KEY, val);
         applyTheme(val);
-        dd.classList.remove('open');
+        closeTDD();
       });
     });
 
-    document.addEventListener('pointerup', function () { dd.classList.remove('open'); });
+    document.addEventListener('click', function () { closeTDD(); });
     mq.addEventListener('change', function () {
       if ((localStorage.getItem(THEME_KEY) || 'dark') === 'device') applyTheme('device');
     });

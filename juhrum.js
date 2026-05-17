@@ -416,16 +416,20 @@
       feed.style.transform = `translateY(-${Math.min(feedP, 1) * totalH}px)`;
     }
 
-    // Update active panel for CSS highlight
+    // Update active panel for CSS highlight (desktop only — mobile uses separate strip)
     let idx = 0;
     for (let i = SCENES.length - 1; i >= 0; i--) {
       if (progress >= SCENES[i].p - 0.01) { idx = i; break; }
     }
     if (idx === currentScene) return;
     currentScene = idx;
-    document.querySelectorAll('.ts-panel').forEach((el, i) => {
-      el.classList.toggle('active', i === idx);
-    });
+    // Only toggle .active on desktop — on mobile the panels are CSS-hidden,
+    // and toggling .active could fight the display:none via inline style side-effects
+    if (window.innerWidth > 900) {
+      document.querySelectorAll('.ts-panel').forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+    }
     // Broadcast scene change for mobile panel strip
     window.dispatchEvent(new CustomEvent('juhrumScene', { detail: idx }));
   }
@@ -529,9 +533,12 @@
       // Use first successfully loaded frame index for initial draw
       const firstLoaded = frames.findIndex(f => f && f.complete && f.naturalWidth > 0);
       drawFrame(Math.max(0, firstLoaded));
-      // Activate first panel
-      const p0 = document.getElementById('ts-panel-0');
-      if (p0) { p0.classList.add('active'); currentScene = 0; }
+      // Activate first panel (desktop only — mobile CSS hides all panels)
+      if (window.innerWidth > 900) {
+        const p0 = document.getElementById('ts-panel-0');
+        if (p0) { p0.classList.add('active'); currentScene = 0; }
+      }
+      currentScene = 0;
     }
 
     for (let i = 0; i < TOTAL; i++) {

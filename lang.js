@@ -572,49 +572,57 @@ function applyLayoutDir(dir) {
 }
 
 // ─────────────────────────────────────────────────────
-// Init — attaches click listeners to lang-btn + options
+// Init — dead-simple, no cloning, no pointerup, no double-fire
+// Works on mouse (desktop) and touch (mobile) identically
 // ─────────────────────────────────────────────────────
 function juhrumInitLang() {
-  // Apply saved language immediately
-  const saved = localStorage.getItem('juhrum-lang') || 'en';
+  var saved = localStorage.getItem('juhrum-lang') || 'en';
   juhrumApplyLang(saved);
 
-  const btn = document.getElementById('lang-btn');
-  const dropdown = document.getElementById('lang-dropdown');
-  if (!btn || !dropdown) return;
+  var btn = document.getElementById('lang-btn');
+  var dd  = document.getElementById('lang-dropdown');
+  if (!btn || !dd) return;
+  if (btn._langBound) return;  // guard against double-init
+  btn._langBound = true;
 
-  // Guard against double-init
-  if (btn.dataset.langInit === '1') return;
-  btn.dataset.langInit = '1';
+  var open = false;
 
-  // Use pointerup — works reliably on both mouse and touch, no double-fire
-  btn.addEventListener('pointerup', function(e) {
+  function openDD() {
+    open = true;
+    dd.classList.add('open');
+  }
+  function closeDD() {
+    open = false;
+    dd.classList.remove('open');
+  }
+  function toggleDD(e) {
     e.stopPropagation();
-    // Close theme dropdown if open
-    var themeDD = document.getElementById('theme-dropdown');
-    if (themeDD) themeDD.classList.remove('open');
-    dropdown.classList.toggle('open');
-  });
+    // Also close theme dropdown if present
+    var tdd = document.getElementById('theme-dropdown');
+    if (tdd) tdd.classList.remove('open');
+    open ? closeDD() : openDD();
+  }
 
-  dropdown.querySelectorAll('.lang-option').forEach(function(opt) {
-    opt.addEventListener('pointerup', function(e) {
+  // Single click listener — browsers fire click reliably on both mouse and touch
+  btn.addEventListener('click', toggleDD);
+
+  dd.querySelectorAll('.lang-option').forEach(function(opt) {
+    opt.addEventListener('click', function(e) {
       e.stopPropagation();
       juhrumApplyLang(opt.getAttribute('data-lang'));
-      dropdown.classList.remove('open');
+      closeDD();
     });
   });
 
-  // Close when tapping/clicking anywhere outside
-  document.addEventListener('pointerup', function() {
-    dropdown.classList.remove('open');
-  });
+  // Close on outside click / tap
+  document.addEventListener('click', function() { closeDD(); });
 }
 
-// Expose globally so inline scripts on each page can also trigger it
+// Expose globally
 window.juhrumApplyLang = juhrumApplyLang;
-window.juhrumInitLang = juhrumInitLang;
+window.juhrumInitLang  = juhrumInitLang;
 
-// Auto-init: works regardless of when script runs (defer, async, or inline)
+// Auto-init regardless of when script runs
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', juhrumInitLang);
 } else {

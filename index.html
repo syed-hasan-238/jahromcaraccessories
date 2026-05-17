@@ -982,6 +982,13 @@
   </div>
 </div>
 
+<!-- Journey scroll-down indicator — mobile only, JS adds click handler -->
+<div id="journey-scroll-down">
+  <span class="jsd-arrow">↓</span>
+  <span class="jsd-label">Continue Scrolling</span>
+  <span class="jsd-sub">Next: What Our Customers Say</span>
+</div>
+
 <section class="reviews" itemscope itemtype="https://schema.org/AutoPartsStore">
   <div class="dot-grid tr" style="opacity:.55;"></div>
   <div class="dot-grid" style="bottom:40px;left:40px;opacity:.3;"></div>
@@ -1203,15 +1210,12 @@ gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', () => window.dispatchEvent(new Event('scroll', { bubbles: false })));
 window.__lenis = lenis;
 
-// GSAP HORIZONTAL SCROLL — desktop only (900px+)
+// GSAP HORIZONTAL SCROLL — all screen sizes including mobile
 gsap.registerPlugin(ScrollTrigger);
 (function(){
   const pin=document.getElementById('story-pin-container');
   const track=document.getElementById('story-track');
   if(!pin || !track) return;
-
-  // On mobile: CSS already stacks panels vertically; skip GSAP pinning entirely
-  if(window.innerWidth <= 900) return;
 
   const panels=track.querySelectorAll('.story-panel');
   const totalWidth=(panels.length-1)*window.innerWidth;
@@ -1404,6 +1408,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // ── MOBILE BUTTON REWIRING (mobile only, <= 900px) ──
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth > 900) return;
+
+  // Journey scroll-down indicator
+  var jsd = document.getElementById('journey-scroll-down');
+  if (jsd) {
+    jsd.addEventListener('click', function() {
+      var reviews = document.querySelector('.reviews');
+      if (reviews) reviews.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 
   // "View Products" -> scroll to 06 catalogue block first
   var btnProducts = document.getElementById('hero-btn-products');

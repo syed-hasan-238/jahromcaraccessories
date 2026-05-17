@@ -624,7 +624,20 @@ a:focus-visible, button:focus-visible {
 
 /* Mobile — panels go below canvas */
 @media (max-width: 900px) {
-  .ts-panels { display: none; }
+  /* Hide right-side text panels with !important — prevents any specificity override */
+  .ts-panels,
+  #ts-panels,
+  [dir="rtl"] .ts-panels {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  /* Belt-and-suspenders: also hide individual panels */
+  .ts-panel {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
   .ts-label-top { left: 24px; top: 28px; }
   .ts-corner-tl { top: 18px; left: 18px; }
   .ts-corner-tr { top: 18px; right: 18px; }
@@ -1773,10 +1786,10 @@ body.pulse-hint {
   .hst-l { font-size: 6px !important; letter-spacing: .12em !important; }
 }
 
-/* ── TRUCK SCRUB: mobile panel below canvas (issue #3) ── */
+/* ── TRUCK SCRUB: mobile — proper height and canvas rendering ── */
 @media (max-width: 900px) {
-  /* Reduce scrub height so the below-panel is reachable */
-  #truck-scrub-outer { height: 700vh; }
+  /* Keep reasonable scroll height for 6 scene transitions */
+  #truck-scrub-outer { height: 600vh; }
 
   /* Mobile panel strip — shown below the canvas */
   .ts-mobile-panel {
@@ -1826,23 +1839,26 @@ body.pulse-hint {
   .ts-mobile-panel { display: none; }
 }
 
-/* ── STORY HORIZONTAL SCROLL: vertical stack on mobile (issue #4) ── */
+/* ── STORY HORIZONTAL SCROLL: GSAP handles mobile too, allow horizontal ── */
 @media (max-width: 900px) {
-  /* Override GSAP pinning — story sections become vertical */
   #story-pin-container {
-    overflow: visible !important;
-    height: auto !important;
-  }
-  #story-track {
-    display: flex !important;
-    flex-direction: column !important;
-    transform: none !important;
-    width: 100% !important;
+    overflow: hidden;
   }
   .story-panel {
-    width: 100% !important;
-    min-height: 80vh;
-    flex-shrink: 0;
+    padding: 0 24px !important;
+  }
+  .panel-content {
+    padding: 32px 24px !important;
+    max-width: calc(100vw - 48px) !important;
+  }
+  .stage-title {
+    font-size: clamp(28px, 8vw, 44px) !important;
+  }
+  .stage-text {
+    font-size: 14px !important;
+  }
+  .story-panel-img {
+    display: none; /* hide decorative image on mobile panels to save space */
   }
 }
 
@@ -2029,11 +2045,12 @@ body.pulse-hint {
    ══════════════════════════════════════════ */
 
 /* ── GLOBAL MOBILE FIT: prevent horizontal overflow ── */
+/* NOTE: overflow-x:hidden on body can break position:sticky in some browsers. 
+   We clip overflow on individual sections instead. */
 @media (max-width: 900px) {
-  html, body {
-    overflow-x: hidden;
-    max-width: 100%;
+  body {
     width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -2106,28 +2123,23 @@ body.pulse-hint {
   }
 }
 
-/* ── TRUCK SCRUB MOBILE FIX: full-width, no overflow, no text intrusion ── */
+/* ── TRUCK SCRUB MOBILE FIX: DO NOT add overflow:hidden to outer — breaks sticky! ── */
 @media (max-width: 900px) {
   #truck-scrub-outer {
     width: 100%;
-    max-width: 100vw;
-    overflow: hidden;
+    /* NO overflow: hidden here — it breaks position: sticky on the inner element */
   }
   #truck-scrub-sticky {
     width: 100%;
-    max-width: 100vw;
-    overflow: hidden;
-    /* Canvas fills full viewport — text panel hidden, below-canvas strip handles it */
+    overflow: hidden; /* OK here, sticky element itself can have overflow: hidden */
     justify-content: center;
     align-items: center;
   }
   #truck-canvas {
     width: 100% !important;
     max-width: 100vw !important;
-    /* Full height on mobile */
     height: 100% !important;
   }
-  /* Ensure nothing bleeds outside the sticky container */
   .ts-label-top {
     left: 16px;
     right: 16px;
@@ -2213,5 +2225,82 @@ body.pulse-hint {
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE FIXES — v8 additions
+   ══════════════════════════════════════════ */
+
+/* ── NAV LOGO: 5% smaller on mobile ── */
+@media (max-width: 900px) {
+  .jnav-logo img {
+    height: 30px !important; /* nav logo is 32px desktop, 30px = ~5% smaller */
+    width: auto !important;
+  }
+}
+
+/* ── JOURNEY SECTION: scroll-down indicator after last panel ── */
+#journey-scroll-down {
+  display: none; /* hidden on desktop — JS shows it on mobile */
+}
+@media (max-width: 900px) {
+  #journey-scroll-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px 24px 32px;
+    background: var(--deep);
+    border-top: 1px solid rgba(196,154,56,.12);
+    cursor: pointer;
+  }
+  .jsd-arrow {
+    font-size: 32px;
+    color: var(--gold);
+    animation: bounceDown 1.6s ease infinite;
+    display: block;
+    line-height: 1;
+  }
+  .jsd-label {
+    font-family: var(--fu);
+    font-size: 11px;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: rgba(196,154,56,.7);
+    text-align: center;
+  }
+  .jsd-sub {
+    font-family: var(--fu);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(196,154,56,.4);
+    text-align: center;
+  }
+}
+
+/* ── TRUCK SCRUB: prominent scroll hint on mobile ── */
+@media (max-width: 900px) {
+  .ts-scroll-hint {
+    opacity: 1 !important; /* always visible on mobile, not hidden behind .active */
+    bottom: 24px !important;
+  }
+  .ts-hint-icon {
+    font-size: 36px !important;
+    color: rgba(20,20,18,.9) !important;
+  }
+  .ts-hint-text {
+    font-size: 15px !important;
+    color: rgba(20,20,18,.9) !important;
+  }
+  .ts-hint-sub {
+    font-size: 11px !important;
+    color: rgba(20,20,18,.65) !important;
+  }
+  /* Mobile panel strip below canvas — ensure visible */
+  .ts-mobile-panel {
+    display: block !important;
   }
 }
