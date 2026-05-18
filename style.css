@@ -2415,3 +2415,58 @@ body.pulse-hint {
     position: relative;
   }
 }
+
+/* ── RTL LAYOUT SUPPORT ── */
+[dir="rtl"] .jnav { direction: rtl; }
+[dir="rtl"] .jnav-links { flex-direction: row-reverse; }
+[dir="rtl"] .jnav-right { flex-direction: row-reverse; }
+[dir="rtl"] .h-stats { direction: rtl; }
+[dir="rtl"] .hst-item { text-align: left; flex-direction: row-reverse; }
+[dir="rtl"] .hst-l { text-align: left; }
+[dir="rtl"] .hero-btns { flex-direction: row-reverse; }
+[dir="rtl"] .pcard-content { text-align: right; direction: rtl; }
+[dir="rtl"] .pcard-cat { flex-direction: row-reverse; }
+[dir="rtl"] .ts-panel { direction: rtl; text-align: right; }
+[dir="rtl"] .booking-area { direction: rtl; text-align: right; }
+[dir="rtl"] .jfoot { direction: rtl; }
+[dir="rtl"] .jfoot-cols { flex-direction: row-reverse; }
+[dir="rtl"] .jfoot-col { text-align: right; }
+[dir="rtl"] .tick-track { direction: ltr; } /* ticker stays LTR */
+[dir="rtl"] .review-card { direction: rtl; text-align: right; }
+[dir="rtl"] .rcard-header { flex-direction: row-reverse; }
+[dir="rtl"] .val-card { text-align: right; direction: rtl; }
+[dir="rtl"] .info-row { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .map-detail-row { flex-direction: row-reverse; }
+[dir="rtl"] .con-left { direction: rtl; text-align: right; }
+[dir="rtl"] .con-right { direction: rtl; text-align: right; }
+[dir="rtl"] .ed-body { direction: rtl; text-align: right; }
+[dir="rtl"] .nb-item { text-align: right; }
+[dir="rtl"] .nb-grid { direction: rtl; }
+[dir="rtl"] .stage-tag { direction: rtl; }
+[dir="rtl"] .stage-text { direction: rtl; text-align: right; }
+[dir="rtl"] .cs-row { flex-direction: row-reverse; }
+[dir="rtl"] .sh-stats { direction: rtl; flex-direction: row-reverse; }
+[dir="rtl"] .sh-stat-l { text-align: left; }
+[dir="rtl"] .img-badge { text-align: right; }
+[dir="rtl"] .booking-h3 { text-align: right; }
+[dir="rtl"] .booking-btns { flex-direction: row-reverse; }
+
+/* RTL font stack */
+[dir="rtl"] body,
+[dir="rtl"] p,
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
+[dir="rtl"] .ed-body, [dir="rtl"] .pcard-spec,
+[dir="rtl"] .booking-text, [dir="rtl"] .ts-panel-desc,
+[dir="rtl"] .stage-text, [dir="rtl"] .review-text {
+  font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--fb), sans-serif;
+  line-height: 1.9;
+}
+[lang="hi"] body,
+[lang="hi"] p,
+[lang="hi"] h1, [lang="hi"] h2, [lang="hi"] h3,
+[lang="hi"] .ed-body, [lang="hi"] .pcard-spec,
+[lang="hi"] .booking-text, [lang="hi"] .ts-panel-desc,
+[lang="hi"] .stage-text, [lang="hi"] .review-text {
+  font-family: 'Noto Sans Devanagari', var(--fb), sans-serif;
+  line-height: 1.85;
+}
