@@ -429,8 +429,14 @@
   z-index: 1;
 }
 
-.story-track{display:flex;will-change:transform;transform:translateZ(0);}
-.story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);position:relative;background:var(--deep);}
+.story-track{display:flex;will-change:transform;transform:translateZ(0);direction:ltr;}
+.story-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);position:relative;background:var(--deep);direction:ltr;}
+/* Fix panel-content for RTL — keep scroll direction LTR, flip text */
+[dir="rtl"] .panel-content { text-align: right; direction: rtl; }
+[dir="rtl"] .stage-tag { direction: rtl; }
+[dir="rtl"] .stage-text { direction: rtl; text-align: right; }
+[dir="rtl"] .story-swipe-hint { direction: rtl; }
+
 .panel-content{max-width:600px;position:relative;z-index:10;text-align:center;transform:translateZ(0);backface-visibility:hidden;}
 .stage-num{font-family:var(--fd);font-size:200px;color:rgba(196,154,56,.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;z-index:0;pointer-events:none;user-select:none;}
 .stage-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);color:var(--gold);margin-bottom:var(--sp-5);line-height:.95;}
@@ -589,6 +595,26 @@
 }
 .lang-drop-item:hover, .lang-drop-item:focus { color: var(--gold); background: rgba(196,154,56,.06); outline: none; }
 .lang-drop-item.active { color: var(--gold); }
+
+/* RTL Hero fixes */
+[dir="rtl"] .h-stats { right: auto; left: 52px; }
+[dir="rtl"] .h-scroll { right: auto; left: 88px; }
+[dir="rtl"] #hero-logo-mark { right: auto; left: 52px; flex-direction: column; align-items: flex-start; }
+[dir="rtl"] .hero-content { text-align: right; }
+[dir="rtl"] .h-tag { text-align: right; justify-content: flex-end; }
+[dir="rtl"] .h-h1 .row { justify-content: flex-end; }
+[dir="rtl"] .h-sub { text-align: right; }
+[dir="rtl"] .h-ctas { flex-direction: row-reverse; }
+[dir="rtl"] .bracket.tl { left: auto; right: 52px; }
+[dir="rtl"] .bracket.br-c { right: auto; left: 52px; }
+
+/* RTL hero sizing */
+[dir="rtl"] .h-h1 { font-size: clamp(44px, 6.2vw, 110px); }
+[dir="rtl"] .h-h1 .row { justify-content: flex-end; }
+[dir="rtl"] .hero-content { right: var(--gutter); left: auto; text-align: right; }
+[dir="rtl"] #hero-logo-mark { right: auto !important; left: 52px !important; align-items: flex-start !important; }
+[dir="rtl"] .bracket.tl { left: auto !important; right: 52px !important; }
+[dir="rtl"] .bracket.br-c { right: auto !important; left: 52px !important; }
 </style>
 <link rel="alternate" hreflang="en" href="https://jahromcaraccessories.vercel.app/">
 </head>
@@ -637,8 +663,7 @@
         <li class="lang-drop-item active" role="option" data-lang="en" data-label="EN" tabindex="0">🌐 English</li>
         <li class="lang-drop-item" role="option" data-lang="ar" data-label="عربي" tabindex="0">🇦🇪 عربي</li>
         <li class="lang-drop-item" role="option" data-lang="ur" data-label="اردو" tabindex="0">🇵🇰 اردو</li>
-        <li class="lang-drop-item" role="option" data-lang="fa" data-label="فارسی" tabindex="0">🌙 فارسی</li>
-        <li class="lang-drop-item" role="option" data-lang="hi" data-label="हिन्दी" tabindex="0">🇮🇳 हिन्दी</li>
+        
       </ul>
     </div>
     <a href="https://wa.me/971503002898" class="jnav-wa" data-tip="WhatsApp" aria-label="Contact us on WhatsApp" data-i18n="nav_whatsapp">WhatsApp Us</a>

@@ -171,6 +171,10 @@
   position: absolute; top: 18px; right: 18px; z-index: 2;
   font-family: var(--fd); font-size: 12px; color: rgba(196,154,56,.22); letter-spacing: .08em;
 }
+[dir="rtl"] .pcard-idx { right: auto; left: 18px; }
+[dir="rtl"] .pcard-content { text-align: right; direction: rtl; }
+[dir="rtl"] .pcard-cat { flex-direction: row-reverse; }
+[dir="rtl"] .pcard-cat::before { margin-right: 0; margin-left: 8px; }
 .pcard-content { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--sp-6) var(--sp-5); z-index: 2; }
 .pcard-cat {
   font-family: var(--fu); font-size: 12px; letter-spacing: .24em;
@@ -347,6 +351,9 @@
 }
 .lang-drop-item:hover, .lang-drop-item:focus { color: var(--gold); background: rgba(196,154,56,.06); outline: none; }
 .lang-drop-item.active { color: var(--gold); }
+
+[dir="rtl"] .pcard-cat { transform: translateX(8px); opacity: 0; }
+[dir="rtl"] .pcard:hover .pcard-cat { transform: translateX(0); opacity: 1; }
 </style>
 </head>
 <body class="noise">
@@ -383,8 +390,7 @@
         <li class="lang-drop-item active" role="option" data-lang="en" data-label="EN" tabindex="0">🌐 English</li>
         <li class="lang-drop-item" role="option" data-lang="ar" data-label="عربي" tabindex="0">🇦🇪 عربي</li>
         <li class="lang-drop-item" role="option" data-lang="ur" data-label="اردو" tabindex="0">🇵🇰 اردو</li>
-        <li class="lang-drop-item" role="option" data-lang="fa" data-label="فارسی" tabindex="0">🌙 فارسی</li>
-        <li class="lang-drop-item" role="option" data-lang="hi" data-label="हिन्दी" tabindex="0">🇮🇳 हिन्दी</li>
+        
       </ul>
     </div>
     <a href="https://wa.me/971503002898" class="jnav-wa" data-tip="WhatsApp" aria-label="Contact us on WhatsApp" data-i18n="nav_whatsapp">WhatsApp Us</a>
@@ -433,13 +439,13 @@
 </div>
 
 <div class="filter-wrap">
-  <button class="fb on" data-f="all">All</button>
-  <button class="fb" data-f="beds">Bed Covers</button>
-  <button class="fb" data-f="exterior">Exterior</button>
-  <button class="fb" data-f="interior">Interior</button>
+  <button class="fb on" data-f="all" data-i18n="filter_all">All</button>
+  <button class="fb" data-f="beds" data-i18n="filter_beds">Bed Covers</button>
+  <button class="fb" data-f="exterior" data-i18n="filter_exterior">Exterior</button>
+  <button class="fb" data-f="interior" data-i18n="filter_interior">Interior</button>
   <button class="fb" data-f="electronics">Electronics</button>
-  <button class="fb" data-f="protection">Protection</button>
-  <button class="fb" data-f="custom">Custom</button>
+  <button class="fb" data-f="protection" data-i18n="filter_protection">Protection</button>
+  <button class="fb" data-f="custom" data-i18n="filter_custom">Custom</button>
 </div>
 
 <div class="prod-wrap" style="position:relative;">
@@ -453,10 +459,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/rollcover.jpg" alt="Retractable roll cover fitted to pickup truck — Sharjah UAE" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">01</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Bed Covers</div>
-      <div class="pcard-name">Hardtop Retractable</div>
-      <div class="pcard-spec">Aerospace-grade 6063-T5 aluminium. Powder-coated matte black. Tested to 500 lb static load. EPDM weather seals keep UAE dust out. Fits F-150, Ram 1500/2500, Sierra. Lock it, load it, forget it.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_beds">Bed Covers</div>
+      <div class="pcard-name" data-i18n="prod_1_name">Hardtop Retractable</div>
+      <div class="pcard-spec" data-i18n="prod_1_spec">Aerospace-grade 6063-T5 aluminium. Powder-coated matte black. Tested to 500 lb static load. EPDM weather seals keep UAE dust out. Fits F-150, Ram 1500/2500, Sierra. Lock it, load it, forget it.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -466,10 +472,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/trifoldbedcover.jpg" alt="Tri-fold hard bed cover for pickup truck — Jahrom Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">02</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Bed Covers</div>
-      <div class="pcard-name">Soft Tri-Fold</div>
-      <div class="pcard-spec">Heavy-duty UV-resistant vinyl. Clamp-on fit — zero drilling, zero damage. Folds open in seconds. Fits F-Series, Ram, Tundra. Lightweight protection that actually works in desert heat.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_beds">Bed Covers</div>
+      <div class="pcard-name" data-i18n="prod_2_name">Soft Tri-Fold</div>
+      <div class="pcard-spec" data-i18n="prod_2_spec">Heavy-duty UV-resistant vinyl. Clamp-on fit — zero drilling, zero damage. Folds open in seconds. Fits F-Series, Ram, Tundra. Lightweight protection that actually works in desert heat.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -479,10 +485,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/bullbar.jpg" alt="Custom bull bar fitted to F-150 — Jahrom Auto Accessories Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">03</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Exterior</div>
-      <div class="pcard-name">Bull Bars</div>
-      <div class="pcard-spec">Mild steel and stainless variants. Powder-coated black or polished. Integrated LED mount points. Brush guard and nudge bar options. Direct bolt-on for F-150, Ram, Sierra, Silverado. Built for wadi approaches, not car parks.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_exterior">Exterior</div>
+      <div class="pcard-name" data-i18n="prod_3_name">Bull Bars</div>
+      <div class="pcard-spec" data-i18n="prod_3_spec">Mild steel and stainless variants. Powder-coated black or polished. Integrated LED mount points. Brush guard and nudge bar options. Direct bolt-on for F-150, Ram, Sierra, Silverado. Built for wadi approaches, not car parks.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -492,10 +498,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/sidestep.jpg" alt="Power side steps fitted to pickup truck — Sharjah UAE" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">04</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Exterior</div>
-      <div class="pcard-name">Running Boards</div>
-      <div class="pcard-spec">Aluminium and steel. Power retractable options available. Drop steps for lifted trucks. Non-slip surface, direct bolt-on — no cutting required. Ford, Dodge, GMC. Makes the entry effortless, makes the truck look intentional.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_exterior">Exterior</div>
+      <div class="pcard-name" data-i18n="prod_4_name">Running Boards</div>
+      <div class="pcard-spec" data-i18n="prod_4_spec">Aluminium and steel. Power retractable options available. Drop steps for lifted trucks. Non-slip surface, direct bolt-on — no cutting required. Ford, Dodge, GMC. Makes the entry effortless, makes the truck look intentional.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -505,10 +511,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/roofrack.jpg" alt="Heavy duty roof rack on pickup truck — Jahrom Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">05</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Exterior</div>
-      <div class="pcard-name">Roof Racks</div>
-      <div class="pcard-spec">Cab-mounted and full-length systems. Powder-coated steel rated to 150 kg. LED light bar channels built in. Model-specific brackets — no improvising, no flex. Overland-ready from day one.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_exterior">Exterior</div>
+      <div class="pcard-name" data-i18n="prod_5_name">Roof Racks</div>
+      <div class="pcard-spec" data-i18n="prod_5_spec">Cab-mounted and full-length systems. Powder-coated steel rated to 150 kg. LED light bar channels built in. Model-specific brackets — no improvising, no flex. Overland-ready from day one.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -518,10 +524,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/rollbars.jpg" alt="Roll bar with LED lights fitted to pickup truck bed — Jahrom Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:0.44;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">06</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Exterior</div>
-      <div class="pcard-name">Roll Bars</div>
-      <div class="pcard-spec">Heavy-duty steel roll bars that define the back of the truck. Powder-coated black with integrated LED light bars and amber accent strip lighting. Direct bolt-on fitment for F-150, Ram, GMC Sierra, Tundra — no drilling, no fabrication. The look and the function, fitted clean.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request roll bar price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_exterior">Exterior</div>
+      <div class="pcard-name" data-i18n="prod_6_name">Roll Bars</div>
+      <div class="pcard-spec" data-i18n="prod_6_spec">Heavy-duty steel roll bars that define the back of the truck. Powder-coated black with integrated LED light bars and amber accent strip lighting. Direct bolt-on fitment for F-150, Ram, GMC Sierra, Tundra — no drilling, no fabrication. The look and the function, fitted clean.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request roll bar price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -531,10 +537,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/floormats.jpg" alt="Premium floor mats for pickup truck — Jahrom Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">07</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Interior</div>
-      <div class="pcard-name">Floor Leather &amp; Mats</div>
-      <div class="pcard-spec">Full floor leather installation in all colours. Heavy-duty all-weather mats with model-specific fit. Anti-slip backing. Covers front, rear, and cargo area. UAE desert-proof construction.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_interior">Interior</div>
+      <div class="pcard-name" data-i18n="prod_7_name">Floor Leather &amp; Mats</div>
+      <div class="pcard-spec" data-i18n="prod_7_spec">Full floor leather installation in all colours. Heavy-duty all-weather mats with model-specific fit. Anti-slip backing. Covers front, rear, and cargo area. UAE desert-proof construction.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -544,10 +550,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/ppf.jpg" alt="Paint protection film PPF applied to truck — Sharjah UAE" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">08</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Protection</div>
-      <div class="pcard-name">PPF &amp; Paint Protection</div>
-      <div class="pcard-spec">Self-healing paint protection film. Full front-end, bonnet, full-body options. Clear and matte finishes. Protects against stone chips, scratches, UV fade. UAE heat and dust tested.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_protection">Protection</div>
+      <div class="pcard-name" data-i18n="prod_8_name">PPF &amp; Paint Protection</div>
+      <div class="pcard-spec" data-i18n="prod_8_spec">Self-healing paint protection film. Full front-end, bonnet, full-body options. Clear and matte finishes. Protects against stone chips, scratches, UV fade. UAE heat and dust tested.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -557,10 +563,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/canopy.jpg" alt="Hardtop canopy fitted to pickup truck — Jahrom Auto Accessories Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.44;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">09</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Bed Covers</div>
-      <div class="pcard-name">Hardtop Canopy</div>
-      <div class="pcard-spec">Full hardshell canopy that turns your truck bed into a weatherproof, lockable cargo space. Fibreglass construction, colour-matched to your truck. Integrated side windows, interior LED strip lighting, and a flush rear lock. Cleaner than a cover, more functional than an open bed.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request canopy price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_beds">Bed Covers</div>
+      <div class="pcard-name" data-i18n="prod_9_name">Hardtop Canopy</div>
+      <div class="pcard-spec" data-i18n="prod_9_spec">Full hardshell canopy that turns your truck bed into a weatherproof, lockable cargo space. Fibreglass construction, colour-matched to your truck. Integrated side windows, interior LED strip lighting, and a flush rear lock. Cleaner than a cover, more functional than an open bed.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request canopy price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -570,10 +576,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/underbody.jpg" alt="Underbody protection fitted to pickup truck — Jahrom Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">10</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Protection</div>
-      <div class="pcard-name">Concealed Protection</div>
-      <div class="pcard-spec">Concealed paint protection for high-impact areas — door edges, rockers, wheel arches. Invisible application. Protects resale value. Pairs perfectly with PPF for full coverage.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp">Request Price →</a>
+      <div class="pcard-cat" data-i18n="filter_protection">Protection</div>
+      <div class="pcard-name" data-i18n="prod_10_name">Concealed Protection</div>
+      <div class="pcard-spec" data-i18n="prod_10_spec">Concealed paint protection for high-impact areas — door edges, rockers, wheel arches. Invisible application. Protects resale value. Pairs perfectly with PPF for full coverage.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener" aria-label="Request price on WhatsApp"><span data-i18n="pcard_cta">Request Price →</span></a>
     </div>
   </div>
 
@@ -583,10 +589,10 @@
     <div class="pcard-img-wrap" style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;"><img src="images/products/custombuilds.jpg" alt="Full custom truck build — Jahrom Auto Accessories Sharjah" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;opacity:0.42;filter:grayscale(10%) contrast(1.05) brightness(0.85);transition:opacity .4s,transform .6s;"></div>
     <div class="pcard-idx">11</div>
     <div class="pcard-content">
-      <div class="pcard-cat">Custom</div>
-      <div class="pcard-name">Full Custom Builds</div>
-      <div class="pcard-spec">Have a vision? We source, spec, and install to your exact requirements. From single accessories to complete truck transformations — talk to our team and we'll make it happen.</div>
-      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener noreferrer">Let's Talk →</a>
+      <div class="pcard-cat" data-i18n="filter_custom">Custom</div>
+      <div class="pcard-name" data-i18n="prod_11_name">Full Custom Builds</div>
+      <div class="pcard-spec" data-i18n="prod_11_spec">Have a vision? We source, spec, and install to your exact requirements. From single accessories to complete truck transformations — talk to our team and we'll make it happen.</div>
+      <a href="https://wa.me/971503002898" class="pcard-cta" target="_blank" rel="noopener noreferrer"><span data-i18n="pcard_cta_custom">Let's Talk →</span></a>
     </div>
   </div>
 
@@ -635,7 +641,7 @@
   <div class="dot-grid tl" style="opacity:.5;"></div>
   <div class="circle-accent" style="width:300px;height:300px;top:50%;right:-60px;transform:translateY(-50%);opacity:.4;"></div>
   <div class="cta-inner">
-    <h2 class="cta-h2">DON'T SEE<br>WHAT YOU<br>NEED?</h2>
+    <h2 class="cta-h2" data-i18n="dont_see_h">DON'T SEE<br>WHAT YOU<br>NEED?</h2>
     <div class="cta-right">
       <p class="cta-body">We source products on request. If it exists and fits your truck, we can find it. Message us on WhatsApp and our team will get back to you the same day.</p>
       <a href="https://wa.me/971503002898" class="btn-dark" target="_blank" data-tip="Chat">Message on WhatsApp →</a>

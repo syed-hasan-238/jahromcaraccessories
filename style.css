@@ -2470,3 +2470,146 @@ body.pulse-hint {
   font-family: 'Noto Sans Devanagari', var(--fb), sans-serif;
   line-height: 1.85;
 }
+
+/* ══════════════════════════════════════════════
+   RTL COMPREHENSIVE LAYOUT FIXES v2
+   ══════════════════════════════════════════════ */
+
+/* ── NAV ── */
+[dir="rtl"] .jnav { direction: rtl; }
+[dir="rtl"] .jnav > * { direction: rtl; }
+[dir="rtl"] .jnav-links { flex-direction: row-reverse; }
+[dir="rtl"] .jnav-links li { list-style: none; }
+[dir="rtl"] .jnav-right { flex-direction: row-reverse; gap: 8px; }
+[dir="rtl"] .mob-nav-drawer { direction: rtl; text-align: right; }
+[dir="rtl"] .mob-nav-links { text-align: right; }
+
+/* ── HERO ── */
+[dir="rtl"] .hero-content { text-align: right; }
+[dir="rtl"] .h-tag { text-align: right; }
+[dir="rtl"] .h-h1 .row { justify-content: flex-end; }
+[dir="rtl"] .h-sub { text-align: right; margin-left: auto; }
+[dir="rtl"] .h-ctas { flex-direction: row-reverse; justify-content: flex-end; }
+[dir="rtl"] .h-stats { right: auto !important; left: 52px; }
+[dir="rtl"] .h-scroll { right: auto !important; left: 88px; }
+
+/* ── TICKER — always LTR ── */
+.ticker, .tick-track, .ticker-t, .ticker-i { direction: ltr !important; }
+
+/* ── TRUCK 3D SECTION ── */
+[dir="rtl"] .ts-panels { text-align: right; direction: rtl; }
+[dir="rtl"] .ts-panel { text-align: right; }
+[dir="rtl"] .ts-panel-title { text-align: right; }
+[dir="rtl"] .ts-panel-desc { text-align: right; }
+[dir="rtl"] .ts-panel-note { text-align: right; }
+[dir="rtl"] .ts-hint { text-align: right; }
+[dir="rtl"] .ts-mobile-panel { text-align: right; direction: rtl; }
+
+/* ── BOOKING ── */
+[dir="rtl"] .booking-area { direction: rtl; text-align: right; }
+[dir="rtl"] .booking-h3 { text-align: right; }
+[dir="rtl"] .booking-text { text-align: right; }
+[dir="rtl"] .booking-btns, [dir="rtl"] .booking-ctas { flex-direction: row-reverse; }
+[dir="rtl"] .booking-info { text-align: right; }
+
+/* ── JOURNEY SECTION (keep LTR for GSAP scroll) ── */
+.story-track, .story-panel { direction: ltr !important; }
+[dir="rtl"] .panel-content { text-align: right; direction: rtl; }
+[dir="rtl"] .stage-tag { text-align: right; direction: rtl; }
+[dir="rtl"] .stage-title { text-align: right; }
+[dir="rtl"] .stage-text { text-align: right; direction: rtl; }
+
+/* ── STORY SECTION HEADING ── */
+[dir="rtl"] .story-h2, [dir="rtl"] .story-section { text-align: right; direction: rtl; }
+[dir="rtl"] .story-sub { text-align: right; }
+
+/* ── REVIEWS ── */
+[dir="rtl"] .review-card { direction: rtl; text-align: right; }
+[dir="rtl"] .rcard-header { flex-direction: row-reverse; }
+[dir="rtl"] .rcard-meta { text-align: right; }
+[dir="rtl"] .review-text { text-align: right; direction: rtl; }
+[dir="rtl"] .rating-wrap { direction: rtl; text-align: right; }
+
+/* ── PRODUCTS PAGE ── */
+[dir="rtl"] .prod-hero { text-align: right; direction: rtl; }
+[dir="rtl"] .prod-hero h1, [dir="rtl"] .prod-hero p { text-align: right; }
+[dir="rtl"] .filter-bar { direction: rtl; justify-content: flex-end; }
+[dir="rtl"] .pcard-content { text-align: right; direction: rtl; }
+[dir="rtl"] .pcard-cat { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .pcard-cat::before { margin-right: 0; margin-left: 8px; }
+[dir="rtl"] .pcard-name { text-align: right; }
+[dir="rtl"] .pcard-spec { text-align: right; direction: rtl; }
+[dir="rtl"] .pcard-cta { text-align: right; }
+[dir="rtl"] .pcard-idx { right: auto; left: var(--gutter); }
+[dir="rtl"] .prod-bottom { direction: rtl; text-align: right; }
+[dir="rtl"] .cs-row { flex-direction: row-reverse; }
+[dir="rtl"] .cs-item { text-align: right; direction: rtl; }
+[dir="rtl"] .cs-arrow { margin-right: 0; margin-left: 0; transform: scaleX(-1); }
+[dir="rtl"] .trucks-grid { direction: rtl; }
+[dir="rtl"] .truck-col { text-align: right; }
+
+/* ── CONTACT PAGE ── */
+[dir="rtl"] .con-hero { text-align: right; direction: rtl; }
+[dir="rtl"] .con-hero h1 { text-align: right; }
+[dir="rtl"] .con-left { direction: rtl; text-align: right; }
+[dir="rtl"] .con-right { direction: rtl; text-align: right; }
+[dir="rtl"] .con-btns { flex-direction: row-reverse; }
+[dir="rtl"] .info-row { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .info-label { text-align: right; }
+[dir="rtl"] .info-val { text-align: right; }
+[dir="rtl"] .hg-item { text-align: right; }
+[dir="rtl"] .hg-day { text-align: right; }
+[dir="rtl"] .hg-time { text-align: right; }
+[dir="rtl"] .hours-grid { direction: rtl; }
+[dir="rtl"] .map-section { direction: rtl; text-align: right; }
+[dir="rtl"] .map-detail-row { flex-direction: row-reverse; }
+[dir="rtl"] .map-body { text-align: right; }
+[dir="rtl"] .dir-title { text-align: right; }
+[dir="rtl"] .dir-step { text-align: right; direction: rtl; }
+[dir="rtl"] .social-grid { direction: rtl; }
+
+/* ── STORY PAGE ── */
+[dir="rtl"] .story-hero { text-align: right; direction: rtl; }
+[dir="rtl"] .sh-stats { flex-direction: row-reverse; direction: rtl; }
+[dir="rtl"] .sh-stat-l { text-align: left; }
+[dir="rtl"] .ed-chapter { direction: rtl; text-align: right; }
+[dir="rtl"] .ed-body { direction: rtl; text-align: right; }
+[dir="rtl"] .ch-title { text-align: right; }
+[dir="rtl"] .img-block { direction: rtl; }
+[dir="rtl"] .img-badge { text-align: right; }
+[dir="rtl"] .pq-text { text-align: right; direction: rtl; }
+[dir="rtl"] .pq-attr { text-align: right; }
+[dir="rtl"] .val-grid { direction: rtl; }
+[dir="rtl"] .val-card { text-align: right; direction: rtl; }
+[dir="rtl"] .nb-grid { direction: rtl; flex-direction: row-reverse; }
+[dir="rtl"] .nb-item { text-align: right; }
+[dir="rtl"] .nb-n { text-align: right; }
+[dir="rtl"] .nb-l { text-align: right; }
+
+/* ── FOOTER ── */
+[dir="rtl"] .jfoot { direction: rtl; }
+[dir="rtl"] .jfoot-cols { flex-direction: row-reverse; }
+[dir="rtl"] .jfoot-col { text-align: right; }
+[dir="rtl"] .jfoot-col ul { text-align: right; }
+[dir="rtl"] .jfoot-col ul li { text-align: right; }
+[dir="rtl"] .jfoot-bottom { flex-direction: row-reverse; }
+[dir="rtl"] .jfoot-bottom-links { flex-direction: row-reverse; }
+
+/* ── GALLERY / PROD-GALLERY ── */
+[dir="rtl"] .gallery-header { flex-direction: row-reverse; }
+[dir="rtl"] .gallery-header p { text-align: left; }
+
+/* ── CS-ROW (cross-sell / CTA rows) ── */
+[dir="rtl"] .cs-row, [dir="rtl"] .cs-grid { flex-direction: row-reverse; }
+[dir="rtl"] .cs-title { text-align: right; }
+[dir="rtl"] .cs-body { text-align: right; direction: rtl; }
+
+/* ── RTL ts-panels flip ── */
+[dir="rtl"] .ts-panels { right: auto; left: 0; }
+[dir="rtl"] .ts-panel { right: auto; left: 52px; text-align: right; direction: rtl; }
+[dir="rtl"] .ts-panel-desc { text-align: right; direction: rtl; }
+[dir="rtl"] .ts-panel-line { margin-left: auto; margin-right: 0; }
+[dir="rtl"] .ts-panel-num { text-align: right; }
+
+/* ── RTL hero tag ── */
+[dir="rtl"] .h-tag b { left: auto; right: 0; }
