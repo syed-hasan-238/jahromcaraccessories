@@ -988,8 +988,8 @@ body.pulse-hint {
 [dir="rtl"] .stage-tag { text-align: right !important; }
 [dir="rtl"] .panel-content { align-items: flex-end !important; text-align: right; }
 [dir="rtl"] .ts-panels {
-  right: auto !important;
-  left: 40px !important;
+  right: 0 !important;
+  left: auto !important;
 }
 [dir="rtl"] .ts-panel { text-align: right; }
 [dir="rtl"] .ts-scroll-hint {
@@ -2487,10 +2487,10 @@ body.pulse-hint {
 .ticker, .tick-track, .ticker-t, .ticker-i { direction: ltr !important; }
 
 /* ── TRUCK 3D SECTION ── */
-[dir="rtl"] .ts-panels { text-align: right; direction: rtl; }
-[dir="rtl"] .ts-panel { text-align: right; }
+[dir="rtl"] .ts-panels { right: 0 !important; left: auto !important; text-align: right; direction: rtl; }
+[dir="rtl"] .ts-panel { right: 52px !important; left: auto !important; text-align: right; direction: rtl; }
 [dir="rtl"] .ts-panel-title { text-align: right; }
-[dir="rtl"] .ts-panel-desc { text-align: right; }
+[dir="rtl"] .ts-panel-desc { text-align: right; direction: rtl; }
 [dir="rtl"] .ts-panel-note { text-align: right; }
 [dir="rtl"] .ts-hint { text-align: right; }
 [dir="rtl"] .ts-mobile-panel { text-align: right; direction: rtl; }
@@ -2604,5 +2604,3 @@ body.pulse-hint {
 
 /* ── RTL hero tag ── */
 [dir="rtl"] .h-tag b { left: auto; right: 0; }
-
-html[dir='rtl'] .truck-section .text, html[dir='rtl'] .ts-copy{z-index:2;position:relative;} html[dir='rtl'] canvas, html[dir='rtl'] #truck-canvas{transform:translateX(10%);} 
