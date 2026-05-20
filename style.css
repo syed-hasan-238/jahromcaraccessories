@@ -2604,3 +2604,5 @@ body.pulse-hint {
 
 /* ── RTL hero tag ── */
 [dir="rtl"] .h-tag b { left: auto; right: 0; }
+
+html[dir='rtl'] .truck-section .text, html[dir='rtl'] .ts-copy{z-index:2;position:relative;} html[dir='rtl'] canvas, html[dir='rtl'] #truck-canvas{transform:translateX(10%);} 
