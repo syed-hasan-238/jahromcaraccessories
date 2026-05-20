@@ -64,12 +64,20 @@
         "latitude": 25.3330,
         "longitude": 55.4050
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        "opens": "08:00",
-        "closes": "23:00"
-      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"],
+          "opens": "08:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Friday"],
+          "opens": "15:00",
+          "closes": "23:00"
+        }
+      ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.7",
@@ -1461,17 +1469,6 @@ gsap.registerPlugin(ScrollTrigger);
   window.addEventListener('scroll', function() { triggered = true; }, { once: true, passive: true });
 })();
 
-// ── SCROLL HINT CLICK ──
-document.addEventListener('DOMContentLoaded', function() {
-  var nudge = document.getElementById('hscroll-nudge');
-  if (nudge) {
-    nudge.addEventListener('click', function() {
-      var target = document.getElementById('truck-scrub-outer');
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-    nudge.style.cursor = 'pointer';
-  }
-});
 </script>
 <!-- Floating WhatsApp -->
 <a href="https://wa.me/971503002898" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">

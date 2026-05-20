@@ -1,7 +1,7 @@
 /**
  * Jahrom Language System — v3
- * EN / AR / UR / FA / HI
- * RTL: AR, UR, FA | LTR: EN, HI
+ * EN / AR / UR
+ * RTL: AR, UR | LTR: EN
  */
 
 const JUHRUM_LANGS = {
@@ -192,6 +192,46 @@ const JUHRUM_LANGS = {
       cs_call_label: 'Call Direct',
       cs_visit_label: 'Walk In — No Appointment',
       cs_visit_val: 'Industrial Area 4, Sharjah'
+,
+      ph_h1_l1: 'EVERY',
+      ph_h1_l2: 'ACCESSORY.',
+      ph_h1_l3: 'EVERY TRUCK.',
+      ph_sub: 'Every accessory. Every truck. No catalogue prices — every build is unique to your vehicle. Message us and we\'ll give you a straight answer within the hour.',
+      dont_see_full: 'DON\'T SEE WHAT YOU NEED?',
+      cta_body: 'We source products on request. If it exists and fits your truck, we can find it. Message us on WhatsApp and our team will get back to you the same day.',
+      cta_wa_btn: 'Message on WhatsApp →',
+      cta_showroom_btn: 'Find Our Showroom',
+      cta_browse_btn: 'Browse Products',
+      back_home: '← Back to Home',
+      sh_h1_l1: 'FROM',
+      sh_h1_l2: 'SHARJAH.',
+      sh_h1_l3: 'TO THE',
+      sh_h1_l4: 'DESERT.',
+      pq_text: '"NO TEMPLATES. NO RUSH JOBS. EVERY FIT VERIFIED TWICE."',
+      pq_attr: '— Hadi Ghanaatian, Founder',
+      values_h1: 'THE ',
+      values_h2: 'JAHROM',
+      values_h3: 'STANDARD.',
+      nb_years: 'Years Experience',
+      nb_products: 'Products',
+      nb_nationwide: 'Nationwide',
+      nb_specialists: 'Specialists',
+      how_to: 'HOW TO',
+      dir1_title: 'From Dubai / Sharjah City',
+      dir1_body: 'Take Emirates Road (E611) or Al Dhaid Road (E88) toward Sharjah Industrial Areas. Exit at Industrial Area 4 — we\'re at 330 First Industrial St.',
+      dir2_title: 'The Landmark',
+      dir2_body: 'Look for the ADNOC petrol pump on First Industrial Street — we\'re immediately after it on your left. You\'ll see trucks being fitted outside. Hard to miss.',
+      dir3_title: 'Parking & Access',
+      dir3_body: 'Free parking directly outside. Plenty of space for trucks. Sat–Thu: 8AM–11PM · Fri: 3PM–11PM. No appointment, no waiting — just show up and we\'ll handle it from there.',
+      con_cta_sub: 'No appointments needed. Walk in, tell us about your truck, and we\'ll show you what\'s possible.',
+      hg_satthur: 'Sat – Thu',
+      hg_satthur_time: '8AM–11PM',
+      hg_fri: 'Friday',
+      hg_fri_time: '3PM–11PM',
+      hg_walkin: 'Walk-ins',
+      hg_walkin_time: 'Welcome',
+      hg_noappt: 'No Appointment',
+      hg_noappt_time: 'Needed'
     }
   },
   ar: {
@@ -384,6 +424,46 @@ const JUHRUM_LANGS = {
       cs_call_label: 'اتصل مباشرة',
       cs_visit_label: 'تفضّل بزيارتنا — بدون موعد',
       cs_visit_val: 'المنطقة الصناعية 4، الشارقة'
+,
+      ph_h1_l1: 'كل',
+      ph_h1_l2: 'إكسسوار.',
+      ph_h1_l3: 'كل شاحنة.',
+      ph_sub: 'كل إكسسوار. كل شاحنة. لا أسعار محددة — كل بناء فريد لسيارتك. راسلنا وستحصل على إجابة مباشرة خلال ساعة.',
+      dont_see_full: 'لا تجد ما تبحث عنه؟',
+      cta_body: 'نوفّر المنتجات عند الطلب. إن وُجد ويناسب شاحنتك، يمكننا إيجاده. راسلنا على واتساب وسيردّ فريقنا في نفس اليوم.',
+      cta_wa_btn: 'راسلنا على واتساب ←',
+      cta_showroom_btn: 'جد صالة عرضنا',
+      cta_browse_btn: 'تصفّح المنتجات',
+      back_home: 'العودة للرئيسية ←',
+      sh_h1_l1: 'من',
+      sh_h1_l2: 'الشارقة.',
+      sh_h1_l3: 'إلى',
+      sh_h1_l4: 'الصحراء.',
+      pq_text: '"لا قوالب جاهزة. لا أعمال متسرعة. كل تركيب يُتحقق منه مرتين."',
+      pq_attr: '— هادي غنائيان، المؤسس',
+      values_h1: 'معيار ',
+      values_h2: 'جهروم',
+      values_h3: 'الذهبي.',
+      nb_years: 'سنة خبرة',
+      nb_products: 'منتج',
+      nb_nationwide: 'في الإمارات',
+      nb_specialists: 'متخصصون',
+      how_to: 'كيف تصلنا',
+      dir1_title: 'من دبي / مدينة الشارقة',
+      dir1_body: 'سلك طريق الإمارات (E611) أو طريق الذيد (E88) باتجاه المناطق الصناعية في الشارقة. اخرج عند المنطقة الصناعية 4 — نحن في شارع صناعي أول 330.',
+      dir2_title: 'المعلم الرئيسي',
+      dir2_body: 'ابحث عن محطة أدنوك في الشارع الصناعي الأول — نحن مباشرة بعدها على يسارك. ستشاهد الشاحنات تُجهَّز في الخارج. لا يمكنك أن تخطئنا.',
+      dir3_title: 'المواقف والدخول',
+      dir3_body: 'مواقف مجانية مباشرة أمام المحل. مساحة كافية للشاحنات. السبت–الخميس: 8ص–11م · الجمعة: 3م–11م. لا حاجة لموعد — تعال وسنهتم بك.',
+      con_cta_sub: 'لا حاجة لموعد. تعال، أخبرنا عن شاحنتك، وسنريك ما يمكن فعله.',
+      hg_satthur: 'السبت – الخميس',
+      hg_satthur_time: '8ص–11م',
+      hg_fri: 'الجمعة',
+      hg_fri_time: '3م–11م',
+      hg_walkin: 'زيارة مباشرة',
+      hg_walkin_time: 'مرحباً بك',
+      hg_noappt: 'بدون موعد',
+      hg_noappt_time: 'تعال مباشرة'
     }
   },
   ur: {
@@ -576,6 +656,46 @@ const JUHRUM_LANGS = {
       cs_call_label: 'براہ راست کال',
       cs_visit_label: 'آئیں — بغیر اپوائنٹمنٹ',
       cs_visit_val: 'صنعتی علاقہ 4، شارجہ'
+,
+      ph_h1_l1: 'ہر',
+      ph_h1_l2: 'اکسیسری.',
+      ph_h1_l3: 'ہر ٹرک.',
+      ph_sub: 'ہر اکسیسری۔ ہر ٹرک۔ کوئی فکسڈ قیمت نہیں — ہر بلڈ آپ کی گاڑی کے لیے منفرد ہے۔ ہمیں میسج کریں اور ایک گھنٹے میں جواب پائیں۔',
+      dont_see_full: 'نہیں ملا جو آپ چاہتے ہیں؟',
+      cta_body: 'ہم درخواست پر مصنوعات فراہم کرتے ہیں۔ اگر موجود ہے اور آپ کے ٹرک کے لیے ہے، ہم ڈھونڈ لیں گے۔ واٹس ایپ پر میسج کریں، اسی دن جواب ملے گا۔',
+      cta_wa_btn: 'واٹس ایپ پر میسج ←',
+      cta_showroom_btn: 'شوروم تلاش کریں',
+      cta_browse_btn: 'مصنوعات دیکھیں',
+      back_home: 'واپس ہوم ←',
+      sh_h1_l1: 'شارجہ سے',
+      sh_h1_l2: 'آغاز۔',
+      sh_h1_l3: 'ریگستان',
+      sh_h1_l4: 'تک۔',
+      pq_text: '"کوئی ٹیمپلیٹ نہیں۔ کوئی جلدبازی نہیں۔ ہر فٹنگ دو بار جانچی جاتی ہے۔"',
+      pq_attr: '— ہادی غنائیان، بانی',
+      values_h1: 'جہروم ',
+      values_h2: 'کا',
+      values_h3: 'معیار۔',
+      nb_years: 'سال تجربہ',
+      nb_products: 'مصنوعات',
+      nb_nationwide: 'پورے امارات',
+      nb_specialists: 'ماہرین',
+      how_to: 'کیسے آئیں',
+      dir1_title: 'دبئی / شارجہ سٹی سے',
+      dir1_body: 'امارات روڈ (E611) یا الذید روڈ (E88) سے شارجہ صنعتی علاقوں کی طرف جائیں۔ صنعتی علاقہ 4 پر نکلیں — ہم 330 فرسٹ انڈسٹریل سٹریٹ پر ہیں۔',
+      dir2_title: 'پہچان کا نشان',
+      dir2_body: 'فرسٹ انڈسٹریل سٹریٹ پر ایڈنوک پیٹرول پمپ تلاش کریں — ہم فوراً بائیں جانب ہیں۔ باہر ٹرک فٹ ہوتے نظر آئیں گے۔',
+      dir3_title: 'پارکنگ اور داخلہ',
+      dir3_body: 'سامنے مفت پارکنگ۔ ٹرکوں کے لیے کافی جگہ۔ ہفتہ–جمعرات: صبح 8–رات 11 · جمعہ: دوپہر 3–رات 11۔ کوئی اپوائنٹمنٹ نہیں — بس آئیں۔',
+      con_cta_sub: 'کوئی اپوائنٹمنٹ نہیں چاہیے۔ آئیں، اپنی گاڑی بتائیں، اور دیکھیں ہم کیا کر سکتے ہیں۔',
+      hg_satthur: 'ہفتہ – جمعرات',
+      hg_satthur_time: 'صبح 8–رات 11',
+      hg_fri: 'جمعہ',
+      hg_fri_time: 'دوپہر 3–رات 11',
+      hg_walkin: 'براہ راست آئیں',
+      hg_walkin_time: 'خوش آمدید',
+      hg_noappt: 'بغیر اپوائنٹمنٹ',
+      hg_noappt_time: 'بالکل ٹھیک'
     }
   }};
 
@@ -615,13 +735,18 @@ function juhrumApplyLang(code) {
   const t = lang.t;
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) {
-      // Preserve inner HTML tags (e.g. <strong>, <em>, <br>)
-      if (el.innerHTML.includes('<') && !el.innerHTML.includes('data-i18n')) {
+    if (t[key] === undefined) return;
+    // Always use textContent for simple leaf elements (no child elements)
+    // Use innerHTML only when the element has child elements (spans, brs, strongs)
+    const hasChildElements = el.children.length > 0;
+    if (hasChildElements) {
+      // Don't overwrite child elements that have their own data-i18n
+      const childrenWithI18n = el.querySelectorAll('[data-i18n]').length;
+      if (childrenWithI18n === 0) {
         el.innerHTML = t[key];
-      } else {
-        el.textContent = t[key];
       }
+    } else {
+      el.textContent = t[key];
     }
   });
 

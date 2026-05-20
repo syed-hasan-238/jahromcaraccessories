@@ -76,19 +76,6 @@
     });
   });
 
-  // Story drag — directional arrow
-  document.querySelectorAll('.drag-scroll').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.classList.add('big');
-      label.textContent = '← DRAG →';
-      label.classList.add('on');
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.classList.remove('big');
-      label.classList.remove('on');
-    });
-  });
-
   // Phase 7: nav links — subtle ring shift
   document.querySelectorAll('.jnav-links a').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('nav'));
@@ -162,90 +149,13 @@
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-// ── SVG STROKE DRAW (decorative lines) ────
-;(function() {
-  const lines = document.querySelectorAll('.draw-line');
-  if (!lines.length) return;
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const len = el.getTotalLength ? el.getTotalLength() : 200;
-      el.style.strokeDasharray = len;
-      el.style.strokeDashoffset = len;
-      el.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.76,0,.24,1)';
-      requestAnimationFrame(() => { el.style.strokeDashoffset = '0'; });
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.3 });
-  lines.forEach(el => obs.observe(el));
-})();
 
-// ── WORD ASSEMBLY for section headings ────
-// Only applies to elements with data-assemble — plain text only, no inner HTML tags
-;(function() {
-  document.querySelectorAll('[data-assemble]').forEach(el => {
-    // safety check — skip if element has child elements (would corrupt HTML)
-    if (el.querySelector('*')) return;
 
-    const words = el.textContent.trim().split(/\s+/);
-    el.innerHTML = words.map((word, i) =>
-      `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;"><span class="aw" style="display:inline-block;transform:translateY(110%);transition:transform .7s ${i * 0.09}s cubic-bezier(.76,0,.24,1);">${word}</span></span>`
-    ).join(' ');
 
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        el.querySelectorAll('.aw').forEach(s => s.style.transform = 'translateY(0)');
-        obs.unobserve(el);
-      });
-    }, { threshold: 0.3 });
-    obs.observe(el);
-  });
-})();
 
-// ── 3D TILT CARDS ─────────────────────────
-;(function() {
-  document.querySelectorAll('.card3d').forEach(card => {
-    const inner = card.querySelector('.card3d-inner');
-    if (!inner) return;
-    card.addEventListener('mousemove', e => {
-      const r  = card.getBoundingClientRect();
-      const nx = ((e.clientX - r.left) / r.width  - .5) * 2;
-      const ny = ((e.clientY - r.top)  / r.height - .5) * 2;
-      inner.style.transform = `rotateY(${nx*9}deg) rotateX(${-ny*7}deg) scale(1.015)`;
-      const g = card.querySelector('.glow');
-      if (g) {
-        g.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
-        g.style.setProperty('--gy', ((e.clientY - r.top)  / r.height * 100) + '%');
-        g.style.opacity = '1';
-      }
-    });
-    card.addEventListener('mouseleave', () => {
-      inner.style.transition = 'transform .7s cubic-bezier(.23,1,.32,1)';
-      inner.style.transform  = 'rotateY(0) rotateX(0) scale(1)';
-      const g = card.querySelector('.glow');
-      if (g) g.style.opacity = '0';
-      setTimeout(() => inner.style.transition = '', 700);
-    });
-  });
-})();
 
-// ── DRAG GALLERY ──────────────────────────
-;(function() {
-  document.querySelectorAll('.drag-scroll').forEach(el => {
-    let down = false, sx, sl;
-    el.style.cursor = 'grab';
-    el.addEventListener('mousedown', e => { down=true; sx=e.pageX-el.offsetLeft; sl=el.scrollLeft; el.style.cursor='grabbing'; });
-    el.addEventListener('mouseleave', () => { down=false; el.style.cursor='grab'; });
-    el.addEventListener('mouseup',    () => { down=false; el.style.cursor='grab'; });
-    el.addEventListener('mousemove',  e => {
-      if (!down) return;
-      e.preventDefault();
-      el.scrollLeft = sl - (e.pageX - el.offsetLeft - sx) * 1.6;
-    });
-  });
-})();
+
+
 
 // ── COUNT-UP ──────────────────────────────
 ;(function() {
@@ -268,26 +178,7 @@
   document.querySelectorAll('[data-count]').forEach(el => obs.observe(el));
 })();
 
-// ── Phase 7: SCROLL-TRIGGERED PARALLAX LAYERS ──
-;(function() {
-  const parallaxEls = document.querySelectorAll('[data-parallax]');
-  if (!parallaxEls.length) return;
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    requestAnimationFrame(() => {
-      const sy = window.scrollY;
-      parallaxEls.forEach(el => {
-        const speed = parseFloat(el.dataset.parallax) || 0.15;
-        const rect = el.getBoundingClientRect();
-        const offset = (rect.top + sy - window.innerHeight * 0.5) * speed;
-        el.style.transform = `translateY(${offset}px)`;
-      });
-      ticking = false;
-    });
-    ticking = true;
-  }, { passive: true });
-})();
+
 
 // ── Phase 7: CLIP-PATH IMAGE REVEAL ───────
 ;(function() {
@@ -304,14 +195,7 @@
   imgs.forEach(el => obs.observe(el));
 })();
 
-
-// ═══════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════
-// PHASE 11 — TRUCK CANVAS SCROLL SCRUB
-// GSAP ScrollTrigger scrub (same method as Oryzo/Lusion)
-// Scene pauses + right-side feature panels
-// ═══════════════════════════════════════════════
+// ── TRUCK CANVAS SCROLL SCRUB ─────────────
 ;(function() {
   const outer   = document.getElementById('truck-scrub-outer');
   const sticky  = document.getElementById('truck-scrub-sticky');
@@ -402,21 +286,7 @@
     ctx.drawImage(img, x, y, w, h);
   }
 
-  // ── Feed scrolling — text column moves up as progress advances ──
-  const feed = document.getElementById('ts-feed');
   function updateScene(progress) {
-    // Scroll the feed vertically based on progress
-    // Feed reveals panels as progress moves through scenes
-    if (feed) {
-      const panels = feed.querySelectorAll('.ts-panel');
-      const totalH = feed.scrollHeight - (feed.parentElement ? feed.parentElement.clientHeight : window.innerHeight * 0.6);
-      // Map progress 0→1 to feed scroll 0→totalH
-      // Add small deadzone at start so panel 0 is visible first
-      const feedP = Math.max(0, (progress - 0.05) / 0.9);
-      feed.style.transform = `translateY(-${Math.min(feedP, 1) * totalH}px)`;
-    }
-
-    // Update active panel for CSS highlight (desktop only — mobile uses separate strip)
     let idx = 0;
     for (let i = SCENES.length - 1; i >= 0; i--) {
       if (progress >= SCENES[i].p - 0.01) { idx = i; break; }
