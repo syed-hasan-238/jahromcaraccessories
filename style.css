@@ -307,6 +307,9 @@ body {
   text-transform: uppercase; color: rgba(196,154,56,.35);
 }
 .jfoot-copy { font-family: var(--fu); font-size: 12px; letter-spacing: .12em; color: var(--dim); }
+.jfoot-legal { font-family: var(--fu); font-size: 10px; letter-spacing: .14em; color: var(--dim); margin-top: 6px; }
+.jfoot-legal a { color: rgba(196,154,56,.55); text-decoration: none; transition: color .25s; }
+.jfoot-legal a:hover { color: var(--gold); }
 
 /* ── NOISE TEXTURE ── */
 .noise::after {
